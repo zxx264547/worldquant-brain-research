@@ -1,0 +1,133 @@
+{
+  "experiments": [
+    {
+      "iteration": 1,
+      "strategy_name": "短窗口ts_mean_pv87",
+      "timestamp": "2026-04-19T20:11:55.429765",
+      "tested_count": 4,
+      "candidates_count": 0,
+      "best_alpha": {
+        "alpha_id": "j2d6kdEO",
+        "expression": "ts_mean(pv87_2_affops_af_matrix_p1_b_chngratio_number, 5)",
+        "dataset": "pv87",
+        "template": "ts_mean_5",
+        "field_id": "pv87_2_affops_af_matrix_p1_b_chngratio_number",
+        "sharpe": 0.65,
+        "fitness": 0.94,
+        "turnover": 0.0081,
+        "margin": 0.063916,
+        "ppc": 0.24677992277992278,
+        "is_submittable": false,
+        "margin_ratio": 7.890864197530865
+      },
+      "results": [
+        {
+          "alpha_id": "VkY7jJ6G",
+          "expression": "ts_mean(pv87_2_affops_af_matrix_all_chngratio_number, 5)",
+          "dataset": "pv87",
+          "template": "ts_mean_5",
+          "field_id": "pv87_2_affops_af_matrix_all_chngratio_number",
+          "sharpe": 0.66,
+          "fitness": 0.96,
+          "turnover": 0.0133,
+          "margin": 0.039377,
+          "ppc": 0.15017925247902367,
+          "is_submittable": false,
+          "margin_ratio": 2.9606766917293235
+        },
+        {
+          "alpha_id": "58ql0M85",
+          "expression": "winsorize(ts_mean(pv87_2_affops_af_matrix_all_chngratio_number, 5))",
+          "dataset": "pv87",
+          "template": "winsorize_tsmean5",
+          "field_id": "pv87_2_affops_af_matrix_all_chngratio_number",
+          "sharpe": 0.64,
+          "fitness": 0.92,
+          "turnover": 0.009,
+          "margin": 0.057111,
+          "ppc": 0.22170419254658386,
+          "is_submittable": false,
+          "margin_ratio": 6.345666666666667
+        },
+        {
+          "alpha_id": "j2d6kdEO",
+          "expression": "ts_mean(pv87_2_affops_af_matrix_p1_b_chngratio_number, 5)",
+          "dataset": "pv87",
+          "template": "ts_mean_5",
+          "field_id": "pv87_2_affops_af_matrix_p1_b_chngratio_number",
+          "sharpe": 0.65,
+          "fitness": 0.94,
+          "turnover": 0.0081,
+          "margin": 0.063916,
+          "ppc": 0.24677992277992278,
+          "is_submittable": false,
+          "margin_ratio": 7.890864197530865
+        },
+        {
+          "alpha_id": "zqJkwjkO",
+          "expression": "ts_mean(pv87_2_affops_af_matrix_p1_b_number, 5)",
+          "dataset": "pv87",
+          "template": "ts_mean_5",
+          "field_id": "pv87_2_affops_af_matrix_p1_b_number",
+          "sharpe": 0.65,
+          "fitness": 0.94,
+          "turnover": 0.0081,
+          "margin": 0.063916,
+          "ppc": 0.24677992277992278,
+          "is_submittable": false,
+          "margin_ratio": 7.890864197530865
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "strategy_name": "标准模板_analyst10",
+      "timestamp": "2026-04-19T20:12:12.462231",
+      "tested_count": 0,
+      "candidates_count": 0,
+      "best_alpha": null,
+      "results": []
+    },
+    {
+      "iteration": 3,
+      "strategy_name": "短窗口ts_mean_mdl136",
+      "timestamp": "2026-04-19T20:12:14.282354",
+      "tested_count": 0,
+      "candidates_count": 0,
+      "best_alpha": null,
+      "results": []
+    },
+    {
+      "iteration": 4,
+      "strategy_name": "pv1标准模板",
+      "timestamp": "2026-04-19T20:12:29.520080",
+      "tested_count": 0,
+      "candidates_count": 0,
+      "best_alpha": null,
+      "results": []
+    },
+    {
+      "iteration": 5,
+      "strategy_name": "pv13价格数据",
+      "timestamp": "2026-04-19T20:12:46.791046",
+      "tested_count": 0,
+      "candidates_count": 0,
+      "best_alpha": null,
+      "results": []
+    }
+  ],
+  "summary": {
+    "total_experiments": 5,
+    "total_tested": 4,
+    "total_candidates": 0,
+    "best_sharpe": 0.66,
+    "best_margin_ratio": 7.890864197530865,
+    "strategies_tried": [
+      "标准模板_analyst10",
+      "短窗口ts_mean_mdl136",
+      "短窗口ts_mean_pv87",
+      "pv13价格数据",
+      "pv1标准模板"
+    ]
+  }
+}

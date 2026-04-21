@@ -1,0 +1,31 @@
+{
+  "credentials": {
+    "email": "2645471525@qq.com",
+    "password": "20001025ZHANG"
+  },
+  "api_settings": {
+    "base_url": "https://api.worldquantbrain.com",
+    "timeout": 30,
+    "retry_attempts": 3
+  },
+  "forum_settings": {
+    "base_url": "https://support.worldquantbrain.com",
+    "headless": true,
+    "timeout": 30
+  },
+  "simulation_defaults": {
+    "type": "REGULAR",
+    "instrument_type": "EQUITY",
+    "region": "USA",
+    "universe": "TOP3000",
+    "delay": 1,
+    "decay": 0,
+    "neutralization": "NONE",
+    "truncation": 0,
+    "test_period": "P0Y0M",
+    "unit_handling": "NONE",
+    "nan_handling": "NONE",
+    "language": "FASTEXPR",
+    "visualization": true
+  }
+}
