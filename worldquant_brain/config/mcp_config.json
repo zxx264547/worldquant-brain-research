@@ -1,0 +1,30 @@
+{
+  "python": "/home/zxx/wq_env/bin/python",
+  "mcp_servers": {
+    "worldquant-brain": {
+      "type": "local",
+      "command": "/home/zxx/wq_env/bin/python",
+      "args": [
+        "-m", "cnhkmcp"
+      ],
+      "env": {}
+    }
+  },
+  "skills": {
+    "enabled": true,
+    "skills_dir": "~/.claude/skills",
+    "auto_load": true
+  },
+  "automation": {
+    "tare": {
+      "enabled": false,
+      "screenshot_path": "./input_box.png",
+      "check_interval_seconds": 30
+    },
+    "ocr": {
+      "enabled": false,
+      "tesseract_path": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+      "language": "chi_sim"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "analyst_datasets": [
+    {
+      "dataset": "analyst10",
+      "field": "anl10_cpsff_2371",
+      "sharpe": 0.59,
+      "fitness": 0.83,
+      "margin": 0.005101,
+      "turnover": 0.096,
+      "mt_ratio": 0.053135416666666664,
+      "alpha_id": "vRJAd8Qr"
+    }
+  ]
+}

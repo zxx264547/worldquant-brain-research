@@ -1,0 +1,64 @@
+{
+  "best_candidates": [
+    {
+      "dataset": "analyst4",
+      "field": "actual_eps_value_quarterly",
+      "template": "ts_mean(winsorize({data}), 25)",
+      "sharpe": 1.00,
+      "fitness": 1.43,
+      "margin": null,
+      "turnover": null,
+      "m_t": 2.96,
+      "notes": "Sharpe首次突破1.0！M/T=2.96"
+    },
+    {
+      "dataset": "analyst4",
+      "field": "actual_eps_value_quarterly",
+      "template": "ts_mean(winsorize({data}), 30)",
+      "sharpe": 0.99,
+      "fitness": 1.41,
+      "margin": null,
+      "turnover": null,
+      "m_t": 3.08,
+      "notes": "Sharpe接近1.0，M/T继续上升"
+    },
+    {
+      "dataset": "analyst4",
+      "field": "actual_dividend_value_quarterly",
+      "template": "ts_mean(winsorize({data}), 15)",
+      "sharpe": 0.82,
+      "fitness": 1.20,
+      "m_t": 4.11,
+      "notes": "M/T最高但Sharpe偏低"
+    },
+    {
+      "dataset": "analyst4",
+      "field": "actual_eps_value_quarterly",
+      "template": "ts_mean(winsorize({data}), 18)",
+      "sharpe": 0.98,
+      "fitness": 1.39,
+      "m_t": 2.70,
+      "notes": ""
+    },
+    {
+      "dataset": "analyst4",
+      "field": "actual_eps_value_quarterly",
+      "template": "ts_mean(winsorize({data}), 10)",
+      "sharpe": 0.98,
+      "fitness": 1.38,
+      "m_t": 2.36,
+      "notes": ""
+    }
+  ],
+  "summary": {
+    "best_sharpe": 1.00,
+    "target_sharpe": 1.58,
+    "gap": 0.58,
+    "breakthrough": "actual_eps_value_quarterly with window 25 首次让Sharpe突破1.0",
+    "next_steps": [
+      "继续测试actual_eps_value_quarterly的更大窗口(35-50)",
+      "测试analyst4其他字段+窗口25-30",
+      "考虑字段组合看能否突破1.58"
+    ]
+  }
+}

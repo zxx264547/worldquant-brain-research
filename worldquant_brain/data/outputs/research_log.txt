@@ -1,0 +1,492 @@
+2026-04-19 21:26:10,010 - INFO - 加载了 6 个洞察, 0 个假设
+2026-04-19 21:26:10,010 - INFO - Authenticating...
+[INFO] 🔐 Starting Authentication process...
+[SUCCESS] Authentication successful
+[SUCCESS] JWT token automatically stored by session
+2026-04-19 21:26:11,594 - INFO - Authentication successful
+2026-04-19 21:26:11 - research_loop - INFO - 认证成功
+2026-04-19 21:26:11,594 - INFO - 认证成功
+2026-04-19 21:26:11 - research_loop - INFO - 开始研究，最多 10 轮
+2026-04-19 21:26:11,594 - INFO - 开始研究，最多 10 轮
+2026-04-19 21:26:11 - research_loop - INFO - 
+============================================================
+2026-04-19 21:26:11,594 - INFO - 
+============================================================
+2026-04-19 21:26:11 - research_loop - INFO - 第 1 轮研究
+2026-04-19 21:26:11,594 - INFO - 第 1 轮研究
+2026-04-19 21:26:11 - research_loop - INFO - ============================================================
+2026-04-19 21:26:11,594 - INFO - ============================================================
+2026-04-19 21:26:11,595 - INFO - 选择策略 [1/8]: 短窗口ts_mean_pv87 (优先级:1)
+2026-04-19 21:26:11 - research_loop - INFO - 选择策略: 短窗口ts_mean_pv87
+2026-04-19 21:26:11,595 - INFO - 选择策略: 短窗口ts_mean_pv87
+2026-04-19 21:26:11 - research_loop - INFO - 描述: pv87字段 + 短回溯期ts_mean(5)
+2026-04-19 21:26:11,595 - INFO - 描述: pv87字段 + 短回溯期ts_mean(5)
+2026-04-19 21:26:11 - research_loop - INFO - 执行中...
+2026-04-19 21:26:11,595 - INFO - 执行中...
+2026-04-19 21:26:12 - research_loop - INFO - 数据集 pv87: 4 个字段
+2026-04-19 21:26:12,289 - INFO - 数据集 pv87: 4 个字段
+2026-04-19 21:26:12 - research_loop - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 21:26:12,289 - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 21:26:12,730 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2RXaNN...
+2026-04-19 21:26:13,125 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2Gt6Qu...
+2026-04-19 21:26:13,529 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2iLUHL...
+2026-04-19 21:28:29,091 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/30cbFH...
+2026-04-19 21:28:31,277 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2gpfge...
+2026-04-19 21:29:38,521 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:29:40,123 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/4BC29g...
+2026-04-19 21:30:28,484 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/1iCOpM...
+2026-04-19 21:30:57,232 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3WmozJ...
+2026-04-19 21:32:56,094 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 2.0s...
+2026-04-19 21:32:58,750 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/sEsiVf...
+2026-04-19 21:33:04 - research_loop - INFO -   进度: 5/8 完成
+2026-04-19 21:33:04,616 - INFO -   进度: 5/8 完成
+2026-04-19 21:33:05,006 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/48mK1g...
+2026-04-19 21:36:37,306 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:36:38,733 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/bHYcRe...
+2026-04-19 21:39:13 - research_loop - INFO -   ts_mean_5: Sharpe=0.66, M/T=2.96
+2026-04-19 21:39:13,546 - INFO -   ts_mean_5: Sharpe=0.66, M/T=2.96
+2026-04-19 21:39:13 - research_loop - INFO -   winsorize_tsmean5: Sharpe=0.64, M/T=6.35
+2026-04-19 21:39:13,546 - INFO -   winsorize_tsmean5: Sharpe=0.64, M/T=6.35
+2026-04-19 21:39:13 - research_loop - INFO -   ts_mean_5: Sharpe=0.66, M/T=2.96
+2026-04-19 21:39:13,546 - INFO -   ts_mean_5: Sharpe=0.66, M/T=2.96
+2026-04-19 21:39:13 - research_loop - INFO -   winsorize_tsmean5: Sharpe=0.64, M/T=6.35
+2026-04-19 21:39:13,546 - INFO -   winsorize_tsmean5: Sharpe=0.64, M/T=6.35
+2026-04-19 21:39:13 - research_loop - INFO -   ts_mean_5: Sharpe=0.65, M/T=7.89
+2026-04-19 21:39:13,546 - INFO -   ts_mean_5: Sharpe=0.65, M/T=7.89
+2026-04-19 21:39:13 - research_loop - INFO -   winsorize_tsmean5: Sharpe=0.64, M/T=16.30
+2026-04-19 21:39:13,546 - INFO -   winsorize_tsmean5: Sharpe=0.64, M/T=16.30
+2026-04-19 21:39:13 - research_loop - INFO -   ts_mean_5: Sharpe=0.65, M/T=7.89
+2026-04-19 21:39:13,546 - INFO -   ts_mean_5: Sharpe=0.65, M/T=7.89
+2026-04-19 21:39:13 - research_loop - INFO -   winsorize_tsmean5: Sharpe=0.64, M/T=16.30
+2026-04-19 21:39:13,546 - INFO -   winsorize_tsmean5: Sharpe=0.64, M/T=16.30
+2026-04-19 21:39:13,546 - INFO - 实验 #1: 短窗口ts_mean_pv87, 测试8个, 候选0个
+2026-04-19 21:39:13,546 - INFO - 从 8 个结果中提取了 2 个洞察
+2026-04-19 21:39:13,546 - INFO - 新增洞察: pv87数据集Margin/Turnover好(8.38)但Sharpe低(0.65)...
+2026-04-19 21:39:13,546 - INFO - 新增洞察: 模板ts_mean_5 Sharpe最高(0.66)，模板winsorize_tsmean5 M/T最好(11.32)...
+2026-04-19 21:39:13,547 - INFO - 记忆已保存到 research_memory.json
+
+============================================================
+研究进度报告
+============================================================
+实验轮次: 1
+测试Alpha总数: 8
+候选Alpha总数: 0
+策略尝试: 1
+
+当前最佳Alpha:
+  1. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  2. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  3. Sharpe=0.65, M/T=7.89, Dataset=pv87, Template=ts_mean_5 ❌ 未达标
+
+⚠️  尚未找到可提交的Alpha，继续研究...
+
+最佳Alpha详情:
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.65)M/T✅Fitness✅PPC✅
+
+============================================================
+2026-04-19 21:39:13 - research_loop - INFO - 
+下轮建议:
+2026-04-19 21:39:13,547 - INFO - 
+下轮建议:
+2026-04-19 21:39:13 - research_loop - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 21:39:13,547 - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 21:39:13 - research_loop - INFO -   - 探索新的数据集组合
+2026-04-19 21:39:13,547 - INFO -   - 探索新的数据集组合
+2026-04-19 21:39:13 - research_loop - INFO -   - 尝试不同的预处理序列
+2026-04-19 21:39:13,547 - INFO -   - 尝试不同的预处理序列
+2026-04-19 21:39:14 - research_loop - INFO - 
+============================================================
+2026-04-19 21:39:14,548 - INFO - 
+============================================================
+2026-04-19 21:39:14 - research_loop - INFO - 第 2 轮研究
+2026-04-19 21:39:14,548 - INFO - 第 2 轮研究
+2026-04-19 21:39:14 - research_loop - INFO - ============================================================
+2026-04-19 21:39:14,548 - INFO - ============================================================
+2026-04-19 21:39:14,548 - INFO - 选择策略 [2/8]: 标准模板_analyst10 (优先级:2)
+2026-04-19 21:39:14 - research_loop - INFO - 选择策略: 标准模板_analyst10
+2026-04-19 21:39:14,548 - INFO - 选择策略: 标准模板_analyst10
+2026-04-19 21:39:14 - research_loop - INFO - 描述: analyst10数据集 + 标准模板
+2026-04-19 21:39:14,548 - INFO - 描述: analyst10数据集 + 标准模板
+2026-04-19 21:39:14 - research_loop - INFO - 执行中...
+2026-04-19 21:39:14,548 - INFO - 执行中...
+2026-04-19 21:39:15 - research_loop - INFO - 数据集 analyst10: 4 个字段
+2026-04-19 21:39:15,313 - INFO - 数据集 analyst10: 4 个字段
+2026-04-19 21:39:15 - research_loop - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 21:39:15,313 - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 21:39:15,736 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2nPyjc...
+2026-04-19 21:39:16,246 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/4j0EDZ...
+2026-04-19 21:39:16,668 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2smytP...
+2026-04-19 21:40:57,574 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/33L8V1...
+2026-04-19 21:42:32,568 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:42:34,032 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3Fa7KC...
+2026-04-19 21:42:34,929 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:42:36,347 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/4EI7VL...
+2026-04-19 21:42:50,129 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/JQlV91...
+2026-04-19 21:44:03,043 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3Dh4Zy...
+2026-04-19 21:44:31,862 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3Ilbii...
+2026-04-19 21:46:06,091 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 2.0s...
+2026-04-19 21:46:08,570 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/31O3fQ...
+2026-04-19 21:47:28,071 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:47:29,582 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3l8w9L...
+2026-04-19 21:47:59,949 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:48:01,341 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/SwTYAa...
+2026-04-19 21:48:54 - research_loop - INFO -   进度: 5/8 完成
+2026-04-19 21:48:54,426 - INFO -   进度: 5/8 完成
+2026-04-19 21:48:54,860 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2YqreC...
+2026-04-19 21:49:27,553 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation polling timed out after 180s
+2026-04-19 21:49:27 - research_loop - WARNING - 评估超时（120秒）: winsorize(anl10_cpsff_2371)...
+2026-04-19 21:49:27,553 - WARNING - 评估超时（120秒）: winsorize(anl10_cpsff_2371)...
+2026-04-19 21:52:12,084 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:52:13,552 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/evxhP8...
+2026-04-19 21:53:47 - research_loop - INFO -   ts_mean_20: Sharpe=0.58, M/T=0.04
+2026-04-19 21:53:47,041 - INFO -   ts_mean_20: Sharpe=0.58, M/T=0.04
+2026-04-19 21:53:47 - research_loop - INFO -   winsorize: Sharpe=0.72, M/T=2.93
+2026-04-19 21:53:47,042 - INFO -   winsorize: Sharpe=0.72, M/T=2.93
+2026-04-19 21:53:47 - research_loop - INFO -   ts_mean_20: Sharpe=0.72, M/T=9.47
+2026-04-19 21:53:47,042 - INFO -   ts_mean_20: Sharpe=0.72, M/T=9.47
+2026-04-19 21:53:47 - research_loop - INFO -   winsorize: Sharpe=-0.36, M/T=-0.00
+2026-04-19 21:53:47,042 - INFO -   winsorize: Sharpe=-0.36, M/T=-0.00
+2026-04-19 21:53:47 - research_loop - INFO -   ts_mean_20: Sharpe=-0.80, M/T=-0.08
+2026-04-19 21:53:47,042 - INFO -   ts_mean_20: Sharpe=-0.80, M/T=-0.08
+2026-04-19 21:53:47 - research_loop - INFO -   winsorize: Sharpe=-0.36, M/T=-0.00
+2026-04-19 21:53:47,042 - INFO -   winsorize: Sharpe=-0.36, M/T=-0.00
+2026-04-19 21:53:47 - research_loop - INFO -   ts_mean_20: Sharpe=-0.76, M/T=-0.08
+2026-04-19 21:53:47,042 - INFO -   ts_mean_20: Sharpe=-0.76, M/T=-0.08
+2026-04-19 21:53:47,042 - INFO - 实验 #2: 标准模板_analyst10, 测试7个, 候选0个
+2026-04-19 21:53:47,042 - INFO - 从 7 个结果中提取了 2 个洞察
+2026-04-19 21:53:47,042 - INFO - 新增洞察: 模板winsorize Sharpe最高(0.00)，模板ts_mean_20 M/T最好(2.34)...
+2026-04-19 21:53:47,042 - INFO - 新增洞察: 字段前缀anl10的Sharpe差异大(variance=0.406)，不同字段表现差异显著...
+2026-04-19 21:53:47,043 - INFO - 记忆已保存到 research_memory.json
+
+============================================================
+研究进度报告
+============================================================
+实验轮次: 2
+测试Alpha总数: 15
+候选Alpha总数: 0
+策略尝试: 2
+
+当前最佳Alpha:
+  1. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  2. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  3. Sharpe=0.72, M/T=9.47, Dataset=analyst10, Template=ts_mean_20 ❌ 未达标
+
+⚠️  尚未找到可提交的Alpha，继续研究...
+
+最佳Alpha详情:
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.72)M/T✅Fitness✅PPC✅
+
+============================================================
+2026-04-19 21:53:47 - research_loop - INFO - 
+下轮建议:
+2026-04-19 21:53:47,044 - INFO - 
+下轮建议:
+2026-04-19 21:53:47 - research_loop - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 21:53:47,044 - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 21:53:47 - research_loop - INFO -   - 探索新的数据集组合
+2026-04-19 21:53:47,044 - INFO -   - 探索新的数据集组合
+2026-04-19 21:53:47 - research_loop - INFO -   - 尝试不同的预处理序列
+2026-04-19 21:53:47,044 - INFO -   - 尝试不同的预处理序列
+2026-04-19 21:53:48 - research_loop - INFO - 
+============================================================
+2026-04-19 21:53:48,045 - INFO - 
+============================================================
+2026-04-19 21:53:48 - research_loop - INFO - 第 3 轮研究
+2026-04-19 21:53:48,045 - INFO - 第 3 轮研究
+2026-04-19 21:53:48 - research_loop - INFO - ============================================================
+2026-04-19 21:53:48,045 - INFO - ============================================================
+2026-04-19 21:53:48,045 - INFO - 选择策略 [3/8]: 短窗口ts_mean_mdl136 (优先级:2)
+2026-04-19 21:53:48 - research_loop - INFO - 选择策略: 短窗口ts_mean_mdl136
+2026-04-19 21:53:48,045 - INFO - 选择策略: 短窗口ts_mean_mdl136
+2026-04-19 21:53:48 - research_loop - INFO - 描述: mdl136字段 + 短回溯期ts_mean
+2026-04-19 21:53:48,045 - INFO - 描述: mdl136字段 + 短回溯期ts_mean
+2026-04-19 21:53:48 - research_loop - INFO - 执行中...
+2026-04-19 21:53:48,045 - INFO - 执行中...
+2026-04-19 21:53:48 - research_loop - INFO - 数据集 mdl136: 0 个字段
+2026-04-19 21:53:48,870 - INFO - 数据集 mdl136: 0 个字段
+2026-04-19 21:53:48 - research_loop - INFO - 开始执行 0 个模拟（并发上限: 3）...
+2026-04-19 21:53:48,870 - INFO - 开始执行 0 个模拟（并发上限: 3）...
+2026-04-19 21:53:48,870 - INFO - 实验 #3: 短窗口ts_mean_mdl136, 测试0个, 候选0个
+2026-04-19 21:53:48,870 - INFO - 记忆已保存到 research_memory.json
+
+============================================================
+研究进度报告
+============================================================
+实验轮次: 3
+测试Alpha总数: 15
+候选Alpha总数: 0
+策略尝试: 3
+
+当前最佳Alpha:
+  1. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  2. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  3. Sharpe=0.72, M/T=9.47, Dataset=analyst10, Template=ts_mean_20 ❌ 未达标
+
+⚠️  尚未找到可提交的Alpha，继续研究...
+
+最佳Alpha详情:
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.72)M/T✅Fitness✅PPC✅
+
+============================================================
+2026-04-19 21:53:48 - research_loop - INFO - 
+下轮建议:
+2026-04-19 21:53:48,870 - INFO - 
+下轮建议:
+2026-04-19 21:53:48 - research_loop - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 21:53:48,871 - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 21:53:48 - research_loop - INFO -   - 探索新的数据集组合
+2026-04-19 21:53:48,871 - INFO -   - 探索新的数据集组合
+2026-04-19 21:53:48 - research_loop - INFO -   - 尝试不同的预处理序列
+2026-04-19 21:53:48,871 - INFO -   - 尝试不同的预处理序列
+2026-04-19 21:53:49 - research_loop - INFO - 
+============================================================
+2026-04-19 21:53:49,872 - INFO - 
+============================================================
+2026-04-19 21:53:49 - research_loop - INFO - 第 4 轮研究
+2026-04-19 21:53:49,872 - INFO - 第 4 轮研究
+2026-04-19 21:53:49 - research_loop - INFO - ============================================================
+2026-04-19 21:53:49,872 - INFO - ============================================================
+2026-04-19 21:53:49,872 - INFO - 选择策略 [4/8]: pv1标准模板 (优先级:3)
+2026-04-19 21:53:49 - research_loop - INFO - 选择策略: pv1标准模板
+2026-04-19 21:53:49,872 - INFO - 选择策略: pv1标准模板
+2026-04-19 21:53:49 - research_loop - INFO - 描述: pv1价格数据 + 标准模板
+2026-04-19 21:53:49,872 - INFO - 描述: pv1价格数据 + 标准模板
+2026-04-19 21:53:49 - research_loop - INFO - 执行中...
+2026-04-19 21:53:49,872 - INFO - 执行中...
+2026-04-19 21:53:50 - research_loop - INFO - 数据集 pv1: 4 个字段
+2026-04-19 21:53:50,585 - INFO - 数据集 pv1: 4 个字段
+2026-04-19 21:53:50 - research_loop - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 21:53:50,585 - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 21:53:51,010 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/kjHLgr...
+2026-04-19 21:53:51,427 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3McyGk...
+2026-04-19 21:53:51,793 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/33PItR...
+2026-04-19 21:57:09,796 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:57:10,851 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:57:11,262 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/tBy6X7...
+2026-04-19 21:57:11,712 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 21:57:12,263 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/43wYle...
+2026-04-19 21:57:13,114 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Rate limit exceeded. Retrying in 2.0s...
+2026-04-19 21:57:15,580 - ERROR - All 3 attempts failed for create_simulation_with_retry: Rate limit exceeded
+2026-04-19 21:57:15 - research_loop - WARNING - 评估异常: Rate limit exceeded
+2026-04-19 21:57:15,580 - WARNING - 评估异常: Rate limit exceeded
+2026-04-19 21:57:15,990 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Rate limit exceeded. Retrying in 1s...
+2026-04-19 21:57:17,440 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Rate limit exceeded. Retrying in 2.0s...
+2026-04-19 21:57:19,864 - ERROR - All 3 attempts failed for create_simulation_with_retry: Rate limit exceeded
+2026-04-19 21:57:19 - research_loop - WARNING - 评估异常: Rate limit exceeded
+2026-04-19 21:57:19,864 - WARNING - 评估异常: Rate limit exceeded
+2026-04-19 21:57:20,284 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Rate limit exceeded. Retrying in 1s...
+2026-04-19 21:57:21,735 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Rate limit exceeded. Retrying in 2.0s...
+2026-04-19 21:57:24,144 - ERROR - All 3 attempts failed for create_simulation_with_retry: Rate limit exceeded
+2026-04-19 21:57:24 - research_loop - WARNING - 评估异常: Rate limit exceeded
+2026-04-19 21:57:24,144 - WARNING - 评估异常: Rate limit exceeded
+2026-04-19 21:57:24,581 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Rate limit exceeded. Retrying in 1s...
+2026-04-19 21:57:26,006 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/xJHnA4...
+2026-04-19 21:59:00,340 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3LWgfJ...
+2026-04-19 21:59:08,216 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li. Retrying in 1s...
+2026-04-19 21:59:09,923 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2RKNUU...
+2026-04-19 21:59:17,947 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li. Retrying in 2.0s...
+2026-04-19 21:59:20,438 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/tJymn7...
+2026-04-19 21:59:28,362 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 21:59:28 - research_loop - WARNING - 评估异常: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 21:59:28,362 - WARNING - 评估异常: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 21:59:28 - research_loop - INFO -   进度: 5/8 完成
+2026-04-19 21:59:28,362 - INFO -   进度: 5/8 完成
+2026-04-19 21:59:28,828 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3o2JwZ...
+2026-04-19 21:59:31,286 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link. Retrying in 1s...
+2026-04-19 21:59:32,780 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/38t4m1...
+2026-04-19 21:59:41,121 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link. Retrying in 2.0s...
+2026-04-19 21:59:43,599 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/4hFd4r...
+2026-04-19 21:59:51,506 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 21:59:51 - research_loop - WARNING - 评估异常: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 21:59:51,506 - WARNING - 评估异常: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:00:45,594 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 2.0s...
+2026-04-19 22:00:48,051 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/Ar8jOc...
+2026-04-19 22:04:16,524 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation polling timed out after 180s
+2026-04-19 22:04:16 - research_loop - WARNING - 评估超时（120秒）: ts_mean(close, 20)...
+2026-04-19 22:04:16,524 - WARNING - 评估超时（120秒）: ts_mean(close, 20)...
+2026-04-19 22:04:16 - research_loop - INFO -   winsorize: Sharpe=0.49, M/T=0.67
+2026-04-19 22:04:16,524 - INFO -   winsorize: Sharpe=0.49, M/T=0.67
+2026-04-19 22:04:16 - research_loop - INFO -   ts_mean_20: Sharpe=0.47, M/T=1.74
+2026-04-19 22:04:16,524 - INFO -   ts_mean_20: Sharpe=0.47, M/T=1.74
+2026-04-19 22:04:16,524 - INFO - 实验 #4: pv1标准模板, 测试2个, 候选0个
+2026-04-19 22:04:16,524 - INFO - 从 2 个结果中提取了 1 个洞察
+2026-04-19 22:04:16,524 - INFO - 新增洞察: 模板winsorize Sharpe最高(0.49)，模板ts_mean_20 M/T最好(1.74)...
+2026-04-19 22:04:16,525 - INFO - 记忆已保存到 research_memory.json
+
+============================================================
+研究进度报告
+============================================================
+实验轮次: 4
+测试Alpha总数: 17
+候选Alpha总数: 0
+策略尝试: 4
+
+当前最佳Alpha:
+  1. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  2. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  3. Sharpe=0.72, M/T=9.47, Dataset=analyst10, Template=ts_mean_20 ❌ 未达标
+
+⚠️  尚未找到可提交的Alpha，继续研究...
+
+最佳Alpha详情:
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.72)M/T✅Fitness✅PPC✅
+
+============================================================
+2026-04-19 22:04:16 - research_loop - INFO - 
+下轮建议:
+2026-04-19 22:04:16,525 - INFO - 
+下轮建议:
+2026-04-19 22:04:16 - research_loop - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 22:04:16,525 - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 22:04:16 - research_loop - INFO -   - 探索新的数据集组合
+2026-04-19 22:04:16,525 - INFO -   - 探索新的数据集组合
+2026-04-19 22:04:16 - research_loop - INFO -   - 尝试不同的预处理序列
+2026-04-19 22:04:16,525 - INFO -   - 尝试不同的预处理序列
+2026-04-19 22:04:17 - research_loop - INFO - 
+============================================================
+2026-04-19 22:04:17,526 - INFO - 
+============================================================
+2026-04-19 22:04:17 - research_loop - INFO - 第 5 轮研究
+2026-04-19 22:04:17,526 - INFO - 第 5 轮研究
+2026-04-19 22:04:17 - research_loop - INFO - ============================================================
+2026-04-19 22:04:17,526 - INFO - ============================================================
+2026-04-19 22:04:17,526 - INFO - 选择策略 [5/8]: pv13价格数据 (优先级:3)
+2026-04-19 22:04:17 - research_loop - INFO - 选择策略: pv13价格数据
+2026-04-19 22:04:17,526 - INFO - 选择策略: pv13价格数据
+2026-04-19 22:04:17 - research_loop - INFO - 描述: pv13价格/成交量数据 + 标准模板
+2026-04-19 22:04:17,526 - INFO - 描述: pv13价格/成交量数据 + 标准模板
+2026-04-19 22:04:17 - research_loop - INFO - 执行中...
+2026-04-19 22:04:17,527 - INFO - 执行中...
+2026-04-19 22:04:18 - research_loop - INFO - 数据集 pv13: 4 个字段
+2026-04-19 22:04:18,390 - INFO - 数据集 pv13: 4 个字段
+2026-04-19 22:04:18 - research_loop - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 22:04:18,390 - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 22:04:18,822 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/4md0Ah...
+2026-04-19 22:04:19,274 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/4zgRu7...
+2026-04-19 22:04:19,750 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/1kd57k...
+2026-04-19 22:04:27,567 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li. Retrying in 1s...
+2026-04-19 22:04:28,999 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/KMmAm3...
+2026-04-19 22:04:36,872 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li. Retrying in 2.0s...
+2026-04-19 22:04:39,340 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3CdVDC...
+2026-04-19 22:04:41,754 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:04:41 - research_loop - WARNING - 评估异常: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:04:41,754 - WARNING - 评估异常: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:04:42,238 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2ck1Ky...
+2026-04-19 22:04:44,639 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link. Retrying in 1s...
+2026-04-19 22:04:46,683 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/1G5ZVL...
+2026-04-19 22:04:49,128 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link. Retrying in 2.0s...
+2026-04-19 22:04:51,638 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/nah667...
+2026-04-19 22:05:04,916 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:05:04 - research_loop - WARNING - 评估异常: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:05:04,916 - WARNING - 评估异常: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:05:05,363 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/1bVEky...
+2026-04-19 22:05:07,850 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li. Retrying in 1s...
+2026-04-19 22:05:09,332 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/1odi8g...
+2026-04-19 22:05:12,739 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li. Retrying in 2.0s...
+2026-04-19 22:05:15,175 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3nkOAE...
+2026-04-19 22:05:17,751 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:05:17 - research_loop - WARNING - 评估异常: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:05:17,751 - WARNING - 评估异常: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:05:18,700 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2M2kX8...
+2026-04-19 22:05:21,618 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link. Retrying in 1s...
+2026-04-19 22:05:23,216 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/19TQeN...
+2026-04-19 22:05:25,635 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link. Retrying in 2.0s...
+2026-04-19 22:05:28,086 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/1eGMki...
+2026-04-19 22:05:36,196 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:05:36 - research_loop - WARNING - 评估异常: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:05:36,196 - WARNING - 评估异常: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:05:36,611 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/lSEz79...
+2026-04-19 22:05:39,038 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li. Retrying in 1s...
+2026-04-19 22:05:40,836 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/25d6pr...
+2026-04-19 22:05:48,702 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li. Retrying in 2.0s...
+2026-04-19 22:05:51,187 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/XJLtZ9...
+2026-04-19 22:05:59,097 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:05:59 - research_loop - WARNING - 评估异常: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:05:59,097 - WARNING - 评估异常: Simulation error: Incompatible unit for input of "winsorize" at index 0, expected "Unit[]", found "Unit[Group:1]". <li
+2026-04-19 22:05:59 - research_loop - INFO -   进度: 5/8 完成
+2026-04-19 22:05:59,098 - INFO -   进度: 5/8 完成
+2026-04-19 22:05:59,580 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/1B9jOO...
+2026-04-19 22:06:07,459 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link. Retrying in 1s...
+2026-04-19 22:06:09,580 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/4shP4K...
+2026-04-19 22:06:55,982 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link. Retrying in 2.0s...
+2026-04-19 22:06:58,412 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/Rn0r6f...
+2026-04-19 22:07:11,703 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:07:11 - research_loop - WARNING - 评估异常: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:07:11,703 - WARNING - 评估异常: Simulation error: Incompatible unit for input of "ts_mean" at index 0, expected "Unit[]", found "Unit[Group:1]". <link
+2026-04-19 22:07:39,935 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 22:07:41,093 - WARNING - Attempt 1/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 1s...
+2026-04-19 22:07:41,573 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/2M2jia...
+2026-04-19 22:07:42,565 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3hm787...
+2026-04-19 22:11:04,514 - WARNING - Attempt 2/3 failed for create_simulation_with_retry: Simulation polling timed out after 180s. Retrying in 2.0s...
+2026-04-19 22:11:07,094 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/43JsyH...
+2026-04-19 22:14:25,438 - ERROR - All 3 attempts failed for create_simulation_with_retry: Simulation polling timed out after 180s
+2026-04-19 22:14:25 - research_loop - WARNING - 评估超时（120秒）: ts_mean(primary_sector_focused_company_c...
+2026-04-19 22:14:25,438 - WARNING - 评估超时（120秒）: ts_mean(primary_sector_focused_company_c...
+2026-04-19 22:14:25 - research_loop - INFO -   winsorize: Sharpe=0.53, M/T=11.15
+2026-04-19 22:14:25,438 - INFO -   winsorize: Sharpe=0.53, M/T=11.15
+2026-04-19 22:14:25,438 - INFO - 实验 #5: pv13价格数据, 测试1个, 候选0个
+2026-04-19 22:14:25,438 - INFO - 从 1 个结果中提取了 1 个洞察
+2026-04-19 22:14:25,438 - INFO - 新增洞察: pv13数据集Margin/Turnover好(11.15)但Sharpe低(0.53)...
+2026-04-19 22:14:25,439 - INFO - 记忆已保存到 research_memory.json
+
+============================================================
+研究进度报告
+============================================================
+实验轮次: 5
+测试Alpha总数: 18
+候选Alpha总数: 0
+策略尝试: 5
+
+当前最佳Alpha:
+  1. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  2. Sharpe=0.64, M/T=16.30, Dataset=pv87, Template=winsorize_tsmean5 ❌ 未达标
+  3. Sharpe=0.53, M/T=11.15, Dataset=pv13, Template=winsorize ❌ 未达标
+
+⚠️  尚未找到可提交的Alpha，继续研究...
+
+最佳Alpha详情:
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.64)M/T✅Fitness✅PPC✅
+  Sharpe❌(0.53)M/T✅Fitness✅PPC✅
+
+============================================================
+2026-04-19 22:14:25 - research_loop - INFO - 
+下轮建议:
+2026-04-19 22:14:25,439 - INFO - 
+下轮建议:
+2026-04-19 22:14:25 - research_loop - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 22:14:25,439 - INFO -   - 继续短窗口ts_mean_mdl136策略（当前最佳）
+2026-04-19 22:14:25 - research_loop - INFO -   - 探索新的数据集组合
+2026-04-19 22:14:25,439 - INFO -   - 探索新的数据集组合
+2026-04-19 22:14:25 - research_loop - INFO -   - 尝试不同的预处理序列
+2026-04-19 22:14:25,439 - INFO -   - 尝试不同的预处理序列
+2026-04-19 22:14:26 - research_loop - INFO - 
+============================================================
+2026-04-19 22:14:26,440 - INFO - 
+============================================================
+2026-04-19 22:14:26 - research_loop - INFO - 第 6 轮研究
+2026-04-19 22:14:26,441 - INFO - 第 6 轮研究
+2026-04-19 22:14:26 - research_loop - INFO - ============================================================
+2026-04-19 22:14:26,441 - INFO - ============================================================
+2026-04-19 22:14:26,441 - INFO - 选择策略 [6/8]: fundamental6基本面 (优先级:3)
+2026-04-19 22:14:26 - research_loop - INFO - 选择策略: fundamental6基本面
+2026-04-19 22:14:26,441 - INFO - 选择策略: fundamental6基本面
+2026-04-19 22:14:26 - research_loop - INFO - 描述: fundamental6基本面数据 + 标准模板
+2026-04-19 22:14:26,441 - INFO - 描述: fundamental6基本面数据 + 标准模板
+2026-04-19 22:14:26 - research_loop - INFO - 执行中...
+2026-04-19 22:14:26,441 - INFO - 执行中...
+2026-04-19 22:14:27 - research_loop - INFO - 数据集 fundamental6: 4 个字段
+2026-04-19 22:14:27,256 - INFO - 数据集 fundamental6: 4 个字段
+2026-04-19 22:14:27 - research_loop - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 22:14:27,256 - INFO - 开始执行 8 个模拟（并发上限: 3）...
+2026-04-19 22:14:27,709 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/4wDn6y...
+2026-04-19 22:14:28,139 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/3tbD2c...
+2026-04-19 22:14:28,554 - INFO - Simulation created, polling: https://api.worldquantbrain.com/simulations/KzLCz9...

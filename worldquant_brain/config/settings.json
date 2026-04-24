@@ -1,0 +1,48 @@
+{
+  "project": {
+    "name": "WorldQuant BRAIN 量化研究",
+    "version": "1.0.0",
+    "description": "基于WorldQuant BRAIN平台的量化研究项目"
+  },
+  "paths": {
+    "data_raw": "data/raw",
+    "data_processed": "data/processed",
+    "datasets": "data/datasets",
+    "outputs": "data/outputs",
+    "factor_library": "factor_library",
+    "knowledge_base": "knowledge_base",
+    "scripts": "scripts"
+  },
+  "mining": {
+    "default_region": "USA",
+    "default_universe": "TOP1000",
+    "min_sharpe_step1": 0.7,
+    "min_sharpe_step2": 0.7,
+    "min_sharpe_step3": 1.0,
+    "min_fitness": 0.5,
+    "max_turnover": 0.7,
+    "correlation_threshold": 0.8,
+    "batch_size": 10,
+    "max_variants": 20,
+    "concurrent_workers": 10,
+    "delay": 1
+  },
+  "ppa_standards": {
+    "ppc_max": 0.5,
+    "sharpe_min": 1.0,
+    "fitness_min": 0.5,
+    "margin_turnover_ratio": 1.0
+  },
+  "scoring": {
+    "d1_weight": 0.30,
+    "d2_weight": 0.25,
+    "d3_weight": 0.20,
+    "d4_weight": 0.25,
+    "window_short": 126,
+    "window_long": 504
+  },
+  "os_strategy": {
+    "os_threshold": 0.5,
+    "check_interval_hours": 4
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "id": "MP5agW2n",
+  "type": "REGULAR",
+  "author": "XZ37692",
+  "settings": {
+    "instrumentType": "EQUITY",
+    "region": "USA",
+    "universe": "TOP3000",
+    "delay": 1,
+    "decay": 0,
+    "neutralization": "NONE",
+    "truncation": 0.0,
+    "pasteurization": "ON",
+    "unitHandling": "VERIFY",
+    "nanHandling": "OFF",
+    "maxTrade": "OFF",
+    "maxPosition": "OFF",
+    "language": "FASTEXPR",
+    "visualization": false,
+    "startDate": "2014-01-01",
+    "endDate": "2023-12-31"
+  },
+  "regular": {
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "description": null,
+    "operatorCount": 2
+  },
+  "dateCreated": "2026-04-20T04:03:44-04:00",
+  "dateSubmitted": null,
+  "dateModified": "2026-04-20T04:03:45-04:00",
+  "name": null,
+  "favorite": false,
+  "hidden": false,
+  "color": null,
+  "category": null,
+  "tags": [],
+  "classifications": [
+    {
+      "id": "DATA_USAGE:SINGLE_DATA_SET",
+      "name": "Single Data Set Alpha"
+    }
+  ],
+  "grade": null,
+  "stage": "IS",
+  "status": "UNSUBMITTED",
+  "is": {
+    "pnl": 25379114,
+    "bookSize": 20000000,
+    "longCount": 2314,
+    "shortCount": 651,
+    "turnover": 0.0131,
+    "returns": 0.2543,
+    "drawdown": 0.3665,
+    "margin": 0.038784,
+    "sharpe": 1.0,
+    "fitness": 1.43,
+    "startDate": "2014-01-01",
+    "investabilityConstrained": {
+      "pnl": 4316781,
+      "bookSize": 20000000,
+      "longCount": 1842,
+      "shortCount": 1134,
+      "turnover": 0.0131,
+      "returns": 0.0433,
+      "drawdown": 0.3631,
+      "margin": 0.006586,
+      "fitness": 0.22,
+      "sharpe": 0.38
+    },
+    "riskNeutralized": {
+      "pnl": 2129424,
+      "bookSize": 20000000,
+      "longCount": 2314,
+      "shortCount": 651,
+      "turnover": 0.0131,
+      "returns": 0.0213,
+      "drawdown": 0.46,
+      "margin": 0.003254,
+      "fitness": 0.07,
+      "sharpe": 0.17
+    },
+    "checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "FAIL",
+        "limit": 1.58,
+        "value": 1.0
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "PASS",
+        "limit": 1.0,
+        "value": 1.43
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.0131
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.0131
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "FAIL",
+        "date": "2019-09-03",
+        "limit": 0.1,
+        "value": 0.552577
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "FAIL",
+        "limit": 0.43,
+        "value": 0.19
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "DATA_DIVERSITY",
+        "result": "PENDING"
+      },
+      {
+        "name": "PROD_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "REGULAR_SUBMISSION",
+        "result": "PENDING"
+      },
+      {
+        "name": "HT_TURNOVER",
+        "result": "WARNING",
+        "limit": 0.2,
+        "value": 0.0131
+      },
+      {
+        "name": "HT_HIGH_TURNOVER_RETURNS_RATIO",
+        "result": "WARNING",
+        "limit": 0.75,
+        "value": -0.0197
+      },
+      {
+        "name": "HT_PNL_REALIZATION_HORIZON",
+        "result": "WARNING",
+        "limit": 20,
+        "value": 120
+      },
+      {
+        "name": "LOW_2Y_SHARPE",
+        "result": "FAIL",
+        "value": 0.67,
+        "limit": 1.58
+      },
+      {
+        "result": "PASS",
+        "name": "MATCHES_PYRAMID",
+        "effective": 1,
+        "multiplier": 1.2,
+        "pyramids": [
+          {
+            "name": "USA/D1/ANALYST",
+            "multiplier": 1.2
+          }
+        ]
+      },
+      {
+        "result": "WARNING",
+        "name": "MATCHES_THEMES",
+        "themes": [
+          {
+            "id": "KymLz14",
+            "multiplier": 1.0,
+            "name": "All regions/D1 Power Pool Apr`26 2"
+          },
+          {
+            "id": "lyakPRD",
+            "multiplier": 3.0,
+            "name": "After Cost HTVR Theme"
+          }
+        ]
+      },
+      {
+        "name": "OSMOSIS_ALLOCATION",
+        "result": "WARNING"
+      }
+    ]
+  },
+  "os": null,
+  "train": null,
+  "test": null,
+  "prod": null,
+  "competitions": null,
+  "themes": null,
+  "pyramids": null,
+  "pyramidThemes": null,
+  "team": null,
+  "osmosisPoints": null,
+  "origin": "PLATFORM"
+}
