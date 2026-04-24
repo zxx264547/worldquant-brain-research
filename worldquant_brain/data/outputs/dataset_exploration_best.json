@@ -1,0 +1,46 @@
+{
+  "best_candidates": [
+    {
+      "dataset": "analyst4",
+      "field": "actual_dividend_value_quarterly",
+      "template": "ts_mean(winsorize({data}), 10)",
+      "sharpe": 0.82,
+      "fitness": 1.21,
+      "margin": null,
+      "turnover": null,
+      "m_t": 3.41,
+      "note": "M/T突破，但Sharpe仍需提高"
+    },
+    {
+      "dataset": "analyst4",
+      "field": "actual_cashflow_per_share_value",
+      "template": "ts_mean(winsorize({data}), 10)",
+      "sharpe": 0.77,
+      "fitness": 1.10,
+      "margin": null,
+      "turnover": null,
+      "m_t": 1.59,
+      "note": "M/T>1，Sharpe次优"
+    },
+    {
+      "dataset": "pv87",
+      "field": "pv87_2_affops_af_matrix_all_chngratio_number",
+      "template": "winsorize({data})",
+      "sharpe": 0.64,
+      "fitness": 0.91,
+      "margin": 0.039,
+      "turnover": 0.013,
+      "m_t": 3.01,
+      "note": "M/T好，Sharpe低"
+    }
+  ],
+  "summary": {
+    "problem": "Sharpe目标1.58与M/T>1难以同时达到",
+    "best_sharpe": 0.82,
+    "best_m_t": 3.41,
+    "gap_to_target": {
+      "sharpe": "需要再提高0.76",
+      "m_t": "已满足"
+    }
+  }
+}

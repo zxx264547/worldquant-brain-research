@@ -1,0 +1,20 @@
+{
+  "name": "handle_turnover_high",
+  "description": "处理Turnover高于70%的问题",
+  "trigger": "Turnover > 70%",
+  "actions": [
+    {
+      "step": 1,
+      "action": "引入trade_when阀门"
+    },
+    {
+      "step": 2,
+      "action": "提升Decay",
+      "value": "3-5"
+    },
+    {
+      "step": 3,
+      "action": "使用ts_mean平滑"
+    }
+  ]
+}

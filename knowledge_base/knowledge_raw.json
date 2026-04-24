@@ -1,0 +1,1881 @@
+{
+  "Combine": {
+    "name": "Combine",
+    "count": 28,
+    "topics": [
+      {
+        "id": "2198",
+        "title": "【差生文具多】WQ助手1.02版(安卓版本+windows版本)",
+        "author": "ZZ43261",
+        "date": "Wed, 15 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【差生文具多】WQ助手1.02版(安卓版本+windows版本) 先发链接： 安卓： windows： 然后是更新列表： 1 修复长时间后台挂起后唤醒没有自动重登录的bug 2 移除一些非常用数据和模块，常用模块重新排版UI优化 3 数据自刷新，不用点按钮手动刷新了 4 增加windows桌面版，方便非安卓手机用户（可以放云上和脚本一起用） 5 上一版本夏令时计算错误修复 新首页： ps：桌面版如果不能运行先装一"
+      },
+      {
+        "id": "2197",
+        "title": "别再在几百条 alpha里盲选了！我用“相关性分族 + 组内排序” 1 分钟提取数据集回测结果里最值得保留的那些alpha",
+        "author": "SF48372",
+        "date": "Tue, 14 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 别再在几百条 alpha里盲选了！我用“相关性分族 + 组内排序” 1 分钟提取数据集回测结果里最值得保留的那些alpha 当一个字段数据集跑出成百上千条调优结果时，真正难的不是找到高分 Alpha，而是找到彼此不同、又足够优秀的 Alpha。这套方法的核心，就是先按相关性把结果分成族群，再从每个族群里挑出最强代表。 在做一个数据集的批量调优时，我们经常会遇到同一个问题：结果表里看起来有很多高分表达式，但仔细看会发现，其中大量 Alpha 其实只是同一类信号的不同写法。它们的 Sharpe、Fitness、..."
+      },
+      {
+        "id": "2025",
+        "title": "我如何用 Codex   有soul  做 WorldQuant 自动量化研究，越用越聪明",
+        "author": "DW74351",
+        "date": "Thu, 02 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 我如何用 Codex 有soul 做 WorldQuant 自动量化研究，越用越聪明 我一直都是依靠ai研究，从开始的mcp 到geminicli-再到现在的codex，我的量化知识都是ai教我，我的情况我上个赛季Combined0.71，这个赛季达到了1.46，我自己没有什么变化主要是用了codex换了最新的GPT5.4模型，还改善了一下研究方法，前段时间openclaw很火，给我的启发最大是能越用越聪明，背后原因是能记录你的操作记录，给你一种越用越聪明的感觉，所以我在使用codex的使用我也让codex..."
+      },
+      {
+        "id": "2017",
+        "title": "【26年4月主题活动】IQC 邀请 + Combined Alpha Performance 提升计划",
+        "author": "KH94146",
+        "date": "Wed, 01 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【26年4月主题活动】IQC 邀请 + Combined Alpha Performance 提升计划 Hello BRAINers， 4 月，我们为大家准备了两项主题活动： 活动一：IQC 邀请活动——门槛极低，只需邮箱注册 活动详情见：【限时羊毛】只要邀请完成平台使用邮箱注册，即可获得IQC限定雨伞和背包！ – WorldQuant BRAIN-CN 活动二：4 月 Combined Alpha Performance 提升计划 本次 Combined Alpha Performance 提升计划，旨在..."
+      },
+      {
+        "id": "2009",
+        "title": "【经验分享】用AI 跑了几百次回测还找不到优质信号，到底是池塘没鱼还是鱼饵不对？燃烧token！给 AI 装上导航！",
+        "author": "JR57542",
+        "date": "Mon, 30 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【经验分享】用AI 跑了几百次回测还找不到优质信号，到底是池塘没鱼还是鱼饵不对？燃烧token！给 AI 装上导航！ 关于 AI 生产 Alpha 灵感过程中对\"效率\"的一些思考 ⚠️ token 消耗警告：以下方法会消耗大量 token，请务必在订阅了 Coding Plan 或有稳定大额 token 来源的情况下再使用。 一、我的工具链背景 我是计算机专业出身，目前用 Claude Code + Skills 的方式让 AI 全程自动化地搜索和迭代 alpha，核心思路是：通过海量 token 消耗换取..."
+      },
+      {
+        "id": "2001",
+        "title": "Harness engineering下的AI Quant",
+        "author": "DZ31817",
+        "date": "Thu, 26 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - Harness engineering下的AI Quant 这篇文章介绍一套我长期使用的人机协同工作流，以及我对这套流程的一些理解。 这套方法并不追求把量化研究完全交给 AI。我的做法更接近一种分工明确的协作框架：让 AI 参与它最擅长的环节，让代码承担稳定、重复、可验证的部分，让人保留目标设定、异常判断和最终提交权。 从来源上看，这套流程仍然建立在最传统的 1/2/3 阶框架之上，但过去一年多里不断吸收研究小组和论坛中的许多经验，把原先“简单提取字段再做扩展”的思路，逐步改造成了“由 AI 驱动”的结构。..."
+      },
+      {
+        "id": "1980",
+        "title": "【经验分享】第一个35SA的生成之路-你认为的好对SA来说不一定真的好",
+        "author": "ZM10537",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【经验分享】第一个35SA的生成之路-你认为的好对SA来说不一定真的好 今天我做出了第一个35的SA，本篇文章记录自己的思考过程，也希望能为朋友们带来一点制作SA的灵感。先说结论：做SA并不是要选择一批很好的因子，而是要选择一批组合起来很好的因子，并不需要其中每个因子的效果都很优秀。 最开始我还是跟随着原来的思路，选择自认为表现好的因子，于是有了以下selection：咋一看还挺像一回事，选择ATOM，保证每个因子都不混信号；保证较低的pc与sc；较低的操作符数量并且惩罚高操作符，避免每个因子过拟合；惩罚高..."
+      },
+      {
+        "id": "1975",
+        "title": "基于贝叶斯优化的 Alpha 参数遍历工作流：高效打破回撤限制",
+        "author": "LA79055",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 基于贝叶斯优化的 Alpha 参数遍历工作流：高效打破回撤限制 1. 背景介绍 针对处于“临界提交状态”或是“已满足提交要求”的优质 Alpha，我们通常都会有进一步探寻其能力上限的需求——即遍历其参数边界（例如探测最匹配的 neutralization, decay, truncation, universe 组合等），从而挖掘出表现更优异的版本。 然而，WorldQuant Brain 平台对单人的每日仿真回撤（Simulation）次数有着严格的上限（5k/day）。如果采用传统的 Grid Sear..."
+      },
+      {
+        "id": "1924",
+        "title": "【26年3月主题活动】2026 全球量化挑战赛（IQC）推荐计划 & Osmosis 大挑战",
+        "author": "KH94146",
+        "date": "Tue, 03 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【26年3月主题活动】2026 全球量化挑战赛（IQC）推荐计划 & Osmosis 大挑战 三月，我们为所有 BRAIN consultant 准备了两项主题活动，帮助你在实战中提高收入、积累周边积分、领取 KIMI token 福利。 活动时间：3月1日-3月31日 活动类型： IQC 推荐计划：邀请身边朋友一起参加 IQC Osmosis 大挑战：用稳定表现拿积分 一、活动一：IQC 推荐官计划 1. IQC 是什么？ IQC（International Quant Championship）是 Wo..."
+      },
+      {
+        "id": "1920",
+        "title": "【经验分享】Combine为负数不要慌，关于Combine为负数之后的逆袭2.0+经验分享",
+        "author": "YQ84572",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【经验分享】Combine为负数不要慌，关于Combine为负数之后的逆袭2.0+经验分享 以下是我是十月份至今的combine变化，从负数逆袭到2.0+，来回馈一下社区，给新人一些建议。 可以看到每次更新都有很大的提升，在Q4季度第一次更新combine为负后当时作为新人的我也是很疑惑，因为我对于我交的因子还是有一定自信的，我马上就找了同期的顾问\"传奇耐打王\"交流讨论combine为负的原因，一番交流下来发现是单个月份新开的reigon太多，一些区域的alpha太少了，导致区域稳定性和多样性太低，comb..."
+      },
+      {
+        "id": "1919",
+        "title": "借助ai手搓出一个IND region的other355字段alpha，记录一下步骤经过",
+        "author": "YT18046",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 借助ai手搓出一个IND region的other355字段alpha，记录一下步骤经过 首先，将other355数据集的字段丢给AI,我是直接截图给到ai： Ai会总结输出文字列表： 完整字段与描述列表 字段：oth335_combined_all_region_hedge描述：来自对冲模型的得分（Score from the hedge model） 字段：oth335_combined_all_region_linear描述：线性模型中的得分（Score from the linear model） ..."
+      },
+      {
+        "id": "1915",
+        "title": "EUR TOPCS1600的经验：解决Robust universe Sharpe / Sub-universe Sharpe / Weight concentration 问题",
+        "author": "XW90844",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - EUR TOPCS1600的经验：解决Robust universe Sharpe / Sub-universe Sharpe / Weight concentration 问题 EUR TOPCS1600是最近新开放的炙手可热的universe。然而回测中经常遇到几个典型的问题： Robust universe Sharpe of 0.xx is below cutoff of 0.70. Sub-universe Sharpe of xx is below cutoff of 1.xx. Weight ..."
+      },
+      {
+        "id": "1896",
+        "title": "【贺六浑】被忽视的宝藏算子：vec_min 与 vec_max 的特定搭配妙用",
+        "author": "JR23144",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【贺六浑】被忽视的宝藏算子：vec_min 与 vec_max 的特定搭配妙用 大家好，我是贺六浑，好久没做分享，今天给大家分享一个对于向量数据处理算子。 今天给大家分享一点我在挖 Alpha 时发现的“小彩蛋”——两个在处理 vector（向量）数据类型时，常常被大家忽视，但在特定场景下却能打出超强效果的操作符：vec_min() 和 vec_max()。 在日常手写代码或者让 AI 辅助优化策略时，面对向量数据的降维或聚合，我们最习惯使用的“万金油”算子通常是 vec_sum()（求和）或者 vec_a..."
+      },
+      {
+        "id": "1879",
+        "title": "【经验分享】如何从expert直升GM",
+        "author": "JD62872",
+        "date": "Thu, 12 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【经验分享】如何从expert直升GM 我是25年7月拿到顾问资格的，一开始其实就很懵懂，对genius规则也不熟悉，9月初的时候才在论坛看到华子哥的插件，看了下排名，发现自己有希望冲击master，于是在9月开始重视六维，但是由于前期没重视社区分，导致去年三季度最终定级在expert。进入四季度后，我制定了四季度点塔以及六维的整体计划，并在执行的过程中根据进程实时进行微调，最终在四季度进入了gm的序列。 大家都知道，要在genius定级系统里拿到好的成绩，我们需要关注四个方面，分别是因子提交数量、点塔数、..."
+      },
+      {
+        "id": "1854",
+        "title": "[四季度六维数据] 聚焦目标数据，超越自我",
+        "author": "JX79797",
+        "date": "Thu, 05 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [四季度六维数据] 聚焦目标数据，超越自我 在combine和六维等级排名中，我们真正面对的竞争对手，并非其他Alpha开发者，而是我们自己能否持续地优化和超越“数据目标”。 这就像我们学生时代的考试一样。看似是和班级同学争夺排名，但实际上，你的真正对手是知识本身，是那些试卷上的分数。当你把注意力集中在掌握知识点、提高分数上，一旦你的分数达到了目标，自然而然就会超越很多同学，甚至包括那些你曾觉得难以逾越的“学霸”。在BRAIN平台，这个道理同样适用。 通过对平台Grandmaster、Master和Expe..."
+      },
+      {
+        "id": "1853",
+        "title": "26年2月全球会议重点内容整理",
+        "author": "PP26750",
+        "date": "Thu, 05 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 26年2月全球会议重点内容整理 一、Osmosis Score机制（Genius评估新模块） 核心目标：通过“信心分数”影响奖金分配，赋予顾问对alpha组合的自主权。 操作流程： 分配10万点数至不同范围； 标签alpha（每范围至少10个alpha，覆盖3+区域+延迟）； 基于组合表现赚取乘数。 评分规则：每日Osmosis分数 = 所有区域/延迟下组合平均回报的排名；分数直接影响每日奖金（作为乘数），并纳入季度Genius等级评估（与CAP、CSAP等组合表现并列）。 关键细节： 每周日午夜（美东时间..."
+      },
+      {
+        "id": "1852",
+        "title": "OS更新后对于“这个因子到底能不能交”的一点思考 【传奇耐打王系列一】",
+        "author": "FX25214",
+        "date": "Thu, 05 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - OS更新后对于“这个因子到底能不能交”的一点思考 【传奇耐打王系列一】 首先，一年的OS不能代表什么，OS差的朋友们不需要焦虑，好的也不要太过开心。但从这一年的OS，总是可以帮我们提高对于因子是否可以提交的认知。接下来我将用几个我自己认为非常有趣的因子来跟大家做出分享。 因子一： 这是我在USA的inst18做的一个ra。不得不说这个因子在我做出来的时候，我的反应应该和大家的是一样的，这不就是一个妥妥的厂吗？pnl的平滑是根本谈不上了。而且这个因子的表现靠的就是前几年堆起来的。那为什么我当时会交这个因子呢？..."
+      },
+      {
+        "id": "1846",
+        "title": "【MCP优化】一段代码获取指定数据集的高质量字段",
+        "author": "SP74109",
+        "date": "Wed, 04 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【MCP优化】一段代码获取指定数据集的高质量字段 众所周知，由于计算资源限制，平台即将开始限制个人单日回测数量，所以不管是使用MCP的同学还是依然使用传统回测框架的同学，都亟需提升回测效率。想要提升回测效率，构建优秀的模板和字段组合尤为重要，我为大家提供一段即插即用的代码，这段代码可以将在指定地区、Universe、数据集id和Delay的情况下将该数据集中所有高质量字段下载并保存为csv文件。 数据集中每个字段的alphaCount和UserCount一定程度上代表了该字段的质量以及产出因子的难度，经过观..."
+      },
+      {
+        "id": "1842",
+        "title": "这个因子到底能不能交？ 定级后关于因子提交的沉重反思 【传奇耐打王系列一】",
+        "author": "FX25214",
+        "date": "Wed, 04 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 这个因子到底能不能交？ 定级后关于因子提交的沉重反思 【传奇耐打王系列一】 回想起距离上一次系列一的发布，已经一整个季度了。先上combine： 从25年三季度combine超过2的信心满满，到25年四季度妄想gold直升gm失败。不得不说，在wqb的世界里遨游，颇有一番年少无知，初生牛犊不怕虎的样貌。 三季度结束的时候我点塔数量不超过30座。印象中好像是27座。四季度开始开辟新的地区，“走出去”才知道gold直升gm的含金量。在此向三季度完成这一壮举的冷神致敬。 先把失败用一句话总结：混塔 + 降per ..."
+      },
+      {
+        "id": "1817",
+        "title": "[AIAC2] Alpha 生成系统：AI驱动的量化策略优化框架",
+        "author": "JX79797",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [AIAC2] Alpha 生成系统：AI驱动的量化策略优化框架 - ✅ **自动生成** 符合 BRAIN 平台规范的 Alpha 表达式 - ✅ **智能优化** 基于 5-Agent 架构的多阶段优化流程 - ✅ **持续运行** 自动循环直到达成目标（Sharpe ≥ 1.58, Fitness ≥ 1.0） - ✅ **完全遵循** WorldQuant 第一定律和 Playbook 优化规则 🏗️ 系统架构 整体架构图 核心组件架构 💡 核心特性 1. 智能数据管理 **DataManager*..."
+      },
+      {
+        "id": "1814",
+        "title": "Gemini CLI正确开启skills以及alpha迭代优化工作流",
+        "author": "HZ32281",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - Gemini CLI正确开启skills以及alpha迭代优化工作流 首先要感谢开发AI打工人的大佬给我们带来这么好用的工具，同样，我也在第一时间使用了，尤其在看到.claude\\skills文件夹的那一刻，仿佛发现了宝藏。作为Gemini CLI的高强度使用者，我就想这些skills能不能在gemini当中使用。 以防还有同学不了解Gemini CLI要怎样开启使用skills，这里就先说一下开启方式。首先，我们直接把.claude当中的skills文件夹整个复制到.gemini文件夹当中。然后我们启动G..."
+      },
+      {
+        "id": "1785",
+        "title": "[WARNING!!!WARNING!!!WARNING] OS已觉醒!!!｜样本外更新之后，我终于看清哪些因子只是“剧情战力” | 附分析代码",
+        "author": "JL40454",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [WARNING!!!WARNING!!!WARNING] OS已觉醒!!!｜样本外更新之后，我终于看清哪些因子只是“剧情战力” | 附分析代码 最近的 OS更新后，我把同一批因子整体重新做了一轮 OS 分布分析。结果非常直观，也非常残酷：很多在 IS 里表现“像主角”的因子，一进 OS 分布，直接暴露出真实定位——剧情强度，不是实战强度。 这次我刻意不看均值、不看单点最优，只看分布。OS 的 Sharpe、Fitness、Returns、Drawdown、Turnover、Margin 全部拆开，按 ty..."
+      },
+      {
+        "id": "1784",
+        "title": "[工具分享] WQ Brain 网页增强工具：网页会话复用+相关性缓存",
+        "author": "GC13416",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [工具分享] WQ Brain 网页增强工具：网页会话复用+相关性缓存 兄弟们，此时此刻，《此处省略300字小作文》，恰如彼时彼刻...... \"Session Expired\" (会话过期) 登录页面朝你微微一笑，刚才的 Alpha 就像前任一样，回不来了，找不到了。 为了拯救被 WorldQuant Brain \"光速踢下线\" 折磨的道友们，我把之前的 Session Keeper 再次进化了！ 发布 v4.1 自适应增强版 —— 这次它比你还能熬！ 项目开源： Gitee: <"
+      },
+      {
+        "id": "1754",
+        "title": "【代码分享】分享一套分析工具，集成中性化/最大团等功能",
+        "author": "JA92987",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【代码分享】分享一套分析工具，集成中性化/最大团等功能 系统介绍 本系统专门为WorldQuant顾问打造的一站式分析平台。这个系统把日常工作中需要用到的各种工具都整合到了一起，让您不用在多个网站、多个软件之间来回切换，大大提高工作效率。 本系统使用的数据库是mysql，开发框架是flask，入手较为简单，小白也可以轻松上手。 背景介绍 我在论坛上进行阅览时，发现有很多工具可供选择，但是这些工具基本都是分散的，于是就有了一个想法，把这些工具做成一个统一的门户，方便进行各个工具之间的快捷切换，从8月份开始做这..."
+      },
+      {
+        "id": "1727",
+        "title": "Osmosis Contest工具优化 - 使用SuperAlpha测试你的Osmosis selected alphas",
+        "author": "DL33935",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - Osmosis Contest工具优化 - 使用SuperAlpha测试你的Osmosis selected alphas Osmosis Contest工具优化 - 使用SuperAlpha测试你的Osmosis selected alphas 前几天再论坛上学习了课代表@XX42289 分享的《CA 降维 + 多指标聚类数评判 Osmosis 点数分配工具》，以及@JR23144【贺六浑】-【工具配置】OC2025 一键清空分数脚本. 感谢两位大佬的分享, 自己也使用两位大佬的工具做了一些测试. 在使用..."
+      },
+      {
+        "id": "1711",
+        "title": "【SDK+MCP+AGENT三层架构】因子挖掘系统，实现mcp稳定运行不断",
+        "author": "GY62435",
+        "date": "Tue, 13 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【SDK+MCP+AGENT三层架构】因子挖掘系统，实现mcp稳定运行不断 MCP运行一直存在一个困扰，就是执行过程中总存在中断，需要用户介入挖掘的情况。为解决这个问题，使用ai编程工具claude实现自动化因子挖掘系统，结合SDK、MCP和Agent三层架构，实现智能化、高性能的alpha挖掘。 ## 系统架构 - **SDK Layer**: 高性能直接API调用，处理80%的简单批量任务 - **MCP Layer**: 复杂分析操作（提交检查、相关性分析） - **Agent Layer**: 智能..."
+      },
+      {
+        "id": "1703",
+        "title": "QuantGo Kit：基于Grafana的WorldQuant量化可视化篇",
+        "author": "ML47973",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - QuantGo Kit：基于Grafana的WorldQuant量化可视化篇 一、2026 开端 本篇是基于上篇 QuantGo Kit：基于Go开发的WorldQuant量化工具箱篇 存入数据库数据做 Grafana可视化，多维度查看和分析自己做过的 Alpha，以及 操作符Op 和 Combine & vf & wf 等数据 . Grafana 官方下载中心： ，我选择下载Grafana到本地，可以不使用Docker启动 . 默认访问地址 "
+      },
+      {
+        "id": "1688",
+        "title": "七十二变结合mcp，快速回测以及筛选出可提交因子",
+        "author": "YQ84572",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 七十二变结合mcp，快速回测以及筛选出可提交因子 话不多说，先上图用昨天培训的流程使用mcp来快速进行变体挖掘，大模型找完之后就开始回测，下面直接看结果，一共是30个回测出了四个信号后续还有28个是生成了没一次性回测完的，回测结果如下出了9个信号，这个效率应该高的没边了，七个出一个信号差不多。这么多信号我就随便选一个到平台看看大概是这样的22年差了一点不过还可以接受，pc的话也不算高，后续调了一下参数和中性化，ra就出来了组合表现也没什么问题 然后还有一版的大概是出了3个ppa吧可以直接交的，80个回测总结..."
+      }
+    ]
+  },
+  "OS/OSM": {
+    "name": "OS/OSM",
+    "count": 1,
+    "topics": [
+      {
+        "id": "2196",
+        "title": "【大角羊】一分钟掌握参加Orthogonal HTVR Theme要点（三倍加成）！",
+        "author": "AL13375",
+        "date": "Tue, 14 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【大角羊】一分钟掌握参加Orthogonal HTVR Theme要点（三倍加成）！ 最后，大角羊预祝诸位顾问大佬们在新主题期间做出高质量的主题RA，每天的OSM都能节节高，拿到心满意足的高BASE！"
+      }
+    ]
+  },
+  "数据处理": {
+    "name": "数据处理",
+    "count": 4,
+    "topics": [
+      {
+        "id": "2195",
+        "title": "通俗易懂，从另一个角度理解一下方法vector_neut(x, y)、ts_vector_neut(x, y, d)、ts_vector_proj(x, y, d)",
+        "author": "CY76111",
+        "date": "Tue, 14 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 通俗易懂，从另一个角度理解一下方法vector_neut(x, y)、ts_vector_neut(x, y, d)、ts_vector_proj(x, y, d) 核心类比：用“老师教学生”来理解 想象一下，x是一个学生的总成绩，y是这位学生的数学成绩。 1. vector_neut(x, y)​ 就像是在全年级进行一次统考后，学校想看看每个学生“除去数学天赋后的真实综合能力”。 1.1怎么做： 学校用全年级所有学生的数据做一个分析，发现总成绩和数学成绩之间存在一个普遍规律（比如，总成绩 ≈ 0.5 + ..."
+      },
+      {
+        "id": "1918",
+        "title": "【WQ数据监控 v0.2.0】wqmanager.qzz.io 版本更新 ---- 新增 Osmosis Rank 变化情况及周维度对比。",
+        "author": "JG15244",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【WQ数据监控 v0.2.0】wqmanager.qzz.io 版本更新 ---- 新增 Osmosis Rank 变化情况及周维度对比。 在线地址： 更新内容 个人信息页面增加 Osmosis Rank 变化趋势图、周维度对比图。 新增 consulant 页面，整合 consulant 全部信息。 更新截图 欢迎提出各位大佬使用，欢迎提出需求、优化建议、bug！ 欢迎 start 和 issue ！ 后端项目地址："
+      },
+      {
+        "id": "1889",
+        "title": "数据字段创建比赛首次培训",
+        "author": "WL13229",
+        "date": "Tue, 24 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 数据字段创建比赛首次培训 Introduction to Data Creation Challenge 2026  本周中国时间晚九点"
+      },
+      {
+        "id": "1685",
+        "title": "因子复现日记：操作符复现（1）【传奇耐打王系列二】",
+        "author": "FX25214",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 因子复现日记：操作符复现（1）【传奇耐打王系列二】 大家好啊，传奇耐打王又来了。 这次我给大家带来了一个新的系列——因子复现日记。以后我也会不定期分享复现因子的整个操作流程。本期是一期非常简单易懂的操作符复现。 作为一个gold，在操作符上实在没有话语权。但是看到一些大佬分享的优秀因子又特别眼馋。咋办呢？心动不如行动，只能自己尝试着复现啦。 Weijie老师说的好：如果你把论坛上所有的东西都学会了，那你就是大佬。既然看着别人的因子眼馋，又有ppa的权利，何乐而不为呢？我们不能仅限于眼前的操作符。也要学会自己..."
+      }
+    ]
+  },
+  "PPA因子": {
+    "name": "PPA因子",
+    "count": 28,
+    "topics": [
+      {
+        "id": "2194",
+        "title": "【个人经验】PPA 因子筛选标准与实战心得（适合新手参考）",
+        "author": "HS67684",
+        "date": "Tue, 14 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【个人经验】PPA 因子筛选标准与实战心得（适合新手参考） 最近一直在做 PPA 因子，也看了很多社区大佬的分享，结合自己反复回测、调整、提交的经验，整理一套自己实际在用的 PPA 标准与思路，希望对新手朋友有帮助。 一、PPA 核心要求PPC ((Power Pool Correlation) < 0.51.相关性必须严格低于 0.5，这是 PPA 最核心门槛，高于 0.5 基本直接拒绝，和公共因子相关性过高，无独特性。2.Sharpe > 1.0样本内、实盘尽量都 >1，至少样本内必须稳定大于 1，建议..."
+      },
+      {
+        "id": "2031",
+        "title": "VF1.0单周期狂赚$2,538.14！我的高Base骚操作大公开",
+        "author": "PP26750",
+        "date": "Tue, 07 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - VF1.0单周期狂赚$2,538.14！我的高Base骚操作大公开 运气不错，vf1.0的这个周期有43天（2.9-3.23）！这算是最长周期了吧，我还正好是最高的vf真实吃美了，这43天光Base就入了2,538刀，平均每天保底60刀📦。趁着刚更新完，赶紧把我的“爽吃”策略分享给兄弟们！ 搞钱之前，先摸清现在的四大KPI：👑 VF：不用多说，决定你能吃多大碗饭，也是决定你保底的关键因素。📈 OS（Osmosis Rank）：2月份新出的隐藏大佬！一周更新5次，跟Base强绑定，这个真的非常关键，os低了v..."
+      },
+      {
+        "id": "1990",
+        "title": "【Quant101】手把手教你搭建本地因子库 ①",
+        "author": "ZH87224",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Quant101】手把手教你搭建本地因子库 ① 新的一期 IQC 已经开跑，又会有一批新顾问进场。平台功能多、接口和字段杂，如果完全wqb、machine_lib或一些零散脚本，因子一多就很难检索、去重和做版本管理。 此外，对于顾问来说，有几个都会遇到的痛点： 平台使用美东时间，并且有夏令时切换，但我们都在CN，每次检索&设置还得考虑时区问题 现在回测很宝贵，每天就5000次，如何在回测时跳过已经回测过的表达式？ 如果快速计算Self-Corr，并且区分PPA和RA？ 如何快速知道哪些因子可以Check？..."
+      },
+      {
+        "id": "1985",
+        "title": "[经验分享]一觉醒来全球combine缩水，只有我保持不变❓（总池combine全球第一）",
+        "author": "LZ63377",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [经验分享]一觉醒来全球combine缩水，只有我保持不变❓（总池combine全球第一） 大家好，标题整蛊一下O(∩_∩)O，我是练习量化4个月的新人顾问Ricardo。2月上旬平台更新了combine和vf，当时我的combine从-1.2一举跃升至3.18，提升超4，前后只隔一个月悬殊却如此之大，属实是个值得研究的典型样本。因此我发布了自己去年11，12月的提交数据，希望能够带给大家一些启发，感兴趣的可以看看，能够更好地衔接本文👉： "
+      },
+      {
+        "id": "1952",
+        "title": "【经验分享】成为顾问一个月，拿下Daily Osmosis Rank全球第一名",
+        "author": "JM19072",
+        "date": "Thu, 12 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【经验分享】成为顾问一个月，拿下Daily Osmosis Rank全球第一名 作为一名新手，第一次更新分数，碰巧拿到Daily Osmosis Rank为0.97分的全球并列第一，还是比较激动的，趁热来记录一下。 实话实说，我个人是不太确定为什么我能拿到这个分数的，甚至在半个月之前都不知道Osmosis怎么弄。多亏了我的朋友ZY36280帮助，我才入门，他的帖子对我启发也挺大，还有个人感触比较深的一些大佬的有关帖子，我一并放在下面链接中，朋友们可以在下面链接中看一看，希望对大家有帮助。 回到Osmosis..."
+      },
+      {
+        "id": "1944",
+        "title": "作为一个gold级别的新人,我是怎么点满60个塔",
+        "author": "LD22811",
+        "date": "Mon, 09 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 作为一个gold级别的新人,我是怎么点满60个塔 我是11月18日成为顾问的新人，2025Q4有42天时间，交数量倒是满足MS级别了，但是12月的comb分0分，VF由于11月不够20天没有出分。提交的alpha质量应该是好坏都有，当时很多知识都不了解，胡乱提交的。 2026年1月我之前发了一个PPA活动主题限制下，提交ra点塔的一点心得。 – WorldQuant BRAIN帖子，alpha提交策略成熟了一些，1月comb也刷新到了1.49，VF第一次出分0.80。 3月5日我的点塔数也60个了，达到了G..."
+      },
+      {
+        "id": "1938",
+        "title": "【效率王】APP-3.0：完全自动化时代",
+        "author": "CQ89422",
+        "date": "Sat, 07 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【效率王】APP-3.0：完全自动化时代 吹哨人来了。万众瞩目的AI工具继续升级，快更新到3.0以上的版本吧！。点击“🔄 Alpha自动流水线”按钮，快速感受以下功能吧！按需点塔，多个研究管线同时自动开工。 核心效果：自适应方式找种子，后根据群表现，AI自决策提升目标 下一个功能：你来提！多试用，多提意见！ 个人试用了一晚上用不到10元，PPA已找到3个。 对了，请勿侵占相关人员的知识产权，必究！未经允许不可转发。"
+      },
+      {
+        "id": "1898",
+        "title": "适合邮箱自动推送的平台信息",
+        "author": "WL27618",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 适合邮箱自动推送的平台信息 有些数据(尤其是排行榜数据), 刷新一次还是很浪费时间的. 这种情况我都觉得让邮箱每天自动推送比较好. 我选择推送的平台五项(income/consultant/genuis/message/simulation count). 推送流程是: 1. 分开设置每个拉取不同数据的脚本 2. 设置总结推送脚本 3. 设置定时任务启动总结脚本 我用的是mac, 添加成功到~/Library/LaunchAgents/定时任务后系统会提示. 建议任务还是写在项目中, 系统目录下用软链接, ..."
+      },
+      {
+        "id": "1877",
+        "title": "0.74VF也能1RA吃到14刀！",
+        "author": "JX39934",
+        "date": "Thu, 12 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 0.74VF也能1RA吃到14刀！ 这次更新了VF，0.46-0.74,想看看能不能去吃一下double的主题，刚好打着这个月PPA小地区主题准备猛攻TWN的打算，就去TWN碰了碰，发现指定有theme的数据集真的不好跑啊，还得是AI大人祝我一臂之力，直接拿下PC0.3以下且fitness1.5+的因子以下是图： 结论是PC0.3是一个坎，fitness1.5也是一个坎，当两个坎都迈过去，就是左脚踩右脚，原地起飞，如果还是有theme加持那更厉害，而且现在的小地区double theme数据集难度都挺高的，..."
+      },
+      {
+        "id": "1873",
+        "title": "alpha本地校验，self+ppac自相关校验及数据完整度校验",
+        "author": "XB37939",
+        "date": "Tue, 10 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - alpha本地校验，self+ppac自相关校验及数据完整度校验 本地校验的必要性 作为一个新手顾问，回测后如何快速的找到可用的alpha至关重要。由于第一次选择的数据集是model165，里面很多数据都只有近几年有数据。生产的alpha不是一个很好的alpha，所以想过滤掉数据不全的alpha。 首先参考了LX57490的分享 "
+      },
+      {
+        "id": "1867",
+        "title": "[新人分享] 13天提交，Combine 1.12, PPA Combine 1.35",
+        "author": "JF13485",
+        "date": "Mon, 09 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [新人分享] 13天提交，Combine 1.12, PPA Combine 1.35 大家好，我是JF13485，我是在2025年11月17日 成为WorldQuant BRAIN平台的有条件顾问。在成为顾问时研究了平台的genius规则，并向我的mentor游戏王大佬请教了combine如何稳固和提升。 回顾我在11月的征程，主要聚焦于 USA市场，并成功提交了 超过40个Alpha。通过这段时间的努力，在一月份更新11月份combine时，我的策略在 13天Combine中达到了1.12，而 PPA ..."
+      },
+      {
+        "id": "1845",
+        "title": "【Community Leader -因子筛选与组合⭐】变体挖掘后的快速自相关分析，挖掘可提交变体",
+        "author": "YQ84572",
+        "date": "Wed, 04 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader -因子筛选与组合⭐】变体挖掘后的快速自相关分析，挖掘可提交变体 在使用mcp进行变体挖掘的时候常常遇到大批量相关性过高的因子，一个个拿id去平台点击查看略嫌麻烦，去跑一遍本地自相关的代码也是不够清晰的能看到变体的各个自相关。哪个变体接近可以提交？针对这个问题我想着把本地自相关的检测添加到mcp工具里面，让ai在完成变体挖掘后也能去快速的检测自相关并返回，由于api的方式限流所以没有去使用mcp种的api检测模式。下面附上效果和代码进行一些调整后也能快速选出相关性优化的变体..."
+      },
+      {
+        "id": "1844",
+        "title": "PPA活动主题限制下，提交ra点塔的一点心得。",
+        "author": "LD22811",
+        "date": "Wed, 04 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - PPA活动主题限制下，提交ra点塔的一点心得。 新季度没多久就开始实行ppa主题活动了，只能在活动区域提交ppa。1月份我做了两个地区的alpha，usa d1和ind，usa在活动之前点了几个塔，活动开始之后又坚持了几天交ra觉得有点累就去了ind活动，活动前期没有在意atom，等我意识到这个问题之后已经交了30个pv塔，所以在活动结束之后我坚持补了20个atom-ra，然后又回usa点亮了剩下的塔，没有去参加GLB活动。两个区应该是一共点了24个塔，100个alpha左右。参加活动的ppa也都满足ra标..."
+      },
+      {
+        "id": "1816",
+        "title": "我用 Codex + GPT-5.2 + MCP 跑通了第一个 Alpha  优化，记录一下过程",
+        "author": "ZZ39487",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 我用 Codex + GPT-5.2 + MCP 跑通了第一个 Alpha 优化，记录一下过程 先说说我的背景 我是个纯计算机科班出身的码农，日常工作就是写代码。AI 工具平时用得挺多，ChatGPT、Claude 都是老伙计了。但说实话，量化和金融这块我真的是零基础，之前完全没接触过。之前做 WorldQuant 的 Alpha，都是东拼西凑——在中文论坛找大神的代码，然后一点点改改跑通回测交alpha上去。（以前交的都是 PPA，这类型的条件比较宽松，好混一点。）后来平台限制了 PPA，除了主题 PPA..."
+      },
+      {
+        "id": "1806",
+        "title": "GLB区域使用ppa点塔",
+        "author": "YB44630",
+        "date": "Wed, 28 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - GLB区域使用ppa点塔 jump_decay(ts_delta(x, 5), 3, sensitivity = 0.3, force = 0.05) 这个表达式通常用于策略信号的预处理或技术指标的平滑优化，举两个具体例子： 股票趋势跟踪策略：先计算收盘价的 5 周期差值（判断 5 天内涨跌幅度），再用 jump_decay 过滤因跳空高开 / 低开导致的异常差值，避免策略因单日跳空而提前买入 / 卖出。 成交量异动策略：先计算成交量的 5 周期差值（判断 5 天内成交量变动），再平滑修正突发的巨量 / 地..."
+      },
+      {
+        "id": "1800",
+        "title": "【ValueFactor】0.38->0.89->1->0.99->1的自我救赎",
+        "author": "WL63604",
+        "date": "Tue, 27 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【ValueFactor】0.38->0.89->1->0.99->1的自我救赎 VF1的好处不言而喻，最直观的是base更绿了，先来波base截图： 这base应该是高VF中最菜的了（不敢截数值，太菜了），base全靠SA，RA低base原因比较多，根本原因还是做不出来指标高的和低PC的，其次是未做theme主题。 自2025年7月1日从IQC顾问成为正式顾问以来，combine和vf更新变化趋势如下： VF0.38为截至 2025 年 7 月 31日的三个月内提交的所有 Alpha 和 SuperAlp..."
+      },
+      {
+        "id": "1786",
+        "title": "【PPAC/Super Alpha Submitter】基于coze 生成描述，提交因子",
+        "author": "ZY25247",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【PPAC/Super Alpha Submitter】基于coze 生成描述，提交因子 基于coze api 生成PPAC Alpha或SuperAlpha 描述信息，通过brain 接口修改目标alpha的描述，再执行提交，代码开箱即用 1. coze 生成描述 coze.py import requestsimport json,timefrom six import print_api_key = \"key\" #替换成自己的keybotid = \"botid\" #替换成自己的botidbaseUrl..."
+      },
+      {
+        "id": "1763",
+        "title": "AI助力拯救“准提交因子”",
+        "author": "GX42576",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - AI助力拯救“准提交因子” 大家好。最近我在常遇到一些因子表现不错但 IS 检查只有一项问题，看下 PC<0.7 放弃有点不甘心，自己调又无从下手。于是参考论坛各位老师的经验搓了一个“AI 因子提升工作流”。 以下是工作流处理的两个案例： 案例一： 9qQ0vwjd - Weight is too strongly concentrated or too few instruments are assigned weight.问题进行优化 AI 优化结果： # Alpha 因子优化报告 - 9qQ0vwjd..."
+      },
+      {
+        "id": "1762",
+        "title": "我是如何分配5000次回测",
+        "author": "BS49098",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 我是如何分配5000次回测 我是25年11月底的新顾问，第一个月都在做自己的工程化准备。在12月中旬我把工程化系统搭建完毕后，发现回测次数已经限制到5000了！但是我系统集成的三阶研究和模板回测模块的研究效率都非常低在5000次回测只能产出1-2个有信号的alpha，而且拥挤度非常高，即使优化后也远远达不到提交的alpha; 为了提升研究效率，我开始思考如何用AI和工程化相辅相成，充分利用5000次回测，尽可能每天挖掘出能提交的alpha；在12月下旬开始转向“AI + 工程化相互相成”的思路，经过一个月的..."
+      },
+      {
+        "id": "1759",
+        "title": "新人第一次Combined Alpha Performance updated更新，意外达到Grandmaster",
+        "author": "CC67505",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 新人第一次Combined Alpha Performance updated更新，意外达到Grandmaster 如图所示，我是2025-10-17晚上正式成为条件顾问，一直到今天，Combined Alpha Performance updated第一次更新，发现评分2.11，成功达到Grandmaster级别。 达到这个级别，个人感觉还是比较蒙的，也有一些忐忑，因为感觉自己的能力还不够，因为本次更新是截至到10月底提交的因子，而我自达成条件顾问后，10月份一共提交15个因子，11个eur地区，4个us..."
+      },
+      {
+        "id": "1756",
+        "title": "获取生产相关性代码改进",
+        "author": "GW98315",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 获取生产相关性代码改进 最近读了大佬的一篇帖子：避免频繁登录可以复用session cookie 代码检查ppac prod 相关性-python代码 "
+      },
+      {
+        "id": "1750",
+        "title": "新顾问踩坑分享——combined为负的惨痛教训",
+        "author": "HY20507",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 新顾问踩坑分享——combined为负的惨痛教训 先说结论：1.关于combined：请务必详细拜读【新人科普，老人必读】从Combined Alpha Performance 的计算原理，学习如何提升表现！ – WorldQuantBrain-CN这篇文章，请：多多“点塔”，关注alpha的质量，特别是margin指标！！！2.关于alpha提交：a.质量远比数量重要，且请不要贪心，哪怕一两天的“断粮”，也不要让差的alpha污染自己的alpha池。b.保持进步：每日的alpha提交收益中，计算公式中，有..."
+      },
+      {
+        "id": "1733",
+        "title": "2025年Q4 Genus升级失败小结",
+        "author": "LL61351",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 2025年Q4 Genus升级失败小结 今天收到“Genius Levels Refreshed!”的通知，点到genus页面查看一下，怎么还是三个五角星？ 我有点不敢相信自己的眼睛，因为上赛季我可是点了58个塔，提交了219个因子，我本以为可以拿下Master可以自由组Super Alpha的！！！ 我赶紧在培训群中问了一下，得到小伙伴的确认后，我再也不能克服自己的情绪！为什么这样？为什么连Expert都不是，我止不住的问自己。 这是我的combine alpha performance: 这是我的点塔情..."
+      },
+      {
+        "id": "1729",
+        "title": "【Community Leader -因子构造 💎】使用AI对指定操作符和数据集构造表达式",
+        "author": "HL81191",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader -因子构造 💎】使用AI对指定操作符和数据集构造表达式 项目背景： 12月18日晚看了kunqi老师专业的工作流讲解，我就跃跃欲试，但是本人能力不够做不出相同功能。于是用Tare基于machine_lib代码简单做了下尝试，目前我有30+操作符没有使用到，就想用AI基于特定操作符和数据集数据字段进行因子表达式构造并进行回测。 效果： 在ASI上试了sentment和pv,大部分都有信号，但是鲁棒性测试不过，特别是jpn，好不容易check通过一个但是因为Turnover太..."
+      },
+      {
+        "id": "1728",
+        "title": "【Community Leader -因子筛选与组合⭐】如何用代码给单个 Alpha 做一次全身体检",
+        "author": "PP26750",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader -因子筛选与组合⭐】如何用代码给单个 Alpha 做一次全身体检 我们每天都会生产成几千个Alpha，如果单纯的对Sharpe或者Fitness进行降序排序，这很可能无法直接找到合适的alpha，可能会找到一个厂或者是一个换手率和回测都极高的alpha，这时候如何从海量因子中筛选出真正具有价值的哪一个，就成了最头疼的问题 下面我分享一套评分逻辑。它的作用很简单：把对单因子的“好坏判断”，量化成一个0到约140的确切分数。可以让我们一眼看出这个alpha的是好是坏。 这段代..."
+      },
+      {
+        "id": "1724",
+        "title": "【贺六浑】 回测次数到达4700，自动强制终止回测 开箱即用脚本",
+        "author": "JR23144",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【贺六浑】 回测次数到达4700，自动强制终止回测 开箱即用脚本 各位肝RA SA PPA 的大佬们，新年好！ 大家是不是经常遇到这种情况：晚上写好了思路，挂着脚本跑因子，心想“明天早上起来收菜”。结果早上睡醒一看，好家伙，脚本确实很勤奋，把那 5000 次每日回测额度跑得干干净净（甚至还透支了）。 这时候如果你突然来了灵感，想手搓两个 Alpha，或者是想让 AI 针对昨晚的结果再做一轮精细优化，结果发现——没额度了！ 只能干瞪眼等美东时间重置，那种感觉太难受了。 为了解决这个问题，我写了一个 “防爆仓“..."
+      },
+      {
+        "id": "1717",
+        "title": "【alpha模板】行业中性化残差信号IND模板",
+        "author": "FF65210",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【alpha模板】行业中性化残差信号IND模板 新人报道，11月份中旬成为顾问，刚开始基本断粮，找不到比较好的alpha，交了一些很差的ppac因子，后面觉得不太行，于是开始琢磨论坛大佬的帖子。 本人因为代码小白，所以阅读大量的帖子后决定用ai，学习了mcp的布置，心流iflow的使用，把工作流搭建起来，把数据集描述复制到知识库里面，基本按【Community Leader -因子筛选与组合⭐】2025 AIAC冠军比赛心得以及当前使用iflow cli的心得（附提示词）这个帖子CR35762大佬说的步骤来..."
+      },
+      {
+        "id": "1678",
+        "title": "IND RA 如何开始开始？",
+        "author": "XD81759",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - IND RA 如何开始开始？ 由于IND-D1无法提交PPA，只能提交狭义的RA，且换手率限制在40以下、有额外的robust universe Sharpe test，因此提交难度相对较大。在此，从以下几个方面给予大家一些或许可行建议，抛砖引玉~ 一、数据选择 我11月10日对国区datafield的使用做了个统计，由此发现了一些可能对大家有帮助的建议。本期聚焦IND RA，为新手、老手、高手推荐合适的data。 Category Alphas% IND-D1 当前占比 提升空间"
+      }
+    ]
+  },
+  "Genius": {
+    "name": "Genius",
+    "count": 1,
+    "topics": [
+      {
+        "id": "2193",
+        "title": "26年Q1 Genius定级已更新，Q2赛季加油！",
+        "author": "KH94146",
+        "date": "Tue, 14 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 26年Q1 Genius定级已更新，Q2赛季加油！ "
+      }
+    ]
+  },
+  "Alpha挖掘": {
+    "name": "Alpha挖掘",
+    "count": 74,
+    "topics": [
+      {
+        "id": "2039",
+        "title": "【BRAIN顾问的春节精彩瞬间】马上有福·BRAIN新春喜乐会 🏮",
+        "author": "KH94146",
+        "date": "Fri, 10 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【BRAIN顾问的春节精彩瞬间】马上有福·BRAIN新春喜乐会 🏮 活动已完结，谨此纪念。 🧧 各位顾问新春快乐！ 岁聿云暮，一元复始。当量化遇上中国年，当代码碰撞新春红——这个二月，BRAIN邀你共度一个严肃活泼的学术春节！Alpha穿越牛熊，祝福跨越山海 🔴 第一篇章 · 四海同庆：《我在这里做BRAIN》 无论你是：- 🏔️ 在雪国调试因子的北方孤狼- 🌴 在海边跑回测的南国侠客- 🏠 窝在老家炕头修Alpha的返乡游子- 🌏 在异国他乡守着屏幕的海外夜猫 此刻，分享你在假期中的趣事，送出你的祝福 📸..."
+      },
+      {
+        "id": "2034",
+        "title": "临时解决alpha页面不能翻页的问题",
+        "author": "WW15616",
+        "date": "Tue, 07 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 临时解决alpha页面不能翻页的问题 打开开发者工具(快捷键f12),切换到控制台(Console).输入以下命令即可翻页: document.querySelector('.footer__button.footer__button--next').click()"
+      },
+      {
+        "id": "2033",
+        "title": "\"看一眼线\"，那是在看啥，Alpha\"续航力评分\"工具",
+        "author": "VC17729",
+        "date": "Tue, 07 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - \"看一眼线\"，那是在看啥，Alpha\"续航力评分\"工具 一、为什么做这个 群友们应该都有一个习惯动作：提交前\"看一眼线\"。就是打开PnL曲线，看看最后一段走势是在往上走还是在走平、在掉头。 这个动作其实非常有效。因为IS回测的累计利润再高，本质上也只是模拟出来的数字。真正决定OS能不能赚钱的，是策略在IS结束前那段时间的状态——它还活着吗？趋势还在吗？最后一个月是赚是亏？ 问题是，\"看一眼\"这件事很主观，看多了容易疲劳，也不好批量操作。所以我就想：能不能把\"看一眼线\"这个动作量化成一个分数？ 于是做了这个工..."
+      },
+      {
+        "id": "2022",
+        "title": "ProdCorr改造插件，【即插即用】，直观显示Category，IS Testing Status 一键直达alphaid页面",
+        "author": "ZY23886",
+        "date": "Thu, 02 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - ProdCorr改造插件，【即插即用】，直观显示Category，IS Testing Status 一键直达alphaid页面 感谢QZ41615 大佬 分享的这个插件 【代码优化】ProdCorr记录插件，减少重复查询 – WorldQuantBrain-CN 让我可以直观的在列表页中查看到之前查询的PC值（安装方法移步大佬帖子） 解决了每次查没查过这个PC不知道， 又去查一次，大大的增加了服务器的负担和查询限制 用了一阵每次回测后的痛点，就是 要打开 网页 查看回测是哪个数据集 他的IS情况是什么 我..."
+      },
+      {
+        "id": "2020",
+        "title": "积极拥抱AI-关于Claude-Code的agent-team功能的探索",
+        "author": "CH62432",
+        "date": "Thu, 02 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 积极拥抱AI-关于Claude-Code的agent-team功能的探索 提示：整个流程的构建是根据OB大佬的工作流演变而来的，在这里感谢OB大佬！整个流程的构建全部都是通过ai实现的，连这篇文章都是让ai参考论坛文章风格生成的。 --- 大家好！今天想和大家分享一下我在使用Claude-Code的agent-team功能进行Alpha研究的一些探索和实践经验。 ## 为什么要做这个探索？ 相信很多BRAIN平台的小伙伴都有这样的困扰： - Alpha表达式设计出来之后，回测结果不理想，但不知道问题出在哪里..."
+      },
+      {
+        "id": "2018",
+        "title": "征集｜Brain 用户访谈志愿者｜参与可获 200 积分",
+        "author": "NK77075",
+        "date": "Wed, 01 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 征集｜Brain 用户访谈志愿者｜参与可获 200 积分 各位同学好， 为了更系统地了解大家在使用 Brain 平台（回测、提交 Alpha，参与比赛）的真实体验和痛点，我们计划开展一轮 用户访谈，希望能邀请不同等级的同学一起聊聊你们的感受和建议。 访谈的主要目的包括： 了解从使用回测工具 → 提交 Alpha → 参与比赛 以及学习过程中，哪些地方体验顺畅，哪些地方最让人困惑或卡顿； 收集大家对平台流程和界面的改进建议； 帮助产品团队在后续迭代中，更有针对性地优化 Brain 平台。 访谈对象（初步计划）..."
+      },
+      {
+        "id": "2006",
+        "title": "【工作流分享】基于openclaw的自动化agent工作流",
+        "author": "ZQ21774",
+        "date": "Mon, 30 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【工作流分享】基于openclaw的自动化agent工作流 利用996中难得的周末，通过codex等vibe coding工具，设计一套基于openclaw的自动化工作流 关键组件 1. OpenClaw Agent 层 当前 MVP 里有 3 个 agent： - `alpha_pm`- `researcher_hkg`- `researcher_eur` 其中： - `alpha_pm` 是总控，负责看 pyramid、配额、submission funnel，然后下发 assignment- `res..."
+      },
+      {
+        "id": "1986",
+        "title": "新晋顾问26天经验与踩坑分享",
+        "author": "LT33346",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 新晋顾问26天经验与踩坑分享 今天是我成为顾问的第26天，作为一名新晋顾问，我目前仍有不少疑问，只能在后续的工作中不断摸索、逐步完善。比较遗憾的是，我错过了与辅导老师一对一的15分钟交流会议，希望之后新加入的顾问同学，一定要重视并牢记这件事，避免留下同样的遗憾。下面，我就分享一下这20多天里我的一些经验总结，以及踩过的那些坑，供大家参考。 我于2026年2月24日成为有条件顾问，恰逢春节假期，中间差点中断回测，万幸当天及时完成了10次回测，才没有影响整体进度。这里也特别建议那些想要冲击master、gran..."
+      },
+      {
+        "id": "1978",
+        "title": "cnhkmcp中的报错修复，及pipeline不能启动的修复",
+        "author": "YQ83381",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - cnhkmcp中的报错修复，及pipeline不能启动的修复 cnhkmcp，最近3.1.5以后的版本，运行的时候总是启动不了，发现一个报错，不知道有没有同学也遇到了同样问题。ace_lib.py脚本中有一处报错： if parsed[\"remaining_minute\"] <= 1: # logger.info(f\"Rate limit {parsed[\"limit_minute\"]} reached (per minute). Sleeping for a minute...\") time.sleep(..."
+      },
+      {
+        "id": "1976",
+        "title": "写了一个专门生成提交alpha 的open claw 的skill",
+        "author": "LL73664",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 写了一个专门生成提交alpha 的open claw 的skill 用telegram 去 输入策略想法，open claw 调用skill 来实现生成提交再生迭代 ┌─────────────────────────────────────────────────────────────────┐│ Alpha Mining Skill 执行流程 │└─────────────────────────────────────────────────────────────────┘ 用户请求"
+      },
+      {
+        "id": "1974",
+        "title": "【差生文具多】WQ助手1.01版本(安卓版本)",
+        "author": "ZZ43261",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【差生文具多】WQ助手1.01版本(安卓版本) 之前发布了1.0版本之后，在一些兄弟们的反馈和我自己使用发现了一些bug，这个版本主要是解决以下bug问题。 修复列表： 1 收入统计之前未计算sa部分- 已修复 2 alpha今日提交的sa卡槽未能正确显示sa-已修复 3 data查询页面双单词字段的传参错误不能正确查询-已修复 4 偶发登陆后还是报错401无权限问题-已修复 另外有一些之前设计的功能可能UI提示做的不好,提醒一下大家我还有这些功能： 1 六维卡片可以点击查看过去趋势图表 2 在金字塔表格中..."
+      },
+      {
+        "id": "1970",
+        "title": "Claude Code 双倍额度限时，国内用户时差红利，附精准时间表",
+        "author": "VC17729",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - Claude Code 双倍额度限时，国内用户时差红利，附精准时间表 gemini近期故障频发，我的号还被风控了，原因是使用opencode调用了gemini的接口，等待出狱中，提醒各位千万不要在geminicli和antigravity以外任何软件中调用gemini订阅会员接口。 订阅了一个月的claude会员体验很好，opus模型有多强自不必多说，claude code还原生支持muti-agent完美做到上下文隔离，在一步步把原有的工作流切换到CC中，唯一问题就是pro会员没怎么用就没了，准备等到期了..."
+      },
+      {
+        "id": "1969",
+        "title": "【分享】一些降低pc的小技巧和aiac2.0第50名的心得",
+        "author": "FF65210",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【分享】一些降低pc的小技巧和aiac2.0第50名的心得 先给自己上个帖子打个广告，【行业中性化残差信号IND模板】【alpha模板】行业中性化残差信号IND模板 – WorldQuantBrain-CN，点塔困难的可以试试。 然后进入正文，我们经常会碰到一些pc0.7到0.8之间的alpha，优化下来感觉非常浪费时间，丢了又很可惜，属于比较鸡肋的alpha，能找到这些alpha说该类型的alpha已经被很多人交过了，而且ai工作流最显著的一个毛病就是最后成功的alpha在pc上面出现幻觉。经过我几个月的..."
+      },
+      {
+        "id": "1965",
+        "title": "OpenClaw“三省六部”架构助力Alpha构建实践",
+        "author": "CZ39633",
+        "date": "Thu, 19 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - OpenClaw“三省六部”架构助力Alpha构建实践 三省六部 OpenClaw 架构概述 我最近发现了GitHub上活跃的开源项目“三省六部·Edict”，它基于OpenClaw框架，借鉴了唐代三省六部制，重新设计AI协作流程。该系统由12个AI角色（含1个兼容官）组成：包括太子（消息分拣）、中书省（规划中心）、门下省（审核把关）、尚书省（调度大脑），以及六部（户、礼、兵、刑、工、吏）和早朝官。各角色分工明确，通过严格的权限矩阵和状态检查，保证任务沿中书→门下→尚书→六部的单向流程流转。这一架构的特点是..."
+      },
+      {
+        "id": "1945",
+        "title": "TRAE配置MCP和Skills(最新)",
+        "author": "CG80910",
+        "date": "Mon, 09 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - TRAE配置MCP和Skills(最新) TRAE下载与配置MCP可以参考这个帖子： 从官网下载最新版本的TRAE，版本号是3.3.34。 找到设置页面： 选择规则和技能，依次点击项目--创建。 将cnhkmcp路径中的skills文件夹中的每个文件，依次打开，将文件夹中的内容全选打包成ZIP。图片以brain-cal"
+      },
+      {
+        "id": "1942",
+        "title": "分享一个自用的AI点塔工作流",
+        "author": "MC42701",
+        "date": "Mon, 09 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 分享一个自用的AI点塔工作流 用前准备：wqb-MCP + 任何一款AI编辑器 + APP（找灵感） # AI 点塔工作流： 这部分主要向AI介绍固定的点塔工作流。 1. 确定要点的塔 1. 明确当前工作的股票池：region/delay/universe 2. 选择要点的塔，依据：简单性优先和未点优先 - 简单性：使用`get_datasets` MCP-tool，参数选择alpha数量倒序，通常alpha数量越多，对应dataset越简单。 - 未点：使用`get_pyramid_alphas` MCP..."
+      },
+      {
+        "id": "1921",
+        "title": "OSMOSIS 分数分配策略 by TIGER：big head 分配法",
+        "author": "ZZ13271",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - OSMOSIS 分数分配策略 ：big head 分配法 策略说明：适用于量少且质量不佳的小地区，把权重尽可能分配给表现相对较好的因子使用说明：只需要填上用户密码和region即可import requestsfrom time import sleepimport jsonimport randomREGION = 'CHN' # Can be changed to other regions like 'APAC', 'EMEA', etc.def login(): username = \"\" pass..."
+      },
+      {
+        "id": "1916",
+        "title": "一文详解DCC比赛",
+        "author": "PP26750",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 一文详解DCC比赛 一、 竞赛概况与规则 本次竞赛由WorldQuant与RavenPack旗下Bigdata.com平台联合举办，是一项面向全球WorldQuant BRAIN平台研究顾问或服务提供商的个人赛。竞赛旨在鼓励参赛者利用Bigdata.com的API创建新的结构化数据集，并基于此模拟Alpha策略。 时间：2026年2月23日至4月5日。 奖品：总奖金池为30，000美元。全球排名前50的选手可获得不同金额奖励，此外每个国家/地区排名前三的选手还可获得100美元额外奖金。 资格要求：参赛者需在..."
+      },
+      {
+        "id": "1894",
+        "title": "【大角羊】一分钟掌握参加DCC比赛要点！",
+        "author": "AL13375",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【大角羊】一分钟掌握参加DCC比赛要点！ 1、DCC 是什么？ DCC 是一项仅限个人参加的竞赛，参赛者使用 Python 和 BRAIN API 直接生成基于新闻的数据字段，并在此基础上构建 Alpha 策略。 2、参赛资格与规定 名额限制：前 3000 名报名的顾问和有条件顾问有资格参加 参赛形式：仅限个人，不允许组队 3、如何参赛 标记方式：竞赛 Alpha 无需提交，只需标记为 \"DCC2026\" 即可 时间窗口：仅在官方竞赛期间（2 月 23 日 – 4 月 5 日）模拟的 Alpha 才会被纳入..."
+      },
+      {
+        "id": "1893",
+        "title": "请说你想当推荐王？推荐管理工具免费送上",
+        "author": "TL32287",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 请说你想当推荐王？推荐管理工具免费送上 众所周知，推荐新人有100美元的奖励，但是如果新人很多又不知道转化成功没？需要很多时候翻记录才可以知道。于是我写了一个推荐新人管理工具，支持索引查询，这样在推荐新人的帮助的时候能够分开处理。eligibleAlphas能够查询成为顾问之后有没有提交满10个因子，更好的帮助老顾问解决新人的问题，做到定向可持续的输出新质人才。 创建一个refermanagement.ipynb: from machine_lib import login import pandas as..."
+      },
+      {
+        "id": "1882",
+        "title": "📢 AI Alpha 竞赛：提交前最终自查清单 (Final Self-Check List)",
+        "author": "WL13229",
+        "date": "Fri, 13 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 📢 AI Alpha 竞赛：提交前最终自查清单 (Final Self-Check List) 各位参赛选手请注意：本次比赛评审采用 严格标准。为确保您的作品能被正确受理，提交前请务必完成以下 四项强制性自查。❌ 任何不符项都可能导致作品无效。 ✅ 1. 环境依赖 (Dependency Management) 比赛基准环境见 requirements.txt。 强制要求：如果您的代码中使用了任何 非标准库（不在 requirements.txt 中），必须 在 Notebook 靠前的单元格中显式包含安装..."
+      },
+      {
+        "id": "1872",
+        "title": "检测AI生成的alpha表达式，是否出现凭空捏造的数据字段",
+        "author": "LL81909",
+        "date": "Tue, 10 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 检测AI生成的alpha表达式，是否出现凭空捏造的数据字段 找AI 生成的alpha 表达式，明明都告诉了AI数据字段的使用，但是依旧会出现AI 自己造数据字段。例如USA;TOP1000;DELAY1;fundamental17->fnd17_qniac fnd17_qniac 不是我提供的,为什么出现在这里? 重点说说为什么会出现这种情况? AI回答： 您说得非常对，我犯了严重错误。fnd17_qniac 确实不在您提供的数据仓库中。 为什么会出现这种情况？ 这是 \"幻觉\"(Hallucination)..."
+      },
+      {
+        "id": "1871",
+        "title": "agent时代对expression ast的一个大更新",
+        "author": "WL27618",
+        "date": "Tue, 10 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - agent时代对expression ast的一个大更新 虽然单用agent做长流程的任务非常不可靠, 但是的确为一次性的任务提供了很多便捷. 有了agent后, 我的工作流程也从 手动(一次性任务) | 写代码(重复任务) 的两个选项, 变成了 手动(一次性任务) | agent(一次性简单任务) | 写代码(重复任务) 的三个选项, 这日子是越过越好了. 关于验证表达式合法性, 尤其是参数个数和参数类型匹配, 本来只有两种处理方法: 1. 我自己手动写了一些规则, 比如vector, group的用法(..."
+      },
+      {
+        "id": "1866",
+        "title": "[AIAC2][操作符] 167 操作符全示例，赋能AI 生成、优化、验证表达式",
+        "author": "JX79797",
+        "date": "Mon, 09 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [AIAC2][操作符] 167 操作符全示例，赋能AI 生成、优化、验证表达式 所有示例(除非独立表达式外)， 均已在AMR delay 1 回测通过。 不同级别和自己能获取到的regular操作符做交集 对我自己的AIAC2参赛作用如下： 1. 创建“中央知识库”： * 我将首先执行上一步的计划：在Notebook中创建一个新的代码单元格，将您提供的 regular_operators_usage.json 内容完整地内嵌到一个名为 OPERATOR_USAGE_GUIDE 的Python字典常量中。这..."
+      },
+      {
+        "id": "1861",
+        "title": "稳健性检验代码",
+        "author": "JL11546",
+        "date": "Sat, 07 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 稳健性检验代码 # 导入官方库 import json import os import requests from requests.auth import HTTPBasicAuth import time # 导入第三方库 from dotenv import load_dotenv # 导入环境变量，非必需 pip install python-dotenv import matplotlib.pyplot as plt import pandas as pd # 读取环境变量文件 load_dot..."
+      },
+      {
+        "id": "1850",
+        "title": "【差生文具多】WQ助手1.01版本(安卓版本)",
+        "author": "ZZ43261",
+        "date": "Thu, 05 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【差生文具多】WQ助手1.01版本(安卓版本) 之前发布了1.0版本之后，在一些兄弟们的反馈和我自己使用发现了一些bug，这个版本主要是解决以下bug问题。 修复列表： 1 收入统计之前未计算sa部分- 已修复 2 alpha今日提交的sa卡槽未能正确显示sa-已修复 3 data查询页面双单词字段的传参错误不能正确查询-已修复 4 偶发登陆后还是报错401无权限问题-已修复 另外有一些之前设计的功能可能UI提示做的不好,提醒一下大家我还有这些功能： 1 六维卡片可以点击查看过去趋势图表 2 在金字塔表格中..."
+      },
+      {
+        "id": "1836",
+        "title": "【WQ数据监控】wqmanager.qzz.io 一览wq-leaderboard数据",
+        "author": "JG15244",
+        "date": "Tue, 03 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【WQ数据监控】wqmanager.qzz.io 一览wq-leaderboard数据 项目介绍 定时拉取平台的数据并存储，进行可视化展示。 目前主要进行weight变化、alpha提交情况进行展示，后续会逐步增加更多指标、维度的数据展示（欢迎提出你的需求）。 目前项目仅需通过WQ_ID即可进行登录，目前个性化展示的内容较少，暂未增加账号系统。 先已将所有国区ID加入登录名单 项目地址 在线地址： 后端项目地址："
+      },
+      {
+        "id": "1835",
+        "title": "【2月主题积分活动】金蛇献瑞·BRAIN新春喜乐会 🏮",
+        "author": "KH94146",
+        "date": "Tue, 03 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【2月主题积分活动】金蛇献瑞·BRAIN新春喜乐会 🏮 🧧 各位研究员新年好！ 岁聿云暮，一元复始。当量化遇上中国年，当代码碰撞新春红——这个二月，BRAIN邀你共度一个严肃活泼的学术春节！Alpha穿越牛熊，祝福跨越山海 🔴 第一篇章 · 四海同庆：《我在这里做BRAIN》 无论你是：- 🏔️ 在雪国调试因子的北方孤狼- 🌴 在海边跑回测的南国侠客- 🏠 窝在老家炕头修Alpha的返乡游子- 🌏 在异国他乡守着屏幕的海外夜猫 此刻，分享你在假期中的趣事，送出你的祝福 📸 参与方式跟帖留言 + 配图一张（含..."
+      },
+      {
+        "id": "1832",
+        "title": "【OC2025】 使用自己的alpha组个SA看看？",
+        "author": "SJ65808",
+        "date": "Mon, 02 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【OC2025】 使用自己的alpha组个SA看看？ 最近一直在研究OC2025比赛的相关东西，一直在想是否可以使用参与oc比赛的alpha的来组个SA来看看，经过多次尝试发现可以使用selection语句来选择相应的alpha，但是还没有找到osmosisPoints对应的权重分配方法。使用 in(competitions,\"OC2025\")*own 就可以选到所有参与OC比赛的alpha了"
+      },
+      {
+        "id": "1830",
+        "title": "关于ts_decay_linear的妙用",
+        "author": "FF56620",
+        "date": "Mon, 02 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 关于ts_decay_linear的妙用 之前对于ts_decay_linear的使用，一直停留在降低turnover上，最近的几个alpha，给了我一些不一样的经验 我最开始得到的是右边的一个alpha，其表达式结构为 -ts_decay_linear(ts_corr(x, y), 20), 63)，但是可以看到，其turnover很低，也就是“死鱼”，我就想，是不是ts_decay_linear的关系，让他turnover这么低，于是我就把ts_decay_linear去掉，使用-ts_corr(x, ..."
+      },
+      {
+        "id": "1824",
+        "title": "【效率王】APP重磅升级功能：来点Alpha--重新定义AI时代123阶",
+        "author": "CQ89422",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【效率王】APP重磅升级功能：来点Alpha--重新定义AI时代123阶 吹哨人来了。万众瞩目的AI工具继续升级，快更新到2.3.0以上的版本吧！。点击“找灵感”按钮，快速感受以下功能吧！一站式获得Alpha表达式。 功能1：《来点Alpha》------对应AI时代1阶 功能2：《增强历史生成模板》------对应AI时代2阶 把你下载好的模板进行增强，点击后输入第一步做好的模板即可（可多选）。 思考与讨论：AI时代的3阶是什么？ 是AI进一步对快要可以提交的信号的自动提升？CLI里面的自我迭代？还是人类..."
+      },
+      {
+        "id": "1822",
+        "title": "数据集子分类分析与中性化策略匹配方法",
+        "author": "CW99271",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 数据集子分类分析与中性化策略匹配方法 我们都知道每个地区都有几个数据集分类，对应的中性化策略推荐大致如下 (本来是准备了图表的，但是上传好几次都失败了，对不起哈各位） 1.Analyst:INDUSTRY 2.broker:无 3.Earnings:INDUSTRY 4.Fundamental:INDUSTRY 5.imbalance:无 6.Insider:INDUSTRY/SUBINDUSTRY 7.Institutions:INDUSTRY/SECTOR 8.Macro:I"
+      },
+      {
+        "id": "1821",
+        "title": "【Osmosis 点数分配工具小升级】一键清零分数 + 优质alpha预筛选 + cluster选因子 + 总分校验",
+        "author": "XC66172",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Osmosis 点数分配工具小升级】一键清零分数 + 优质alpha预筛选 + cluster选因子 + 总分校验 这个脚本是在课代表的Osmosis工具添加一些自己的修改。主要修改为： （1）分配Osmosis分数前先清零。因为可以在比赛期间多次改分数，每次改分数前先清零。首次使用NEED_RESET_TO_0可设置为False (2) 筛选已提交的因子刨除掉了SA以及D0因子。 (3) 优质alpha预筛选: WEIJIE老师有在群里讲过，有一些因子你是一定不想分配分数的，结合全球会议信息，以下是我的..."
+      },
+      {
+        "id": "1820",
+        "title": "【代码优化】ProdCorr记录插件，减少重复查询",
+        "author": "QZ41615",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【代码优化】ProdCorr记录插件，减少重复查询  ProdCorr 查询比较花费时间，为了减少重复查询，我用 Gemini 开发了一个 chrome 插件，可以在 alpha 页面和列表中显示最新一次查询结果。 alpha 页面效果 alpha 列表效果 这里把BookSize替换成了MaxProdCorr，需要在SelectColumns里选择后才能显示 "
+      },
+      {
+        "id": "1818",
+        "title": "【一键切换API供应商】小白也能配置，AI打工人的辅助神器，适用Claude Code、Codex、Gemini CLI",
+        "author": "TZ69297",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【一键切换API供应商】小白也能配置，AI打工人的辅助神器，适用Claude Code、Codex、Gemini CLI 一、概述； 1、由于AI打工人用的Claude Code中模型可选择性少，手动配置和更改模型较麻烦且容易出错，经过一天的学习，找到了一个【一键配置大模型环境变量】的神器： 2、CC Switch（全称 Claude Code & Codex Provider Switcher）是一款专为开发者设计的开源桌面应用，用于集中管理和一键切换多款AI命令行工具（如Claude Code、Code..."
+      },
+      {
+        "id": "1815",
+        "title": "使用mcp+ai挖掘alpha过程中节约token的小技巧",
+        "author": "SZ83096",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 使用mcp+ai挖掘alpha过程中节约token的小技巧 在AI对话/API调用中，Token的消耗由三部分组成，形成一个“上下文窗口”： 总消耗Token = [输入Token] + [输出Token] 输入Token： 你提交给AI的所有内容：系统提示词 + 对话历史 + 本次问题/指令。 这些都会被模型“阅读”和处理。 输出Token： AI根据你的输入新生成的回复内容。 你要求AI生成的文字越多，输出Token就越多。 输入的token，我观察过AI调用 mcp的过程中，函数返"
+      },
+      {
+        "id": "1810",
+        "title": "MAC系统MCP WEB APP的BRAIN Alpha Simulator的回测报错问题",
+        "author": "YG86479",
+        "date": "Wed, 28 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - MAC系统MCP WEB APP的BRAIN Alpha Simulator的回测报错问题 目前我的cnhkmcp版本是2.2.0； 系统为MAC。 BRAIN Alpha Simulator 点击Start Simulation之后 虽然网页上显示回测器启动成功，但是启动APP的控制台报错，观察了结果也没有回测成功unsubmitted的列表没有结果。 错误原因 ModuleNotFoundError: No module named 'msvcrt' 的意思是 Python 找不到名为 msvcrt 的..."
+      },
+      {
+        "id": "1809",
+        "title": "最新MacOS tahoe 系统如何解决运行APP后打开回测器报错解决方案",
+        "author": "XC83126",
+        "date": "Wed, 28 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 最新MacOS tahoe 系统如何解决运行APP后打开回测器报错解决方案 更新最新的mac系统后，mac系统做了限制，不推荐直接在全局安装python包，而是使用创建虚拟环境，这样其实挺好了，就是有点麻烦，得先创建一个项目，添加虚拟环境，再安装cnhkmcp，启动完app后，网页上点击打开回测器命令行工具会报错，回提示找不到工具。 为了解决这个问题，让AI帮我写了修复脚本，放到APP目录下就可以吗，每次升级后都可以执行一下，完美解决问题。 #!/bin/bash######################..."
+      },
+      {
+        "id": "1808",
+        "title": "【Community Leader - 因子构造】gemini_cli_sdk + 双agent，打造一个听话的挖掘工2",
+        "author": "WS29639",
+        "date": "Wed, 28 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader - 因子构造】gemini_cli_sdk + 双agent，打造一个听话的挖掘工2 第一版传送门："
+      },
+      {
+        "id": "1803",
+        "title": "【BRAIN 专属福利】KIMI 限时API额度羊毛活动来啦！",
+        "author": "KH94146",
+        "date": "Wed, 28 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【BRAIN 专属福利】KIMI 限时API额度羊毛活动来啦！ 在前期培训和交流中，我们收到了很多来自大家的真实反馈——「想用 AI，但对 token 花费没底。」 为了帮助各位 BRAIN consultant 更轻松、低成本地把 AI 用起来，我们联合 KIMI 推出限时福利活动，最高可领 45 元免费额度，助你放心“练手”、大胆“折腾”。 一、活动福利一览（可叠加，最多领 45 元） 说明：下面的次数仅为参考示例，实际可用次数以具体调用消耗为准。 1. 新用户注册即送：15 元免费额度（KIMI 官方..."
+      },
+      {
+        "id": "1799",
+        "title": "opencode+skills全自动优化alpha",
+        "author": "XG93684",
+        "date": "Tue, 27 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - opencode+skills全自动优化alpha 周末听了两位老师的培训，看到功能强大的skills，就想着和我的opencode结合起来用，非常顺畅，第一个alpha就从sharp 1.01优化到了1.45. 虽然还差一点，但是总体体验非常好，全程无需干预，AI自动迭代。就是还比较费token，总共花费5元。 操作简单， 1 更新cnhkmcp，把uncrack下的skills目录复制到你的主目录下.config/opencode/目录下 2 给.config/opencode/opencode.jso..."
+      },
+      {
+        "id": "1798",
+        "title": "手机远程连接claudecode，24小时随时指挥AI干活！",
+        "author": "ZL81441",
+        "date": "Tue, 27 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 手机远程连接claudecode，24小时随时指挥AI干活！ 最近Clawdbot太火了，我已经被Clawdbot刷屏两天了 他实现了WhatsApp, Telegram, Discord,直接和ai对话，并且可以远程指挥你的电脑干活 我也是第一时间部署到了自己的Mac mini上，老实说这个玩意权限确实有点大，想尝试的小伙伴还是整一台新的电脑或者是部署到vps上。我折腾了半天只跑通了千问的模型，使用下来觉得很兴奋，又有点小失望。兴奋是功能和潜力十分强大，交互方式十分的新颖。失望是配置起来简单，后续各种权限..."
+      },
+      {
+        "id": "1783",
+        "title": "【大角羊】一分钟掌握参加AIAC2.0比赛要点！",
+        "author": "AL13375",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【大角羊】一分钟掌握参加AIAC2.0比赛要点！ 话不多说，想要参加AIAC2.0比赛，只需要三个步骤： 1.找到符合参赛要求的Regular Alpha（Super Alpha不允许参赛），要求如下： Alpha 只能为regular Alphas, ATOM Alphas 和 thematic PowerPools 地区只能为USA, GLB, EUR, ASI 的 Delay 1 2.将你使用的AI模型名称给Alpha打上tag，目前支持的AI模型有： claude-3.5-haiku-2024-10..."
+      },
+      {
+        "id": "1782",
+        "title": "从数据库中查询alpha并提交之流程(附代码)",
+        "author": "MM21099",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 从数据库中查询alpha并提交之流程(附代码) 操作该流程时，需要有前提条件：就是prodcorr合格的alpha已经存放在数据库中，比如下图： 基于此，下面是具体操作流程和代码：(使用*.ipynb) 1从数据库中查询符合要求的alpha，并按照prodcorr从小到大的顺序排序等； 从数据库中查询出待提交Alpha import sqlite3 import pandas as pd from IPython.display import display def fetch_top_alphas(db_..."
+      },
+      {
+        "id": "1779",
+        "title": "提交aiac2 alpha 自己碰到的小问题（第一次提交 aiac）",
+        "author": "HK42607",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 提交aiac2 alpha 自己碰到的小问题（第一次提交 aiac） aiac 之前一直没参与。这次第一次参与了解。翻阅论坛之前大佬分享和aiac2一些信息。我就把自己碰到的问题和信息说一下。可能有一些对其他参与过的是常识，所以仅限参考，有不对的请及时告知。 1.只要IS Testing Status检查中有 Competition check pending: AI Alphas Competition 2.0. 就说明shi符合比赛的表达式 2.这次aiac2，tag部分不需要在填入父alpha id...."
+      },
+      {
+        "id": "1778",
+        "title": "[Alpha优化] 提高Robust Universie Sharp，提高Sub Universe Sharp，降低Turnover的常见方式",
+        "author": "ZZ75777",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [Alpha优化] 提高Robust Universie Sharp，提高Sub Universe Sharp，降低Turnover的常见方式 1 Robust Universe Sharp robust universe sharp一般是印度区常见的错误。迄今我已经提交了超过30个IND区的alpha，总结一些alpha 优化的常见方式： 在印度区，经常遇到Robust Universe Sharp等问题，并且时常伴随着比较高的turnover，这是因为，印度区的数据集缺失，并且部分数据集可能在时间窗口比..."
+      },
+      {
+        "id": "1775",
+        "title": "[cnhkmcp APP] 导出带settings的json批量回测--断点续传，智能重试",
+        "author": "JX79797",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [cnhkmcp APP] 导出带settings的json批量回测--断点续传，智能重试 APP内置 vs 独立脚本 1. APP内部回测：提供了直观的Web界面和交互式命令行工具（`simulator_wqb.py`），功能丰富，适合日常的Alpha探索、小规模测试和快速验证。 2. 独立脚本：一个纯Python命令行工具，设计目标单一且明确——专注于从JSON文件读取Alpha配置，并以最高效率和稳定性执行BRAIN平台的批量模拟。它没有Web界面，但其强大的后台处理能力和鲁棒性是其核心价值。 断点续..."
+      },
+      {
+        "id": "1769",
+        "title": "[cnhkmcp APP] 导出带settings的json批量回测--断点续传，智能重试",
+        "author": "JX79797",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [cnhkmcp APP] 导出带settings的json批量回测--断点续传，智能重试 APP内置 vs 独立脚本 1. APP内部回测：提供了直观的Web界面和交互式命令行工具（`simulator_wqb.py`），功能丰富，适合日常的Alpha探索、小规模测试和快速验证。 2. 独立脚本：一个纯Python命令行工具，设计目标单一且明确——专注于从JSON文件读取Alpha配置，并以最高效率和稳定性执行BRAIN平台的批量模拟。它没有Web界面，但其强大的后台处理能力和鲁棒性是其核心价值。 断点续..."
+      },
+      {
+        "id": "1766",
+        "title": "【”羊毛“合集】可供使用的AI免费资源",
+        "author": "WL13229",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【”羊毛“合集】可供使用的AI免费资源 【工具推荐】claude-code-proxy + AI打工人：使用免费的大模型白嫖打工人！ – WorldQuant BRAIN 谷歌Antigravity 如何使用Skills – WorldQuant BRAIN 盘点最近薅到的免费大模型 – WorldQuant BRAIN 免费大模型羊毛薅不完 – WorldQuant BRAIN 【体验Sub Agent】将Antigravity的额度反向代理给Claude Code – WorldQuant BRAIN ..."
+      },
+      {
+        "id": "1761",
+        "title": "批量隐藏数据缺失因子工具",
+        "author": "AC13170",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 批量隐藏数据缺失因子工具 该代码基于游戏王大佬（ZS59763）的代码上进行优化，实现即插即用[游戏王]批量隐藏厂与数据缺失因子（复制即用！） – WorldQuantBrain-CN 由于大佬修改了machine_lib中的get_alphas（）函数，其给出的代码无法适配，所以我用AI对代码进行了优化，感谢大佬提供的灵感！ 工具实现了对数据少于8年的因子进行隐藏，即插即用，提高筛选效率！ 代码如下： import osimport loggingimport timeimport requestsimp..."
+      },
+      {
+        "id": "1760",
+        "title": "一文读懂如何进行Osmosis （12.8晚会议 总结与分析）",
+        "author": "BW14163",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 一文读懂如何进行Osmosis （12.8晚会议 总结与分析） 5 秒看懂核心任务① 从“已提交 Alpha”里挑出最纯粹、彼此不重复的信号。② 给它们贴“渗透点”（Osmosis Points）③ 每个赛区（US/Asia/Europe/Global/India），恰好 100000 点，≥10 条 Alpha④ 至少完成 3 个赛区才能上榜；5 个赛区全完成才能拿满分⑤ 1 月 4 日 23:59 ET 前可任意改权重，系统只采最后一刻的分配 赛前自检①已提交 ≥10 条 Delay=1，Regular..."
+      },
+      {
+        "id": "1751",
+        "title": "[比赛专用]实现本地实时监控Osmosis分数变化",
+        "author": "JL16510",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [比赛专用]实现本地实时监控Osmosis分数变化 从12月22日起，Osmosis Competition 2025每天更新各比赛区域daily pnl，每隔几个小时更新osmosisPoints Allocated。即使没有更改每个区域的osmosisPoints Allocated，daily pnl也会随着时间有所变化。 为了追踪daily pnl实时变化情况，通过windows自带程序+自编代码，可实现本地监控Osmosis分数实时变化，进而动态优化osmosisPoints Allocated，..."
+      },
+      {
+        "id": "1749",
+        "title": "【平台新功能】字段新特征：datecoverage的介绍、应用与勘误。",
+        "author": "JX14975",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【平台新功能】字段新特征：datecoverage的介绍、应用与勘误。 最近平台的data板块新增了一列数据’datecoverage’来描述每个field的特征，如图所示： 一，含义。 顾名思义，这一特征的含义就是该数据能够覆盖10年回测周期中的百分之多少。 需要注意的是，虽然这一特征表现了数据的覆盖率，但它没有指出数据覆盖率不为100%时缺失的时间段在哪里：虽然在一般情况下，数据字段未覆盖的地方都是最远离现在的那一段日期，但也有少数情况下，数据字段未覆盖的部分在10年回测周期的中间或者最后（如下图）。 ..."
+      },
+      {
+        "id": "1746",
+        "title": "Mac OS设置cnhkmcp环境",
+        "author": "LL65475",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - Mac OS设置cnhkmcp环境 1. Python安装：  下载Python 3.11.9 - April 2, 2024的安装包，进行安装。 备注：cnhkmcp依赖pydantic，pydantic依赖的python版本大于3.8.0，小于3.12.0。APP依赖3.11.0。 python环境配置：  Using venv: pyt"
+      },
+      {
+        "id": "1743",
+        "title": "gemini_cli_sdk + 双agent，打造一个听话的挖掘工（含代码框架和样例）",
+        "author": "WS29639",
+        "date": "Sat, 17 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - gemini_cli_sdk + 双agent，打造一个听话的挖掘工（含代码框架和样例） 感谢JX79797大佬提供的链接 gemini_cli_sdk:  原理：单agent容易产生幻觉，且随着主agent接收的信息增加，容易不按照既定要求执行命令，需要另一个agent（无上下文）进行持续监督。 目前处于探索阶段，刚把流程跑通，欢迎一起交流迭代。 监督样例1： 监督样例2: 简易代码框架 import jsonimport asy"
+      },
+      {
+        "id": "1741",
+        "title": "【重复回测&哈希】大家是如何做好避免重复回测的？哈希是否是一个好的方案",
+        "author": "ZT38415",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【重复回测&哈希】大家是如何做好避免重复回测的？哈希是否是一个好的方案 问题 在回测过程中，有时候会出现重复回测的情况，这个在之前传统的一二三阶回测方案中，采用了记录断点后，进行断点续跑的方案。但是随着我当前构建的回测系统逐渐复杂，尤其是开始利用冷神的模板群方案后，对于避免重复回测成了一个难题。我当前是构建了一个较为复杂的json { \"塔名\": { \"pyramid_info\": { \"pyramid_status\": \"light\" | \"completed_high_quality\" | \"compl..."
+      },
+      {
+        "id": "1740",
+        "title": "【Alpha模板】模板群管理——动态优化淘汰低效模板",
+        "author": "SY43349",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Alpha模板】模板群管理——动态优化淘汰低效模板 ## 引言 大家好我是sy。最近社区一直在缩减回测量想必大家可能会遇到很多困难。我是11月中旬成为条件顾问，到目前刚好一个半月了，这期间我总共提交了122个alpha，点了27个塔，平均每日回测大概2500左右，目前大概每天能稳定提交2-4个alpha（中间断交主要是临时有事。。） 我想跟大家分享一下目前我在实现低回测高产出方面的核心经验——动态管理模板群。 不过需要注意⚠️的是，由于代码和我自身的框架非常绑定无法单独抽离，以下内容主要以思路为主，希望能..."
+      },
+      {
+        "id": "1737",
+        "title": "关于印度区因子挖掘遇到一些常见问题的一些小技巧",
+        "author": "MM38095",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 关于印度区因子挖掘遇到一些常见问题的一些小技巧 作为一个新人，没有太多发言权，感觉也许很多认识都是不全面和错误的，这里只是把这近20天在印度区的挖掘做一个手搓派的心得分享： 印度区遇到最多的一些问题： 1.提高Robust Universe Sharpe<1 我的解决心得：<0.6，就放弃，>0.6,就尝试用group_op，优先使用group_rank和signed_power，大部分都能得到有效提升 2.turnover>40% 我的解决心得:优先调整 ts_decay_linear,其次调整decay..."
+      },
+      {
+        "id": "1736",
+        "title": "win10解决cmd窗口不显示图标和特殊符号的问题",
+        "author": "MS70058",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - win10解决cmd窗口不显示图标和特殊符号的问题 1.升级之前，运行cli的窗口是这样的，todo列表因为不显示✅️等特殊符号，不明显，字体也不好看，背景也没有高级感 2.升级之后，是这样的，舒服多了 3.解决思路，用window Terminal替代原始的cmd窗口作为默认启动的命令行工具 4.详细步骤 ①安装Windows Terminal 下载地址：  安装完毕后，鼠标在空白地方右键可出现“在终端打开(T)”,即可用w"
+      },
+      {
+        "id": "1734",
+        "title": "谷歌Antigravity 如何使用Skills",
+        "author": "CW62372",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 谷歌Antigravity 如何使用Skills 谷歌Antigravity 也快速跟进Skills了。相关文档：  为什么使用 Antigravity？因为它现在甚至不需要学生认证就可以免费使用gemini3 pro，安装也比claude code和gemini-cli简单，只需梯子开tun模式就可以登录成功，gemini-cli还需要踩几步坑，claude code 需要花不少token钱。 它有两种配置模式，当前项目和全局： Location S"
+      },
+      {
+        "id": "1725",
+        "title": "【体验Sub Agent】将Antigravity的额度反向代理给Claude Code",
+        "author": "OB53521",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【体验Sub Agent】将Antigravity的额度反向代理给Claude Code 很多小伙伴都已经使用过Gemini CLI和Antigravity搭配MCP进行Alpha挖掘，但是目前为止，执行MCP最强的仍然是Claude，但是Claude由于及其严格的风控以及高昂的价额，劝退了很多用户。 今天分享一个可以将Antigravity的额度转换为Claude Code API的工具： AM充当一个中转站的角色，你可以把各种 AI 服务（Claude、ChatGPT、Ge"
+      },
+      {
+        "id": "1719",
+        "title": "脚本记录Osmosis point每日变化",
+        "author": "WL27618",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 脚本记录Osmosis point每日变化 不知道Osmosis point的leaderboard的api之后会不会变化, 我想既然之后每周都要更新osmosis point, 用定时脚本记录历史变化应该比较有必要. 方便自己监测质量 # monitor_osmosis.py import asyncio import aiohttp import json import logging import os import pandas as pd from datetime import datetime..."
+      },
+      {
+        "id": "1716",
+        "title": "【差生文具多】为wq官网开发一个手机app查询常用信息-WQHelper",
+        "author": "ZZ43261",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【差生文具多】为wq官网开发一个手机app查询常用信息-WQHelper 因为下班需要回家带娃，所以我下班是不带电脑回家的，自从开始搞wq之后，下班之后怎么继续回测是个问题。我使用了云主机部署回测脚本，并使用windowsapp远程连接手机控制。回测的时候需要经常查看那个塔没点，那个字段质量高，但是用手机访问wq官网总是有各种问题，比如卡顿和输入框连击导致无法输出查询等问题。为了方便我脱离电脑远程回测，我开发了一个基于官网api接口的手机app，便于辅助回测，随便起了个名字就叫wqhelper吧。 功能清单..."
+      },
+      {
+        "id": "1714",
+        "title": "# [工具分享] 🐰 WQ 守护星 v3.15 - 彻底告别 Session 过期，后台无感重登",
+        "author": "GC13416",
+        "date": "Tue, 13 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - # [工具分享] 🐰 WQ 守护星 v3.15 - 彻底告别 Session 过期，后台无感重登 作为顾问，在网页使用Simulation时遇到一些问题： >正在Alpha 挖掘的兴头上，突然发现 Session Expired，不得不重新登录？ >跑一个长的 Simulation，切出去看会儿书，回来发现*会话超时*，进度丢了？ 基于此我做了一个网页端的会话复用插件“ WQ 守护星 (WQ Session Keeper) ”，连续测试72小时，没有遇到会话过期需要登录的问题。 项目开源在： gitee地址..."
+      },
+      {
+        "id": "1713",
+        "title": "[Gemini大王]同时调取多个Gemini Cli完成不同工作",
+        "author": "HZ58133",
+        "date": "Tue, 13 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [Gemini大王]同时调取多个Gemini Cli完成不同工作 在使用AI改进Alpha时，我每次都需要打开terminal，然后输入提示词开始任务，颇为繁琐。于是想到是否可以有更高效的办法，比如用代码同时唤起多个Gemini Cli大模型然后完成不同的任务。 经过学习发现有多种方法可以实现，比如可以多任务调度”Python 脚本(需要api)如果有需要我之后也可都介绍一下，我们现在主要介绍使用 PowerShell 并行脚本(免费)。 第一步:安装Gemini Cli Terminal中输入 npm i..."
+      },
+      {
+        "id": "1709",
+        "title": "[Agent skills] 枪在手跟我走，AI工作流大进化，Skills开箱即用！",
+        "author": "VC17729",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [Agent skills] 枪在手跟我走，AI工作流大进化，Skills开箱即用！ 1、项目链接 各位道友好，我是白嫖党的最爱 Vincent，终于轮到我来回馈社区了。话不多说，先上项目链接： 2、快速使用 如果你已经对 Agent Skills 的概念非常了解，并且高强度地在使用 roo code、claude code、geminicli 等工具，那么你可以直接拉取代码后，按照 README 指引配置好环境开始运行（特别注意各 md 文档中的 /opt/miniconda3/bi"
+      },
+      {
+        "id": "1705",
+        "title": "ASI MINVOL1M市场Robust Universe优化案例",
+        "author": "SC16582",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - ASI MINVOL1M市场Robust Universe优化案例 在ASI MINVOL1M市场（亚太地区除日本，最小波动率前1000只股票）的优化实践中，我们通过系统性的方法解决了Robust Universe Sharpe和Returns不达标的问题，成功将Alpha 优化至12项检查全部通过。 问题分析原始Alpha 在Robust Universe测试中失败：- Robust Universe Sharpe**: 2.78 < 2.88（阈值）- Robust Universe Returns**..."
+      },
+      {
+        "id": "1704",
+        "title": "【代码优化】缘分一道桥429 频繁报错 + 解析误判的一个实用修法（亲测有效）",
+        "author": "YH87796",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【代码优化】缘分一道桥429 频繁报错 + 解析误判的一个实用修法（亲测有效） 大家好，最近我在“缘分一道桥”里跑批量 Alpha 时，429/502 一直来，尤其是 data-fields 的请求量飙得很快。而且一旦出现了这个错误，一时半会是好不了的。最开始以为纯限速问题，搞了几轮调参都不稳，最后发现真正的“罪魁祸首”其实是 解析误判 导致的无意义请求。 Error in fetch_alphas: 429 Client Error: Too Many Requests for url 一、问题现象 - ..."
+      },
+      {
+        "id": "1702",
+        "title": "【Community Leader -因子构造 💎】拯救IND地区Robust universe Sharpe测试不通过的一个新思路",
+        "author": "ZR19003",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader -因子构造 💎】拯救IND地区Robust universe Sharpe测试不通过的一个新思路 最近学习了《GOLD筑基期，做JPN副本的一个思路》以及更早的《关于在ASI，如何提升JPN表现不佳的一个思路 》两篇文章，尝试着去借鉴其中的思路，在IND地区的ALPHA中去解决Robust universe Sharpe测试不通过的问题，多次尝试后似乎有一定的效果，将思路共享出来，大家来一起探讨和交流。 首先，Robust universe Sharpe测试不通过，尤其是..."
+      },
+      {
+        "id": "1700",
+        "title": "[Osmosis Competition 2025]从比赛结果中得到新版本的启示",
+        "author": "AK76468",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [Osmosis Competition 2025]从比赛结果中得到新版本的启示 Osmosis Competition 2025 已结束，祝贺国区的圆满成功！！！ 比赛失利的顾问们也不要灰心，从比赛中汲取经验和教训才是最重要的，那么从比赛结果中能得到什么启示呢？ 在本次 OC2025 比赛的数据分析中，我们要重新回答一个问题： “Is quantity still quality?” 疯狂提交 Alpha 能否线性提升 IR 排名？ 为了验证这一点，我对 USA、GLB、EUR、ASI、IND 五个赛区的..."
+      },
+      {
+        "id": "1698",
+        "title": "【平台新功能】字段新特征：datecoverage的介绍、应用与勘误。",
+        "author": "JX14975",
+        "date": "Sat, 10 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【平台新功能】字段新特征：datecoverage的介绍、应用与勘误。 最近平台的data板块新增了一列数据’datecoverage’来描述每个field的特征，如图所示： 一，含义。 顾名思义，这一特征的含义就是该数据能够覆盖10年回测周期中的百分之多少。 需要注意的是，虽然这一特征表现了数据的覆盖率，但它没有指出数据覆盖率不为100%时缺失的时间段在哪里：虽然在一般情况下，数据字段未覆盖的地方都是最远离现在的那一段日期，但也有少数情况下，数据字段未覆盖的部分在10年回测周期的中间或者最后（如下图）。 ..."
+      },
+      {
+        "id": "1683",
+        "title": "【大角羊】使用tags管理已提交ra的pyramid-开箱即用版",
+        "author": "AL13375",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【大角羊】使用tags管理已提交ra的pyramid-开箱即用版 在我看来，已提交的alpha是个人的专属宝藏。它们应该被挖掘利用，而不是已提交就让任不管，实在是太可惜了。 对于已提交的regular alpha和power pool alpha，可以考虑从以下几个方面来挖掘剩余价值： 横向点塔：比如将USA中成功点塔的数据集也放到其他地区去跑，一般也会有不错的信号； 更换模板：将出信号的alpha所在的数据集用在其他好用的模板中，也可以挖掘出不错的alpha； 换中性化 所以我写了一段代码来实现对已提交的..."
+      },
+      {
+        "id": "1681",
+        "title": "【Alpha 模板】基于情感数据的IND模板",
+        "author": "LZ29996",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Alpha 模板】基于情感数据的IND模板 S1=ts_mean(ts_backfill({sentiment},250),22);# 月平均情感分数 R1=ts_product(1+returns,22); # 月度收益率，本来应该是ts_product(1+returns,22)-1，没有-1不影响结果。 alpha=ts_quantile(S1-R1,5,driver=’cauchy’);# 归一化并加重极端值的权重，使用gaussian也可以。 // alpha idea:做多情感分数相对于收益高..."
+      },
+      {
+        "id": "1680",
+        "title": "MCP与模板两手抓——IND困难户探索出的2种出货方法",
+        "author": "PM90725",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - MCP与模板两手抓——IND困难户探索出的2种出货方法 为了响应IND theme，也搞了几天IND，但即使参考了论坛中各位顾问的经验也还是没能手搓成功。这两天尝试了各种方法，其中有2种成功做出了pc<0.5的ra，在此分享一些小经验。 1. MCP微调 论坛中其他顾问的经验非常宝贵，但是交给我的话，一是我可能没充分理解文章内容，二是我没有那么多耐心做很多次调整。所以我挑选了我认为有用的内容交给MCP，让它帮我优化。那么你需要准备： 一个指标差一点点的alpha（Robust universe Sharpe..."
+      }
+    ]
+  },
+  "工具软件": {
+    "name": "工具软件",
+    "count": 30,
+    "topics": [
+      {
+        "id": "2035",
+        "title": "[MCP-守护] 让你的mcp无视token限制，实现免费的MAX模式",
+        "author": "CZ78575",
+        "date": "Tue, 07 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [MCP-守护] 让你的mcp无视token限制，实现免费的MAX模式 你是否也有这样的困扰，免费的TARE固然好用，但因token的限制无法做到无人值守，时常弹出 让人心生厌烦。。。 现在，你只需专注idea，剩下的交给时间，本脚本将助你一臂之力，让任务异常中断时自动继续。 需要提前安装Tesseract和语言包 # 下载安装： # 语言包"
+      },
+      {
+        "id": "2026",
+        "title": "【Quant101】AIAC2.0 TOP25 经验分享",
+        "author": "ZH87224",
+        "date": "Thu, 02 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Quant101】AIAC2.0 TOP25 经验分享 AIAC2.0 Final Round 应该是出来了，预计下次全球大会时会公布结果，有幸拿到TOP25，跟大家分享一些我的经验。 我的主要方案在比赛中打造出来，后续一直持续使用，是我目前点塔的主要流程。我的方案是结合了几次AI培训课程的内容，包括GEM和来点灵感，在此基础之上我本人也做了一点微小的工作：数据集压缩。 整套方案在分析数据集时，需要读入整个数据集，看过代码的小伙伴都知道，如果数据集很大的情况下，实际上只会读取TOP-N条数据，这显然会丢失..."
+      },
+      {
+        "id": "2008",
+        "title": "【Docker】两步部署自己的免费gemini api",
+        "author": "MB50079",
+        "date": "Mon, 30 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Docker】两步部署自己的免费gemini api 论坛里分享的大模型api，大部分是通过各种官方途径就能直接使用的，这里介绍一种自己部署gemini api的间接方法，优势是只要网页版gemini免费就能一直用，劣势是有时候不太稳定，而且同样需要科学上网。感谢开源该方法的大佬，github地址： ，各位如果用上了可以去点下star支持大佬。 由于我习惯使用Docker，所以在这里只介绍Docker的部署方式，当然github上也提供了其他方式。 1、使用浏览器无痕模式登录网页版gem"
+      },
+      {
+        "id": "1988",
+        "title": "【SKILL】征文",
+        "author": "WL13229",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【SKILL】征文 AI时代，SKILL和代码工具尤其重要。如果您有想分享的SKILL或者代码片段，请分享至此处。我们将不定时抽取优秀同学发放100-200积分。 另外，请不要将类似主题发送新帖子。本贴谢绝非深度回复，请将您对作者的感谢，转化成手中的点赞。"
+      },
+      {
+        "id": "1968",
+        "title": "OpenClaw + BRAIN 经验分享：我只改了 memory 分层，干活稳定很多",
+        "author": "JW52291",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - OpenClaw + BRAIN 经验分享：我只改了 memory 分层，干活稳定很多 最近折腾了一圈原生和二开的 OpenClaw，最后一个很直观的感受是：BRAIN skill 真正有用，不在于它“多会想”，而在于它“会不会把东西记对地方”。 一开始我也以为装完 BRAIN、接好模型、能跑起来就算结束了，结果实际干活时经常出现三个问题： 1. 刚聊顺一点，开个新 session 又像失忆。 2. 项目状态、用户偏好、当天临时结论全堆在一起，越记越乱。 3. 同一个任务隔一天再做，明明文件还在，关键上下文..."
+      },
+      {
+        "id": "1950",
+        "title": "【贺六浑】OpenClaw 快速安装与避坑指南",
+        "author": "JR23144",
+        "date": "Thu, 12 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【贺六浑】OpenClaw 快速安装与避坑指南 💻 环境与系统要求 基础依赖：Node.js 22 及以上版本（如果使用下方的一键脚本，系统会自动检测并帮你安装）。 支持系统：macOS、Linux 或 Windows。 特别提醒：Windows 用户强烈建议在 WSL2 环境下进行安装和运行。 🛠️ 核心安装步骤 👉 方式一：一键安装脚本（官方推荐，最省心） 只需运行下面这行命令，脚本会自动搞定 Node 环境、下载安装包并引导你完成初始化配置。 macOS / Linux / WSL2 环境： Bash"
+      },
+      {
+        "id": "1937",
+        "title": "重要培训通知【新顾问必知必会】",
+        "author": "WL13229",
+        "date": "Sat, 07 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 重要培训通知【新顾问必知必会】 如果您的新加入平台的顾问，不知道从哪里上手，我们为您准备如下重要在线培训，将由我们高级别的资深顾问为您分享。 3月4日晚8-9点 主题：BRAIN工具安装及新顾问衔接课 内容：介绍顾问应知应会内容及顾问社区开源工具安装 Zoom: 93312308635 3月7日周六14-18点 主题：AI工具助您研究顺利 内容：AI应用实战 Zoom:93922514561 第一场会议是第二场的前置必会课程，缺席第一场将对第二场有重大影响。 如您已参加类似课程，可忽略本通知。第一场会议是第..."
+      },
+      {
+        "id": "1929",
+        "title": "重要会议通知【新顾问必知必会】",
+        "author": "WL13229",
+        "date": "Wed, 04 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 重要会议通知【新顾问必知必会】 如果您的新加入平台的顾问，不知道从哪里上手，我们为您准备如下重要在线培训，将由我们高级别的资深顾问为您分享。 3月4日晚8-9点 主题：BRAIN工具按照及新顾问衔接课 Zoom: 93312308635 3月7日周六14-18点 主题：AI工具助您研究顺利 Zoom:93922514561 如您已参加类似课程，可忽略本通知。"
+      },
+      {
+        "id": "1928",
+        "title": "AI打工人配置指南 - Windows\\Mac\\Linux",
+        "author": "JL11546",
+        "date": "Wed, 04 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - AI打工人配置指南 - Windows\\Mac\\Linux 1. 前置条件 如果你的系统里安装了非Anaconda或uv配置的Python建议卸载掉，设置 - 应用 - 安装的应用 - 找到Python卸载 2. 下载安装包 通过网盘分享的文件：AI打工人+华子哥插件链接:  提取码: 7rmy 3. 安装AI打工人 右键点击\"BRAIN工具一键安装windows版本.exe\" - 以管理员身份运行，选择(强烈建议新建)一个文件夹一键安装 4. 安装的"
+      },
+      {
+        "id": "1903",
+        "title": "【代码优化】优化datafield的模糊查询",
+        "author": "QF72678",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【代码优化】优化datafield的模糊查询 我们往往需要使用模糊查询功能查询出含义或者描述符合要求的数据字段， 但是平台目前限制了模糊查询的记录返回数，以查询\"volume\"为例： 只会返回符合要求的前100条， 而如果我们检查api的返回结果，会发现count为3528。 在模板构建或者初筛阶段，我们可能需要获取符合查询条件的所有datafield，作为模板引擎的输入。我们可以用变通的方式来实现这一目标， 先获取所有的dataset，然后在每个dataset里面查询datafield。 代码如下（基于w..."
+      },
+      {
+        "id": "1897",
+        "title": "【工具】在opencode中使用Antigravity内模型额度详解（包含如何配置mcp）",
+        "author": "PZ64174",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【工具】在opencode中使用Antigravity内模型额度详解（包含如何配置mcp） 最近geminicli使用时总提示“We are currently experiencing high demand.We apologize and appreciate your patience./model to switch models.”。让我很苦恼，正好最近刷论坛看到OB佬之前推荐的\"在OpenCode中使用Antigravity的Claude额度\" 尝试安装后发现安装使用没有那么简单，在这详细描述..."
+      },
+      {
+        "id": "1895",
+        "title": "大模型羊毛——含泪分享 Gemini AI Pro 3个月免费试用！",
+        "author": "GC13416",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 大模型羊毛——含泪分享 Gemini AI Pro 3个月免费试用！ ⚠️ 核心警告：先看这里！ 如果你目前拥有 Google Gemini 的学生优惠（这个活动有效期很长，2027 年到期），请务必不要现在操作！ 后果： 参与此活动可能会导致原本 12 个月（或更久）的优惠直接被置换为 3 个月（我就是!!!!!!!!!!) 建议： 等学生优惠快到期时再通过此方法“续命”。 Google AI Pro 3 个月免费领取教程 通过完成 Coursera 上的 Google AI 专业证书课程，即可获得 3 ..."
+      },
+      {
+        "id": "1892",
+        "title": "BRAIN打工人解决报错之claude与node.js冲突",
+        "author": "RL11824",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - BRAIN打工人解决报错之claude与node.js冲突 之前的教程已经安装了AI打工人，桌面也有蓝色大脑图标 点击着桌面蓝色大脑后，Claude Code CLI会自动更新，然后与电脑中的nodejs冲突报错 报错信息为 TypeError: Object not disposable 经过一番搜索，发现这事挺常见的，遂发个帖子帮助后来顾问省点时间 报错原因： Claude Code 最近自动更新后，与 Node.js 18 存在兼容性问题 解决方案： 1（楼主二测不可用，低版本的claude code..."
+      },
+      {
+        "id": "1880",
+        "title": "【工具分享】解决win用户cli、打工人闪屏、无法回滚的问题",
+        "author": "QL88701",
+        "date": "Thu, 12 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【工具分享】解决win用户cli、打工人闪屏、无法回滚的问题 经常看到顾问村和mcp交流群里有顾问说gemini cli、iflow cli或者打工人总是闪屏，并且在跑工作流时不能进行回滚，同时也会有回滚时显示的历史对话不全等等的问题。这些问题并不是小问题，查看历史对话可以清楚知道AI都干了什么，也方便管理你多开的工作流。 解决办法 更换win自带的cmd工具，下载链接地址： 注意 下载完如果找不到的话，左下角搜索终端 power"
+      },
+      {
+        "id": "1862",
+        "title": "【送AI Token】参加今日培训AI工具助你研究效率翻倍，更有token券相送",
+        "author": "WL13229",
+        "date": "Sat, 07 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【送AI Token】参加今日培训AI工具助你研究效率翻倍，更有token券相送 温馨提醒，明日（2026/02/07）中午2点至下午六点，将由Master级别，历史最高评级GrandMaster,的研究顾问为大家分享并实操带练AI量化研究流程，助你效率翻倍。 课前必备工具安装：AI打工人配置指南 - Windows\\Mac\\Linux 上述工具请自行安装，课程将不再赘述。 Zoom:93673862363 Password: 222412 课上认真回答问卷者，将可获得10元KIMI token券"
+      },
+      {
+        "id": "1851",
+        "title": "AI打工人配置指南 - Windows\\Mac\\Linux",
+        "author": "JL11546",
+        "date": "Thu, 05 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - AI打工人配置指南 - Windows\\Mac\\Linux 1. 前置条件 如果你的系统里安装了非Anaconda或uv配置的Python建议卸载掉，设置 - 应用 - 安装的应用 - 找到Python卸载 2. 下载安装包 我用夸克网盘给你分享了「BRAIN_工具一键安装_windows版本.exe」，点击链接或复制整段内容，打开「夸克APP」即可获取。/~10933AMUmY~:/链接： 3. 安装AI打工人 右键点击\"BRAIN工具一键安装windows版"
+      },
+      {
+        "id": "1843",
+        "title": "【AI打工人Step4运行问题】针对Mac系统的代码调整",
+        "author": "HY28054",
+        "date": "Wed, 04 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【AI打工人Step4运行问题】针对Mac系统的代码调整 错误信息：FileNotFoundError: [Errno 2] No such file or directory: 'powershell' 这个错误表明在 macOS 上运行了为 Windows 设计的代码。脚本尝试调用 powershell，但 macOS 上没有这个命令。 把下面的方法添加到Step4_SetAPI_And_Check_LLMModel.py文件中： def set_macos_env_var(name, value): ..."
+      },
+      {
+        "id": "1841",
+        "title": "萌新第一次定级怎么做到comb-1.48但是Velue Factor0.9的（踩坑教程）",
+        "author": "YD84002",
+        "date": "Wed, 04 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 萌新第一次定级怎么做到comb-1.48但是Velue Factor0.9的（踩坑教程） 萌新是一位对量化一点也不理解的真萌新，这个兼职是朋友介绍的，8月底开始拿着官方的脚本开始跑阿尔法，一边跑一边学，10月底受到考试邮件，一次性过了考试，11月8日转正，1月份终于定下了我的comb和vf，如下图所示： 为什么我comb是负数，vf却这么高，我总结了一下自己踩的坑给大家分享一下 comb为什么低： 1、频繁换地区：我当初刚转正，发现多了好多地区可以交阿尔法，于是兴奋的随意尝试，3天开了7个地区，每个地区就交..."
+      },
+      {
+        "id": "1838",
+        "title": "【重要课程通知】今晚（2月4日）8点AI工具安装及新顾问衔接",
+        "author": "WL13229",
+        "date": "Wed, 04 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【重要课程通知】今晚（2月4日）8点AI工具安装及新顾问衔接 如您正纠结于手边没有研究工具，或者对论坛里大家所谈到的各种工具摸不着头脑，或是安装失败，那么这次课程将是你不容错过的一次。我们将邀请社区优秀顾问（Master以上）及China Country Lead为您演示并指导，手把手帮助您完成各类工具的安装，助您在量化研究的路程中一路顺风！  ZoomCode: 96084599796 Passcode:21213"
+      },
+      {
+        "id": "1819",
+        "title": "AI打工人系列：玩转MAC系统中回测小问题",
+        "author": "WZ33694",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - AI打工人系列：玩转MAC系统中回测小问题 python 运行打开我.py后，模版设置好后，回测会发生一些问题，经过检查，修复如下： simulator_wqb.py在MACos下，cmd提示会出现如下问题： Traceback (most recent call last): File \"/usr/local/lib/python3.11/site-packages/cnhkmcp/untracked/APP/simulator/temp_automated_1769328501.py\", line 10..."
+      },
+      {
+        "id": "1813",
+        "title": "【重要会议提醒】今晚即将开始：AI比赛与研究效率提升+社区新工具",
+        "author": "WL13229",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【重要会议提醒】今晚即将开始：AI比赛与研究效率提升+社区新工具 Zoom: 94444142609"
+      },
+      {
+        "id": "1780",
+        "title": "【Community Leader - 因子回测🔍】简洁优雅的给Simulator设定每日限额的方法",
+        "author": "JL11546",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader - 因子回测🔍】简洁优雅的给Simulator设定每日限额的方法 在每日限额上线后，我们的Simulator请求的响应头会增加三个键分别是\"x-ratelimit-limit\", \"x-ratelimit-remaining\", \"x-ratelimit-reset\". 我根据x-ratelimit-remaining的键值设计了一套到达每日限额后停止的方法，兼容绝大多数目前的主流回测框架。 首先，在wqb或者machine_lib等api代码中的回测器类中增加两个属性：..."
+      },
+      {
+        "id": "1757",
+        "title": "【工具推荐】claude-code-proxy + AI打工人：使用免费的大模型白嫖打工人！",
+        "author": "JC25837",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【工具推荐】claude-code-proxy + AI打工人：使用免费的大模型白嫖打工人！ AI打工人只提供了kimi与deepseek，如果想使用其他的大模型还可以通过修改Step4_SetAPI_And_Check_LLMModel.py里面的参数进行新增，但是国内的大模型普遍收费，唯一的iflow免费但是不支持anthropic，使用claude-code-proxy就可以解决Claude Code与OpenAI兼容API之间的互操作性问题，项目地址： 部署Clau"
+      },
+      {
+        "id": "1748",
+        "title": "【SKILLS everywhere】自动同步skills，从claude到gemini，codex，iflow",
+        "author": "FF56620",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【SKILLS everywhere】自动同步skills，从claude到gemini，codex，iflow 随着claude将skills进行标准化，各家也对skills进行了支持，本文简单介绍一下在各种工具中对于skills的使用，供大家参考。 现在大家对skills的规范支持都是一样的，内部结构都保持一致，结构如下： skills/ └── skillsA/ ├── SKILL.md └── ... └── skillsB/ ├── SKILL.md └── ... └── skillsC/ ├─..."
+      },
+      {
+        "id": "1747",
+        "title": " [工具分享] 追踪每一次cnhkmcp的更新",
+        "author": "ZH74761",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [工具分享] 追踪每一次cnhkmcp的更新 不得不说 `cnhkmcp` 的开发者实在是太高产了！几乎每周都有更新，有时候甚至一天能发好几个版本。这当然是一件好事，但也让人不禁疑惑：这个版本到底更新了什么？我要不要升级？ 虽然在Pypi ( 上可以看到版本号的变化，但因为这个项目没有公开 GitHub 仓库，我们很难知道具体的更新内容。比如 2.1.9 版本引入了 `skills` 功能，我也是看了论坛里大佬的帖子才知道的。 于是我就萌生了一个想法：既然包是安装在本地的，我能不能在本地追踪一下每个版"
+      },
+      {
+        "id": "1730",
+        "title": "AI打工人安装问题",
+        "author": "JS16353",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - AI打工人安装问题 最新版本的 cnhkmcp 安装后里面有一个AI打工人。这个里面有两个文件，一个是exe结尾的文文件，这个是Windows使用的。 另一个是zip，Linux下显示是“ш┐РшбМцИС_ф╕АщФохоЙшгЕ.sh” ，根据内容提示是安装脚本。不过没事，运行“mv ш┐РшбМцИС_ф╕АщФохоЙшгЕ.sh project_install.sh” 这个命令换一下名字即可。 然后使用 chmod +x project_install.sh 但是运行时候会反复提示 “./proj..."
+      },
+      {
+        "id": "1726",
+        "title": "[MCP-守护] 让你的mcp无视token限制，实现免费的MAX模式",
+        "author": "CZ78575",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [MCP-守护] 让你的mcp无视token限制，实现免费的MAX模式 你是否也有这样的困扰，免费的TARE固然好用，但因token的限制无法做到无人值守，时常弹出 让人心生厌烦。。。 现在，你只需专注idea，剩下的交给时间，本脚本将助你一臂之力，让任务异常中断时自动继续。 需要提前安装Tesseract和语言包 # 下载安装： # 语言包"
+      },
+      {
+        "id": "1707",
+        "title": "Brain Labs填充缺失值使用未来数据吗？",
+        "author": "HL64570",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - Brain Labs填充缺失值使用未来数据吗？ 我在Brain Labs里面看到forwardfill相关的函数，比如“visualizations.forward_fill”和\"visualizations.plot_coverage_forward_fill\"。 当时百思不得其解，forward fill的话，不就是使用了未来数据了吗？！意义何在？ 于是，我查了一下Brain Labs里面的代码实现： 发现调用的是pandas里面的ffill，于是，查了一下pandas官网，发现： Aha！破案了：pa..."
+      },
+      {
+        "id": "1701",
+        "title": "在获取数据集的时候返回API rate limit exceeded",
+        "author": "CW28997",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 在获取数据集的时候返回API rate limit exceeded 我在用初始模版中的get_datafields功能获取数据集的时候会返回'API rate limit exceeded'错误信息,但是我是正常使用,请问这是什么原因呢, 而且我前一段之间一直正常使用,这段才开始出现,代码也没有改过。有些不明白为什么,请问有大佬遇到过这个问题么～"
+      },
+      {
+        "id": "1677",
+        "title": "【 代码优化】如何解决限流429报错的问题",
+        "author": "XB37939",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【 代码优化】如何解决限流429报错的问题 前言 近期调用api时经常提示api limit，status_code == 429，这就是api限流了。限流后会导致获取不到results，导致代码报错。 比如get_datafields方法datafields_list.append(datafields.json()['results'])时报错 解决方案 添加重试机制即可解决限流问题 代码 核心代码： for x in range(0, count, 50): datafields = s.get(ur..."
+      }
+    ]
+  },
+  "ValueFactor(VF)": {
+    "name": "ValueFactor(VF)",
+    "count": 75,
+    "topics": [
+      {
+        "id": "2032",
+        "title": "我依靠这套代码，半个月点了10个塔",
+        "author": "FZ98343",
+        "date": "Tue, 07 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 我依靠这套代码，半个月点了10个塔 本人0126成为正式顾问，开始的一个月靠着使用打工人+AI聊天等工具制作模版回测，但效果始终不是很好，可能本身底子太薄，也没有深入研究用法，断断续续靠着打工人+其他AI工具，勉强点了两个塔；眼看同期的朋友群里讨论都点了好多塔，并且甚至进入了研究小组，在硬扛了半个月之后，不得不走上了一条搭建自己挖因子系统的道路，有付出总有收获，终于在上周跑通流程，并且略有小成，看到成果后，赶紧回来反哺社区，毕竟之前在社区跟各位大佬学到很多知识。 话不多说，直接上图+代码：（有疑问欢迎评论区..."
+      },
+      {
+        "id": "2030",
+        "title": "【新人向】是否还在对华子哥数据WebDataRAW不会解压而感到苦恼！即插即用代码来了，仅需Excel就可以进行数据分析！",
+        "author": "LX57490",
+        "date": "Tue, 07 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【新人向】是否还在对华子哥数据WebDataRAW不会解压而感到苦恼！即插即用代码来了，仅需Excel就可以进行数据分析！ 本帖子展示了如何将华子哥前辈（KZ79256）制作的WebDataRAW解压成Excel进行数据分析！ 注：内存要求极高，请清空电脑目前全部其他打开的应用再进行运行代码！！！！ 运行内存10G+可尝试！！！！ 一、配置 1. 解压完WebDataRAW_20250219_V0.10.9在图示位置随便创建一个.py文件 ！"
+      },
+      {
+        "id": "2024",
+        "title": "【ValueFactor】经验分享，纯新手VF 0.5 -> 0.97 -> 0.99",
+        "author": "SE19816",
+        "date": "Thu, 02 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【ValueFactor】经验分享，纯新手VF 0.5 -> 0.97 -> 0.99 大家好！我11月成为顾问，2月VF第一次更新从0.5到0.97，3月第二次更新升至0.99，此前也没有相关金融背景，在此分享一点纯新手的经验，希望能够帮到大家。 成为顾问的前段时间，有了顾问论坛的权限后，把大佬们的经验贴狠狠刷了一遍，虽然没能完全看懂，但深受启发，从入场就认识到了提交策略的重要性，形成了初步的提交策略。而且当时还没有过多限制回测，那时每天大量回测，提交的alpha是优中选优。后来由于回测的限制，且觉得为了..."
+      },
+      {
+        "id": "2023",
+        "title": "【VF 0.95收入经验分享】高VF如何拿到更高的base",
+        "author": "WL58980",
+        "date": "Thu, 02 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【VF 0.95收入经验分享】高VF如何拿到更高的base 以VF更新为一个周期，Base到底有多少呢？ 此次VF更新周期是2026年2月10日至3月23日，周期长达40天左右，也是非常幸运，此次VF提升到了0.95，在此期间我的base收入一共是US$1,917.72，日均将近US$50。 那么在高VF的情况下，应该如何拿到更高的base呢？ 首先，来看看现阶段影响base的主要因素： 1.VF：决定base的上限，VF越高，base的上限越高； 2.Daily Osmosis Rank（简称OS）:OS..."
+      },
+      {
+        "id": "2021",
+        "title": "【WQ Manager 新需求调研】想加一个每日base排行榜，会有多少同学使用？",
+        "author": "JG15244",
+        "date": "Thu, 02 Apr 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【WQ Manager 新需求调研】想加一个每日base排行榜，会有多少同学使用？ 【WQ Manager 新需求调研】想加一个每日base排行榜，会有多少同学使用？ 昨天突发奇想，想加一个每日base排行榜，但不知道会有多少同学支持使用，毕竟人数太少的话，就没有实际意义了，所以如果你支持并且会使用的话，希望留下你的评论。 初步构想 每日金额由自己手动输入上传。【为增加可信度，允许上传截图（不强制）（提供ID水印，防止被二次盗取使用）】 可选匿名（wq_id）。 除base外，同时关联vf、osm信息（可选..."
+      },
+      {
+        "id": "2014",
+        "title": "【OSMOSIS新人友好版】真正的一键打分：指定区域清空+补齐10类+标签过滤",
+        "author": "BQ64903",
+        "date": "Tue, 31 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【OSMOSIS新人友好版】真正的一键打分：指定区域清空+补齐10类+标签过滤 前几天看到 XX42289 【课代表】【轻松点击即可完成参赛】CA 降维 + 多指标聚类数评判 + KMeans / 层次 / DBSCAN 聚类的 Osmosis 点数分配工具 – WorldQuant BRAIN和JR23144【贺六浑】-【工具配置】OC2025 一键清空分数脚本 – WorldQuant BRAIN的文章。发现一些细节不足： 清除分数会将所有区域清除，且不包含super alpha 分配分数时四舍五入的偏..."
+      },
+      {
+        "id": "2007",
+        "title": "【ValueFactor】关于这次更新VF从0.98突然暴跌至0.75的反思与警示",
+        "author": "XW85841",
+        "date": "Mon, 30 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【ValueFactor】关于这次更新VF从0.98突然暴跌至0.75的反思与警示 老规矩，无图无真相，先上图： 这次不分享经验，主是关于之前几个篇帖子的关于长期维护高VF的心得体会的一个印证（详见帖子："
+      },
+      {
+        "id": "2003",
+        "title": "经验分享-Combine提升之路-过山车的经历真刺激，从负数到2的来时路",
+        "author": "LM81527",
+        "date": "Fri, 27 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 经验分享-Combine提升之路-过山车的经历真刺激，从负数到2的来时路 大家好，我叫Mike，当然在之前分享过几篇文章，可能有些注意到了， 虎哥模版， 对，我就是那个虎哥模版的人，极大扩展了虎哥模板的范围， 哈哈，但是可能这个形成了路径依赖，后果就是崩了。 这里是我最近2个赛季的情况，之前的是负数(好像平台看不到之前更远的记录） 上赛季是: 目前是： 那时候比较得意，最开始的2025年初，当时的高VF，但是没有高base，哈哈，然后就是2025年年中的时候一路狂飙到底， combine都成负数了， vf更..."
+      },
+      {
+        "id": "1989",
+        "title": "成为Expert的VF爬升之路：0.68-0.98-0.99",
+        "author": "MY82844",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 成为Expert的VF爬升之路：0.68-0.98-0.99 看到大家分享的各种VF提升经验，获益匪浅！ 在数量+多样性的经验指导下，侥幸VF也达到了0.99，从提交数据分析下我自己的情况，贡献一个数据点，希望对大家的大数据分析有所帮助。 近三个月的VF变化情况：0.68-0.98-0.99 从VF的计算周期来看，应该是11月和12月的alpha提交情况比较好。把9月到12月的alpha提交情况拉了下，是这样的： 从我的个例来看，一些可能可以解释VF获得提升的点： 1. 有一定数量的regular alph..."
+      },
+      {
+        "id": "1987",
+        "title": "【AI提示词分享】一套基于Gemini Cli的因子优化提示词---即ctrl即用",
+        "author": "LJ46725",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【AI提示词分享】一套基于Gemini Cli的因子优化提示词---即ctrl即用 在列表捡垃圾时，我时常遇到一些微小指标上的fall或者因子某些指标的不满意，通过不断的修改，慢慢形成了自己的一套“黄金手搓优化方法论”。 但我在想，这样方法上是否会固步自封?以及成效缓慢呢（本人非金融相关出身，可能对具体情况的处理理解确实不到位，只能套用通法进行处理）？ 于是，我结合自己对不同情况手搓优化的一些经验，以及开放了AI学习进步空间，打磨了一套“专门进行因子优化的AI提示词”，已用月余效果还不错，在这里分享给大家，..."
+      },
+      {
+        "id": "1984",
+        "title": "成为顾问的100天感想：道阻且长，唯有沉心学习。",
+        "author": "JZ76850",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 成为顾问的100天感想：道阻且长，唯有沉心学习。 其实标题党了一点，其实从成为正式顾问1月开始到现在，已经快120天了。当然还没有遇到VF刷新的情况，所以每天提交的alpha都在1.5刀上下。当然，因为提交的alpha大于100个，我在前段时间刚解锁了SA权限，然后自己的每天报酬突破了3刀。 不过，一开始想努努力冲一冲expert，结果遇到了打击，那就是第一次更新的Combined Alpha Performance是负数，这彻底堵住了冲expert的路。 经过论坛学习，我才发现这些问题是出在哪里了。 刚开..."
+      },
+      {
+        "id": "1983",
+        "title": "[skills小工具]将数据库中数据封装成skills，用于AI工作流",
+        "author": "CZ39633",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [skills小工具]将数据库中数据封装成skills，用于AI工作流 这几天随着Gemini pro的额度大砍，导致不得不想着怎么节省tokens和上下文。随后在与小虎哥的提点下得知采用将数据封装成skills来节省上下文和tokens，而刚好前几天我发了怎么将从网页拉取的数据存储到数据库的帖子（"
+      },
+      {
+        "id": "1982",
+        "title": "将从网页拉取的数据存储到数据库",
+        "author": "CZ39633",
+        "date": "Sat, 21 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 将从网页拉取的数据存储到数据库 由于最近我想要搭建自己的本地数据字段库，为此我向SD17531(小虎哥)取经。在与小虎哥的聊天中才知道之前用代码拉起数据已经因为接口限流导致不能使用，只能自行在网页中下载数据，存放在本地。但是由于数据的过于混乱导致没什么用处，为此我写了怎么将txt文件中拉取的数据存储的数据库的代码。 代码如下： import hashlib import json import logging from collections import Counter from datetime imp..."
+      },
+      {
+        "id": "1973",
+        "title": "支持关键词搜索/可提交检索的get_alphas函数",
+        "author": "WC53907",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 支持关键词搜索/可提交检索的get_alphas函数 我从7月下旬接触世坤的顾问项目，到10月中旬获得顾问权限，从论坛上学习到了很多知识和技巧，非常感谢各位前辈大佬的经验和分享。 今天我分享一下我重构后的get_alphas函数。我重构后的函数现在支持表达式关键词搜索，根据返回的json文件中的is下面checks的fail数量判断是否具备提交条件，顺带自动标成绿色，方便在官网快速查看。整个搜索过程支持进度条显示。以下是具体功能介绍。 关键词搜索 通过required_fields传入需要的关键词列表，ma..."
+      },
+      {
+        "id": "1972",
+        "title": "AI教我写模板",
+        "author": "HC68689",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - AI教我写模板 1. 如何理解模板 先说下个人背景，程序员，金融小白。去年9月底成为顾问，vf经历三次更新，0.5->0.17->0.47->0.77, 算是刚脱坑的新手。之前的工作流程主要是两块： 1.给一些模板(来自论坛)和特定数据集，让AI帮我推荐字段。 2.给数据集，直接让AI帮我给出模板。 虽然能勉强出货了，总感觉自己对模板缺乏理解，不知道如何独立写一个模板，就花时间向AI学习了一段时间，整理下自己的理解，希望能帮助到和我一样没有任何金融背景的小白，大佬可以跳过了。 对模板的理解，简单点就是一个可..."
+      },
+      {
+        "id": "1971",
+        "title": "   【深度分享】我是怎么给 Claude + BRAIN 做了一套全自动挖矿 Pipeline MCP 的              ",
+        "author": "GY62435",
+        "date": "Fri, 20 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【深度分享】我是怎么给 Claude + BRAIN 做了一套全自动挖矿 Pipeline MCP 的 "
+      },
+      {
+        "id": "1964",
+        "title": "【base经验分享方向帖 】带你分析vf0.77 如何吃到50刀 上篇",
+        "author": "ZL75781",
+        "date": "Thu, 19 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【base经验分享方向帖 】带你分析vf0.77 如何吃到50刀 上篇 先上图片 有图有真相，2月18日 我获得了历史以来第一个50刀，本文我将来分析osrank和theme对rabase的影响以及osrank和vf对sabase的影响（下篇章见）。 回到2月18日，当天我提交了什么因子我们来看看。 RA: 看ra就可以明白 数值达到了FITNESS2+ 门槛已过 theme吃到了2倍率 然后加上我的OSrank0.82 然后我们算一些倍率多少 公式: 金字塔倍率+（有无吃到2倍率）*(1+osrank) ..."
+      },
+      {
+        "id": "1962",
+        "title": "0.5--->0.45--->0.56--->0.94--->0.90--->0.96vf经验分享----量化涅槃之路",
+        "author": "TL32287",
+        "date": "Wed, 18 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 0.5--->0.45--->0.56--->0.94--->0.90--->0.96vf经验分享----量化涅槃之路 尊敬的各位WorldQuant友： 非常荣幸能够获得发帖子分享经验的机会，本人非常感谢WolrdQuant Brain China Team的认可与支持！ 不知不觉已经在WorldQuant兼职半年多的时间，岁月蹉跎如今我已经20岁了，相比正常的大学生我晚了两年。 你会好奇，我这两年的时光哪里去了。 先自我介绍一下。本人从高三入行worlqquant量化，距今9个月，在这之前我高二的时候离..."
+      },
+      {
+        "id": "1955",
+        "title": "[代码优化]将历史回测存储至MongoDB中",
+        "author": "WD55029",
+        "date": "Thu, 12 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [代码优化]将历史回测存储至MongoDB中 将回测存储在本地数据库有许多好处。首先可以方便自己检索全部回测，更精细化的筛选需要提交的内容。其次在回测限流5000的时代，我们可以通过检测哈希值避免重复回测从而更高效的利用我们回测的机会。我个人选择了MongoDB因为官方API的simulation是json格式，传统关系型数据库建表复杂，而MongoDB可以直接储存json，使用起来很直接方便。 我这里分享一个我自己使用的将回测存储至本地mongoDB的python脚本，以及我经常会使用的一些query命令..."
+      },
+      {
+        "id": "1954",
+        "title": "【VF0.74 BASE居然也能40刀！】每日base方向帖",
+        "author": "JX39934",
+        "date": "Thu, 12 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【VF0.74 BASE居然也能40刀！】每日base方向帖 继上次的单RA突破14刀后，这次我迎来了新的巨大突破，单RA也能40刀？平台这次的OS排名更新 ，属实给VF不高的群体带来了新的希望，直接展示博主的40刀RA 其实不难看出，fit是一个关键要素，不像是我之前发的14刀那个，那个靠的是PC小于0.3加主题，而且那时是没有OS daily rank加成的，这次的呢，一个是官方的double theme，一个是1.4倍的金字塔倍率，然后也是有我VF0.74 OS 0.68的加成，OS也不是特别高，我本..."
+      },
+      {
+        "id": "1951",
+        "title": "【贺六浑】从大厂内卷到18线小城：稳吃保底与我的两次GM进阶之路",
+        "author": "JR23144",
+        "date": "Thu, 12 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【贺六浑】从大厂内卷到18线小城：稳吃保底与我的两次GM进阶之路 大家好 年前 kunqi 老师邀请我做个分享，说实话，过年期间走亲访友多喝了几杯，一直没腾出空来。今天终于坐在屏幕前，想着老生常谈的套路大家在论坛也看腻了，那我就分享一点我不一样的“打怪升级”经历和最近的 Alpha 巧思。 按照国际惯例，先上战绩镇楼： 段位记录： 一次Expert 两次定级 Grand Master VF 更新记录： 4-6月 0.5 ， 7月0.95， 8月0.92， 9月0.99， 10月0.97， 11月 0.85 ..."
+      },
+      {
+        "id": "1949",
+        "title": "【工具分享】用Claude Code + MCP搭建全自动因子挖掘流水线的实践",
+        "author": "LH94963",
+        "date": "Thu, 12 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【工具分享】用Claude Code + MCP搭建全自动因子挖掘流水线的实践 最近看到论坛上越来越多大佬分享AI挖因子的经验，什么TRAE + MCP、Gemini CLI + Agent、Claude Skills模块化……说实话看得我又兴奋又焦虑。兴奋是因为这条路确实可行，焦虑是因为感觉不跟上就要被卷飞了。 所以我花了大概两周时间，搭了一套自己的自动化流水线，目前已经稳定跑了一个多月。今天来做一个比较详细的分享，尽量把我踩过的坑和想明白的东西都说清楚。 一、我的背景和动机 看到论坛上大佬的帖子，才意识..."
+      },
+      {
+        "id": "1948",
+        "title": "16815刀季度奖经验分享-小虎",
+        "author": "SD17531",
+        "date": "Thu, 12 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 16815刀季度奖经验分享-小虎 大家好，我是SD7531，顾问朋友们都很nice，一般喊我小虎哥。我从 2024 年 12 月 13 日开始提交顾问 Alpha，近三次定级都很幸运地保住了 GM。我本科专业是公共管理，代码一般是现学现用。 我的背景在顾问里也算和量化最不相关的之一，不过反过来说，我这样的背景都能做到 GM，相信绝大多数顾问朋友，只要愿意付出时间和精力，都能冲刺 GM。下面附上我的季度奖和一路熬过来的每日 base，希望能给大家一些鼓励：只要不放弃，收益终究会一柱擎天。关于季度奖，YX239..."
+      },
+      {
+        "id": "1943",
+        "title": "关于Combined Power Pool Alpha Performance持续稳定的猜想（2.12-2.42-1.97-2.62-2.67）",
+        "author": "MZ45384",
+        "date": "Mon, 09 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 关于Combined Power Pool Alpha Performance持续稳定的猜想（2.12-2.42-1.97-2.62-2.67） 我是去年7月1日IQC结束成为的条件顾问，8月还是9月成为的正式研究顾问。第一次更新combine三个条都是负的，多少不记得了，但在10月出狱后，除了selected其它两个combine都得到了大幅提升，尤其是Combined Power Pool Alpha Performance，直接从零点几突破到2.12，摸清大致方向后一路稳扎稳打，中间由于12月afte..."
+      },
+      {
+        "id": "1934",
+        "title": "【经验分享】菜鸟日记——代码小白如何稳住6个月VF0.9+",
+        "author": "ZH41150",
+        "date": "Thu, 05 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【经验分享】菜鸟日记——代码小白如何稳住6个月VF0.9+ 各位新年好，这帖子一直想写很久了~先自我介绍一下，本人是代码小白，一点基础都没有，目前仍然使用一二三阶代码，去年3月末注册，5月底成为有条件顾问，8月底成为正式顾问，我的VF更新分数为0.5-0.89-0.91-0.91-0.92-0.95-0.96-0.92，也是比较幸运，在上个季度成为了第74名GM，极限卡位了，comb分数也是在第二次更新后稳定在2以上。 说实在，我个人也不知道自己为什么能一直保持0.9+的VF，我只能说一下我的思路和提交策略..."
+      },
+      {
+        "id": "1933",
+        "title": "【AI工具推荐】OpenClaw平替--OpenWork，适用于windows系统。",
+        "author": "CG80910",
+        "date": "Thu, 05 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【AI工具推荐】OpenClaw平替--OpenWork，适用于windows系统。 OpenWork 安装与配置教程 本教程将指导你完成 OpenWork 的安装、本地 MCP 配置和本地 Skill 配置。 可以实现一句话自动实现任务工作流。 目录 环境要求 安装 OpenWork 配置本地 MCP 配置本地 Skill 验证配置 环境要求 在开始之前，请确保你的系统满足以下要求： 操作系统: Windows 10/11, macOS, 或 Linux js: 18.x 或更高版本 包管理器: npm,..."
+      },
+      {
+        "id": "1914",
+        "title": "[经验分享]❌从全错到全对✅，仅一个月实现combine -1.2→3.18 + vf0.92",
+        "author": "LZ63377",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [经验分享]❌从全错到全对✅，仅一个月实现combine -1.2→3.18 + vf0.92 大家新年好呀，给大家拜个晚年了🧨🧨 首先声明我不是大佬，很多东西我都是一知半解的，还在逐渐摸索，combine和vf得分也有很大的运气成分。 我是去年11月下旬转为有条件顾问的，至今经历了两次combine刷新和一次vf刷新，变动如下图所示： 可以看到前后仅一个月，我的combine就从-1.2拉升到了3.18，vf也涨到了0.92，对比过于强烈，完全可以说是从全错到全对的过程。因此我认为自己这个样本还是很具有研..."
+      },
+      {
+        "id": "1913",
+        "title": "成为expert，vf连续三个月上0.9！！！",
+        "author": "ZY36280",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 成为expert，vf连续三个月上0.9！！！ 近三次更新的vf变化是：0.98->0.91->0.90，这次更新来到了12月，刚好包括了整个expert这三个月，因此打算依次查看下这三个月提交的alpha，总结expert这三个月高vf的原因。 首先8、9、10月的vf猛涨来到了0.98，vf猛增0.48->0.98，第一次SA拿满60刀 – WorldQuant BRAIN在这个帖子里已经总结了一部分了。 接下来是9、10、11月。由于os已经更新了，可以很明显的看到11月提交的USA地区OS/IS R..."
+      },
+      {
+        "id": "1905",
+        "title": "一个非科班选手的量化“打怪升级”路——季度奖突破万刀必读",
+        "author": "YX23928",
+        "date": "Thu, 26 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 一个非科班选手的量化“打怪升级”路——季度奖突破万刀必读 先来个图镇楼： （两次GM奖金加起来合计为3w+） 大家好，我是YX23928, 简单的介绍一下我自己，目前是一位智能制造方向的软件工程师，本科学的是自动化专业。其实不论是现有工作还是我的过往专业，都可以说是与量化毫无关联。 2024年10月，机缘巧合之下，我意外得知World Quant这样一份兼职。观望一阵后，于2024年12月成为顾问，2025年5月份有幸做过一次高VF分享，《vf从0.5到0.99：一个非科班选手的量化成长之路》， 欢迎大家来..."
+      },
+      {
+        "id": "1902",
+        "title": "VF第一次更新从0.5-0.88的感想",
+        "author": "ZL75781",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - VF第一次更新从0.5-0.88的感想 大家好！我是ZL75781。做为从2025年10月进来的新顾问来和大家分享一下我从0.5到0.88的感想。 这次VF更新是9 10 11 这三个月，刚好OS也更新了，我给大家看看我这三个月交了些什么。 我一共是交了34个，其中IND地区8个。 可以看到我IND地区的sharpe125都非常不错，但是有两个不好的因子存在。 而我的EUR/1地区相比之下逊色不少 最最不好的是EUR/0地区出现了，这个是我新手时期不懂事交上去的高turnover低margin。可以看出来是..."
+      },
+      {
+        "id": "1901",
+        "title": "【WQ数据监控 v0.1.0】wqmanager.qzz.io  版本更新！ 快来看看本次 value factor 和 combined 更新情况吧！",
+        "author": "JG15244",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【WQ数据监控 v0.1.0】wqmanager.qzz.io 版本更新！ 快来看看本次 value factor 和 combined 更新情况吧！ 应PP26750、LX57490需求，新增 vf 和 comb 分析。 在线地址： 更新内容： 1. 个人中心页面增加 vf 和 comb 变化趋势图。 2. 新增 vf 和 comb 变化统计，可从多维度查看更新情况。 3. 新增 favicon.ico 图标。 value factor 和 combined 页面需从右下角菜单进入"
+      },
+      {
+        "id": "1900",
+        "title": "【工具分享】简单便捷地给大模型添加skills",
+        "author": "LX31898",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【工具分享】简单便捷地给大模型添加skills 平时总有顾问反应说自己用的AI大模型在执行任务、工作流的过程中经常出现前面把需求提完，后面执行过程ai关注的焦点逐渐偏离主线任务的情况。随着大模型的快速迭代，现在的大模型进化出了skill这个新事物来改善以上问题。 大模型、提示词、上下文的区别： 大模型的\"Skill\"（技能/能力）并非突然出现，而是随着模型规模扩大和训练数据增加逐步涌现的。2020年后，GPT-3等模型展现出上下文学习（In-Context Learning）能力，可视为早期skill形态；..."
+      },
+      {
+        "id": "1899",
+        "title": "【经验分享】新人如何Combine 2.3， VF 0.9",
+        "author": "ZZ51745",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【经验分享】新人如何Combine 2.3， VF 0.9 首先明确一点，提交的质量才是最重要的 我是11月中才成为顾问的，那时候算是最后的好日子了，回测数还没有限制，每天可以大量的回测，各种想法都可以试试，然后优中选优，每天只提交最好的，下面的Combine就是一月的时候刷新的，对应我11月的提交，应该算是很不错的了 然后到12月，增加了回测数量的限制，那时候就感觉回测数不够用了，经常跑一半就用完了，要等第二天，很多想法也没办法尝试了，提交的质量比起11月肯定是下滑的。 再加上还要兼顾点塔，我当时想着至少..."
+      },
+      {
+        "id": "1891",
+        "title": "💰💰2025年度收入回顾",
+        "author": "SJ65808",
+        "date": "Wed, 25 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 💰💰2025年度收入回顾 近期25年第四季度的季度奖金发布了，是时候总结一下年度收入了，本人总计收入：23013.99 美元，其中base奖金6710.46，季度奖金15,447.53，推荐奖800，双周奖56。 25年从gold到gm一步一步升级上来的，下半年随着vf和genius等级的提升，收入显著提升，占了全年收入的95%以上，所以维持高vf和高等级的genius是高收入的关键。这两者实际上是可以兼顾的，近半年我的vf和combine表现也不错： 经验总结的话简而言之就是：atom+diversity..."
+      },
+      {
+        "id": "1881",
+        "title": "终结烦人的MCP error -32000",
+        "author": "XG41865",
+        "date": "Thu, 12 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 终结烦人的MCP error -32000 MCP怎么设置都避免不了-32000，甚至是MCP不可用，特别是搞GLB的时候。既然这样，那就不用MCP，让AI阅读platform_functions.py文件实现brain_api_client.py，同时实现一个brain_cli.py作为命令行调用工具类。最后让AI更新Workflow，将里面使用mcp工具的都替换为brain_cli.py或者仅替换回测工具。 代码如下（完全AI编写）： ------------------------- 分隔符 ----..."
+      },
+      {
+        "id": "1878",
+        "title": "终于走出雾霾区，体验了一把“一柱擎天”的喜悦！！！（vf: 0.5 -> 0.14 -> 0.13 -> 0.38 ->0.81->0.95）",
+        "author": "WL58980",
+        "date": "Thu, 12 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 终于走出雾霾区，体验了一把“一柱擎天”的喜悦！！！（vf: 0.5 -> 0.14 -> 0.13 -> 0.38 ->0.81->0.95） 就在昨天vf和combine更新，vf来到了0.95，base也是体验了一把“一柱擎天”，十分惊喜和意外！！！！ 那就来回顾一下我的顾问之路吧！ 我是七月中旬开始接触，半个月速通条件顾问，九月初成为正式顾问。众所周知，在成为条件顾问之后，就可以拿到base收入，当时所有地区都可以提交ppa,可以说是无脑提交，由于刚开始接触，并出于对base的渴望，所以把能提交的al..."
+      },
+      {
+        "id": "1863",
+        "title": "[OS比赛分数统计]OS比赛分数统计",
+        "author": "JX39934",
+        "date": "Sun, 08 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [OS比赛分数统计]OS比赛分数统计 想必经历过之前OS比赛的家人，应该都有过分数没有打整10W分，导致比赛分数失效的悔恨经历，不用怕，我这代码来了 自动获取成为顾问的日期拉取对应地区已提交alpha的分数，最后汇总 个人觉得是很有用的小工具，请路过的哥们帮我点点赞，评论下，谢谢大家，祝国区所有顾问都VF1.0，每季度都GM，代码请看下面,同目录需要有user_info.txt import asyncio import logging import re import wqb from typing im..."
+      },
+      {
+        "id": "1855",
+        "title": "【新人向-SA的本地计算SC】复制即用！跟上后一篇PC检测代码！",
+        "author": "LX57490",
+        "date": "Thu, 05 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【新人向-SA的本地计算SC】复制即用！跟上后一篇PC检测代码！ 【新人向-SA的Prod检测 —— 24h可检测600个！】即插即用！结合上一篇SA自相关文章！ – WorldQuantBrain-CN 上述链接跳转PC检测帖子！ 一、登录 478,479行账号密码def main(): # 配置参数 class cfg: username = \"\" password = \"\" data_path = Path('.') 二、配置 # ===== 参数设置 =====# SuperAl"
+      },
+      {
+        "id": "1848",
+        "title": "新人期升段失败 ，vf0.5-0.93的个人小结",
+        "author": "JZ61289",
+        "date": "Thu, 05 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 新人期升段失败 ，vf0.5-0.93的个人小结 首先，我是11月初成为顾问的，也就是说我大约有50+天时间的新手期，我当时定下的目标是vf0.7，rank来到ex，最终一个超出预期 ，一个未达预期 。也算是中规中矩吧 。 关于vf，主要就是参考论坛之前dalao的分享帖的经验，多交ra和atom，高fit，关注最近两年 的数据，margin>10，因此也可以看到我50+天也就交了120个alpha。平均每天才3个不到。虽然保证了一点质量，但是也为我这赛季没有升段埋下了一点伏笔。 其次是升段，关于升段，六维..."
+      },
+      {
+        "id": "1840",
+        "title": "【ValueFactor提升经验】从0.26->0.53->0.56->0.9->0.95的经验之谈",
+        "author": "BL59154",
+        "date": "Wed, 04 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【ValueFactor提升经验】从0.26->0.53->0.56->0.9->0.95的经验之谈 我是4月就开始成为条件顾问的，由于参加IQC的缘故，7月才计算valuefactor，印象中7、8月的vf好像是0.8左右，出乎意料以至于我放松警惕，交了若干过拟合的因子，来到了噩梦般的9月，vf一下子骤降到了0.26，连坐了三个月牢，一直到12份vf才有了质的变化。对于为什么突然骤降这么低，以及之后怎么改进，也有了一些经验，希望大家也能从中获得一些收获。 为什么骤降？ 9月份更新的vf是5、6、7月三个月..."
+      },
+      {
+        "id": "1831",
+        "title": "【Community Leader -因子构造 💎 】AI工作流完成SA的双五指标的研究",
+        "author": "WL72408",
+        "date": "Mon, 02 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader -因子构造 💎 】AI工作流完成SA的双五指标的研究 前言：在前面的几次Community Leader培训会议当中，从各位大佬的分享中学会了怎么用AI工作流进行RA因子的研究和优话，使得我能通过学习，让赛季末的我能够解决我断粮RA因子的困境。但是我就在想，RA可以通过工作流完成研究，SA为什么不能呢。于是，在前人的基础上，进行SA自动生成工作流进行了摸索。功夫不负有心人，在反复试错打磨之后。我摸索出了一套有效果的工作流。以下是完成SA研究的详细步骤： AI工具：我这边使..."
+      },
+      {
+        "id": "1829",
+        "title": "[找灵感] 我遇到的找灵感时账号登录问题",
+        "author": "LL40122",
+        "date": "Mon, 02 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [找灵感] 我遇到的找灵感时账号登录问题 在启动  找灵感时，遇到了2个问题 ，我记录下： 1. 因为我用的是 iflow ，所以我的 Base URL:  ; Model Name: 一开始我填的是 Kimi-K2-Thinking , 因为当时我的 iflow cli 选的模型 就是这个，还以为这里也是填一样的； 后来发现在“找灵感”这里，提示是连接“成功”，但 Results 这里却报错： \"None Type...\" 后来问了群里的大佬，有人告知"
+      },
+      {
+        "id": "1828",
+        "title": "iflow cli接入自定义大模型api",
+        "author": "DL10343",
+        "date": "Mon, 02 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - iflow cli接入自定义大模型api 目前iflow cli提供了内置的几个免费模型，包括1. GLM-4.72. iFlow-ROME-30BA3B(预览版)3. DeepSeek-V3.24. Qwen3-Coder-Plus5. Kimi-K2-Thinking6. MiniMax-M2.17. Kimi-K2-0905最近，kimi新出了kimi-k2.5模型，英伟达也更新了kimi-k2.5模型，可以免费使用注册可以参考这个帖子："
+      },
+      {
+        "id": "1823",
+        "title": "在2核2G的linux云服务器中跑App_wqb代码以及一些服务器常见问题解决",
+        "author": "YT92737",
+        "date": "Thu, 29 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 在2核2G的linux云服务器中跑App_wqb代码以及一些服务器常见问题解决 在2核2G的服务器中，运行vscode经常会导致卡死，不得不重启服务器。可以采用分配虚拟内存的形式。以下是我的做法： 第一步：创建 2G 的交换文件 sudo fallocate -l 2G /swapfile 第二步：设置权限 sudo chmod 600 /swapfile 第三步：将文件格式化为 Swap 格式 sudo mkswap /swapfile 第四步：启用 Swap sudo swapon /swapfile ..."
+      },
+      {
+        "id": "1802",
+        "title": "【即插即用】分享一个alpha数据到本地库的脚本（断点续连）",
+        "author": "JA92987",
+        "date": "Tue, 27 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【即插即用】分享一个alpha数据到本地库的脚本（断点续连） 1. 项目概述 本脚本专门用于从 WorldQuant Brain 平台大规模采集alpha数据，并将其持久化存储到 MySQL 数据库中。支持断点续连、分批处理、失败重试等高级功能。 2. 核心用途 批量爬取 WorldQuant Brain 平台上的所有 Alpha 策略数据（包括 REGULAR 和 SUPER 类型） 解析复杂的 Alpha 策略元数据，包括代码、描述、性能指标、参数配置等 将数据实时入库，支持数据更新和版本管理 支持按日..."
+      },
+      {
+        "id": "1801",
+        "title": "2025年踩坑经验总结 vf 0.5->0.13->0.38->0.81； Combined Alpha Performance 0.68->0.06->-0.58->0.36；",
+        "author": "WL58980",
+        "date": "Tue, 27 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 2025年踩坑经验总结 vf 0.5->0.13->0.38->0.81； Combined Alpha Performance 0.68->0.06->-0.58->0.36； 回顾2025，作为一名七月底成为条件顾问，九月初成为正式顾问的新人，现已收到平台截至10月底期间的薪酬累计5k+。本人并没有任何金融经验，有一些代码基础，起初并不知道如何选择高质量的alphas提交，只要能提交的便提交了，后来当vf变成0.13，Combined变成-0.58时也曾想过放弃，但当收到平台的第一笔薪酬时又重燃了希望，..."
+      },
+      {
+        "id": "1787",
+        "title": "【Community Leader - 可视化alpha打分工具 】可视化分析你的alpha，并进行打分，助力Osmosis比赛！",
+        "author": "JG15244",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader - 可视化alpha打分工具 】可视化分析你的alpha，并进行打分，助力Osmosis比赛！ 先看效果图 拥有的功能： 可视化alpha之间的相关性，支持自主调节相关性阈值 自主删除/恢复 alpha 自主删除alpha之间的连线 查看某个alpha的详细指标（无pnl） 对alpha平均分配点数 按照聚簇分配点数 导出/导入分配结果 TODO： 根据pyr、指标等对alpha进行分类 自主进行alpha分类 按照分类进行点数分配 权重点数分配 支持pnl的展示 再说下..."
+      },
+      {
+        "id": "1781",
+        "title": "[SuperAlpha] 基于SuperAlpha数据分析师--Own极简回测次数源源不断三五(附代码)",
+        "author": "JX79797",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [SuperAlpha] 基于SuperAlpha数据分析师--Own极简回测次数源源不断三五(附代码) 前置条件，需要在某一个区域有一定数量的alpha，设置一个目标选择数量范围。 如作者EUR初始130个alpha，目前170多个alpha， SA目标数量设置40-70，设置和combo一直运行同一种，目前交了30个三五还没有断，如果不好出了 可能会变更SA目标数量和设置及combo。 作者第一次执行200多个回测，50多个三五，去除自相关，最终提交12个， 当前每执行配置在回测50-70次，基本还可以..."
+      },
+      {
+        "id": "1777",
+        "title": "【实用报表】多维度分析Alpha最新2023年OS趋势",
+        "author": "TL53163",
+        "date": "Wed, 21 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【实用报表】多维度分析Alpha最新2023年OS趋势 最近随着VF一起更新的还有截止到2023-12-31的OS数据，我乐于点开每一个已提交的alpha查看23年的OS走势如何，这个数据对我们已提交alpha质量预测很有用。 所以想着写一个报表，可以统计一下最近提交的alpha的OS表现如何，报表效果如下： 代码见：  此报表暂时只统计了RA，没有SA。后续会加一个sheet页展示SA"
+      },
+      {
+        "id": "1774",
+        "title": "[工具分享]一键  Robust Sharpe优化辅助",
+        "author": "JX79797",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [工具分享]一键 Robust Sharpe优化辅助 `robust_sharpe_optimizer.py` 是一个独立的命令行工具，它接收一个原始Alpha的ID作为输入，然后执行一个多阶段的自动化探索流程，目标是寻找并筛选出Robust Sharpe和Sharpe比率表现良好的Alpha变体。 两轮筛选+一轮表达式变体回测，存储整体优化结果，对绝大多数表达式有效，耗费约80次回测，如果一次优化不够，可以看整体结果里其他也有优化的思路叠加。 核心功能流程包括： 1. 初始Alpha信息获取： 脚本首先会..."
+      },
+      {
+        "id": "1773",
+        "title": "[SuperAlpha] 基于SuperAlpha数据分析师--Own极简回测次数源源不断三五(附代码)",
+        "author": "JX79797",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [SuperAlpha] 基于SuperAlpha数据分析师--Own极简回测次数源源不断三五(附代码) 前置条件，需要在某一个区域有一定数量的alpha，设置一个目标选择数量范围。 如作者EUR初始130个alpha，目前170多个alpha， SA目标数量设置40-70，设置和combo一直运行同一种，目前交了30个三五还没有断，如果不好出了 可能会变更SA目标数量和设置及combo。 作者第一次执行200多个回测，50多个三五，去除自相关，最终提交12个， 当前每执行配置在回测50-70次，基本还可以..."
+      },
+      {
+        "id": "1772",
+        "title": "[SuperAlpha]SuperAlpha数据分析师，洞察alpha表现自动构建selection利器(附代码)",
+        "author": "JX79797",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [SuperAlpha]SuperAlpha数据分析师，洞察alpha表现自动构建selection利器(附代码) 在上一篇帖子中，  [SuperAlpha] 基于SuperAlpha数据分析师--Own极简回测次数源源不断三五 背后的“大脑”——`sa_selection_analyzer.py`，它提供了一个强大的 `SuperAlphaSelectionAnalyzer` 类，帮助我们深入理解 `sele"
+      },
+      {
+        "id": "1771",
+        "title": "[SuperAlpha] 基于SuperAlpha数据分析师--Own极简回测次数源源不断三五(附代码)",
+        "author": "JX79797",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [SuperAlpha] 基于SuperAlpha数据分析师--Own极简回测次数源源不断三五(附代码) 前置条件，需要在某一个区域有一定数量的alpha，设置一个目标选择数量范围。 如作者EUR初始130个alpha，目前170多个alpha， SA目标数量设置40-70，设置和combo一直运行同一种，目前交了30个三五还没有断，如果不好出了 可能会变更SA目标数量和设置及combo。 作者第一次执行200多个回测，50多个三五，去除自相关，最终提交12个， 当前每执行配置在回测50-70次，基本还可以..."
+      },
+      {
+        "id": "1770",
+        "title": "[SuperAlpha]SuperAlpha数据分析师，洞察alpha表现自动构建selection利器(附代码)",
+        "author": "JX79797",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [SuperAlpha]SuperAlpha数据分析师，洞察alpha表现自动构建selection利器(附代码) 在上一篇帖子中，  [SuperAlpha] 基于SuperAlpha数据分析师--Own极简回测次数源源不断三五 背后的“大脑”——`sa_selection_analyzer.py`，它提供了一个强大的 `SuperAlphaSelectionAnalyzer` 类，帮助我们深入理解 `sele"
+      },
+      {
+        "id": "1768",
+        "title": "[工具分享]一键  Robust Sharpe优化辅助",
+        "author": "JX79797",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [工具分享]一键 Robust Sharpe优化辅助 `robust_sharpe_optimizer.py` 是一个独立的命令行工具，它接收一个原始Alpha的ID作为输入，然后执行一个多阶段的自动化探索流程，目标是寻找并筛选出Robust Sharpe和Sharpe比率表现良好的Alpha变体。 两轮筛选+一轮表达式变体回测，存储整体优化结果，对绝大多数表达式有效，耗费约80次回测，如果一次优化不够，可以看整体结果里其他也有优化的思路叠加。 核心功能流程包括： 1. 初始Alpha信息获取： 脚本首先会..."
+      },
+      {
+        "id": "1758",
+        "title": "【Community Leader - 因子构造】在MCP中加入表达式正确性校验",
+        "author": "CC60514",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader - 因子构造】在MCP中加入表达式正确性校验 最近一段时间，我尝试通过 iFlow + MCP 来辅助完成因子构造相关工作，包括因子表达式生成、数据检索以及后续的回测流程。在实际使用过程中，发现了两个比较影响效率的问题，这里简单分享一下我的发现和对应的优化思路。 一、LLM 构造的因子表达式容易出错 在使用 LLM 自动构造 Alpha 表达式时，经常会出现表达式不规范或不符合平台语法要求的情况。这些错误往往要到 create_multiSim 阶段才被发现，LLM需要花..."
+      },
+      {
+        "id": "1755",
+        "title": "[工具分享] Alpha 综合评分系统：基于多维度指标的自动筛选框架",
+        "author": "HZ58133",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - [工具分享] Alpha 综合评分系统：基于多维度指标的自动筛选框架 在挖掘 Alpha 时，我们经常会遇到“选择困难症”：模拟回测产生了一大堆 Alpha，但提交名额有限。单纯看 Sharpe 或 Fitness 往往不够全面，因为 Margin 太低、Turnover 过高或者多空头持仓不平衡都会导致 Alpha 在实盘中表现不佳。 为了解决这个问题，我写了一个 Python 脚本。根据一套**效用（Utility）- 惩罚（Penalty）**逻辑进行打分，帮助你一眼看出哪个 Alpha 最值得提交。..."
+      },
+      {
+        "id": "1753",
+        "title": "Osmosis competition 打分V2-精细化筛选alpha池",
+        "author": "CC21336",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - Osmosis competition 打分V2-精细化筛选alpha池 Osmosis competition 第一周结果公布前，自己没有对alpha池进行精选。因为组SA的时候，alpha个数比较多的情况下，通常指标会比较好看。因此自己一度曾错认为alpha池中个数越多，整体表现很可能会更好，于是把大多数alpha都入选到池中。但打完分后，观察Leaderboard,我的ASI地区，Daly PNL ASI 几乎每天都是亏的，相反近期刚参与的 GLB/IND 全部alpha本身数目比较少，但大多数情况下..."
+      },
+      {
+        "id": "1752",
+        "title": "【火眼金睛】vf与combine齐飞，我提交了怎样的alpha（Osmosis自适应版）",
+        "author": "YZ88594",
+        "date": "Mon, 19 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【火眼金睛】vf与combine齐飞，我提交了怎样的alpha（Osmosis自适应版） 从最初的combine为负和vf为0.24到combine均为1+和vf为0.84，我到底提交了哪些alpha？ 先说结论，自从上次combine和vf双双爆炸之后，本人痛定思痛，所以后面提交的alpha都算是深思熟虑后提交的。总结起来，主要看重以下三点，近年信号丶sharpe走势以及margin。 1.近年信号 在一个alpha达到提交的最低要求（Sharpe>1）之后，本人在提交之前会着重观察近四年的表现，尤其是近..."
+      },
+      {
+        "id": "1742",
+        "title": "一键单页面查看多个Alpha的PNL走势图",
+        "author": "TT21691",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 一键单页面查看多个Alpha的PNL走势图 在平台上对比不同alpha的表现时，往往需要手动输入alpha id在链接中打开多个页面，不利于对多个alpha进行表现对比，所以我做了一个可以一键在单个页面查看多个alpha PNL图的工具。效果展示： 支持查看多条PNL曲线 支持只查看单条曲线。 支持计算相关性：代码``` import matplotlib matplotlib.use('Agg') # 使用非交互式后端 import matplotlib.pyplot as plt import matp..."
+      },
+      {
+        "id": "1738",
+        "title": "【新人向-SA的Prod检测 —— 24h可检测600个！】即插即用！结合上一篇SA自相关文章！",
+        "author": "LX57490",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【新人向-SA的Prod检测 —— 24h可检测600个！】即插即用！结合上一篇SA自相关文章！ 本帖子展示了如何将前辈SY86571的优雅避免prod检测受到限流处理及上一篇自相关检测的输出结果进行合二为一的SA-Prod检测代码！ 一、登录及其配置参数 1. 40，41行输入账号密码； 2. 38行更改时间，依据于上一篇自相关代码跑出来的文件时间； 3. 42行“SELF_CORR_THRESHOLD = 0.58”， 三五可以改为0.5，0.5更容易出货；"
+      },
+      {
+        "id": "1735",
+        "title": "【代码优化，即插即用】一键批量获取数据字段（以可直接用于app的格式/已解决429问题）",
+        "author": "YW36099",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【代码优化，即插即用】一键批量获取数据字段（以可直接用于app的格式/已解决429问题） 如果有一个好的模板，想遍历某个或某几个category的数据字段，就可以用下面的代码一键获取。代码最开始取自论坛，后面针对需求做出修改，主要包括： 1，重写get_datafields加入429重试（否则最近的情况根本运行不了）。 2，结果以“字段1，字段2，字段3......”的格式写入csv文件，用记事本打开-全选-复制，就能直接粘贴到app的变量里。 3，下图第三行是获取某个category的字段，第四行是获取某..."
+      },
+      {
+        "id": "1732",
+        "title": "新手福音，全自动爬山算法，1个Alpha变N个！！！（开箱即用）",
+        "author": "ML43675",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 新手福音，全自动爬山算法，1个Alpha变N个！！！（开箱即用） 本人0基础小菜鸡一枚，25年9月22注册，11月21成为有条件顾问。不会编程，也不懂金融。纯靠AI，实现保底自由。下面介绍一下我的流程。 第一步：万事开头难，我的初始Alpha基本上都是Gemini cli帮我挖的，最开始没充钱，用的是2.5，最高记录挖了1个3刀多的Alpha(～￣▽￣)～ 。（Gemini 和 Iflow都用过，个人感觉Gemini比较好用。可以多开，可以挖出来，我用Iflow没挖出来，而且不能多开，仅代表个人感受！！！非..."
+      },
+      {
+        "id": "1731",
+        "title": "【MCP工具分享-即插即用】多 Alpha 两两相关性批量检查工具 (附完整源码)",
+        "author": "TJ14150",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【MCP工具分享-即插即用】多 Alpha 两两相关性批量检查工具 (附完整源码) 在平台上进行研究时，除了需要确保 Alpha 与生产环境的相关性低于 0.7 之外，确保自己名下的一组 Alpha 之间不具有高度相关性同样至关重要。手动逐一对比 PnL 极其低效，并且ai自动化工作流，会同时出现相关性极高的alpha，同时进行检查相关性，非常占用宝贵的相关性检查资源，同时找出了可提交的alpha只有提交之后才能继续使用平台相关性检查，使工作流流畅，导致不得不进行提交无法进行存货，对于一些高要求的顾问是。为..."
+      },
+      {
+        "id": "1722",
+        "title": "【Community Leader -因子构造 💎 】点赞50有奖 教你如何不用自己写代码，用Claude Skill + Subagent复刻Kunqi老师的Gem工作流",
+        "author": "RM49262",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader -因子构造 💎 】点赞50有奖 教你如何不用自己写代码，用Claude Skill + Subagent复刻Kunqi老师的Gem工作流 如果你没看过昨晚Kunqi老师的直播分享，这里就先简单介绍一下： - Kunqi老师对Gem的定义是**寻找基于数据含义的Idea** - 大体的研究流程就是 1. 通过数据集的定义/数据字段的定义进行聚类 2. 基于各个类别的数据字段创建idea(比如通过多数据字段及其之间的关系来提供新的信息) 3. 通过Lab观察数据的特征分布 4..."
+      },
+      {
+        "id": "1721",
+        "title": "【Community Leader ——GEM复现】如何用工作流让analyst4数据集产生14,898个GEM",
+        "author": "WC53907",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【Community Leader ——GEM复现】如何用工作流让analyst4数据集产生14,898个GEM 24日参加了GEM培训，根据GEM的逻辑，我用工作流进行了复现。 为了节省令牌支出，全文采用英文。 # GEM Workflow: Systematically Creating Economically Meaningful Data Field Combinations## Table of Contents- [GEM Definition](#gem-definition)- [Keyw..."
+      },
+      {
+        "id": "1720",
+        "title": "2025年踩坑经验总结 vf 0.5->0.13->0.38； Combined Alpha Performance 0.68->0.06->-0.58>0.36；",
+        "author": "WL58980",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 2025年踩坑经验总结 vf 0.5->0.13->0.38； Combined Alpha Performance 0.68->0.06->-0.58>0.36； 回顾2025，作为一名七月底成为条件顾问，九月初成为正式顾问的新人，现已收到平台截至10月底期间的薪酬累计5k+。本人并没有任何金融经验，有一些代码基础，起初并不知道如何选择高质量的alphas提交，只要能提交的便提交了，后来当vf变成0.13，Combined变成-0.58时也曾想过放弃，但当收到平台的第一笔薪酬时又重燃了希望，而且vf和Co..."
+      },
+      {
+        "id": "1718",
+        "title": "【提示词优化】使用iflow_cli结合deepseek的提示词",
+        "author": "ZC83454",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【提示词优化】使用iflow_cli结合deepseek的提示词 Hello，新手顾问来报道。 最近看到论坛很多前辈发了使用AI进行alpha挖掘的帖子，尤其是community leader活动，XG43628大佬的"
+      },
+      {
+        "id": "1706",
+        "title": "我的量化之路: 我是如何用上AI做量化的",
+        "author": "SZ84537",
+        "date": "Mon, 12 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 我的量化之路: 我是如何用上AI做量化的 与量化的结缘开始于worldquant，2025年3月，报名参加了IQC2025。很长一段时间不甚了了，跟着视频学，包括培训视频，复现视频中的alpha，加以改进，也能交一些alpha。有时候也找一些模板，只是手搓，效果不是很好。2025年5月培训课给了回测代码，当时认为回测框架挺重要，优化适合我使用习惯的回测框架，折腾到6月才开始大规模回测。到7月份IQC2025就结束了，之后等待成为有条件顾问，实际上这中间积累的回测经验比较少。成为有条件顾问后，潜意识里面可能缺..."
+      },
+      {
+        "id": "1697",
+        "title": "用 Claude Skills 做因子自动挖掘：回测、记录与知识查询模块化",
+        "author": "CC60514",
+        "date": "Sat, 10 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 用 Claude Skills 做因子自动挖掘：回测、记录与知识查询模块化 最近在做因子自动挖掘，工具链主要是 Claude Code / Gemini CLI / iFlow + WorldQuant BRAIN (cnhkmcp)。做了一段时间之后遇到一个问题：我会定义不同的工作流（SOP），但它们的步骤其实大量重叠。 比如： 不同研究流程都要回测表达式 都要记录研究过程 都要查字段、示例因子和优化经验 都会不断改表达式 → 回测 → 再改 → 再回测 导致每次创建一个新的 SOP，都要重复写相同的动作..."
+      },
+      {
+        "id": "1696",
+        "title": "VF0.98+Expert直升Grandmaster我是怎么做的",
+        "author": "LY85808",
+        "date": "Sat, 10 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - VF0.98+Expert直升Grandmaster我是怎么做的 首先分享下保持高vf的经验，上次是0.99这次是0.98降了一点点，之前也发过帖子，无非就是多点塔，高sharp高fitness，margin10+，pnl曲线平稳上升，我是ppa和ra都交，但ra交的更多，达到提交标准的都交，ppa的话是sharp>1，fitness>0.7，我一般不看pc的，但为了留在研究小组还是会控制在0.7以内。 其次就是Expert直升Grandmaster，想要直升Grandmaster，提交数量大于220、三个..."
+      },
+      {
+        "id": "1687",
+        "title": "如何在 macOS/Linux 上以命令行方式安装运行 MCP？",
+        "author": "ST63725",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 如何在 macOS/Linux 上以命令行方式安装运行 MCP？ 命令行的方式简洁明了，不涉及 VS Code 等 IDE。 假设 macOS/Linux 系统上已经有了 Python。 第一步，先建一个虚拟环境，以避免 Python 包的版本冲突。这里推荐的工具是uv，安装的方法是： pip install uv 创建并激活虚拟环境： uv init mcpcd mcpuv venv --python=3.12source .venv/bin/activate 第二步，安装 MCP。 uv pip ins..."
+      },
+      {
+        "id": "1686",
+        "title": "使用MCP构建SA",
+        "author": "XY50888",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 使用MCP构建SA 我是使用windsurf搭配mcp来使用的，之前就是windsurf的付费用户，已经习惯使用它了。 而且使用得早，现在每月付费是9.9刀，收费和trae一样，可用模型比较多，而且它还经常推出很多免费的模型可以使用，非常不错。 我之前使用mcp构建了几个工作流，譬如更新描述，这个大家最常用。还有提交alpha（修改了代码）还有数据集探索工作流，今天修改了部分代码，然后使用mcp开始回侧SA,因为刚成为顾问不久，积累的alpha数据量不多，之前都是手搓SA。 之前一直不懂SA,后来慢慢明白，..."
+      },
+      {
+        "id": "1684",
+        "title": "【关于SA的思考】存在数据缺失的alpha可以用在SA中吗？",
+        "author": "CL86067",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【关于SA的思考】存在数据缺失的alpha可以用在SA中吗？ ——来自一个刚开始学习SA的量化小白，算是新人学习super alpha过程的一点疑问和思考，发出来看看能不能抛砖引玉一下 一·疑问怎么来的 说到这个就必须说一下刚开始接触到SA必须面对的问题了，那就是怎么把用户阶段提交的alpha给踢出选择范围？读了文档和社区的一些帖子，都没找到合适的答案，最后搜索了一下才在一个同学的分享帖子和另外一个帖子评论区里找到了可能解决办法： 1：(own)&&not(in(competitions, 'challeg..."
+      },
+      {
+        "id": "1682",
+        "title": "【代码优化】给缘分一道桥限制回测并发数",
+        "author": "JX84394",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【代码优化】给缘分一道桥限制回测并发数 刚跑起来大佬的代码，相信很多人都碰到了一大堆回测失败！！！因为原代码回测的时候默认并没有对并发数进行限制，所以这里加了个并发数量限制并且可以在页面上进行配置，仅修改了alpha_inspector.html文件，效果如下： 另外说下，代码是AI编写的附上提示词，使用Qoder生成： 帮我看看这个函数是并发太快限流了，改为界面上可以配置并发数，并且GLB区域的alpha并发数减半 日志如下INFO:werkzeug:127.0.0.1 - - [11/Dec/2025 ..."
+      }
+    ]
+  },
+  "AI工具": {
+    "name": "AI工具",
+    "count": 13,
+    "topics": [
+      {
+        "id": "2002",
+        "title": "IQC 邀请有礼活动开启，所有用户都可参与，限量周边免费拿回家！",
+        "author": "KH94146",
+        "date": "Fri, 27 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - IQC 邀请有礼活动开启，所有用户都可参与，限量周边免费拿回家！ IQC 比赛火热进行中，现在，不仅你可以冲击榜单，还能靠“安利”身边的同学和朋友，把 IQC 限定周边 一套带走！ 只要成功邀请好友注册并报名 IQC，就有机会获得：IQC 定制雨伞 + IQC 限定背包（各 1 个）！活动时间有限，抓紧上车！ 🎁 活动奖励 累计有效邀请满 5 人👉 获得 IQC 定制雨伞 1 把 累计有效邀请满 15 人（即在达到 5 人雨伞的基础上，再多邀请 10 人）👉 额外获得 IQC 限定背包 1 个 说明：每位符..."
+      },
+      {
+        "id": "1991",
+        "title": "iflow cli将4月停止维护，提前使用opencode免费使用MiMo模型MiniMax等模型",
+        "author": "AX58883",
+        "date": "Mon, 23 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - iflow cli将4月停止维护，提前使用opencode免费使用MiMo模型MiniMax等模型 由于看到了iflow会4月份关停，考虑其他方式白嫖大模型 正好看到iflow论坛中有部分切换到opencode，并有免费模型，因此提前使用opencode延续iflow的任务。 1 下载opencode OpenCode | 下载 我是windows的，下载了windows的opencode桌面版 2 安装opencode 这就不截图了，一直下一步就行 3 配置cnhkmcp到opencode 修改openc..."
+      },
+      {
+        "id": "1967",
+        "title": "【日常生活贴】我的量化日记第十一季",
+        "author": "WL13229",
+        "date": "Thu, 19 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【日常生活贴】我的量化日记第十一季 欢迎大家在此互相交流、评论，记录自己的日常。 往期（【日常生活贴】我的量化日记第一季 +【日常生活贴】我的量化日记第二季 – WorldQuant BRAIN + 【日常生活贴】我的量化日记第三季 – WorldQuant BRAIN+【日常生活贴】我的量化日记第四季 – WorldQuant BRAIN + 【日常生活贴】我的量化日记第五季 – WorldQuant BRAIN+【日常生活贴】我的量化日记第六季 + 【日常生活贴】我的量化日记第七季+【日常生活贴】我的量..."
+      },
+      {
+        "id": "1935",
+        "title": "🤞🤞AIAC 比赛用模板",
+        "author": "SJ65808",
+        "date": "Thu, 05 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 🤞🤞AIAC 比赛用模板 给大家分享一个我在AIAC比赛期间用AI发现的一个模板，模板如下： ts_rank(ts_max({data},d1),d2),d1,d2可以取(60,250)或者(20,120) 经济学解释:当d1,d2 = (60,250)时该模板衡量当前季度的峰值在过去一年中处于什么位置。 高分值信号（接近 1.0）：表示当前的季度最高值是过去一年中所有季度最高价里最高的。这通常对应着年度级别的向上突破，代表了极强的动能和市场共识。 低分值信号（接近 0.0）：表示当前的季度最高点甚至比过去..."
+      },
+      {
+        "id": "1926",
+        "title": "【日常生活贴】我的量化日记第十季",
+        "author": "WL13229",
+        "date": "Tue, 03 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【日常生活贴】我的量化日记第十季 欢迎大家在此互相交流、评论，记录自己的日常。 往期（【日常生活贴】我的量化日记第一季 +【日常生活贴】我的量化日记第二季 – WorldQuant BRAIN + 【日常生活贴】我的量化日记第三季 – WorldQuant BRAIN+【日常生活贴】我的量化日记第四季 – WorldQuant BRAIN + 【日常生活贴】我的量化日记第五季 – WorldQuant BRAIN+【日常生活贴】我的量化日记第六季 + 【日常生活贴】我的量化日记第七季+【日常生活贴】我的量化..."
+      },
+      {
+        "id": "1917",
+        "title": "🤞🤞AIAC 比赛用模板",
+        "author": "SJ65808",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 🤞🤞AIAC 比赛用模板 给大家分享一个我在AIAC比赛期间用AI发现的一个模板，模板如下： ts_rank(ts_max({data},d1),d2),d1,d2可以取(60,250)或者(20,120) 经济学解释:该模板衡量当前季度的峰值在过去一年中处于什么位置。 高分值信号（接近 1.0）：表示当前的季度最高值是过去一年中所有季度最高价里最高的。这通常对应着年度级别的向上突破，代表了极强的动能和市场共识。 低分值信号（接近 0.0）：表示当前的季度最高点甚至比过去一年中任何时候的季度最高点都要低。这..."
+      },
+      {
+        "id": "1807",
+        "title": "iflow提示API账户余额不足（Insufficient Balance）？不要急，切换个模型即可",
+        "author": "XB37939",
+        "date": "Wed, 28 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - iflow提示API账户余额不足（Insufficient Balance）？不要急，切换个模型即可 前言 今天使用iflow执行工作流的时候报错，提示： [API Error: generate data error: HTTP error! status: 402, body: {\"error\":{\"message\":\"Insufficient Balance\",\"type\":\"unknown_error\",\"param\":null,\"code\":\"invalid_request_error\"}} Tr..."
+      },
+      {
+        "id": "1805",
+        "title": "羊毛薅不完 Google for developers 每月10刀优惠 可用于调用Gemini api  助力你的AIAC 2.0",
+        "author": "RM49262",
+        "date": "Wed, 28 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 羊毛薅不完 Google for developers 每月10刀优惠 可用于调用Gemini api 助力你的AIAC 2.0 相信论坛里已经有很多人薅到了Google AI pro会员的资格 如果你已经是会员了，目前还有一个羊毛可以让大家薅：  在这个页面中，可以看到以下内容： 目前是每个月有10刀的免费额度可以让大家自由使用api之类的google developer服务 当然如果你想调用Gemini 3.0 pro的Api可能不太够用，但Gemini 3"
+      },
+      {
+        "id": "1764",
+        "title": "【日常生活贴】我的量化日记第九季",
+        "author": "WL13229",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【日常生活贴】我的量化日记第九季 欢迎大家在此互相交流、评论，记录自己的日常。 往期（【日常生活贴】我的量化日记第一季 +【日常生活贴】我的量化日记第二季 – WorldQuant BRAIN + 【日常生活贴】我的量化日记第三季 – WorldQuant BRAIN+【日常生活贴】我的量化日记第四季 – WorldQuant BRAIN + 【日常生活贴】我的量化日记第五季 – WorldQuant BRAIN+【日常生活贴】我的量化日记第六季 + 【日常生活贴】我的量化日记第七季+【日常生活贴】我的量化..."
+      },
+      {
+        "id": "1739",
+        "title": "使用Mac系统跑App_wqb (BRAIN Expression Template Decoder) 第二弹，Mac本地跑",
+        "author": "CM48632",
+        "date": "Fri, 16 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 使用Mac系统跑App_wqb (BRAIN Expression Template Decoder) 第二弹，Mac本地跑 在Mac系统上面跑 App_wqb 的两种方式（2） 续接Mac在云电脑上跑app_wqb，本次是将程序部署到Mac本地，跑app_wqb. 部署到Mac本地好处，没有部署到远程云电脑那么复杂，相对简单，可以说极其简单。下面就是具体步骤： 1.找到程序文件，放到合适位置 2.直接运行程序，需要注意一些细节，操作如下： 3.查看程序运行情况 4.通过浏览器，访问"
+      },
+      {
+        "id": "1715",
+        "title": "Gemini cli如何使用cnhkmcp中的Skills",
+        "author": "PP26750",
+        "date": "Thu, 15 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - Gemini cli如何使用cnhkmcp中的Skills 最近cnhkmcp更新了个好东西Skills，有了它我们就可以将自己摸索出来的或者大佬分享的\"方法论\"全部告诉ai，再配合Gemini 3 pro这个最强大脑真的是当之无愧的好东西 不过现在Gemini cli默认无法使用skills，需要进行一些配置 关于cnhkmcp的更新这里就不再讲解了，更新完成后会多一个skills文件夹，你需要在你的项目文件夹下新建.gemini文件夹然后将cnhkmcp中的skills文件夹复制到.gemini文件夹中..."
+      },
+      {
+        "id": "1712",
+        "title": "解决Gemini输出乱码问题",
+        "author": "LJ71703",
+        "date": "Tue, 13 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 解决Gemini输出乱码问题 我们在使用Gemini cli时，会遇到在过程输出总是乱码的情况，例如 解决办法很简单： 1、按 Win + R，输入 intl.cpl ，回车 2、点击管理页的中的更改系统区域设置 3、点击启用 “Beta版：使用 Unicode (UTF-8) 提供全球语言支持” 4、重启电脑 然后就能正常输出中文了"
+      },
+      {
+        "id": "1710",
+        "title": "在Trae 中使用cnhkmcp中的Skills",
+        "author": "YL42885",
+        "date": "Tue, 13 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 在Trae 中使用cnhkmcp中的Skills 今天更新了新版本的MCP（2.1.9）【如果有不知道更新命令的小伙伴，注意了：pip install --upgrade cnhkmcp】，无意间发现了大佬写好的skill，这这这 大佬们怎么只顾着闷头做事一点也不宣传啊，skill是啥我就不再过多赘述了，不了解的小伙伴可以问问AI。 由于本人一直在使用Trae，那么今天就给大家介绍一下如何用Trae来使用skill： 环境要求 Node.js >= 20.6.0 【node.js 下载地址： n"
+      }
+    ]
+  },
+  "Alpha筛选": {
+    "name": "Alpha筛选",
+    "count": 4,
+    "topics": [
+      {
+        "id": "1947",
+        "title": "【咖啡蛇】告别重复造轮子！我的Python会话管理模块如何解决API请求的3大痛点",
+        "author": "QL33636",
+        "date": "Thu, 12 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【咖啡蛇】告别重复造轮子！我的Python会话管理模块如何解决API请求的3大痛点 在顾问的研究工作中经常需要和API打交道，你是否也遇到过这些问题？会话过期需要手动重新登录、请求失败要反复重试、业务代码里充斥着各种异常处理逻辑...这些重复的工作不仅耗时，还容易让代码变得臃肿。 今天我想分享一个我自己封装的会话管理模块，它通过统一封装、自动重试和中间件机制，完美解决了这些痛点。 💡 代码亮点 🚀 核心功能与解决的痛点 1. 统一封装，告别重复代码 痛点：在业务代码中需要频繁处理会话创建、请求重试等通用逻辑..."
+      },
+      {
+        "id": "1922",
+        "title": "data存储与主题数据高效获取方法",
+        "author": "JL71699",
+        "date": "Mon, 02 Mar 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - data存储与主题数据高效获取方法 目前的很多主题活动都会限制活动数据集，但是每一次都去通知里面找起来一个一个修改很麻烦，所以本人分享自己存储数据集与应用数据集的一个好方法 首先第一步，先获取所有能用到的dataset url = brain_api_url + \"/data-sets?\" +\\ f\"instrumentType={instrument_type}&region={region}&delay={str(delay)}&universe={universe}\" 这个url可以获得所有能用上的d..."
+      },
+      {
+        "id": "1865",
+        "title": "AI小白10分钟学会Gemini Chrome 插件的配置和使用～～",
+        "author": "LL61351",
+        "date": "Mon, 09 Feb 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - AI小白10分钟学会Gemini Chrome 插件的配置和使用～～ 众所周知，Gemini 3.0非常聪明（模型强大，Token支持百万级），不过直接开通服务，一方面要完成支付认证，另一方面Gemini 3.0每月124.99美刀，估计劝退了不少小伙伴。国区的很多同学使用Gemini cli，具体可以安装使用可以参考OB53521同学的贴子： 除了Gemini cli，现在还有一种更简单且免费使用Gemini方案，即Gem"
+      },
+      {
+        "id": "1767",
+        "title": "【傻瓜式安装教程】傻瓜式安装claude-code-router使用ai打工人的免费api",
+        "author": "QY54408",
+        "date": "Tue, 20 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 【傻瓜式安装教程】傻瓜式安装claude-code-router使用ai打工人的免费api  头一次写这种帖子，严格来说，算是一个技术帖子，内容跟上面这个大佬的类似，这一篇的话主要也是围绕claude-code-router展开，先教你傻瓜式安装，后教给你原理，让你理解为什么这么做。 1.首先claude-code-router的安装首先要安装node.js，官网下载即可，官网地址："
+      }
+    ]
+  },
+  "经验心得": {
+    "name": "经验心得",
+    "count": 1,
+    "topics": [
+      {
+        "id": "1679",
+        "title": "解决IND robs差一点点的小技巧",
+        "author": "LL46807",
+        "date": "Tue, 06 Jan 2026",
+        "summary": "A post was added to the topic 顾问专属中文论坛. ( - 解决IND robs差一点点的小技巧 当robs卡在0.95左右 ，两个小技巧帮你轻松通过robs 1.signed_power 一般设为1.3左右有效果 2.scale通常能提升0.02左右"
+      }
+    ]
+  }
+}

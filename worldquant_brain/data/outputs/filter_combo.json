@@ -1,0 +1,12 @@
+[
+  {
+    "name": "eps_plus_delay_div",
+    "expression": "ts_mean(winsorize(actual_eps_value_quarterly), 25) + ts_delay(actual_dividend_value_quarterly, 1)",
+    "sharpe": 0.79,
+    "fitness": 1.11,
+    "margin": 0.029094,
+    "turnover": 0.017,
+    "mt_ratio": 1.7114117647058822,
+    "alpha_id": "om9P9Z1b"
+  }
+]

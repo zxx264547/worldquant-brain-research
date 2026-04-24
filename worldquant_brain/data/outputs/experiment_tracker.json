@@ -1,0 +1,133 @@
+{
+  "experiments": [
+    {
+      "iteration": 1,
+      "strategy_name": "短窗口ts_mean_pv87",
+      "timestamp": "2026-04-19T22:15:34.396341",
+      "tested_count": 0,
+      "candidates_count": 0,
+      "best_alpha": null,
+      "results": []
+    },
+    {
+      "iteration": 2,
+      "strategy_name": "标准模板_analyst10",
+      "timestamp": "2026-04-19T22:16:05.294750",
+      "tested_count": 0,
+      "candidates_count": 0,
+      "best_alpha": null,
+      "results": []
+    },
+    {
+      "iteration": 3,
+      "strategy_name": "短窗口ts_mean_mdl136",
+      "timestamp": "2026-04-19T22:16:07.147819",
+      "tested_count": 0,
+      "candidates_count": 0,
+      "best_alpha": null,
+      "results": []
+    },
+    {
+      "iteration": 4,
+      "strategy_name": "pv1标准模板",
+      "timestamp": "2026-04-19T22:17:59.195875",
+      "tested_count": 2,
+      "candidates_count": 0,
+      "best_alpha": {
+        "alpha_id": "A1OGwjJQ",
+        "expression": "ts_mean(adv20, 20)",
+        "dataset": "pv1",
+        "template": "ts_mean_20",
+        "field_id": "adv20",
+        "sharpe": 0.47,
+        "fitness": 0.63,
+        "turnover": 0.016,
+        "margin": 0.027787,
+        "ppc": 0.12522307345651196,
+        "is_submittable": false,
+        "margin_ratio": 1.7366875
+      },
+      "results": [
+        {
+          "alpha_id": "vRJNLxNQ",
+          "expression": "winsorize(adv20)",
+          "dataset": "pv1",
+          "template": "winsorize",
+          "field_id": "adv20",
+          "sharpe": 0.49,
+          "fitness": 0.66,
+          "turnover": 0.0258,
+          "margin": 0.01737,
+          "ppc": 0.07744092732946946,
+          "is_submittable": false,
+          "margin_ratio": 0.6732558139534883
+        },
+        {
+          "alpha_id": "A1OGwjJQ",
+          "expression": "ts_mean(adv20, 20)",
+          "dataset": "pv1",
+          "template": "ts_mean_20",
+          "field_id": "adv20",
+          "sharpe": 0.47,
+          "fitness": 0.63,
+          "turnover": 0.016,
+          "margin": 0.027787,
+          "ppc": 0.12522307345651196,
+          "is_submittable": false,
+          "margin_ratio": 1.7366875
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "strategy_name": "pv13价格数据",
+      "timestamp": "2026-04-19T22:28:10.930639",
+      "tested_count": 1,
+      "candidates_count": 0,
+      "best_alpha": {
+        "alpha_id": "O057VnWY",
+        "expression": "winsorize(primary_sector_focused_company_count)",
+        "dataset": "pv13",
+        "template": "winsorize",
+        "field_id": "primary_sector_focused_company_count",
+        "sharpe": 0.53,
+        "fitness": 0.7,
+        "turnover": 0.0063,
+        "margin": 0.070219,
+        "ppc": 0.31773303167420813,
+        "is_submittable": false,
+        "margin_ratio": 11.145873015873017
+      },
+      "results": [
+        {
+          "alpha_id": "O057VnWY",
+          "expression": "winsorize(primary_sector_focused_company_count)",
+          "dataset": "pv13",
+          "template": "winsorize",
+          "field_id": "primary_sector_focused_company_count",
+          "sharpe": 0.53,
+          "fitness": 0.7,
+          "turnover": 0.0063,
+          "margin": 0.070219,
+          "ppc": 0.31773303167420813,
+          "is_submittable": false,
+          "margin_ratio": 11.145873015873017
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_experiments": 5,
+    "total_tested": 3,
+    "total_candidates": 0,
+    "best_sharpe": 0.53,
+    "best_margin_ratio": 11.145873015873017,
+    "strategies_tried": [
+      "短窗口ts_mean_mdl136",
+      "短窗口ts_mean_pv87",
+      "pv1标准模板",
+      "pv13价格数据",
+      "标准模板_analyst10"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "*",
+      "Bash",
+      "WebFetch(domain:support.worldquantbrain.com)",
+      "WebSearch"
+    ]
+  },
+  "prefersReducedMotion": false,
+  "dangerously-skip-permissions": true
+}

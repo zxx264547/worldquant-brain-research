@@ -1,0 +1,22 @@
+{
+  "name": "handle_fitness_low",
+  "description": "处理Fitness低于1.0的问题",
+  "trigger": "Fitness < 1.0",
+  "actions": [
+    {
+      "step": 1,
+      "action": "调整Decay",
+      "value": "2"
+    },
+    {
+      "step": 2,
+      "action": "添加中性化",
+      "value": "Neutralization=Industry"
+    },
+    {
+      "step": 3,
+      "action": "降低截断",
+      "value": "Truncation=0.01"
+    }
+  ]
+}

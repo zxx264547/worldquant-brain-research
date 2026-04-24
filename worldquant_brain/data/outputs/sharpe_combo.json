@@ -1,0 +1,32 @@
+[
+  {
+    "name": "blend_70_30",
+    "expression": "0.7*ts_mean(winsorize(actual_eps_value_quarterly),25) + 0.3*ts_mean(winsorize(actual_dividend_value_quarterly),25)",
+    "sharpe": 0.82,
+    "fitness": 1.12,
+    "margin": 0.038995,
+    "turnover": 0.0119,
+    "mt_ratio": 3.276890756302521,
+    "alpha_id": "vRJY9aLv"
+  },
+  {
+    "name": "rank_sum",
+    "expression": "rank(ts_mean(winsorize(actual_eps_value_quarterly),25)) + rank(ts_mean(winsorize(actual_dividend_value_quarterly),25))",
+    "sharpe": 0.76,
+    "fitness": 1.11,
+    "margin": 0.088717,
+    "turnover": 0.006,
+    "mt_ratio": 0,
+    "alpha_id": "qMm5kKo1"
+  },
+  {
+    "name": "prod",
+    "expression": "ts_mean(winsorize(actual_eps_value_quarterly),25) * ts_mean(winsorize(actual_dividend_value_quarterly),25)",
+    "sharpe": 0.56,
+    "fitness": 0.82,
+    "margin": 0.030791,
+    "turnover": 0.0174,
+    "mt_ratio": 1.7695977011494253,
+    "alpha_id": "1YnGmLVK"
+  }
+]

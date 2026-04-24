@@ -1,0 +1,44 @@
+{
+  "name": "AlphaWorker",
+  "description": "专注探索单个alpha idea",
+  "incremental_stages": [
+    {
+      "stage": "0-op",
+      "name": "裸信号探测",
+      "allowed_operators": ["rank", "zscore"],
+      "examples": [
+        "rank(field)",
+        "-1 * rank(field)",
+        "zscore(field)"
+      ],
+      "ban": "严禁使用ts_类算子"
+    },
+    {
+      "stage": "1-op",
+      "name": "方向/平滑",
+      "allowed_operators": ["ts_mean", "ts_decay", "ts_delta", "ts_zscore"],
+      "examples": [
+        "ts_mean(field, 22)",
+        "ts_decay(field, 22)",
+        "ts_delta(field, 5)"
+      ],
+      "condition": "0-op Sharpe > 0"
+    },
+    {
+      "stage": "2-op+",
+      "name": "嵌套逻辑",
+      "allowed_operators": ["ts_rank", "winsorize", "signed_power", "ts_backfill"],
+      "examples": [
+        "ts_rank(ts_delta(field, 5), 22)",
+        "signed_power(ts_mean(field, 22), 1.3)"
+      ],
+      "condition": "1-op验证有效后"
+    }
+  ],
+  "time_windows": [5, 22, 66, 120, 252, 504],
+  "forbidden_windows": [7, 10, 14, 30],
+  "normalization_rule": "Fundamental/Volume数据必须rank()包裹",
+  "batch_rule": "每次create_multiSim必须8个alpha",
+  "timeout": 900,
+  "timeout_action": "重新认证+重启模拟"
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "name": "analyst4_eps_w30",
+    "expression": "ts_mean(winsorize(actual_eps_value_quarterly), 30)",
+    "sharpe": 0.99,
+    "fitness": 1.41,
+    "margin": 0.039448,
+    "turnover": 0.0128,
+    "mt_ratio": 3.0818749999999997,
+    "alpha_id": "O05NRajJ"
+  },
+  {
+    "name": "analyst4_div_w10",
+    "expression": "ts_mean(winsorize(actual_dividend_value_quarterly), 10)",
+    "sharpe": 0.82,
+    "fitness": 1.21,
+    "margin": 0.042978,
+    "turnover": 0.0126,
+    "mt_ratio": 3.410952380952381,
+    "alpha_id": "Gr3baPqG"
+  },
+  {
+    "name": "analyst4_div_w30",
+    "expression": "ts_mean(winsorize(actual_dividend_value_quarterly), 30)",
+    "sharpe": 0.79,
+    "fitness": 1.14,
+    "margin": 0.052246,
+    "turnover": 0.0099,
+    "mt_ratio": 0,
+    "alpha_id": "9qAl7zzo"
+  },
+  {
+    "name": "analyst4_eps_rank_w30",
+    "expression": "rank(ts_mean(winsorize(actual_eps_value_quarterly), 30))",
+    "sharpe": 0.71,
+    "fitness": 1.02,
+    "margin": 0.091743,
+    "turnover": 0.0057,
+    "mt_ratio": 0,
+    "alpha_id": "YPWl7w7w"
+  },
+  {
+    "name": "analyst4_div_raw_w25",
+    "expression": "ts_mean(actual_dividend_value_quarterly, 25)",
+    "sharpe": 0.62,
+    "fitness": 0.88,
+    "margin": 0.035866,
+    "turnover": 0.014,
+    "mt_ratio": 2.561857142857143,
+    "alpha_id": "WjWYV5Vj"
+  }
+]
