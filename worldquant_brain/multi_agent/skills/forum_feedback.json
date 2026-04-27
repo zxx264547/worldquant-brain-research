@@ -1,0 +1,61 @@
+{
+  "name": "forum_feedback",
+  "description": "论坛反馈技能 - 搜索论坛获取Alpha优化方案并积累知识",
+  "trigger_conditions": [
+    "Alpha优化前",
+    "传统策略失败后",
+    "需要新方案时"
+  ],
+  "search_templates": {
+    "fitness_low": [
+      "alpha fitness optimization decay neutralization",
+      "fitness less than 1 alpha improve",
+      "alpha decay neutralization fitness"
+    ],
+    "turnover_high": [
+      "alpha high turnover reduce smoothing",
+      "alpha turnover smoothing ts_mean",
+      "reduce alpha turnover decay"
+    ],
+    "weight_concentration": [
+      "alpha weight concentration diversify",
+      "alpha weight concentration ts_backfill",
+      "group_rank alpha concentration"
+    ],
+    "correlation_fail": [
+      "alpha correlation fix uncorrelated",
+      "alpha correlation reduce dataset field",
+      "uncorrelated alpha optimization"
+    ],
+    "sharpe_low": [
+      "alpha sharpe improve optimization",
+      "alpha performance improve tips",
+      "sharpe ratio alpha optimization"
+    ]
+  },
+  "action_patterns": [
+    "decay\\s*=\\s*(\\d+)",
+    "neutralization\\s*=\\s*(\\w+)",
+    "truncation\\s*=\\s*([\\d.]+)",
+    "trade_when\\s*=\\s*([^,\\s]+)",
+    "ts_mean\\s*\\([^,]+,\\s*(\\d+)\\)",
+    "ts_decay\\s*\\([^,]+,\\s*(\\d+)\\)",
+    "ts_rank\\s*\\([^)]+\\)",
+    "rank\\s*\\([^)]+\\)",
+    "signed_power\\s*\\([^,]+,\\s*([\\d.]+)\\)"
+  ],
+  "workflow": [
+    "1. 识别Alpha问题类型(fitness_low/turnover_high/weight_concentration/correlation_fail)",
+    "2. 调用ForumFeedbackService.search_before_optimize()搜索论坛",
+    "3. 获取前5个高票帖子的详细内容",
+    "4. 使用extract_actions()从帖子提取可应用的操作",
+    "5. 尝试应用每个操作到Alpha表达式",
+    "6. 测试优化后的Alpha",
+    "7. 调用write_discovery()将搜索到的方案和结果写入知识库"
+  ],
+  "knowledge_write_rules": {
+    "daily": "每次论坛搜索都记录到 daily/YYYY-MM-DD.md",
+    "research_memory": "所有发现都追加到 research_memory.json 的 forum_insights 数组",
+    "effective_marking": "effective字段: null=待验证, true=有效, false=无效"
+  }
+}
