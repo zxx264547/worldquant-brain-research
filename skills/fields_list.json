@@ -1,0 +1,24 @@
+{
+  "name": "fields_list",
+  "description": "获取数据集的所有字段",
+  "category": "brain_api",
+  "parameters": {
+    "dataset_id": {
+      "type": "string",
+      "required": true,
+      "description": "数据集ID，如 TOP1500, analyst4, pv87"
+    }
+  },
+  "output": {
+    "success": "boolean",
+    "dataset": "string",
+    "fields": "array",
+    "count": "integer"
+  },
+  "examples": [
+    "获取: fields_list(dataset_id='TOP1500')",
+    "获取: fields_list(dataset_id='analyst4')"
+  ],
+  "cli_command": "wq-fields",
+  "cli_usage": "wq-fields --dataset TOP1500"
+}

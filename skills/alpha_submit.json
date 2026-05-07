@@ -1,0 +1,28 @@
+{
+  "name": "alpha_submit",
+  "description": "检查用户Alpha中哪些满足提交条件",
+  "category": "alpha_analysis",
+  "parameters": {
+    "stage": {
+      "type": "string",
+      "default": "IS",
+      "description": "阶段 (IS 或 OS)"
+    },
+    "limit": {
+      "type": "integer",
+      "default": 50,
+      "description": "检查数量"
+    }
+  },
+  "output": {
+    "success": "boolean",
+    "submittable": "array",
+    "near_miss": "array"
+  },
+  "examples": [
+    "检查: alpha_submit(stage='IS')",
+    "检查: alpha_submit(stage='OS', limit=100)"
+  ],
+  "cli_command": "wq-alpha-submit",
+  "cli_usage": "wq-alpha-submit --stage IS"
+}

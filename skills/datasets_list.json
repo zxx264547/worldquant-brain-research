@@ -1,0 +1,16 @@
+{
+  "name": "datasets_list",
+  "description": "获取WorldQuant BRAIN所有可用的数据集列表",
+  "category": "brain_api",
+  "parameters": {},
+  "output": {
+    "success": "boolean",
+    "datasets": "array",
+    "count": "integer"
+  },
+  "examples": [
+    "获取: datasets_list()"
+  ],
+  "cli_command": "wq-datasets",
+  "cli_usage": "wq-datasets"
+}

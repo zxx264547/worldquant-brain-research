@@ -8,6 +8,21 @@
         "-m", "cnhkmcp"
       ],
       "env": {}
+    },
+    "wq-forum-rag": {
+      "type": "local",
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/home/zxx/worldQuant/worldquant_brain/wq_forum_rag",
+        "run",
+        "wq-forum-rag-mcp"
+      ],
+      "env": {
+        "WQ_FORUM_RAG_DB": "/home/zxx/worldQuant/worldquant_brain/data/forum.sqlite3",
+        "WQ_EMBEDDING_MODEL": "BAAI/bge-small-zh-v1.5",
+        "WQ_EMBEDDING_CACHE_DIR": "/home/zxx/wq_embedding_cache"
+      }
     }
   },
   "skills": {

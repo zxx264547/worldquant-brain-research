@@ -4,7 +4,11 @@
       "*",
       "Bash",
       "WebFetch(domain:support.worldquantbrain.com)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(mkdir -p ~/.claude/agents)",
+      "Bash(cp /home/zxx/worldQuant/.claude/agents/alpha-*.md ~/.claude/agents/)",
+      "Read(//home/zxx/.claude/agents/**)",
+      "WebFetch(domain:github.com)"
     ]
   },
   "prefersReducedMotion": false,

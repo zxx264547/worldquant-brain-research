@@ -1,0 +1,28 @@
+{
+  "name": "alpha_get",
+  "description": "获取Alpha详情（Sharpe, Fitness, Turnover等指标）",
+  "category": "brain_api",
+  "parameters": {
+    "alpha_id": {
+      "type": "string",
+      "required": true,
+      "description": "Alpha ID"
+    }
+  },
+  "output": {
+    "success": "boolean",
+    "alpha_id": "string",
+    "sharpe": "number",
+    "fitness": "number",
+    "turnover": "number",
+    "margin": "number",
+    "ppc": "number",
+    "expression": "string"
+  },
+  "examples": [
+    "获取: alpha_get(alpha_id='ALPHA123')",
+    "获取: alpha_get(alpha_id='SIM456')"
+  ],
+  "cli_command": "wq-alpha-get",
+  "cli_usage": "wq-alpha-get --alpha-id ALPHA123"
+}

@@ -27,6 +27,14 @@ IDEAS_FILE = BASE_DIR / "ideas.json"
 RESULTS_FILE = BASE_DIR / "results.json"
 CONFIG_FILE = BASE_DIR / "configs" / "team_lead.json"
 
+# 知识库路径
+KNOWLEDGE_DB_PATH = Path("/home/zxx/worldQuant/worldquant_brain/data/forum.sqlite3")
+
+# 添加 wq_forum_rag 路径
+WQ_FORUM_RAG_SRC = Path("/home/zxx/worldQuant/worldquant_brain/wq_forum_rag/src")
+if str(WQ_FORUM_RAG_SRC) not in sys.path:
+    sys.path.insert(0, str(WQ_FORUM_RAG_SRC))
+
 
 class TeamLeadService:
     """Team Lead 服务"""
@@ -36,6 +44,39 @@ class TeamLeadService:
         self.msg_bus = MessageBus()
         self.config = self._load_config()
         self.logger = Logger()
+
+    def _ensure_research_assistant_running(self):
+        """确保 research_assistant 在运行"""
+        import subprocess
+        import os
+
+        # 检查进程是否在运行
+        try:
+            result = subprocess.run(
+                ['pgrep', '-f', 'research_assistant_service'],
+                capture_output=True,
+                text=True
+            )
+            if result.returncode == 0:
+                # 进程已在运行
+                return
+
+            # 进程不在运行，启动它
+            script_path = Path(__file__).parent / "research_assistant_service.py"
+            log_file = Path("/tmp/multi_agent/logs/research_assistant.log")
+
+            # 启动为后台进程
+            with open(log_file, 'a') as f:
+                subprocess.Popen(
+                    ['/home/zxx/wq_env/bin/python', str(script_path)],
+                    stdout=f,
+                    stderr=subprocess.STDOUT,
+                    cwd=str(script_path.parent)
+                )
+            self.logger.log("Started research_assistant_service")
+
+        except Exception as e:
+            self.logger.log(f"Error starting research_assistant: {e}")
 
     def _load_config(self) -> dict:
         """加载配置"""
@@ -56,6 +97,9 @@ class TeamLeadService:
     def run(self):
         """主运行循环"""
         self.logger.log("Team Lead Service started")
+
+        # 0. 确保 research_assistant 在运行
+        self._ensure_research_assistant_running()
 
         # 1. 处理新事件
         self._process_events()
@@ -134,10 +178,12 @@ class TeamLeadService:
                         alpha_id, sharpe, result
                     )
                     self.logger.log(f"ALPHA SUBMISSION READY: {alpha_id} Sharpe={sharpe}")
+                    self._log_alpha_experience(result, confidence=0.95, tag='submission-ready')
 
                 # 检查是否有潜力深度优化
                 elif sharpe >= self.config['min_sharpe_for_deep']:
                     self.msg_bus.publish_alpha_promising(alpha_id, sharpe, result.get('code', ''))
+                    self._log_alpha_experience(result, confidence=0.80, tag='promising')
 
                 new_results.append(result)
 
@@ -231,7 +277,7 @@ class TeamLeadService:
         self.logger.log(f"Assigned idea {idea_id} to {worker_id}")
 
     def _save_ideas(self, pending_ideas: List[dict]):
-        """保存更新后的ideas列表 - 保留in_progress的ideas"""
+        """保存更新后的ideas列表 - 保留in_progress和pending的ideas"""
         try:
             # 重新加载完整数据
             with open(IDEAS_FILE, 'r') as f:
@@ -239,14 +285,14 @@ class TeamLeadService:
 
             existing_ideas = data.get('ideas', [])
 
-            # 获取当前in_progress的idea IDs
-            in_progress_ids = set()
+            # 获取当前in_progress和pending的idea IDs
+            active_ids = set()
             for idea_id, status in self.state_mgr.state.ideas_status.items():
-                if status.status == 'in_progress':
-                    in_progress_ids.add(idea_id)
+                if status.status in ('in_progress', 'pending'):
+                    active_ids.add(idea_id)
 
-            # 过滤出保留的ideas (in_progress + 新pending)
-            kept_ideas = [idea for idea in existing_ideas if idea.get('id') in in_progress_ids]
+            # 过滤出保留的ideas (in_progress + pending)
+            kept_ideas = [idea for idea in existing_ideas if idea.get('id') in active_ids]
 
             # 合并新pending ideas (避免重复)
             existing_ids = set(idea.get('id') for idea in kept_ideas)
@@ -271,8 +317,7 @@ class TeamLeadService:
         total = len(pending) + len(in_progress)
 
         if total < self.config['max_idle_ideas']:
-            self.logger.log(f"Low ideas queue ({total}), need to generate more")
-            # 发布生成新ideas的请求
+            self.logger.log(f"Low ideas queue ({total}), generating more")
             self.msg_bus.publish(Event(
                 event_type=EventType.IDEA_GENERATED.value,
                 source='team_lead',
@@ -312,6 +357,138 @@ class TeamLeadService:
             ppc < 0.5 and
             margin > turnover
         )
+
+    def _get_idea_by_id(self, idea_id: int) -> Optional[dict]:
+        """根据idea_id获取idea详情"""
+        try:
+            if not IDEAS_FILE.exists():
+                return None
+            with open(IDEAS_FILE, 'r') as f:
+                data = json.load(f)
+            ideas = data.get('ideas', [])
+            for idea in ideas:
+                if idea.get('id') == idea_id:
+                    return idea
+            return None
+        except Exception:
+            return None
+
+    def _log_alpha_experience(self, result: dict, confidence: float, tag: str):
+        """将 alpha 配置和性能沉淀到知识库"""
+        try:
+            from wq_forum_rag.evolution import EvolutionService
+
+            idea_id = result.get('idea_id')
+            idea = self._get_idea_by_id(idea_id) if idea_id else None
+
+            evo = EvolutionService(str(KNOWLEDGE_DB_PATH))
+
+            slug = f"alpha-{tag}-{idea_id}" if idea_id else f"alpha-{tag}-{result.get('alpha_id', 'unknown')}"
+
+            # 从 idea 或 result 中提取信息
+            dataset = idea.get('dataset', 'N/A') if idea else result.get('dataset', 'N/A')
+            field = idea.get('field', 'N/A') if idea else result.get('field', 'N/A')
+            operator = idea.get('operator', 'N/A') if idea else result.get('operator', 'N/A')
+            window = idea.get('window', 'N/A') if idea else result.get('window', 'N/A')
+
+            body = f"""## Alpha配置
+
+- 数据集: {dataset}
+- 字段: {field}
+- 算子: {operator}
+- 窗口: {window}
+
+## 性能指标
+
+| 指标 | 值 |
+|------|-----|
+| Sharpe | {result.get('sharpe', 0):.3f} |
+| Fitness | {result.get('fitness', 0):.3f} |
+| Turnover | {result.get('turnover', 0):.3f} |
+| Margin | {result.get('margin', 0):.3f} |
+| PPC | {result.get('ppc', 0):.3f} |
+
+## 表达式
+
+```
+{result.get('expression', 'N/A')}
+```
+"""
+
+            evo.propose_knowledge_page(
+                slug=slug,
+                title=f"Alpha经验 [{tag}]: {dataset} + {operator}",
+                summary=f"Sharpe={result.get('sharpe', 0):.2f}, Fitness={result.get('fitness', 0):.2f}",
+                body=body,
+                source_topic_ids=[],
+                confidence=confidence,
+                auto_publish=True,
+            )
+            self.logger.log(f"Experience logged: {slug}")
+
+        except Exception as e:
+            self.logger.log(f"Error logging experience: {e}")
+
+    def _trigger_research(self):
+        """触发 research-assistant 搜索论坛并沉淀知识"""
+        try:
+            from wq_forum_rag.evolution import EvolutionService
+            from datetime import datetime, timedelta
+
+            # 检查触发频率
+            research_interval = self.config.get('research_interval_hours', 1)
+            last_research = self.state_mgr.state.__dict__.get('last_research_time')
+            if last_research:
+                last_time = datetime.fromisoformat(last_research)
+                if datetime.now() - last_time < timedelta(hours=research_interval):
+                    self.logger.log(f"Research skipped: interval not elapsed")
+                    return
+
+            self.logger.log("Starting research: searching forum and emails...")
+
+            evo = EvolutionService(str(KNOWLEDGE_DB_PATH))
+
+            # 搜索当前研究问题的解决方案
+            queries = [
+                "alpha fitness improve",
+                "turnover high reduce",
+                "sharpe optimization",
+            ]
+
+            saved_count = 0
+            for query in queries:
+                result = evo.build_evolution_context(query, top_k=3)
+
+                # 将有用的论坛帖子沉淀到知识库
+                for post in result.get('forum_evidence', [])[:2]:
+                    topic_id = post.get('topic_id', '')
+                    if not topic_id:
+                        continue
+
+                    slug = f"research-{topic_id}"
+                    title = post.get('title', '')[:50]
+                    body_text = post.get('body_text', '')
+                    summary = body_text[:100] if body_text else ''
+
+                    evo.propose_knowledge_page(
+                        slug=slug,
+                        title=f"论坛发现: {title}",
+                        summary=summary,
+                        body=body_text,
+                        source_topic_ids=[topic_id],
+                        confidence=0.7,
+                        auto_publish=True,
+                    )
+                    saved_count += 1
+
+            # 更新最后研究时间
+            if hasattr(self.state_mgr.state, 'last_research_time'):
+                self.state_mgr.state.last_research_time = datetime.now().isoformat()
+
+            self.logger.log(f"Research completed: {saved_count} items saved to knowledge base")
+
+        except Exception as e:
+            self.logger.log(f"Error in research: {e}")
 
 
 class Logger:

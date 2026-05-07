@@ -117,40 +117,42 @@ Stop optimizing and mark as "ready_to_submit" when alpha meets ALL criteria:
 
 1. Read current results from /tmp/multi_agent/results.json
 2. Identify alphas needing optimization (Sharpe < 1.58 or other issues)
-3. **Before applying traditional strategies, search forum for solutions**:
-   - Call `ForumFeedbackService.search_before_optimize()` to get forum solutions
-   - Extract actionable suggestions using `extract_actions()`
-   - Try forum-suggested approaches first
-4. For each alpha, apply appropriate optimization strategy (traditional or forum-based)
+3. **Before applying traditional strategies, search knowledge base for solutions**:
+   - Call `search_knowledge()` to get existing solutions
+   - Try knowledge-based approaches first (faster, already validated)
+4. For each alpha, apply appropriate optimization strategy (knowledge-based or traditional)
 5. Run simulations with 8 variants
 6. Evaluate results against termination conditions
-7. **Write all forum discoveries to knowledge base** using `write_discovery()`:
-   - Record search query and found solutions
-   - Mark effectiveness after testing (effective=true/false/null)
-   - Append to `research_memory.json` in `forum_insights` array
-   - Update daily record in `daily/YYYY-MM-DD.md`
+7. **Write discoveries to knowledge base** using `propose_knowledge_page()`:
+   - Record successful optimization patterns
+   - Append to team lead's research memory
 8. If successful, append to results with "ready_to_submit" or "improved" status
 9. If not successful, apply domain exploration and retry
 
-## Forum Feedback Integration
+## Knowledge Base Integration
 
-Use the `ForumFeedbackService` from `worldquant_brain.multi_agent.tools.forum_feedback_service`:
+Use the wq-forum-rag knowledge base (not forum search):
 
 ```python
-from worldquant_brain.multi_agent.tools.forum_feedback_service import ForumFeedbackService
+# Search existing knowledge pages
+search_knowledge(query="fitness low improve", top_k=5)
 
-# Initialize with brain client
-service = ForumFeedbackService(brain_client)
+# Get detailed knowledge page
+get_knowledge_page(slug="ppa-factor-standards")
 
-# Before each optimization round, search forum
-solutions = await service.search_and_extract_actions(
-    problem_type="fitness_low",  # or "turnover_high", "weight_concentration", "correlation_fail"
-    alpha_metrics={'fitness': 0.5, 'turnover': 85, 'dataset': 'analyst4'}
+# Save new discoveries
+propose_knowledge_page(
+    slug="alpha-optimization-{idea_id}-{date}",
+    title="Alpha优化: {dataset} + {operator}",
+    summary="Sharpe={sharpe}, Fitness={fitness}",
+    body="...",
+    source_topic_ids=[],
+    confidence=0.8,
+    auto_publish=True
 )
-
-# After testing, write results to knowledge base
-service.write_discovery(discovery, effective=True/False)
 ```
+
+**Note**: Only search knowledge base. Forum/email research is handled by `alpha-research-assistant`.
 
 ## Decision Framework
 
@@ -158,6 +160,33 @@ service.write_discovery(discovery, effective=True/False)
 - Then address soft issues (Turnover, Correlation)
 - Finally, maximize Sharpe through domain exploration
 - If alpha plateaus after 3 optimization rounds, mark as "stalled" and focus on others
+
+## AI-Driven Workflow (Use These Tools!)
+
+AI是决策者，CLI工具是AI的能力延伸。在优化Alpha时，按以下流程工作：
+
+### Step 1: Search Knowledge Base (检索知识库)
+```bash
+uv run wq-forum-rag knowledge-search "fitness low improve" --db /home/zxx/worldQuant/worldquant_brain/data/forum.sqlite3
+```
+AI从已有知识库获取类似问题的解决方案。
+
+### Step 2: AI Reasoning (AI推理决策)
+- 基于知识库+历史经验，AI选择最优方案
+- 不要盲目执行，先思考再行动
+
+### Step 3: Execute Backtest (执行回测)
+```bash
+python cli/backtest.py -e "rank(close)" --dataset TOP1500
+```
+验证优化效果。
+
+### Step 4: Save Experience (保存经验)
+```bash
+# 成功后将经验沉淀到知识库
+python cli/experience.py record --problem fitness_low --action-type group_rank --success
+```
+将优化结果记录到经验库，供后续参考。
 
 ## Update your agent memory
 

@@ -1,0 +1,29 @@
+{
+  "name": "alpha_screen",
+  "description": "按PPA标准筛选Alpha（Sharpe>=1.0, Fitness>0.5, PPC<0.5, Margin>Turnover）",
+  "category": "alpha_analysis",
+  "parameters": {
+    "alpha_id": {
+      "type": "string",
+      "required": true,
+      "description": "Alpha ID"
+    }
+  },
+  "output": {
+    "success": "boolean",
+    "alpha_id": "string",
+    "passed": "boolean",
+    "sharpe": "number",
+    "fitness": "number",
+    "ppc": "number",
+    "margin": "number",
+    "turnover": "number",
+    "reasons": "array"
+  },
+  "examples": [
+    "筛选: alpha_screen(alpha_id='ALPHA123')",
+    "批量: alpha_screen_batch(alpha_ids=['A1', 'A2', 'A3'])"
+  ],
+  "cli_command": "wq-alpha-screen",
+  "cli_usage": "wq-alpha-screen --alpha-id ALPHA123"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "forum_search",
+  "description": "搜索WorldQuant论坛获取类似问题的解决方案",
+  "category": "knowledge",
+  "parameters": {
+    "query": {
+      "type": "string",
+      "description": "搜索关键词，如'fitness low improve'",
+      "required": true
+    },
+    "max_results": {
+      "type": "integer",
+      "description": "最大返回结果数，默认5",
+      "default": 5
+    },
+    "locale": {
+      "type": "string",
+      "description": "语言，zh-cn或en-us",
+      "default": "zh-cn"
+    }
+  },
+  "output": {
+    "success": "boolean",
+    "results": [
+      {
+        "title": "string",
+        "link": "string",
+        "snippet": "string",
+        "votes": "integer",
+        "author": "string",
+        "date": "string"
+      }
+    ],
+    "total_found": "integer"
+  },
+  "examples": [
+    "搜索: forum_search(query='fitness low turnover high alpha optimize')",
+    "搜索: forum_search(query='group_rank ts_backfill sharpe improve', max_results=10)"
+  ],
+  "cli_command": "wq-forum-search",
+  "cli_usage": "wq-forum-search 'fitness low alpha' --max 5"
+}

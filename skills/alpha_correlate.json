@@ -1,0 +1,30 @@
+{
+  "name": "alpha_correlate",
+  "description": "分析Alpha相关性，去除重复Alpha，每族保留Sharpe最高的代表",
+  "category": "alpha_analysis",
+  "parameters": {
+    "alpha_ids": {
+      "type": "array",
+      "required": true,
+      "description": "Alpha ID列表"
+    },
+    "threshold": {
+      "type": "number",
+      "default": 0.8,
+      "description": "相关性阈值，默认0.8"
+    }
+  },
+  "output": {
+    "success": "boolean",
+    "input_count": "integer",
+    "output_count": "integer",
+    "representatives": "array",
+    "stats": "object"
+  },
+  "examples": [
+    "分析: alpha_correlate(alpha_ids=['A1', 'A2', 'A3'])",
+    "分析: alpha_correlate(alpha_ids=['A1', 'A2'], threshold=0.9)"
+  ],
+  "cli_command": "wq-alpha-correlate",
+  "cli_usage": "wq-alpha-correlate --alphas alphas.json"
+}
