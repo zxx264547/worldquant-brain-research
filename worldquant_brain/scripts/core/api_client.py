@@ -13,7 +13,7 @@ from typing import Optional, Dict, Any, List
 FORUM_PATH = "/home/zxx/wq_env/lib/python3.12/site-packages/cnhkmcp/untracked"
 sys.path.insert(0, FORUM_PATH)
 
-from platform_functions import BrainApiClient
+from platform_functions import BrainApiClient, SimulationSettings, SimulationData
 from .exceptions import (
     BrainAPIError, AuthenticationError, SimulationTimeoutError,
     RateLimitError, SimulationError, AlphaNotFoundError
@@ -38,6 +38,9 @@ class RetryableBrainClient:
         poll_timeout: int = 600,
         poll_interval: int = 5
     ):
+        # 自动从配置文件加载凭据
+        if credentials is None:
+            credentials = self._load_credentials()
         self.credentials = credentials
         self.max_retries = max_retries
         self.poll_timeout = poll_timeout
@@ -54,6 +57,25 @@ class RetryableBrainClient:
 
         # 尝试恢复Session
         self._load_session()
+
+    def _load_credentials(self) -> Optional[Dict[str, str]]:
+        """从配置文件加载凭据"""
+        config_paths = [
+            Path("/home/zxx/worldQuant/worldquant_brain/config/user_config.json"),
+            Path.home() / ".worldquant_brain" / "user_config.json",
+        ]
+        for path in config_paths:
+            if path.exists():
+                try:
+                    with open(path) as f:
+                        config = json.load(f)
+                    if 'credentials' in config:
+                        return config['credentials']
+                    if 'email' in config and 'password' in config:
+                        return {'email': config['email'], 'password': config['password']}
+                except Exception:
+                    pass
+        return None
 
     def _save_session(self):
         """保存session到本地文件"""
@@ -170,6 +192,8 @@ class RetryableBrainClient:
         result = await self.client.authenticate(email, password)
 
         if result.get('status') == 'authenticated':
+            # 同步credentials到内部client
+            self.client.auth_credentials = {'email': email, 'password': password}
             self._authenticated = True
             logger.info("Authentication successful")
             self._save_session()  # 保存session
@@ -196,17 +220,49 @@ class RetryableBrainClient:
         """
         await self.ensure_authenticated()
 
-        # 检查是否已测试过
-        dataset = settings.get('dataset', 'unknown')
+        # 从expression中推断dataset（从字段名推断，如 actual_eps_value_quarterly 来自 analyst4）
+        dataset = self._infer_dataset(expression)
         if self.is_tested(expression, dataset, settings):
             cached = self.get_cached_result(expression, dataset, settings)
             if cached:
                 logger.info(f"Skipping tested combination (cached): {expression[:40]}...")
                 return cached
 
+        # 使用 SimulationSettings 和 SimulationData 结构
+        sim_settings = SimulationSettings(
+            instrumentType=settings.get('instrumentType', 'EQUITY'),
+            region=settings.get('region', 'USA'),
+            universe=settings.get('universe', 'TOP3000'),
+            delay=settings.get('delay', 1),
+            decay=settings.get('decay', 0.0),
+            neutralization=settings.get('neutralization', 'NONE'),
+            truncation=settings.get('truncation', 0.08),
+            pasteurization=settings.get('pasteurization', 'ON'),
+            unitHandling=settings.get('unitHandling', 'VERIFY'),
+            nanHandling=settings.get('nanHandling', 'OFF'),
+            language=settings.get('language', 'FASTEXPR'),
+            visualization=settings.get('visualization', False),
+            testPeriod=settings.get('testPeriod', 'P0Y0M'),
+            selectionHandling=settings.get('selectionHandling', 'POSITIVE'),
+            selectionLimit=settings.get('selectionLimit', 1000),
+            maxTrade=settings.get('maxTrade', 'OFF'),
+            componentActivation=settings.get('componentActivation', 'IS'),
+        )
+
+        # 直接POST到API并轮询（不使用platform_functions的create_simulation，因为它有bug）
+        settings_dict = sim_settings.model_dump()
+
+        # REGULAR类型需要移除SUPER-specific字段
+        settings_dict.pop('selectionHandling', None)
+        settings_dict.pop('selectionLimit', None)
+        settings_dict.pop('componentActivation', None)
+
+        # 过滤None值
+        settings_dict = {k: v for k, v in settings_dict.items() if v is not None}
+
         payload = {
             'type': 'REGULAR',
-            'settings': settings,
+            'settings': settings_dict,
             'regular': expression
         }
 
@@ -215,7 +271,7 @@ class RetryableBrainClient:
             json=payload
         )
 
-        # 处理限流 - 使用Retry-After header
+        # 处理限流
         if resp.status_code == 429:
             retry_after = resp.headers.get('Retry-After')
             if retry_after:
@@ -239,6 +295,40 @@ class RetryableBrainClient:
 
         return result
 
+    def _infer_dataset(self, expression: str) -> str:
+        """从表达式推断数据集"""
+        # 常见数据集字段前缀映射
+        dataset_fields = {
+            'actual_eps': 'analyst4',
+            'actual_sales': 'analyst4',
+            'actual_cashflow': 'analyst4',
+            'actual_dividend': 'analyst4',
+            'actual_ebit': 'analyst4',
+            'actual_ebitda': 'analyst4',
+            'actual_net_income': 'analyst4',
+            'actual_revenue': 'analyst4',
+            'analyst4': 'analyst4',
+            'mdl136': 'mdl136',
+            'close': 'price',
+            'open': 'price',
+            'high': 'price',
+            'low': 'price',
+            'volume': 'price',
+            'vwap': 'price',
+            'return': 'price',
+            'cap': 'shortable',
+            'shortable': 'shortable',
+            'industry': 'classifications',
+            'sector': 'classifications',
+            'subindustry': 'classifications',
+            'region': 'classifications',
+        }
+        expr_lower = expression.lower()
+        for field_prefix, dataset in dataset_fields.items():
+            if field_prefix.lower() in expr_lower:
+                return dataset
+        return 'unknown'
+
     async def _poll_for_completion(self, location: str, timeout: int) -> Dict[str, Any]:
         """轮询等待模拟完成"""
         elapsed = 0
@@ -253,28 +343,43 @@ class RetryableBrainClient:
                 continue
 
             data = r.json()
+
+            # Check for completion - API returns 'alpha' field when done
+            alpha_id = data.get('alpha')
+            if alpha_id:
+                logger.info(f"Simulation completed, fetching alpha: {alpha_id}")
+                alpha_data = await self.get_alpha_with_retry(alpha_id)
+                return {
+                    'status': 'COMPLETE',
+                    'alpha_id': alpha_id,
+                    **alpha_data
+                }
+
+            # Check for explicit status field (fallback)
             status = data.get('status')
-
             if status == 'COMPLETE':
-                alpha_id = data.get('alpha')
-                if alpha_id:
-                    alpha_data = await self.get_alpha_with_retry(alpha_id)
-                    return {
-                        'status': 'COMPLETE',
-                        'alpha_id': alpha_id,
-                        **alpha_data
-                    }
                 return {'status': 'COMPLETE', 'alpha_id': None}
-
             elif status == 'ERROR':
                 return {
                     'status': 'ERROR',
                     'message': data.get('message', 'Unknown error')
                 }
 
+            # Log progress if available
+            progress = data.get('progress')
+            if progress:
+                logger.info(f"Simulation progress: {progress:.0%}")
+
+            # Check Retry-After header - when it's 0, simulation is likely complete
+            # (but alpha might be in next request or same response)
             retry_after = r.headers.get('Retry-After')
             if retry_after:
-                intervals = min(float(retry_after), 10)
+                retry_val = float(retry_after)
+                if retry_val == 0:
+                    # Simulation might be complete, try getting alpha_id
+                    logger.info("Retry-After=0, simulation may be complete")
+                else:
+                    intervals = min(retry_val, 10)
 
         raise SimulationTimeoutError(f"Simulation polling timed out after {timeout}s")
 

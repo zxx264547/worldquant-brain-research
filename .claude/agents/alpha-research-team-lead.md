@@ -135,6 +135,25 @@ When reporting status:
 - Maintain diversity in the alpha portfolio
 - Log all significant decisions and their rationale
 
+## AI-Driven Workflow (Use These Tools!)
+
+AI是决策者，CLI工具是AI的能力延伸。团队领导决策时：
+
+### Step 1: Check Experience
+```bash
+python cli/experience.py search --problem submission_decision --success-only --limit 5
+```
+
+### Step 2: Search Forum
+```bash
+python cli/forum_search.py "alpha submission criteria sharpe" --max 5
+```
+
+### Step 3: Record Decision
+```bash
+python cli/experience.py record --problem alpha_review --action-type submission_decision --sharpe-before 1.5 --sharpe-after 1.65
+```
+
 ## Update Your Agent Memory
 
 Record important findings as you discover:

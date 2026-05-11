@@ -27,7 +27,7 @@
 
 3. 多轮筛选
    ├─ screening_pipeline.py
-   ├─ PPA标准: PPC<0.5, Sharpe>1.0, Fitness>0.5
+   ├─ PPA筛选: PPC<0.5, Sharpe>=1.0, Fitness>0.5 (提交需Sharpe>=1.58)
    └─ Margin > Turnover
 
 4. 相关性去重
@@ -85,7 +85,7 @@
          │
          ▼
 ┌─────────────────┐
-│  第三轮筛选       │  Sharpe >= 1.0
+│  第三轮筛选       │  Sharpe >= 1.0 (筛选) / >= 1.58 (提交)
 └────────┬────────┘
          │
          ▼
@@ -113,7 +113,7 @@
 |------|-----|------|
 | min_sharpe_step1 | 0.7 | 首轮 |
 | min_sharpe_step2 | 0.7 | 次轮 |
-| min_sharpe_step3 | 1.0 | 第三轮 |
+| min_sharpe_step3 | 1.58 | 第三轮(提交) |
 | min_fitness | 0.5 | Fitness门槛 |
 | max_turnover | 0.7 | 最大换手率 |
 | correlation_threshold | 0.8 | 相关性阈值 |
@@ -137,7 +137,7 @@
 | 检查项 | 标准 | 权重 |
 |--------|------|------|
 | PPC | < 0.5 | 核心 |
-| Sharpe | >= 1.0 | 核心 |
+| Sharpe | >= 1.58 | 提交核心 |
 | Fitness | > 0.5 | 核心 |
 | Margin | > Turnover | 核心 |
 

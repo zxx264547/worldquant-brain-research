@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha 列表 — BRAIN Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace; background: #0d1117; color: #c9d1d9; padding: 20px; }
+        .header { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #21262d; }
+        .header h1 { font-size: 22px; color: #58a6ff; }
+        .nav { display: flex; gap: 12px; margin-bottom: 16px; }
+        .nav a { color: #58a6ff; text-decoration: none; font-size: 14px; padding: 6px 14px; border-radius: 6px; border: 1px solid #21262d; }
+        .nav a:hover, .nav a.active { background: #1f6feb22; border-color: #58a6ff; }
+        .controls { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; }
+        .controls select, .controls input { background: #161b22; border: 1px solid #21262d; color: #c9d1d9; padding: 6px 12px; border-radius: 6px; font-size: 13px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; background: #161b22; border: 1px solid #21262d; border-radius: 8px; overflow: hidden; }
+        th { text-align: left; padding: 10px 14px; color: #8b949e; font-weight: 600; border-bottom: 1px solid #21262d; font-size: 11px; text-transform: uppercase; background: #161b22; cursor: pointer; }
+        th:hover { color: #58a6ff; }
+        td { padding: 7px 14px; border-bottom: 1px solid #21262d; }
+        tr:hover { background: #1c2129; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-ok { background: #1b3a1b; color: #3fb950; }
+        .badge-submit { background: #1b3a3a; color: #58a6ff; }
+        .pagination { display: flex; gap: 8px; margin-top: 16px; justify-content: center; }
+        .pagination button { background: #161b22; border: 1px solid #21262d; color: #58a6ff; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+        .pagination button:hover { background: #1f6feb22; }
+        .pagination button:disabled { color: #484f58; cursor: default; }
+        .footer { text-align: center; font-size: 11px; color: #484f58; margin-top: 20px; padding-top: 15px; border-top: 1px solid #21262d; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>📋 Alpha 列表</h1></div>
+    <div class="nav">
+        <a href="/">📊 仪表盘</a>
+        <a href="/alphas" class="active">📋 Alpha列表</a>
+        <a href="/analysis">📊 数据分析</a>
+    </div>
+    <div class="controls">
+        <span style="font-size:13px;color:#8b949e">排序:</span>
+        <select id="sortBy" onchange="loadPage(0)">
+            <option value="sharpe">Sharpe ↓</option>
+            <option value="fitness">Fitness ↓</option>
+            <option value="created_at">时间 ↓</option>
+            <option value="margin">Margin ↓</option>
+            <option value="turnover">换手率 ↑</option>
+        </select>
+        <span style="font-size:13px;color:#8b949e;margin-left:12px">每页:</span>
+        <select id="pageSize" onchange="loadPage(0)">
+            <option value="20">20</option>
+            <option value="50" selected>50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+    <table>
+        <thead>
+            <tr><th>#</th><th>Alpha ID</th><th>名称</th><th>Sharpe</th><th>Fitness</th><th>PPC</th><th>Margin</th><th>TO</th><th>表达式</th><th>状态</th><th>时间</th></tr>
+        </thead>
+        <tbody id="alphaTable"></tbody>
+    </table>
+    <div class="pagination" id="pager"></div>
+    <div class="footer">WorldQuant BRAIN · Alpha List</div>
+
+    <script>
+        let currentPage = 0, totalPages = 0;
+
+        async function loadPage(page) {
+            const sort = document.getElementById('sortBy').value;
+            const size = document.getElementById('pageSize').value;
+            const order = sort === 'turnover' ? 'asc' : 'desc';
+            const url = `/api/alphas?limit=${size}&offset=${page*size}&sort=${sort}&order=${order}`;
+
+            const data = await fetch(url).then(r => r.json());
+            totalPages = Math.ceil(data.total / size);
+
+            let html = '';
+            data.alphas.forEach((a, i) => {
+                let badge = a.is_submittable ? '<span class="badge badge-submit">可提交</span>'
+                          : (a.sharpe >= 1.0 ? '<span class="badge badge-ok">有潜力</span>' : '');
+                html += `<tr>
+                    <td>${page*parseInt(size) + i + 1}</td>
+                    <td style="font-family:monospace;font-size:11px">${a.id}</td>
+                    <td title="${a.expression}">${(a.name||'').substring(0, 35)}</td>
+                    <td><b>${a.sharpe.toFixed(3)}</b></td>
+                    <td>${a.fitness.toFixed(2)}</td>
+                    <td>${a.ppc.toFixed(3)}</td>
+                    <td>${a.margin.toFixed(4)}</td>
+                    <td>${a.turnover.toFixed(4)}</td>
+                    <td style="font-size:11px;color:#8b949e;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${a.expression}">${a.expression}</td>
+                    <td>${badge}</td>
+                    <td style="font-size:11px;color:#8b949e">${a.created_at||'—'}</td>
+                </tr>`;
+            });
+            if (!data.alphas.length) html = '<tr><td colspan="11" style="text-align:center;color:#484f58;padding:40px">暂无数据</td></tr>';
+            document.getElementById('alphaTable').innerHTML = html;
+
+            // Pagination
+            let pager = '';
+            pager += `<button onclick="loadPage(0)" ${page===0?'disabled':''}>«</button>`;
+            pager += `<button onclick="loadPage(${page-1})" ${page===0?'disabled':''}>‹</button>`;
+            pager += `<span style="color:#8b949e;font-size:13px;padding:6px 12px">${page+1} / ${totalPages||1}</span>`;
+            pager += `<button onclick="loadPage(${page+1})" ${page>=totalPages-1?'disabled':''}>›</button>`;
+            pager += `<button onclick="loadPage(${totalPages-1})" ${page>=totalPages-1?'disabled':''}>»</button>`;
+            document.getElementById('pager').innerHTML = pager;
+
+            currentPage = page;
+        }
+
+        loadPage(0);
+    </script>
+</body>
+</html>

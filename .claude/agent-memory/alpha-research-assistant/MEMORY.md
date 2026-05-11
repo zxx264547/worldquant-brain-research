@@ -1,0 +1,1 @@
+- [High Sharpe Alpha Patterns](high_sharpe_patterns.md) — Reference: forum/knowledge research on Sharpe >= 1.5 patterns

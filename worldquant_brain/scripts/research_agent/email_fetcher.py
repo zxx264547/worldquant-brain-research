@@ -289,10 +289,10 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(description='QQ邮箱抓取器')
-    parser.add_argument('--email', type=str, default='2645471525@qq.com',
-                       help='邮箱地址')
-    parser.add_argument('--password', type=str, default='nurqhdbkqbdveafh',
-                       help='授权码')
+    parser.add_argument('--email', type=str, default=None,
+                       help='邮箱地址 (默认从config/user_config.json读取)')
+    parser.add_argument('--password', type=str, default=None,
+                       help='授权码 (默认从config/user_config.json读取)')
     parser.add_argument('--output', type=str, default='data/raw/emails_raw.json',
                        help='输出文件')
     parser.add_argument('--since', type=str, default=None,

@@ -205,6 +205,30 @@ Write concise notes to /tmp/multi_agent/memory.json about what worked and what f
 4. Be responsive - handle fuses and timeouts gracefully
 5. Be collaborative - update shared files properly for other workers
 
+## AI-Driven Workflow (Use These Tools!)
+
+AI是决策者，CLI工具是AI的能力延伸。优化Alpha时：
+
+### Step 1: Search Experience
+```bash
+python cli/experience.py search --problem fitness_low --fitness-max 0.5
+```
+
+### Step 2: Search Forum
+```bash
+python cli/forum_search.py "fitness low alpha" --max 5
+```
+
+### Step 3: Execute Backtest
+```bash
+python cli/backtest.py -e "expression" --dataset TOP1500
+```
+
+### Step 4: Record Experience
+```bash
+python cli/experience.py record --problem fitness_low --success
+```
+
 # Persistent Agent Memory
 
 You have a persistent, file-based memory system at `/home/zxx/worldQuant/.claude/agent-memory/alpha-explorer-worker/`. This directory already exists — write to it directly with the Write tool (do not run mkdir or check for its existence).

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAIN Alpha 仪表盘</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', monospace; background: #0d1117; color: #c9d1d9; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #21262d; }
+        .header h1 { font-size: 22px; color: #58a6ff; }
+        .header .refresh { font-size: 12px; color: #8b949e; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .stat-card { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 16px; text-align: center; }
+        .stat-card .value { font-size: 28px; font-weight: bold; color: #58a6ff; }
+        .stat-card .value.green { color: #3fb950; }
+        .stat-card .value.yellow { color: #d29922; }
+        .stat-card .value.red { color: #f85149; }
+        .stat-card .label { font-size: 12px; color: #8b949e; margin-top: 4px; text-transform: uppercase; }
+        .section { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .section h2 { font-size: 16px; margin-bottom: 12px; color: #f0f6fc; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 8px 12px; color: #8b949e; font-weight: 600; border-bottom: 1px solid #21262d; font-size: 11px; text-transform: uppercase; }
+        td { padding: 6px 12px; border-bottom: 1px solid #21262d; }
+        tr:hover { background: #1c2129; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .badge-ok { background: #1b3a1b; color: #3fb950; }
+        .badge-warn { background: #3a2e1b; color: #d29922; }
+        .badge-submit { background: #1b3a3a; color: #58a6ff; }
+        .badge-idle { background: #1b3a1b; color: #3fb950; }
+        .badge-busy { background: #3a1b3a; color: #bc8cff; }
+        .progress-bar { height: 4px; background: #21262d; border-radius: 2px; overflow: hidden; margin-top: 2px; }
+        .progress-fill { height: 100%; background: #58a6ff; border-radius: 2px; transition: width 0.3s; }
+        .trend-chart { display: flex; align-items: flex-end; gap: 2px; height: 80px; padding: 8px 0; }
+        .trend-bar { flex: 1; min-width: 4px; background: #58a6ff; border-radius: 2px 2px 0 0; opacity: 0.7; transition: opacity 0.2s; }
+        .trend-bar:hover { opacity: 1; }
+        .trend-bar.high { background: #3fb950; }
+        .trend-bar.low { background: #f85149; }
+        .nav { display: flex; gap: 12px; margin-bottom: 16px; }
+        .nav a { color: #58a6ff; text-decoration: none; font-size: 14px; padding: 6px 14px; border-radius: 6px; border: 1px solid #21262d; transition: all 0.2s; }
+        .nav a:hover, .nav a.active { background: #1f6feb22; border-color: #58a6ff; }
+        .worker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .worker-card { background: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 12px; }
+        .worker-card .wid { font-weight: bold; color: #58a6ff; font-size: 14px; }
+        .worker-card .meta { font-size: 11px; color: #8b949e; margin-top: 4px; }
+        .empty { text-align: center; color: #484f58; padding: 40px; font-size: 14px; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .pulse { animation: pulse 2s infinite; }
+        .footer { text-align: center; font-size: 11px; color: #484f58; margin-top: 20px; padding-top: 15px; border-top: 1px solid #21262d; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>🧠 WorldQuant BRAIN — Alpha仪表盘</h1>
+            <div style="font-size:12px;color:#8b949e;margin-top:4px">实时监控Alpha挖掘进度</div>
+        </div>
+        <div class="refresh">
+            ⏱ 自动刷新 5s <span id="countdown">5</span><br>
+            <span id="lastUpdate" style="color:#8b949e">—</span>
+        </div>
+    </div>
+
+    <div class="nav">
+        <a href="/" class="active">📊 仪表盘</a>
+        <a href="/alphas">📋 Alpha列表</a>
+        <a href="/analysis">📊 数据分析</a>
+    </div>
+
+    <!-- 统计卡片 -->
+    <div class="stats" id="stats">
+        <div class="stat-card"><div class="value" id="stat-total">—</div><div class="label">总Alpha数</div></div>
+        <div class="stat-card"><div class="value green" id="stat-best">—</div><div class="label">最佳Sharpe</div></div>
+        <div class="stat-card"><div class="value yellow" id="stat-submittable">—</div><div class="label">可提交</div></div>
+        <div class="stat-card"><div class="value" id="stat-pending">—</div><div class="label">待处理任务</div></div>
+        <div class="stat-card"><div class="value" id="stat-running">—</div><div class="label">执行中</div></div>
+        <div class="stat-card"><div class="value" id="stat-recent">—</div><div class="label">24h新增</div></div>
+    </div>
+
+    <!-- Sharpe趋势 -->
+    <div class="section">
+        <h2>📈 Sharpe 趋势 (最近50条)</h2>
+        <div class="trend-chart" id="trend"></div>
+    </div>
+
+    <!-- 最佳Alpha -->
+    <div class="section">
+        <h2>🏆 最佳 Alpha (Top 10)</h2>
+        <table>
+            <thead><tr><th>#</th><th>名称</th><th>Sharpe</th><th>Fitness</th><th>PPC</th><th>Margin</th><th>TO</th><th>状态</th></tr></thead>
+            <tbody id="bestTable"></tbody>
+        </table>
+    </div>
+
+    <!-- Worker状态 -->
+    <div class="section">
+        <h2>👷 Worker 状态</h2>
+        <div class="worker-grid" id="workers"></div>
+    </div>
+
+    <!-- 最近任务 -->
+    <div class="section">
+        <h2>📋 最近任务 (最新10条)</h2>
+        <table>
+            <thead><tr><th>ID</th><th>策略</th><th>状态</th><th>Worker</th><th>Sharpe</th><th>时间</th></tr></thead>
+            <tbody id="taskTable"></tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        WorldQuant BRAIN Alpha Research System · Dashboard v1.0 · Powered by FastAPI
+    </div>
+
+    <script>
+        let cd = 5;
+        setInterval(() => { cd--; if(cd<=0){ cd=5; refresh(); } document.getElementById('countdown').textContent = cd; }, 1000);
+
+        async function refresh() {
+            try {
+                const [stats, best, tasks, trend] = await Promise.all([
+                    fetch('/api/stats').then(r => r.json()),
+                    fetch('/api/best?limit=10').then(r => r.json()),
+                    fetch('/api/tasks?limit=10').then(r => r.json()),
+                    fetch('/api/trend').then(r => r.json())
+                ]);
+
+                // Stats
+                document.getElementById('stat-total').textContent = stats.total_alphas;
+                document.getElementById('stat-best').textContent = (stats.best_sharpe || 0).toFixed(3);
+                document.getElementById('stat-submittable').textContent = stats.submittable;
+                document.getElementById('stat-pending').textContent = stats.pending_tasks;
+                document.getElementById('stat-running').textContent = stats.running_tasks;
+                document.getElementById('stat-recent').textContent = stats.recent_24h;
+
+                if (stats.best_sharpe >= 1.58) document.getElementById('stat-best').className = 'value green';
+                else if (stats.best_sharpe >= 1.0) document.getElementById('stat-best').className = 'value yellow';
+                else document.getElementById('stat-best').className = 'value red';
+
+                // Trend chart
+                let trendHtml = '';
+                const maxS = Math.max(...trend.trend.map(t => Math.abs(t.sharpe)), 1);
+                for (const t of trend.trend) {
+                    const h = Math.max(4, Math.abs(t.sharpe) / maxS * 76);
+                    const cls = t.sharpe >= 1.0 ? 'high' : (t.sharpe < 0 ? 'low' : '');
+                    trendHtml += `<div class="trend-bar ${cls}" style="height:${h}px" title="Sharpe=${t.sharpe.toFixed(3)} ${t.time}"></div>`;
+                }
+                document.getElementById('trend').innerHTML = trendHtml;
+
+                // Best table
+                let bestHtml = '';
+                best.best.forEach((a, i) => {
+                    let badge = a.is_submittable ? '<span class="badge badge-submit">可提交</span>'
+                              : (a.sharpe >= 1.0 ? '<span class="badge badge-ok">有潜力</span>'
+                              : '<span class="badge badge-warn">优化中</span>');
+                    bestHtml += `<tr><td>${i+1}</td><td title="${a.expression}">${a.name.substring(0,40)}</td>
+                        <td><b>${a.sharpe.toFixed(3)}</b></td><td>${a.fitness.toFixed(2)}</td>
+                        <td>${a.ppc.toFixed(3)}</td><td>${a.margin.toFixed(4)}</td>
+                        <td>${a.turnover.toFixed(4)}</td><td>${badge}</td></tr>`;
+                });
+                if (!best.best.length) bestHtml = '<tr><td colspan="8" class="empty">暂无Alpha数据</td></tr>';
+                document.getElementById('bestTable').innerHTML = bestHtml;
+
+                // Workers — 优先显示live_miners, 其次显示db workers
+                let wHtml = '';
+                if (stats.live_miners && stats.live_miners.length) {
+                    for (const m of stats.live_miners) {
+                        if (!m.script.includes('mining') && !m.script.includes('breakthrough')) continue;
+                        const name = m.script.length > 35 ? m.script.substring(0, 35) + '...' : m.script;
+                        wHtml += `<div class="worker-card">
+                            <div class="wid">PID:${m.pid} <span class="badge badge-busy pulse">活跃</span></div>
+                            <div class="meta">脚本: ${name}</div>
+                            <div class="meta" style="font-size:10px;color:#8b949e">${m.cmd.substring(0,50)}</div></div>`;
+                    }
+                }
+                if (stats.workers && stats.workers.length) {
+                    for (const w of stats.workers) {
+                        const cls = w.status === 'busy' ? 'badge badge-busy pulse' : 'badge badge-idle';
+                        wHtml += `<div class="worker-card">
+                            <div class="wid">${w.id} <span class="${cls}">${w.status}</span></div>
+                            <div class="meta">完成: ${w.completed} | 失败: ${w.failed}</div>
+                            <div class="meta">心跳: ${w.last_heartbeat || '—'}</div></div>`;
+                    }
+                }
+                if (!wHtml) wHtml = '<div class="empty">暂无活跃Worker</div>';
+                document.getElementById('workers').innerHTML = wHtml;
+
+                // Tasks
+                let tHtml = '';
+                tasks.tasks.forEach(t => {
+                    let st = t.status === 'done' ? '<span class="badge badge-ok">完成</span>'
+                           : (t.status === 'running' ? '<span class="badge badge-busy pulse">执行中</span>'
+                           : (t.status === 'failed' ? '<span class="badge badge-warn">失败</span>'
+                           : '<span class="badge">排队</span>'));
+                    tHtml += `<tr><td>${t.id}</td><td>${t.strategy}</td><td>${st}</td>
+                        <td>${t.worker_id}</td><td>${(t.sharpe||0).toFixed(3)}</td>
+                        <td style="font-size:11px;color:#8b949e">${t.updated_at||t.created_at}</td></tr>`;
+                });
+                if (!tasks.tasks.length) tHtml = '<tr><td colspan="6" class="empty">暂无任务</td></tr>';
+                document.getElementById('taskTable').innerHTML = tHtml;
+
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('zh-CN');
+            } catch(e) { console.error(e); }
+        }
+
+        refresh();
+    </script>
+</body>
+</html>

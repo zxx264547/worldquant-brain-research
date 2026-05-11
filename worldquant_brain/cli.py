@@ -1,0 +1,176 @@
+#!/usr/bin/env python3
+"""WorldQuant BRAIN 统一CLI"""
+
+import asyncio
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from worldquant_brain.engine import (ExpressionBuilder, ExpressionTemplates,
+                                      BacktestRunner, get_settings, store)
+from worldquant_brain.strategies import ALL_STRATEGIES, get_strategy
+from worldquant_brain.scheduler import Orchestrator
+
+
+# ─── CLI框架 (不依赖click, 使用argparse) ───
+
+def cmd_mine(args):
+    """运行Alpha挖掘"""
+    strategy_names = args.strategy or ['combination']
+    workers = args.workers or 3
+
+    async def _run():
+        orch = Orchestrator(strategy_names, workers)
+        await orch.run()
+
+    asyncio.run(_run())
+
+
+def cmd_test(args):
+    """测试单个表达式"""
+    expression = args.expression
+    name = args.name or "test"
+
+    async def _run():
+        runner = BacktestRunner()
+        result = await runner.run(expression, name=name)
+        if result.get('status') == 'ok':
+            print(f"Sharpe: {result['sharpe']:.3f}")
+            print(f"Fitness: {result['fitness']:.3f}")
+            print(f"Turnover: {result['turnover']:.4f}")
+            print(f"Margin: {result['margin']:.4f}")
+            print(f"PPC: {result['ppc']:.4f}")
+            if result.get('is_submittable'):
+                print("*** 可提交! ***")
+        else:
+            print(f"Error: {result.get('error', 'Unknown')}")
+
+    asyncio.run(_run())
+
+
+def cmd_check(args):
+    """检查Alpha是否可提交"""
+    alpha_id = args.alpha_id
+
+    async def _run():
+        from worldquant_brain.scripts.core import RetryableBrainClient
+        client = RetryableBrainClient()
+        await client.authenticate_with_retry()
+        alpha = await client.get_alpha_with_retry(alpha_id)
+
+        sharpe = alpha.get('sharpe', 0)
+        fitness = alpha.get('fitness', 0)
+        ppc = alpha.get('ppc', 0)
+        margin = alpha.get('margin', 0)
+        turnover = alpha.get('turnover', 0)
+
+        checks = {
+            'Sharpe >= 1.58': sharpe >= 1.58,
+            'Fitness > 0.5': fitness > 0.5,
+            'PPC < 0.5': ppc < 0.5,
+            'Margin > Turnover': margin > turnover,
+        }
+
+        for check, passed in checks.items():
+            print(f"  {'✓' if passed else '✗'} {check}")
+
+        if all(checks.values()):
+            print("\n*** Alpha满足提交条件! ***")
+        else:
+            print("\nAlpha不满足提交条件")
+
+    asyncio.run(_run())
+
+
+def cmd_best(args):
+    """查看最佳Alpha"""
+    limit = args.limit or 10
+    for a in store.best(limit):
+        print(f"  {a['name'][:50]:50s} Sharpe={a['sharpe']:.3f} "
+              f"Fitness={a['fitness']:.3f} alpha_id={a['id']}")
+
+
+def cmd_submittable(args):
+    """查看可提交Alpha"""
+    subs = store.submittable()
+    if not subs:
+        print("没有可提交的Alpha")
+        return
+    for a in subs:
+        print(f"  {a['alpha_id']}: Sharpe={a['sharpe']:.3f} "
+              f"Name={a['name'][:40]}")
+
+
+def cmd_clean(args):
+    """清理数据库 (保留Top N)"""
+    keep = args.keep or 200
+    import sqlite3
+    from worldquant_brain.db.repository import get_db_path, count_alphas
+
+    before = count_alphas()
+    conn = sqlite3.connect(get_db_path())
+    conn.execute("""DELETE FROM alphas WHERE id NOT IN
+        (SELECT id FROM alphas ORDER BY sharpe DESC LIMIT ?)""", (keep,))
+    conn.commit()
+    conn.execute("VACUUM")
+    conn.close()
+    after = count_alphas()
+    print(f"清理: {before} → {after} (保留Top {keep})")
+
+
+# ─── 主CLI ───
+
+def create_parser():
+    import argparse
+    parser = argparse.ArgumentParser(
+        description='WorldQuant BRAIN Alpha Research CLI')
+    sub = parser.add_subparsers(dest='command')
+
+    # mine
+    p = sub.add_parser('mine', help='运行Alpha挖掘')
+    p.add_argument('--strategy', '-s', nargs='+',
+                   choices=list(ALL_STRATEGIES.keys()))
+    p.add_argument('--workers', '-w', type=int, default=3)
+    p.set_defaults(func=cmd_mine)
+
+    # test
+    p = sub.add_parser('test', help='测试单个表达式')
+    p.add_argument('expression', help='Alpha表达式')
+    p.add_argument('--name', '-n', help='名称')
+    p.set_defaults(func=cmd_test)
+
+    # check
+    p = sub.add_parser('check', help='检查Alpha')
+    p.add_argument('alpha_id', help='Alpha ID')
+    p.set_defaults(func=cmd_check)
+
+    # best
+    p = sub.add_parser('best', help='最佳Alpha')
+    p.add_argument('--limit', '-l', type=int, default=10)
+    p.set_defaults(func=cmd_best)
+
+    # submittable
+    p = sub.add_parser('submittable', help='可提交Alpha')
+    p.set_defaults(func=cmd_submittable)
+
+    # clean
+    p = sub.add_parser('clean', help='清理数据库')
+    p.add_argument('--keep', '-k', type=int, default=200,
+                   help='保留Top N条记录')
+    p.set_defaults(func=cmd_clean)
+
+    return parser
+
+
+def main():
+    parser = create_parser()
+    args = parser.parse_args()
+    if args.command is None:
+        parser.print_help()
+        return
+    args.func(args)
+
+
+if __name__ == "__main__":
+    main()

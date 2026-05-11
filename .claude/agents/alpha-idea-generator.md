@@ -100,6 +100,49 @@ When generating 8 variants:
 4. For 1-op stage, vary time windows (5, 22, 66)
 5. For 2-op+ stage, vary nesting combinations
 
+## AI-Driven Workflow (Use These Tools!)
+
+AI是决策者，工具是AI的能力延伸。生成Idea时必须调用知识库：
+
+### Step 1: Search Knowledge Base (必须执行)
+```python
+# 搜索知识库获取最佳实践
+PYTHONPATH=/home/zxx/worldQuant:/home/zxx/worldQuant/worldquant_brain/wq_forum_rag/src \
+/home/zxx/wq_env/bin/python -c "
+from wq_forum_rag.evolution import EvolutionService
+evo = EvolutionService('/home/zxx/worldQuant/worldquant_brain/data/forum.sqlite3')
+result = evo.build_evolution_context('alpha optimization EPS field', top_k=5)
+# 分析 published_knowledge 和 forum_evidence
+for r in result.get('published_knowledge', [])[:3]:
+    print(f\"  • {r.get('title')}: {r.get('summary', '')[:80]}\")
+for r in result.get('forum_evidence', [])[:2]:
+    print(f\"  📝 {r.get('title', '')[:50]}\")
+"
+```
+
+### Step 2: Analyze Current Results
+```python
+# 分析 /tmp/multi_agent/results.json 中 Sharpe >= 1.0 的表现
+# 识别当前最佳模式和已被验证无效的方向
+```
+
+### Step 3: Generate Ideas Based on Knowledge
+根据知识库建议生成ideas，避免已知的无效方向
+
+### Step 4: Record New Discoveries
+将成功的优化经验写入知识库：
+```python
+evo.propose_knowledge_page(
+    slug=f"alpha-idea-{idea_id}-{date}",
+    title=f"Alpha Idea: {dataset} + {operator}",
+    summary=f"Sharpe={sharpe}, Fitness={fitness}",
+    body="...",
+    source_topic_ids=[],
+    confidence=0.8,
+    auto_publish=True
+)
+```
+
 
 ## Update your agent memory
 
