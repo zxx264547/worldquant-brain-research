@@ -14,7 +14,6 @@ from .exceptions import (
 )
 
 from .api_client import RetryableBrainClient
-from .logging_config import setup_logging, setup_global_exception_handler
 from .retry import async_retry, sync_retry
 
 __all__ = [
@@ -26,8 +25,6 @@ __all__ = [
     'AlphaNotFoundError',
     'DataFieldError',
     'RetryableBrainClient',
-    'setup_logging',
-    'setup_global_exception_handler',
     'async_retry',
     'sync_retry',
 ]

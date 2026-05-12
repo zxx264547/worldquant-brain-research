@@ -78,6 +78,8 @@ class Orchestrator:
                 print("[Orchestrator] 论坛数据库不存在，跳过知识搜索")
                 return {}
 
+            forum_src = str(FORUM_DB.parent.parent / "wq_forum_rag" / "src")
+            sys.path.insert(0, forum_src)
             from wq_forum_rag.evolution import EvolutionService
             evo = EvolutionService(str(FORUM_DB))
 
@@ -119,6 +121,8 @@ class Orchestrator:
             if not FORUM_DB.exists() or len(best_alphas) < 2:
                 return
 
+            forum_src = str(FORUM_DB.parent.parent / "wq_forum_rag" / "src")
+            sys.path.insert(0, forum_src)
             from wq_forum_rag.evolution import EvolutionService
             evo = EvolutionService(str(FORUM_DB))
 

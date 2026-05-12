@@ -1,42 +1,62 @@
 #!/usr/bin/env python3
-"""编排化挖掘 — 调用Orchestrator, 激活全部新架构模块
-
-替代 robust_mining.py, 使用:
-  Orchestrator → WorkerPool → Strategies → BacktestRunner → SQLite → AlphaHarness
-"""
-
-import asyncio
-import sys
+"""编排化挖掘 — 使用Orchestrator进行持续Alpha挖掘"""
+import asyncio, sys, time
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from worldquant_brain.scheduler import Orchestrator
+from worldquant_brain.scheduler.orchestrator import Orchestrator
 from worldquant_brain.engine.alpha_harness import AlphaHarness
 from worldquant_brain.engine.route_contract import RouteContract
+from worldquant_brain.engine import ExpressionTemplates
 
 
 async def main():
     contract = RouteContract.template_breakthrough()
     harness = AlphaHarness(contract)
 
-    orch = Orchestrator(
-        strategy_names=['combination', 'knowledge_guided'],
-        worker_count=4
-    )
+    strategies = ['combination', 'single_field', 'settings_optimize']
+    worker_count = 4
+    rounds = 0
 
-    # 注入harness到Runner
-    from worldquant_brain.engine.backtest_runner import BacktestRunner
-    BacktestRunner._shared_harness = harness
+    while True:
+        rounds += 1
+        print(f"\n{'='*50}")
+        print(f"  Round {rounds}")
+        print(f"{'='*50}")
 
-    # 开始一轮
-    round_ = harness.start_round("哪些非EPS字段组合能突破Sharpe 1.17？")
-    harness.current_round = round_
+        # 每轮更新上下文
+        context = {
+            "base_alphas": [
+                ("eps_252_09", ExpressionTemplates.eps_basic()),
+                ("eps_mom", ExpressionTemplates.eps_with_momentum()),
+                ("eps_div", ExpressionTemplates.eps_with_dividend()),
+            ],
+            "technicals": [
+                ("beta_120", ExpressionTemplates.tech_beta(120)),
+                ("beta_252", ExpressionTemplates.tech_beta(252)),
+                ("vol_120", ExpressionTemplates.tech_vol(120)),
+                ("vol_252", ExpressionTemplates.tech_vol(252)),
+                ("rsi_14", ExpressionTemplates.tech_rsi(14)),
+                ("mom_60", ExpressionTemplates.tech_momentum(60)),
+            ],
+            "regions": ["USA"],
+        }
 
-    await orch.run()
+        # 开始记账轮
+        round_ = harness.start_round(f"Round {rounds}: 探索EPS+技术信号组合")
+        harness.current_round = round_
 
-    harness.finish_round(round_, "分析结果, 确定下一步方向")
-    print(harness.get_summary())
+        # 每轮换一批策略
+        current_strats = [strategies[rounds % len(strategies)]]
 
+        orch = Orchestrator(current_strats, worker_count)
+        await orch.run(context)
+
+        # 结束记账
+        harness.finish_round(round_, f"Round {rounds+1}: 继续探索")
+
+        # 短暂休息
+        await asyncio.sleep(10)
 
 if __name__ == "__main__":
     asyncio.run(main())

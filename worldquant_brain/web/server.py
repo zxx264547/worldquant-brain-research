@@ -526,6 +526,44 @@ async def api_harness_failures(failure_type: str = None, limit: int = 50):
     }
 
 
+# ─── Alpha详情 (表达式解释 + 回测分析) ───
+
+@app.get("/api/alphas/{alpha_id}")
+async def api_alpha_detail(alpha_id: str):
+    """获取单个Alpha的完整详情: 表达式解释 + PPA分析 + 信号灯"""
+    from worldquant_brain.engine.expression_explainer import explain_expression, analyze_result
+    conn = get_db()
+    try:
+        row = conn.execute(
+            "SELECT * FROM alphas WHERE id=? AND status='done'", (alpha_id,)).fetchone()
+        if not row:
+            return {"error": "Alpha not found"}
+        r = dict(row)
+
+        # 表达式解释
+        explanation = explain_expression(r.get('expression', '') or '')
+
+        # 结果分析
+        analysis = analyze_result(r)
+
+        return {
+            "alpha_id": r['id'],
+            "name": r.get('name', ''),
+            "expression": r.get('expression', '') or '',
+            "sharpe": r.get('sharpe', 0),
+            "fitness": r.get('fitness', 0),
+            "ppc": r.get('ppc', 0),
+            "margin": r.get('margin', 0),
+            "turnover": r.get('turnover', 0),
+            "is_submittable": bool(r.get('is_submittable', 0)),
+            "created_at": r.get('created_at', ''),
+            "explanation": explanation,
+            "analysis": analysis,
+        }
+    finally:
+        conn.close()
+
+
 # ─── 健康检查 ───
 
 @app.get("/health")
