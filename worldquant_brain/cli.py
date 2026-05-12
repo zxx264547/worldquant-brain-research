@@ -9,21 +9,26 @@ from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from worldquant_brain.engine import (ExpressionBuilder, ExpressionTemplates,
-                                      BacktestRunner, get_settings, store)
-from worldquant_brain.strategies import ALL_STRATEGIES, get_strategy
-from worldquant_brain.scheduler import Orchestrator
+
+def _import_engine():
+    """延迟导入引擎模块（需要外部依赖）"""
+    from worldquant_brain.engine import (ExpressionBuilder, ExpressionTemplates,
+                                          BacktestRunner, get_settings, store)
+    from worldquant_brain.strategies import ALL_STRATEGIES, get_strategy
+    from worldquant_brain.scheduler import Orchestrator
+    return locals()
 
 
 # ─── CLI框架 (不依赖click, 使用argparse) ───
 
 def cmd_mine(args):
     """运行Alpha挖掘"""
+    eng = _import_engine()
     strategy_names = args.strategy or ['combination']
     workers = args.workers or 3
 
     async def _run():
-        orch = Orchestrator(strategy_names, workers)
+        orch = eng['Orchestrator'](strategy_names, workers)
         await orch.run()
 
     asyncio.run(_run())
@@ -31,11 +36,12 @@ def cmd_mine(args):
 
 def cmd_test(args):
     """测试单个表达式"""
+    eng = _import_engine()
     expression = args.expression
     name = args.name or "test"
 
     async def _run():
-        runner = BacktestRunner()
+        runner = eng['BacktestRunner']()
         result = await runner.run(expression, name=name)
         if result.get('status') == 'ok':
             print(f"Sharpe: {result['sharpe']:.3f}")
@@ -87,15 +93,17 @@ def cmd_check(args):
 
 def cmd_best(args):
     """查看最佳Alpha"""
+    eng = _import_engine()
     limit = args.limit or 10
-    for a in store.best(limit):
+    for a in eng['store'].best(limit):
         print(f"  {a['name'][:50]:50s} Sharpe={a['sharpe']:.3f} "
               f"Fitness={a['fitness']:.3f} alpha_id={a['id']}")
 
 
 def cmd_submittable(args):
     """查看可提交Alpha"""
-    subs = store.submittable()
+    eng = _import_engine()
+    subs = eng['store'].submittable()
     if not subs:
         print("没有可提交的Alpha")
         return
@@ -162,6 +170,38 @@ def cmd_memory(args):
     print(f"记忆已保存: {note[:60]}")
 
 
+## ─── 认知循环命令 ───
+
+def cmd_perceive(args):
+    """感知当前全局状态（认知循环第1步）"""
+    from worldquant_brain.cognitive_loop import cli_perceive
+    cli_perceive()
+
+
+def cmd_dispatch(args):
+    """下发批量任务（认知循环第3步）"""
+    from worldquant_brain.cognitive_loop import cli_dispatch
+    cli_dispatch(args.plan)
+
+
+def cmd_reflect(args):
+    """分析批量结果（认知循环第4步）"""
+    from worldquant_brain.cognitive_loop import cli_reflect
+    cli_reflect(args.results_file)
+
+
+def cmd_remember_insight(args):
+    """记录发现到知识库（认知循环第5步）"""
+    from worldquant_brain.cognitive_loop import cli_remember
+    cli_remember(args.insight, args.confidence)
+
+
+def cmd_evolve(args):
+    """提议规则修改（认知循环第6步）"""
+    from worldquant_brain.cognitive_loop import cli_evolve
+    cli_evolve()
+
+
 def cmd_clean(args):
     """清理数据库 (保留Top N)"""
     keep = args.keep or 200
@@ -189,8 +229,7 @@ def create_parser():
 
     # mine
     p = sub.add_parser('mine', help='运行Alpha挖掘')
-    p.add_argument('--strategy', '-s', nargs='+',
-                   choices=list(ALL_STRATEGIES.keys()))
+    p.add_argument('--strategy', '-s', nargs='+')
     p.add_argument('--workers', '-w', type=int, default=3)
     p.set_defaults(func=cmd_mine)
 
@@ -238,6 +277,32 @@ def create_parser():
     p = sub.add_parser('memory', help='保存记忆')
     p.add_argument('--save', '-s', required=True, help='记忆内容')
     p.set_defaults(func=cmd_memory)
+
+    # ─── 认知循环命令 ───
+
+    # perceive
+    p = sub.add_parser('perceive', help='感知全局状态（认知循环）')
+    p.set_defaults(func=cmd_perceive)
+
+    # dispatch
+    p = sub.add_parser('dispatch', help='下发批量任务（认知循环）')
+    p.add_argument('plan', help='JSON格式的执行计划')
+    p.set_defaults(func=cmd_dispatch)
+
+    # reflect
+    p = sub.add_parser('reflect', help='分析批量结果（认知循环）')
+    p.add_argument('results_file', help='结果JSON文件路径')
+    p.set_defaults(func=cmd_reflect)
+
+    # remember
+    p = sub.add_parser('remember', help='记录发现到知识库（认知循环）')
+    p.add_argument('insight', help='发现内容')
+    p.add_argument('--confidence', '-c', type=float, default=0.6)
+    p.set_defaults(func=cmd_remember_insight)
+
+    # evolve
+    p = sub.add_parser('evolve', help='提议规则修改（认知循环）')
+    p.set_defaults(func=cmd_evolve)
 
     # clean
     p = sub.add_parser('clean', help='清理数据库')

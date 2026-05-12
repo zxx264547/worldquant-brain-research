@@ -10,6 +10,7 @@ env/
 *.csv
 *.parquet
 *.db
+worldquant_brain/data/reports/
 
 # Environment
 .env

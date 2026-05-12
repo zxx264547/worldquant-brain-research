@@ -2,7 +2,44 @@
 
 ## 项目概述
 
-AI辅助量化研究项目，目标是挖掘Sharpe >= 1.58的可提交Alpha。
+AI主导的量化研究项目，目标是挖掘Sharpe >= 1.58的可提交Alpha。
+
+**架构理念**：AI是大脑（决策者），Python脚本是工具（执行者）。
+AI通过认知循环持续 感知→决策→执行→反思→记忆→进化。
+
+---
+
+## 认知循环协议（Cognitive Loop）
+
+AI Agent的核心工作流：
+
+```
+PERCEIVE → PLAN → DISPATCH → REFLECT → REMEMBER → EVOLVE
+    ↑                                            │
+    └──────── Unified Knowledge Store ───────────┘
+```
+
+### CLI命令
+
+| 命令 | 作用 |
+|------|------|
+| `python worldquant_brain/cli.py perceive` | 感知全局状态 |
+| `python worldquant_brain/cli.py dispatch '{...}'` | 下发批量任务 |
+| `python worldquant_brain/cli.py reflect <file>` | 分析结果提取insights |
+| `python worldquant_brain/cli.py remember "..." -c 0.8` | 沉淀知识 |
+| `python worldquant_brain/cli.py evolve` | 提议规则进化 |
+
+---
+
+## 自进化机制
+
+| 级别 | 对象 | 审批 |
+|------|------|------|
+| L1 自动 | 策略效果分数、优先级 | 无需审批 |
+| L2 提议 | PPA阈值、时间窗口、CLAUDE.md规则 | 用户审批 |
+| L3 记录 | 代码架构改进 | 用户实施 |
+
+策略配置位于：`worldquant_brain/strategies/strategy_config.yaml`
 
 ---
 

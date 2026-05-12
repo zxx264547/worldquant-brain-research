@@ -1,0 +1,44 @@
+strategies:
+- name: analyst4_eps
+  priority: 1
+  effectiveness: 0.6
+  datasets:
+  - analyst4
+  templates:
+  - rank(ts_mean({data}, 22))
+  - rank(ts_delta({data}, 22))
+  - zscore(ts_mean({data}, 66))
+  last_tested: '2026-05-12'
+- name: fundamental_value
+  priority: 2
+  effectiveness: 0.5
+  datasets:
+  - fundamental6
+  templates:
+  - rank({data})
+  - rank(ts_mean({data}, 66))
+  - zscore(ts_mean({data}, 252))
+  last_tested: null
+- name: pv87_momentum
+  priority: 3
+  effectiveness: 0.45
+  datasets:
+  - pv87
+  templates:
+  - rank(ts_mean({data}, 5))
+  - rank(ts_delta({data}, 22))
+  - rank(ts_std_dev({data}, 22))
+  last_tested: '2026-05-12'
+thresholds:
+  sharpe_min: 1.58
+  fitness_min: 0.5
+  ppc_max: 0.5
+  margin_gt_turnover: true
+allowed_windows:
+- 5
+- 22
+- 66
+- 120
+- 252
+- 504
+last_evolved: null
