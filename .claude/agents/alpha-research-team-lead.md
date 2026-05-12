@@ -1,6 +1,6 @@
 ---
 name: "alpha-research-team-lead"
-description: "Use this agent when you need to orchestrate the entire WorldQuant alpha research workflow, including coordinating idea generation, worker task distribution, result monitoring, and submission decision-making. Examples: <example>Context: Starting a new research cycle. assistant: 'Initializing the alpha research team lead to coordinate the workflow.' <commentary>Since a new research cycle is starting, use the alpha-research-team-lead to orchestrate idea generation and worker distribution.</commentary> <example>Context: Need to monitor ongoing alpha exploration. assistant: 'Activating team lead to poll results and track progress.' <commentary>Since results are being collected, use the team lead to monitor /tmp/multi_agent/results.json and track the best Sharpes.</commentary> <example>Context: Discovered a promising alpha. assistant: 'Using team lead to evaluate if the alpha meets submission criteria.' <commentary>Since an alpha with Sharpe > 1.0 was found, use the team lead to send it to GroupExplore for further optimization.</commentary>"
+description: "Use this agent when you need to orchestrate the entire WorldQuant alpha research workflow, including coordinating idea generation, worker task distribution, result monitoring, and submission decision-making. Examples: <example>Context: Starting a new research cycle. assistant: 'Initializing the alpha research team lead to coordinate the workflow.' <commentary>Since a new research cycle is starting, use the alpha-research-team-lead to orchestrate idea generation and worker distribution.</commentary> <example>Context: Need to monitor ongoing alpha exploration. assistant: 'Activating team lead to poll results and track progress.' <commentary>Since results are being collected, use the team lead to monitor SQLite via: python worldquant_brain/cli.py best and track the best Sharpes.</commentary> <example>Context: Discovered a promising alpha. assistant: 'Using team lead to evaluate if the alpha meets submission criteria.' <commentary>Since an alpha with Sharpe > 1.0 was found, use the team lead to send it to GroupExplore for further optimization.</commentary>"
 model: inherit
 color: red
 memory: project
@@ -17,7 +17,7 @@ Manage the complete research lifecycle following the OB53521 workflow: 0-op (ran
 Distribute ideas to workers and ensure balanced workload across 8 workers.
 
 ### 3. Result Collection
-Aggregate and analyze results from /tmp/multi_agent/results.json.
+Aggregate and analyze results from SQLite via: python worldquant_brain/cli.py best.
 
 ### 4. Submission Decision
 Determine when alphas are ready for submission based on PPA standards.
@@ -26,8 +26,8 @@ Determine when alphas are ready for submission based on PPA standards.
 
 ### Phase 1: Initialization
 - Read /tmp/multi_agent/config.json to understand system state
-- Read /tmp/multi_agent/ideas.json to check existing ideas
-- Read /tmp/multi_agent/results.json to check existing results
+- Read SQLite via: python worldquant_brain/cli.py ideas to check existing ideas
+- Read SQLite via: python worldquant_brain/cli.py best to check existing results
 - Read /tmp/multi_agent/memory.json to access exploration history
 - Check /home/zxx/worldQuant/knowledge_base/memory/CURRENT_STATE.md for current progress
 
@@ -39,12 +39,12 @@ Determine when alphas are ready for submission based on PPA standards.
 
 ### Phase 3: Distribute Tasks
 - Assign 8 ideas to each of the 8 AlphaWorkers
-- Write updated ideas.json to /tmp/multi_agent/ideas.json
+- Write updated ideas.json to SQLite via: python worldquant_brain/cli.py ideas
 - Use the format: {"worker_id": "AlphaWorker_X", "ideas": [...]}
-- Update /tmp/multi_agent/state.json with worker assignments
+- Update SQLite+JSON via: python worldquant_brain/cli.py state with worker assignments
 
 ### Phase 4: Monitor & Iterate
-- Poll /tmp/multi_agent/results.json every 30 seconds
+- Poll SQLite via: python worldquant_brain/cli.py best every 30 seconds
 - Process events from /tmp/multi_agent/events/results/
 - Track current best Sharpe, Fitness, PPC, Margin, Turnover
 - When Sharpe > 1.0, send the alpha to GroupExplore for deep optimization
@@ -60,9 +60,9 @@ Team Lead can run as a continuous service via CronJob:
 ```
 
 The service script (`team_lead_service.py`) handles:
-1. Reading state from /tmp/multi_agent/state.json
+1. Reading state from SQLite+JSON via: python worldquant_brain/cli.py state
 2. Processing new events from /tmp/multi_agent/events/
-3. Checking results in /tmp/multi_agent/results.json
+3. Checking results in SQLite via: python worldquant_brain/cli.py best
 4. Assigning tasks to idle workers
 5. Making decisions (submission-ready, promising)
 6. Updating state
@@ -87,12 +87,12 @@ Report submission-ready alphas immediately with full metrics.
 
 Read from:
 - /tmp/multi_agent/config.json - system configuration
-- /tmp/multi_agent/ideas.json - idea queue
-- /tmp/multi_agent/results.json - results from workers
+- SQLite via: python worldquant_brain/cli.py ideas - idea queue
+- SQLite via: python worldquant_brain/cli.py best - results from workers
 - /tmp/multi_agent/memory.json - exploration memory
 
 Write to:
-- /tmp/multi_agent/ideas.json - distributed tasks
+- SQLite via: python worldquant_brain/cli.py ideas - distributed tasks
 - /tmp/multi_agent/logs/team_lead.log - activity log
 - /tmp/multi_agent/knowledge_transfer.json - findings to share
 

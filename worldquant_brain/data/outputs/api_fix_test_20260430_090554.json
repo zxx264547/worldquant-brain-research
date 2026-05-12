@@ -1,0 +1,212 @@
+{
+  "test_results": [
+    {
+      "name": null,
+      "expression": "ts_backfill(signed_power(ts_sum(winsorize(actual_eps_value_quarterly), 252), 1.05), 3)",
+      "id": "akA3mMNw",
+      "type": "REGULAR",
+      "author": "XZ37692",
+      "settings": {
+        "instrumentType": "EQUITY",
+        "region": "USA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08,
+        "pasteurization": "ON",
+        "unitHandling": "VERIFY",
+        "nanHandling": "OFF",
+        "maxTrade": "OFF",
+        "maxPosition": "OFF",
+        "language": "FASTEXPR",
+        "visualization": false,
+        "startDate": "2014-01-01",
+        "endDate": "2023-12-31"
+      },
+      "regular": {
+        "code": "ts_backfill(signed_power(ts_sum(winsorize(actual_eps_value_quarterly), 252), 1.05), 3)",
+        "description": null,
+        "operatorCount": 4
+      },
+      "dateCreated": "2026-04-29T21:05:53-04:00",
+      "dateSubmitted": null,
+      "dateModified": "2026-04-29T21:05:53-04:00",
+      "favorite": false,
+      "hidden": false,
+      "color": null,
+      "category": null,
+      "tags": [],
+      "classifications": [
+        {
+          "id": "DATA_USAGE:SINGLE_DATA_SET",
+          "name": "Single Data Set Alpha"
+        }
+      ],
+      "grade": null,
+      "stage": "IS",
+      "status": "UNSUBMITTED",
+      "is": {
+        "pnl": 22837553,
+        "bookSize": 20000000,
+        "longCount": 2355,
+        "shortCount": 627,
+        "turnover": 0.0039,
+        "returns": 0.2288,
+        "drawdown": 0.387,
+        "margin": 0.116558,
+        "sharpe": 0.88,
+        "fitness": 1.19,
+        "startDate": "2014-01-01",
+        "investabilityConstrained": {
+          "pnl": 3386377,
+          "bookSize": 20000000,
+          "longCount": 1845,
+          "shortCount": 1138,
+          "turnover": 0.0089,
+          "returns": 0.0339,
+          "drawdown": 0.2766,
+          "margin": 0.007646,
+          "fitness": 0.17,
+          "sharpe": 0.32
+        },
+        "riskNeutralized": {
+          "pnl": 1210235,
+          "bookSize": 20000000,
+          "longCount": 2355,
+          "shortCount": 627,
+          "turnover": 0.0039,
+          "returns": 0.0121,
+          "drawdown": 0.1563,
+          "margin": 0.006177,
+          "fitness": 0.06,
+          "sharpe": 0.19
+        },
+        "checks": [
+          {
+            "name": "LOW_SHARPE",
+            "result": "FAIL",
+            "limit": 1.58,
+            "value": 0.88
+          },
+          {
+            "name": "LOW_FITNESS",
+            "result": "PASS",
+            "limit": 1.0,
+            "value": 1.19
+          },
+          {
+            "name": "LOW_TURNOVER",
+            "result": "FAIL",
+            "limit": 0.01,
+            "value": 0.0039
+          },
+          {
+            "name": "HIGH_TURNOVER",
+            "result": "PASS",
+            "limit": 0.7,
+            "value": 0.0039
+          },
+          {
+            "name": "CONCENTRATED_WEIGHT",
+            "result": "FAIL",
+            "date": "2019-10-09",
+            "limit": 0.1,
+            "value": 0.154365
+          },
+          {
+            "name": "LOW_SUB_UNIVERSE_SHARPE",
+            "result": "FAIL",
+            "limit": 0.38,
+            "value": 0.15
+          },
+          {
+            "name": "SELF_CORRELATION",
+            "result": "PENDING"
+          },
+          {
+            "name": "DATA_DIVERSITY",
+            "result": "PENDING"
+          },
+          {
+            "name": "PROD_CORRELATION",
+            "result": "PENDING"
+          },
+          {
+            "name": "REGULAR_SUBMISSION",
+            "result": "PENDING"
+          },
+          {
+            "name": "HT_TURNOVER",
+            "result": "WARNING",
+            "limit": 0.2,
+            "value": 0.0039
+          },
+          {
+            "name": "HT_HIGH_TURNOVER_RETURNS_RATIO",
+            "result": "WARNING",
+            "limit": 0.75,
+            "value": 0.0302
+          },
+          {
+            "name": "HT_PNL_REALIZATION_HORIZON",
+            "result": "WARNING",
+            "limit": 20,
+            "value": 120
+          },
+          {
+            "name": "LOW_2Y_SHARPE",
+            "result": "FAIL",
+            "value": 0.54,
+            "limit": 1.58
+          },
+          {
+            "result": "PASS",
+            "name": "MATCHES_PYRAMID",
+            "effective": 1,
+            "multiplier": 1.2,
+            "pyramids": [
+              {
+                "name": "USA/D1/ANALYST",
+                "multiplier": 1.2
+              }
+            ]
+          },
+          {
+            "result": "WARNING",
+            "name": "MATCHES_THEMES",
+            "themes": [
+              {
+                "id": "KymLz14",
+                "multiplier": 1.0,
+                "name": "All regions/D1 Power Pool Apr`26 2"
+              },
+              {
+                "id": "q4O051y",
+                "multiplier": 3.0,
+                "name": "Orthogonal HTVR Theme"
+              }
+            ]
+          },
+          {
+            "name": "OSMOSIS_ALLOCATION",
+            "result": "WARNING"
+          }
+        ]
+      },
+      "os": null,
+      "train": null,
+      "test": null,
+      "prod": null,
+      "competitions": null,
+      "themes": null,
+      "pyramids": null,
+      "pyramidThemes": null,
+      "team": null,
+      "osmosisPoints": null,
+      "origin": "PLATFORM",
+      "note": "if you got a negative alpha sharpe, you can just add a minus sign in front of the last line of the Alpha to flip then think the next step."
+    }
+  ],
+  "submission_ready": null
+}

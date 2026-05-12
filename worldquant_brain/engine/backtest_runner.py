@@ -35,6 +35,16 @@ class BacktestRunner:
         """运行单个回测"""
         await self.init()
 
+        # 0. 表达式自动修复 (降低40% token浪费)
+        from worldquant_brain.engine.func_call_corrector import fixer
+        original_expr = expression
+        try:
+            expression = fixer.fix(expression, fill_defaults=False)
+            if expression != original_expr:
+                print(f"  [FIX] 表达式已修复: {original_expr[:50]}... → {expression[:50]}...")
+        except Exception:
+            pass  # 修复失败则用原文
+
         # 1. SQLite去重
         expr_hash = hashlib.sha256(expression.encode()).hexdigest()[:16]
         if cached := store.find(expression):
@@ -74,9 +84,13 @@ class BacktestRunner:
         sharpe = result['sharpe']
         if sharpe >= 1.0:
             await self._auto_knowledge(result)
-            # 对低Fitness的Alpha应用Skill修复
             if result.get('fitness', 0) < 1.0:
                 await self._apply_skill_fix(result)
+
+        # 5. AlphaHarness记账 (如果已注入)
+        if hasattr(self, '_shared_harness') and self._shared_harness:
+            self._shared_harness.feed_result(
+                self._shared_harness.current_round, result)
 
         return result
 

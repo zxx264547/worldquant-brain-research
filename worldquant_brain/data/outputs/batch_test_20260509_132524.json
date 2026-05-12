@@ -1,0 +1,141 @@
+{
+  "test_results": [
+    {
+      "name": "close",
+      "expression": "close",
+      "error": "Simulation polling timed out after 180s"
+    },
+    {
+      "name": "ts_mean(close,5)",
+      "expression": "ts_mean(close, 5)",
+      "error": "Simulation polling timed out after 180s"
+    },
+    {
+      "name": "ts_mean(close,22)",
+      "expression": "ts_mean(close, 22)",
+      "alpha_id": "9qaQe369",
+      "sharpe": 0.78,
+      "fitness": 1.11,
+      "margin": 0.131796,
+      "turnover": 0.0038,
+      "ppc": 0.5244568245125347,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_mean(close,66)",
+      "expression": "ts_mean(close, 66)",
+      "alpha_id": "akAGRneO",
+      "sharpe": 0.78,
+      "fitness": 1.11,
+      "margin": 0.18048,
+      "turnover": 0.0028,
+      "ppc": 0.7125148045795499,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_delta(close,1)",
+      "expression": "ts_delta(close, 1)",
+      "alpha_id": "KPXeK5dj",
+      "sharpe": -0.57,
+      "fitness": -0.17,
+      "margin": -0.000188,
+      "turnover": 1.4252,
+      "ppc": 0.0014061331338818248,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_delta(close,5)",
+      "expression": "ts_delta(close, 5)",
+      "error": "Simulation polling timed out after 180s"
+    },
+    {
+      "name": "rank(close)",
+      "expression": "rank(close)",
+      "alpha_id": "npZ01Abz",
+      "sharpe": 0.67,
+      "fitness": 0.93,
+      "margin": 0.04778,
+      "turnover": 0.01,
+      "ppc": 0.1994989561586639,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "rank(ts_mean(close,22))",
+      "expression": "rank(ts_mean(close, 22))",
+      "alpha_id": "3qaJ5abX",
+      "sharpe": 0.68,
+      "fitness": 0.95,
+      "margin": 0.121582,
+      "turnover": 0.004,
+      "ppc": 0.4974713584288052,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_min(vec_min(anl69_best_eps_stddev),22)",
+      "expression": "ts_min(vec_min(anl69_best_eps_stddev), 22)",
+      "alpha_id": "QP2eZpL5",
+      "sharpe": 0.42,
+      "fitness": 0.47,
+      "margin": 0.007169,
+      "turnover": 0.0439,
+      "ppc": 0.04551746031746032,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_max(vec_max(anl69_best_eps_stddev),22)",
+      "expression": "ts_max(vec_max(anl69_best_eps_stddev), 22)",
+      "alpha_id": "9qaoYkOx",
+      "sharpe": 0.41,
+      "fitness": 0.52,
+      "margin": 0.007768,
+      "turnover": 0.0512,
+      "ppc": 0.03909411172622043,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "group_rank(close, industry)",
+      "expression": "group_rank(close, industry)",
+      "alpha_id": "LLg32Apa",
+      "sharpe": 0.65,
+      "fitness": 0.89,
+      "margin": 0.033168,
+      "turnover": 0.0142,
+      "ppc": 0.14042337002540223,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "group_rank(ts_mean(close,22), industry)",
+      "expression": "group_rank(ts_mean(close, 22), industry)",
+      "alpha_id": "LLgxowwv",
+      "sharpe": 0.66,
+      "fitness": 0.92,
+      "margin": 0.072482,
+      "turnover": 0.0066,
+      "ppc": 0.30113003739094313,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_backfill(signed_power(ts_sum(winsorize(actual_eps_value_quarterly),252),1.05),3)",
+      "expression": "ts_backfill(signed_power(ts_sum(winsorize(actual_eps_value_quarterly), 252), 1.05), 3)",
+      "alpha_id": "akA3mMNw",
+      "sharpe": 0.88,
+      "fitness": 1.19,
+      "margin": 0.116558,
+      "turnover": 0.0039,
+      "ppc": 0.5094318181818182,
+      "is_ready": false,
+      "is_promising": false
+    }
+  ],
+  "submission_ready": null,
+  "timestamp": "2026-05-09T13:25:24.242231"
+}

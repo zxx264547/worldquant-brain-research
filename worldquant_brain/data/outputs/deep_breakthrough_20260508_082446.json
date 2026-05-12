@@ -1,0 +1,216 @@
+{
+  "test_type": "Deep Breakthrough",
+  "variants": [
+    {
+      "name": "EUR_best_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "EUR",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      }
+    },
+    {
+      "name": "ASI_best_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "ASI",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      }
+    },
+    {
+      "name": "EUR_decay_eps",
+      "expression": "ts_decay_linear(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "EUR",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      }
+    },
+    {
+      "name": "ASI_decay_eps",
+      "expression": "ts_decay_linear(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "ASI",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      }
+    },
+    {
+      "name": "INDIA_best_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "INDIA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      }
+    },
+    {
+      "name": "EUR_multi_field",
+      "expression": "rank(ts_sum(actual_eps_value_quarterly, 252)) + rank(ts_sum(actual_cashflow_value_quarterly, 252))",
+      "settings": {
+        "region": "EUR",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      }
+    },
+    {
+      "name": "TOP1500_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "USA",
+        "universe": "TOP1500",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      }
+    },
+    {
+      "name": "TOP500_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      }
+    }
+  ],
+  "results": [
+    {
+      "name": "EUR_best_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "EUR",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      },
+      "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+    },
+    {
+      "name": "ASI_best_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "ASI",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      },
+      "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region ASI.\"]}}"
+    },
+    {
+      "name": "EUR_decay_eps",
+      "expression": "ts_decay_linear(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "EUR",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      },
+      "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+    },
+    {
+      "name": "ASI_decay_eps",
+      "expression": "ts_decay_linear(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "ASI",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      },
+      "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region ASI.\"]}}"
+    },
+    {
+      "name": "INDIA_best_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "INDIA",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      },
+      "error": "Failed to create simulation: 400 {\"settings\":{\"region\":[\"\\\"INDIA\\\" is not a valid choice.\"]}}"
+    },
+    {
+      "name": "EUR_multi_field",
+      "expression": "rank(ts_sum(actual_eps_value_quarterly, 252)) + rank(ts_sum(actual_cashflow_value_quarterly, 252))",
+      "settings": {
+        "region": "EUR",
+        "universe": "TOP3000",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      },
+      "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+    },
+    {
+      "name": "TOP1500_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "USA",
+        "universe": "TOP1500",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      },
+      "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP1500 is not available for instrument type EQUITY and region USA.\"]}}"
+    },
+    {
+      "name": "TOP500_eps",
+      "expression": "ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)",
+      "settings": {
+        "region": "USA",
+        "universe": "TOP500",
+        "delay": 1,
+        "decay": 0,
+        "neutralization": "NONE",
+        "truncation": 0.08
+      },
+      "sharpe": 0.79,
+      "fitness": 1.08,
+      "margin": 0.058883,
+      "turnover": 0.008,
+      "ppc": 0.2503528911564626,
+      "is_ready": false,
+      "breakthrough_1.17": false
+    }
+  ],
+  "breakthrough": null,
+  "submission_ready": null,
+  "timestamp": "2026-05-08T08:24:46.988306"
+}

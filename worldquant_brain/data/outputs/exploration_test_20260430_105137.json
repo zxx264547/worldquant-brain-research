@@ -1,0 +1,62 @@
+{
+  "test_results": [
+    {
+      "name": "ts_backfill(signed_power(ts_sum(winsorize(actual_eps_value_quarterly), 22), 1.05), 1)",
+      "expression": "ts_backfill(signed_power(ts_sum(winsorize(actual_eps_value_quarterly), 22), 1.05), 1)",
+      "alpha_id": "xAPMAzEl",
+      "sharpe": 0.95,
+      "fitness": 1.28,
+      "margin": 0.042003,
+      "turnover": 0.0109,
+      "ppc": 0.18414291977202982,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_mean(winsorize(actual_eps_value_quarterly), 22)",
+      "expression": "ts_mean(winsorize(actual_eps_value_quarterly), 22)",
+      "alpha_id": "wpn6KVJ1",
+      "sharpe": 0.96,
+      "fitness": 1.29,
+      "margin": 0.041078,
+      "turnover": 0.011,
+      "ppc": 0.18216407982261643,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_sum(winsorize(actual_eps_value_quarterly), 22)",
+      "expression": "ts_sum(winsorize(actual_eps_value_quarterly), 22)",
+      "alpha_id": "MPKwM8dr",
+      "sharpe": 0.97,
+      "fitness": 1.31,
+      "margin": 0.04314,
+      "turnover": 0.0106,
+      "ppc": 0.18821989528795813,
+      "is_ready": false,
+      "is_promising": false
+    },
+    {
+      "name": "ts_mean(mdl136_qes_etf_us_flow_gross_pctvol_1, 22)",
+      "expression": "ts_mean(mdl136_qes_etf_us_flow_gross_pctvol_1, 22)",
+      "error": "Simulation error: Attempted to use unknown variable \"mdl136_qes_etf_us_flow_gross_pctvol_1\". <linkToCommonErrorMessage"
+    },
+    {
+      "name": "ts_mean(mdl136_qes_etf_us_flow_gross_pctvol_1, 5)",
+      "expression": "ts_mean(mdl136_qes_etf_us_flow_gross_pctvol_1, 5)",
+      "error": "Simulation error: Attempted to use unknown variable \"mdl136_qes_etf_us_flow_gross_pctvol_1\". <linkToCommonErrorMessage"
+    },
+    {
+      "name": "ts_mean(mdl136_qes_etf_us_flow_gross_pctvol_1, 5) with decay=2",
+      "expression": "ts_mean(mdl136_qes_etf_us_flow_gross_pctvol_1, 5)",
+      "error": "Simulation error: Attempted to use unknown variable \"mdl136_qes_etf_us_flow_gross_pctvol_1\". <linkToCommonErrorMessage"
+    },
+    {
+      "name": "ts_sum(mdl136_qes_etf_us_flow_gross_pctvol_1, 22) + ts_sum(actual_eps_value_quarterly, 22)",
+      "expression": "ts_sum(mdl136_qes_etf_us_flow_gross_pctvol_1, 22) + ts_sum(actual_eps_value_quarterly, 22)",
+      "error": "Simulation error: Attempted to use unknown variable \"mdl136_qes_etf_us_flow_gross_pctvol_1\". <linkToCommonErrorMessage"
+    }
+  ],
+  "submission_ready": null,
+  "timestamp": "2026-04-30T10:51:37.040091"
+}

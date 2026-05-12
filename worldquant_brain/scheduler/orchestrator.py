@@ -158,7 +158,11 @@ class Orchestrator:
             ("rsi_14", ExpressionTemplates.tech_rsi(14)),
             ("mom_60", ExpressionTemplates.tech_momentum(60)),
         ]
-        return {"base_alphas": bases, "technicals": techs}
+        return {
+            "base_alphas": bases,
+            "technicals": techs,
+            "regions": ["USA", "CHN"],
+        }
 
 
 async def main():

@@ -1,0 +1,617 @@
+{
+  "pv87": {
+    "count": 50,
+    "fields": [
+      {
+        "id": "pv87_2_affops_af_matrix_all_chngratio_number",
+        "description": "count number of all change ratio of Adjusted Funds from Operations per Share (AF"
+      },
+      {
+        "id": "pv87_2_affops_af_matrix_all_number",
+        "description": "count number of estimates (once for one analyst) of Adjusted Funds from Operatio"
+      },
+      {
+        "id": "pv87_2_affops_af_matrix_p1_b_chngratio_number",
+        "description": "count number of all change ratio of Adjusted Funds from Operations per Share (AF"
+      },
+      {
+        "id": "pv87_2_affops_af_matrix_p1_b_number",
+        "description": "count number of estimates (once for one analyst) of Adjusted Funds from Operatio"
+      },
+      {
+        "id": "pv87_2_affops_af_matrix_p1_chngratio_number",
+        "description": "count number of all change ratio of Adjusted Funds from Operations per Share (AF"
+      },
+      {
+        "id": "pv87_2_affops_af_matrix_p1_number",
+        "description": "count number of estimates (once for one analyst) of Adjusted Funds from Operatio"
+      },
+      {
+        "id": "pv87_2_affops_qf_matrix_all_chngratio_number",
+        "description": "count number of all change ratio of Adjusted Funds from Operations per Share (AF"
+      },
+      {
+        "id": "pv87_2_affops_qf_matrix_all_number",
+        "description": "count number of estimates (once for one analyst) of Adjusted Funds from Operatio"
+      },
+      {
+        "id": "pv87_2_affops_qf_matrix_p1_b_chngratio_number",
+        "description": "count number of all change ratio of Adjusted Funds from Operations per Share (AF"
+      },
+      {
+        "id": "pv87_2_affops_qf_matrix_p1_b_number",
+        "description": "count number of estimates (once for one analyst) of Adjusted Funds from Operatio"
+      },
+      {
+        "id": "pv87_2_affops_qf_matrix_p1_chngratio_number",
+        "description": "count number of all change ratio of Adjusted Funds from Operations per Share (AF"
+      },
+      {
+        "id": "pv87_2_affops_qf_matrix_p1_number",
+        "description": "count number of estimates (once for one analyst) of Adjusted Funds from Operatio"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_chngratio_high",
+        "description": "highest value of all change ratio of Book Value Per Share *change ratio = ((curr"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_chngratio_low",
+        "description": "lowest value of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_chngratio_mean",
+        "description": "mean value of all change ratio of Book Value Per Share *change ratio = ((current"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_chngratio_median",
+        "description": "median value of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_chngratio_number",
+        "description": "count number of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_chngratio_std",
+        "description": "std value of all change ratio of Book Value Per Share *change ratio = ((current "
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_dts",
+        "description": "std value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_high",
+        "description": "highest value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_low",
+        "description": "lowest value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_mean",
+        "description": "mean value of all analysts estimates of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_median",
+        "description": "median value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_all_number",
+        "description": "count number of estimates (once for one analyst) of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_chngratio_high",
+        "description": "highest value of all change ratio of Book Value Per Share *change ratio = ((curr"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_chngratio_low",
+        "description": "lowest value of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_chngratio_mean",
+        "description": "mean value of all change ratio of Book Value Per Share *change ratio = ((current"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_chngratio_median",
+        "description": "median value of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_chngratio_number",
+        "description": "count number of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_chngratio_std",
+        "description": "std value of all change ratio of Book Value Per Share *change ratio = ((current "
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_dts",
+        "description": "std value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_high",
+        "description": "highest value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_low",
+        "description": "lowest value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_mean",
+        "description": "mean value of all analysts estimates of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_median",
+        "description": "median value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_b_number",
+        "description": "count number of estimates (once for one analyst) of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_chngratio_high",
+        "description": "highest value of all change ratio of Book Value Per Share *change ratio = ((curr"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_chngratio_low",
+        "description": "lowest value of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_chngratio_mean",
+        "description": "mean value of all change ratio of Book Value Per Share *change ratio = ((current"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_chngratio_median",
+        "description": "median value of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_chngratio_number",
+        "description": "count number of all change ratio of Book Value Per Share *change ratio = ((curre"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_chngratio_std",
+        "description": "std value of all change ratio of Book Value Per Share *change ratio = ((current "
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_dts",
+        "description": "std value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_high",
+        "description": "highest value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_low",
+        "description": "lowest value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_mean",
+        "description": "mean value of all analysts estimates of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_median",
+        "description": "median value of all analysts estimates  of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_af_matrix_p1_number",
+        "description": "count number of estimates (once for one analyst) of Book Value Per Share"
+      },
+      {
+        "id": "pv87_2_bps_qf_matrix_all_chngratio_high",
+        "description": "highest value of all change ratio of Book Value Per Share *change ratio = ((curr"
+      },
+      {
+        "id": "pv87_2_bps_qf_matrix_all_chngratio_low",
+        "description": "lowest value of all change ratio of Book Value Per Share *change ratio = ((curre"
+      }
+    ]
+  },
+  "fundamental6": {
+    "count": 50,
+    "fields": [
+      {
+        "id": "assets",
+        "description": "Assets - Total"
+      },
+      {
+        "id": "assets_curr",
+        "description": "Current Assets - Total"
+      },
+      {
+        "id": "bookvalue_ps",
+        "description": "Book Value Per Share"
+      },
+      {
+        "id": "capex",
+        "description": "Capital Expenditures"
+      },
+      {
+        "id": "cash",
+        "description": "Cash"
+      },
+      {
+        "id": "cash_st",
+        "description": "Cash and Short-Term Investments"
+      },
+      {
+        "id": "cashflow",
+        "description": "Cashflow (Annual)"
+      },
+      {
+        "id": "cashflow_dividends",
+        "description": "Cash Dividends (Cash Flow)"
+      },
+      {
+        "id": "cashflow_fin",
+        "description": "Financing Activities - Net Cash Flow"
+      },
+      {
+        "id": "cashflow_invst",
+        "description": "Investing Activities - Net Cash Flow"
+      },
+      {
+        "id": "cashflow_op",
+        "description": "Operating Activities - Net Cash Flow"
+      },
+      {
+        "id": "cogs",
+        "description": "Cost of Goods Sold"
+      },
+      {
+        "id": "current_ratio",
+        "description": "Current Ratio"
+      },
+      {
+        "id": "debt",
+        "description": "Debt"
+      },
+      {
+        "id": "debt_lt",
+        "description": "Long-Term Debt - Total"
+      },
+      {
+        "id": "debt_st",
+        "description": "Debt in Current Liabilities"
+      },
+      {
+        "id": "depre_amort",
+        "description": "Depreciation and Amortization - Total"
+      },
+      {
+        "id": "ebit",
+        "description": "Earnings Before Interest and Taxes"
+      },
+      {
+        "id": "ebitda",
+        "description": "Earnings Before Interest"
+      },
+      {
+        "id": "employee",
+        "description": "Employees"
+      },
+      {
+        "id": "enterprise_value",
+        "description": "Enterprise Value"
+      },
+      {
+        "id": "eps",
+        "description": "Earnings Per Share (Basic) - Including Extraordinary Items"
+      },
+      {
+        "id": "equity",
+        "description": "Common/Ordinary Equity - Total"
+      },
+      {
+        "id": "fnd6_acdo",
+        "description": "Current Assets of Discontinued Operations"
+      },
+      {
+        "id": "fnd6_acodo",
+        "description": "Other Current Assets Excl Discontinued Operations"
+      },
+      {
+        "id": "fnd6_acox",
+        "description": "Current Assets - Other - Sundry"
+      },
+      {
+        "id": "fnd6_acqgdwl",
+        "description": "Acquired Assets - Goodwill"
+      },
+      {
+        "id": "fnd6_acqintan",
+        "description": "Acquired Assets - Intangibles"
+      },
+      {
+        "id": "fnd6_adesinda_curcd",
+        "description": "ISO Currency Code - Company Annual Market"
+      },
+      {
+        "id": "fnd6_aldo",
+        "description": "Long-term Assets of Discontinued Operations"
+      },
+      {
+        "id": "fnd6_am",
+        "description": "Amortization of Intangibles"
+      },
+      {
+        "id": "fnd6_aodo",
+        "description": "Other Assets excluding Discontinued Operations"
+      },
+      {
+        "id": "fnd6_aox",
+        "description": "Assets - Other - Sundry"
+      },
+      {
+        "id": "fnd6_aqc",
+        "description": "Acquisitions"
+      },
+      {
+        "id": "fnd6_aqi",
+        "description": "Acquisitions - Income Contribution"
+      },
+      {
+        "id": "fnd6_aqs",
+        "description": "Acquisitions - Sales Contribution"
+      },
+      {
+        "id": "fnd6_beta",
+        "description": "beta"
+      },
+      {
+        "id": "fnd6_capxs",
+        "description": "Capital Expenditures"
+      },
+      {
+        "id": "fnd6_capxv",
+        "description": "Capital Expend Property, Plant and Equipment Schd V"
+      },
+      {
+        "id": "fnd6_caxts",
+        "description": "Cost and Expenses - Total"
+      },
+      {
+        "id": "fnd6_ceql",
+        "description": "Common Equity - Liquidation Value"
+      },
+      {
+        "id": "fnd6_ch",
+        "description": "Cash"
+      },
+      {
+        "id": "fnd6_ci",
+        "description": "Comprehensive Income - Total"
+      },
+      {
+        "id": "fnd6_cibegni",
+        "description": "Comp Inc - Beginning Net Income"
+      },
+      {
+        "id": "fnd6_cicurr",
+        "description": "Comp Inc - Currency Trans Adj"
+      },
+      {
+        "id": "fnd6_cidergl",
+        "description": "Comp Inc - Derivative Gains/Losses"
+      },
+      {
+        "id": "fnd6_cik",
+        "description": "nonimportant technical code"
+      },
+      {
+        "id": "fnd6_cimii",
+        "description": "Comprehensive Income - Noncontrolling Interest"
+      },
+      {
+        "id": "fnd6_ciother",
+        "description": "Comp. Inc. - Other Adj."
+      },
+      {
+        "id": "fnd6_cipen",
+        "description": "Comprehensive Income - Minimum Pension Adjustment"
+      }
+    ]
+  },
+  "analyst4": {
+    "count": 50,
+    "fields": [
+      {
+        "id": "actual_cashflow_per_share_value_quarterly",
+        "description": "Cash Flow Per Share - actual value for the quarter"
+      },
+      {
+        "id": "actual_dividend_value_quarterly",
+        "description": "Dividend - Actual value for the quarter"
+      },
+      {
+        "id": "actual_eps_value_quarterly",
+        "description": "Earnings Per Share (Income Statement/Per Share) (Actual)"
+      },
+      {
+        "id": "actual_sales_value_annual",
+        "description": "Sales - Actual Value"
+      },
+      {
+        "id": "actual_sales_value_quarterly",
+        "description": "Sales - Value in financial services income statement (in millions)"
+      },
+      {
+        "id": "actuals_reporting_currency",
+        "description": "Home currency of instrument"
+      },
+      {
+        "id": "actuals_value_currency_code",
+        "description": "Pricing Currency where the security trades"
+      },
+      {
+        "id": "anl4_adjusted_netincome_ft",
+        "description": "Adjusted net income - forecast type (revision/new/...)"
+      },
+      {
+        "id": "anl4_ads1detailafv110_bk",
+        "description": "Broker name (int)"
+      },
+      {
+        "id": "anl4_ads1detailafv110_estvalue",
+        "description": "Estimation value"
+      },
+      {
+        "id": "anl4_ads1detailafv110_person",
+        "description": "Broker Id"
+      },
+      {
+        "id": "anl4_ads1detailafv110_prevval",
+        "description": "The Previous Estimation of Financial Item"
+      },
+      {
+        "id": "anl4_ads1detailqfv110_bk",
+        "description": "Broker name (int)"
+      },
+      {
+        "id": "anl4_ads1detailqfv110_estvalue",
+        "description": "Estimation value"
+      },
+      {
+        "id": "anl4_ads1detailqfv110_person",
+        "description": "Broker Id"
+      },
+      {
+        "id": "anl4_ads1detailqfv110_prevval",
+        "description": "The previous estimation of financial item"
+      },
+      {
+        "id": "anl4_adxqfv110_down",
+        "description": "Number of lower estimations"
+      },
+      {
+        "id": "anl4_adxqfv110_high",
+        "description": "The highest estimation"
+      },
+      {
+        "id": "anl4_adxqfv110_low",
+        "description": "The lowest estimation"
+      },
+      {
+        "id": "anl4_adxqfv110_mean",
+        "description": "Mean of estimations"
+      },
+      {
+        "id": "anl4_adxqfv110_median",
+        "description": "Median of estimations"
+      },
+      {
+        "id": "anl4_adxqfv110_numest",
+        "description": "The number of forecasts counted in aggregation"
+      },
+      {
+        "id": "anl4_adxqfv110_pu",
+        "description": "The number of upper estimations"
+      },
+      {
+        "id": "anl4_ady_down",
+        "description": "Number of lower estimations"
+      },
+      {
+        "id": "anl4_ady_high",
+        "description": "The highest estimation"
+      },
+      {
+        "id": "anl4_ady_low",
+        "description": "The lowest estimation"
+      },
+      {
+        "id": "anl4_ady_mean",
+        "description": "Mean of estimations"
+      },
+      {
+        "id": "anl4_ady_median",
+        "description": "Median of estimations"
+      },
+      {
+        "id": "anl4_ady_numest",
+        "description": "The number of forecasts counted in aggregation"
+      },
+      {
+        "id": "anl4_ady_pu",
+        "description": "The number of upper estimations"
+      },
+      {
+        "id": "anl4_af_cfps_value",
+        "description": "Cash Flow Per Share - Actual Value"
+      },
+      {
+        "id": "anl4_af_div_value",
+        "description": "Dividend - Actual value"
+      },
+      {
+        "id": "anl4_af_eps_value",
+        "description": "Earnings Per Share - Actual Value"
+      },
+      {
+        "id": "anl4_afv4_actual",
+        "description": "Announced financial data"
+      },
+      {
+        "id": "anl4_afv4_cfps_high",
+        "description": "Cash Flow Per Share - The highest estimation for the annual forecast"
+      },
+      {
+        "id": "anl4_afv4_cfps_low",
+        "description": "Cash Flow Per Share - The lowest estimation for the upcoming fiscal year"
+      },
+      {
+        "id": "anl4_afv4_cfps_mean",
+        "description": "Cash Flow Per Share - average of estimations for the annual frequency"
+      },
+      {
+        "id": "anl4_afv4_cfps_median",
+        "description": "Cash Flow Per Share - Median value among forecasts for the annual frequency"
+      },
+      {
+        "id": "anl4_afv4_cfps_number",
+        "description": "Cash Flow Per Share - number of estimations for annual frequency"
+      },
+      {
+        "id": "anl4_afv4_div_high",
+        "description": "Dividend per share - The highest estimation for the annual forecast."
+      },
+      {
+        "id": "anl4_afv4_div_low",
+        "description": "Dividend - The lowest estimation for the annual forecast"
+      },
+      {
+        "id": "anl4_afv4_div_mean",
+        "description": "Dividend per share - average of estimations for annual frequency"
+      },
+      {
+        "id": "anl4_afv4_div_median",
+        "description": "Dividend per share - Median value among forecasts"
+      },
+      {
+        "id": "anl4_afv4_div_number",
+        "description": "Number of estimations for Dividend per share - annually"
+      },
+      {
+        "id": "anl4_afv4_div_std",
+        "description": "Dividend per share - standard deviation of estimations"
+      },
+      {
+        "id": "anl4_afv4_dts_spe",
+        "description": "Earnings per share - standard deviation of estimations"
+      },
+      {
+        "id": "anl4_afv4_eps_high",
+        "description": "Earnings per share - The highest estimation"
+      },
+      {
+        "id": "anl4_afv4_eps_low",
+        "description": "Earnings per share - The lowest estimation for annual frequency"
+      },
+      {
+        "id": "anl4_afv4_eps_mean",
+        "description": "Earnings per share - mean of estimations for annual frequency"
+      },
+      {
+        "id": "anl4_afv4_eps_number",
+        "description": "Earnings per share - number of estimations for annual frequency"
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "alpha_id": "blWK5YgK",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 10)",
+    "sharpe": 1.01,
+    "fitness": 1.4,
+    "margin": 0.035508,
+    "turnover": 0.0135
+  },
+  {
+    "alpha_id": "vRJPXEja",
+    "code": "ts_decay_linear(ts_mean(winsorize(actual_eps_value_quarterly), 25), 15)",
+    "sharpe": 1.01,
+    "fitness": 1.41,
+    "margin": 0.041583,
+    "turnover": 0.0117
+  },
+  {
+    "alpha_id": "npOrXjO3",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 20)",
+    "sharpe": 1.01,
+    "fitness": 1.41,
+    "margin": 0.038983,
+    "turnover": 0.0124
+  },
+  {
+    "alpha_id": "9qAk2alr",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 15)",
+    "sharpe": 1.01,
+    "fitness": 1.4,
+    "margin": 0.037611,
+    "turnover": 0.0128
+  },
+  {
+    "alpha_id": "1Yn2qRVK",
+    "code": "ts_mean(winsorize(anl4_af_eps_value), 25)",
+    "sharpe": 0.98,
+    "fitness": 1.38,
+    "margin": 0.098956,
+    "turnover": 0.005
+  },
+  {
+    "alpha_id": "zqJexlKG",
+    "code": "ts_mean(winsorize(pv87_2_affops_af_matrix_p1_chngratio_number), 25)",
+    "sharpe": 0.64,
+    "fitness": 0.92,
+    "margin": 0.123165,
+    "turnover": 0.0042
+  },
+  {
+    "alpha_id": "9qAknObr",
+    "code": "ts_mean(winsorize(anl4_adjusted_netincome_ft), 25)",
+    "sharpe": 0.59,
+    "fitness": 0.81,
+    "margin": 0.096841,
+    "turnover": 0.0049
+  },
+  {
+    "alpha_id": "kqL9x3Yk",
+    "code": "ts_zscore(ts_mean(winsorize(actual_eps_value_quarterly), 25), 20)",
+    "sharpe": 0.53,
+    "fitness": 0.3,
+    "margin": 0.000635,
+    "turnover": 0.1542
+  },
+  {
+    "alpha_id": "MP5NYnVL",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25) - ts_mean(winsorize(actual_eps_value_quarterly), 5)",
+    "sharpe": 0.1,
+    "fitness": 0.04,
+    "margin": 0.000312,
+    "turnover": 0.168
+  },
+  {
+    "alpha_id": "WjWJZQPP",
+    "code": "ts_mean(winsorize(pv87_2_bps_af_matrix_all_chngratio_mean), 25)",
+    "sharpe": -0.4,
+    "fitness": -0.36,
+    "margin": -0.008406,
+    "turnover": 0.0235
+  }
+]

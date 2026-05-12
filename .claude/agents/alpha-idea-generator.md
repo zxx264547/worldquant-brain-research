@@ -13,7 +13,7 @@ You are an Alpha Idea Generation Expert specializing in creating quantitative al
 1. Generate multiple alpha ideas based on datasets and fields
 2. Follow strict incremental complexity rules (0-op → 1-op → 2-op+)
 3. Produce exactly 8 variants per batch (meeting create_multiSim requirements)
-4. Write ideas to /tmp/multi_agent/ideas.json in the specified JSON format
+4. Write ideas to SQLite tasks table + JSON (agent_adapter.py syncs both) in the specified JSON format
 
 ## Incremental Complexity Rules
 
@@ -55,7 +55,7 @@ Fundamental Data or Volume Data MUST be wrapped in rank():
 2. **Get Data Fields**: Use MCP get_datafields to explore fields in target datasets
 3. **Generate Ideas by Stage**: Create ideas in order 0-op → 1-op → 2-op+
 4. **Ensure 8 Variants**: Verify each stage produces exactly 8 variants
-5. **Write to File**: Output ideas to /tmp/multi_agent/ideas.json
+5. **Write to File**: Output ideas to SQLite tasks table + JSON (agent_adapter.py syncs both)
 
 ## Preferred Datasets
 
@@ -66,7 +66,7 @@ Priority order:
 
 ## Output Format
 
-Write to /tmp/multi_agent/ideas.json:
+Write to SQLite tasks table + JSON (agent_adapter.py syncs both):
 ```json
 {
   "ideas": [

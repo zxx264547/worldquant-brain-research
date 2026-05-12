@@ -1,0 +1,70 @@
+[
+  {
+    "name": "EUR_mdl136_flow_rank",
+    "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+  },
+  {
+    "name": "EUR_mdl136_flow_mean",
+    "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+  },
+  {
+    "name": "EUR_risk60_vol_rank",
+    "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+  },
+  {
+    "name": "EUR_risk60_vol_mean",
+    "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+  },
+  {
+    "name": "EUR_fund6_revenue_rank",
+    "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+  },
+  {
+    "name": "EUR_fund6_revenue_mean",
+    "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region EUR.\"]}}"
+  },
+  {
+    "name": "GLB_mdl136_flow_rank",
+    "error": "Simulation error: Attempted to use unknown variable \"mdl136_qes_etf_us_flow_gross_pctvol_1\". <linkToCommonErrorMessage"
+  },
+  {
+    "name": "GLB_risk60_vol_rank",
+    "error": "Simulation error: Attempted to use unknown variable \"risk60_volatility_20d\". <linkToCommonErrorMessages>Learn more</li"
+  },
+  {
+    "name": "CHN_mdl136_flow_rank",
+    "error": "Failed to create simulation: 400 {\"settings\":{\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region CHN.\"]}}"
+  },
+  {
+    "name": "JPN_mdl136_flow_rank",
+    "error": "Failed to create simulation: 400 {\"settings\":{\"region\":[\"Region JPN is not available.\"],\"universe\":[\"Universe TOP3000 is not available for instrument type EQUITY and region JPN.\"]}}"
+  },
+  {
+    "name": "ts_corr_eps_vol",
+    "error": "Simulation error: Attempted to use unknown variable \"risk60_volatility_20d\". <linkToCommonErrorMessages>Learn more</li"
+  },
+  {
+    "name": "ts_corr_revenue_vol",
+    "error": "Simulation error: Attempted to use unknown variable \"fundamental6_total_revenue\". <linkToCommonErrorMessages>Learn mor"
+  },
+  {
+    "name": "ts_corr_eps_price",
+    "error": "RetryableBrainClient.get_alpha_with_retry() got an unexpected keyword argument 'timeout'"
+  },
+  {
+    "name": "ts_zscore_eps",
+    "error": "RetryableBrainClient.get_alpha_with_retry() got an unexpected keyword argument 'timeout'"
+  },
+  {
+    "name": "ts_zscore_revenue",
+    "error": "Simulation error: Attempted to use unknown variable \"fundamental6_total_revenue\". <linkToCommonErrorMessages>Learn mor"
+  },
+  {
+    "name": "sign_eps_mean",
+    "error": "RetryableBrainClient.get_alpha_with_retry() got an unexpected keyword argument 'timeout'"
+  },
+  {
+    "name": "sign_volatility",
+    "error": "Simulation error: Attempted to use unknown variable \"risk60_volatility_20d\". <linkToCommonErrorMessages>Learn more</li"
+  }
+]

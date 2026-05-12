@@ -499,6 +499,40 @@ async def api_traffic_light():
         conn.close()
 
 
+# ─── Harness / Ledger API ───
+
+@app.get("/api/harness/summary")
+async def api_harness_summary():
+    """AlphaHarness总览"""
+    from worldquant_brain.engine.ledger import ledger
+    from worldquant_brain.engine.route_contract import RouteContract
+    return {
+        "ledger": ledger.get_summary(),
+        "rounds": ledger.get_rounds(10),
+        "contracts": {
+            "eps_usa": RouteContract.template_eps_usa().to_dict(),
+            "breakthrough": RouteContract.template_breakthrough().to_dict(),
+        }
+    }
+
+
+@app.get("/api/harness/failures")
+async def api_harness_failures(failure_type: str = None, limit: int = 50):
+    """失败记录查询"""
+    from worldquant_brain.engine.ledger import ledger
+    return {
+        "failures": ledger.get_failures(failure_type, limit),
+        "by_type": ledger.get_summary().get('failures_by_type', {})
+    }
+
+
+# ─── 健康检查 ───
+
+@app.get("/health")
+async def health():
+    return {"status": "ok", "timestamp": datetime.now().isoformat()}
+
+
 # ─── 页面路由 ───
 
 @app.get("/", response_class=HTMLResponse)

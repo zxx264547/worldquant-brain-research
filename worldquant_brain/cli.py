@@ -2,8 +2,10 @@
 """WorldQuant BRAIN 统一CLI"""
 
 import asyncio
+import json
 import sys
 from pathlib import Path
+from datetime import datetime
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -102,6 +104,64 @@ def cmd_submittable(args):
               f"Name={a['name'][:40]}")
 
 
+def cmd_ideas(args):
+    """查看待处理的Ideas (Agent用)"""
+    from worldquant_brain.engine.agent_adapter import load_ideas
+    ideas = load_ideas(args.limit or 8)
+    if not ideas:
+        print("暂无待处理Idea")
+    for i, idea in enumerate(ideas):
+        expr = idea.get('expression', '')[:60]
+        print(f"  [{i}] {idea.get('idea_id','?')} | {expr}")
+
+
+def cmd_backtest(args):
+    """执行单次回测 (Agent用)"""
+    async def _run():
+        from worldquant_brain.engine.agent_adapter import run_backtest
+        result = await run_backtest(args.expression, None, args.name or 'cli')
+        if result:
+            print(f"  alpha_id={result.get('alpha_id','')}")
+            print(f"  Sharpe={result.get('sharpe',0):.3f} "
+                  f"Fitness={result.get('fitness',0):.3f}")
+    asyncio.run(_run())
+
+
+def cmd_knowledge(args):
+    """搜索知识库 (Agent用)"""
+    from worldquant_brain.engine.agent_adapter import search_knowledge
+    results = search_knowledge(args.query)
+    if not results:
+        print("未找到相关知识")
+    for r in results[:5]:
+        if isinstance(r, dict):
+            print(f"  [{r.get('slug','?')}] {r.get('title','')[:80]}")
+
+
+def cmd_state(args):
+    """查看系统状态 (Agent/TeamLead用)"""
+    from worldquant_brain.engine.agent_adapter import load_state, get_stats
+    state = load_state()
+    stats = get_stats()
+    print(f"总Alpha: {stats['total_alphas']}")
+    print(f"最佳Sharpe: {stats['best']['sharpe']:.3f}" if stats['best'] else "无结果")
+    print(f"Worker数: {len(state.get('workers',[]))}")
+    print(f"时间: {state.get('timestamp','')}")
+
+
+def cmd_memory(args):
+    """保存记忆 (Agent用)"""
+    note = args.save
+    ts = datetime.now().isoformat()
+    mem_file = Path("/tmp/multi_agent/memory.json")
+    entries = []
+    if mem_file.exists():
+        entries = json.loads(mem_file.read_text())
+    entries.append({"timestamp": ts, "note": note})
+    mem_file.write_text(json.dumps(entries, indent=2, ensure_ascii=False))
+    print(f"记忆已保存: {note[:60]}")
+
+
 def cmd_clean(args):
     """清理数据库 (保留Top N)"""
     keep = args.keep or 200
@@ -153,6 +213,31 @@ def create_parser():
     # submittable
     p = sub.add_parser('submittable', help='可提交Alpha')
     p.set_defaults(func=cmd_submittable)
+
+    # ideas (Agent用)
+    p = sub.add_parser('ideas', help='查看待处理Idea')
+    p.add_argument('--limit', '-l', type=int, default=8)
+    p.set_defaults(func=cmd_ideas)
+
+    # backtest (Agent用)
+    p = sub.add_parser('backtest', help='执行单次回测')
+    p.add_argument('expression', help='Alpha表达式')
+    p.add_argument('--name', '-n', help='名称')
+    p.set_defaults(func=cmd_backtest)
+
+    # knowledge (Agent用)
+    p = sub.add_parser('knowledge', help='搜索知识库')
+    p.add_argument('query', help='搜索关键词')
+    p.set_defaults(func=cmd_knowledge)
+
+    # state (Agent用)
+    p = sub.add_parser('state', help='系统状态')
+    p.set_defaults(func=cmd_state)
+
+    # memory (Agent用)
+    p = sub.add_parser('memory', help='保存记忆')
+    p.add_argument('--save', '-s', required=True, help='记忆内容')
+    p.set_defaults(func=cmd_memory)
 
     # clean
     p = sub.add_parser('clean', help='清理数据库')

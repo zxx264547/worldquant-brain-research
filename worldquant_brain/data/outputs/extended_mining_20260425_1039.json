@@ -1,0 +1,242 @@
+[
+  {
+    "alpha_id": "1YnKL2OM",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "sharpe": 1.02,
+    "fitness": 1.43,
+    "margin": 0.039463,
+    "turnover": 0.0125
+  },
+  {
+    "alpha_id": "1YnKLGOk",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "sharpe": 1.02,
+    "fitness": 1.43,
+    "margin": 0.039773,
+    "turnover": 0.0124
+  },
+  {
+    "alpha_id": "RRkznAPe",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "sharpe": 1.02,
+    "fitness": 1.43,
+    "margin": 0.040083,
+    "turnover": 0.0122
+  },
+  {
+    "alpha_id": "qMmGoeNE",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "sharpe": 1.02,
+    "fitness": 1.43,
+    "margin": 0.040424,
+    "turnover": 0.0121
+  },
+  {
+    "alpha_id": "blWK5YgK",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 10)",
+    "sharpe": 1.01,
+    "fitness": 1.4,
+    "margin": 0.035508,
+    "turnover": 0.0135
+  },
+  {
+    "alpha_id": "vRJPXEja",
+    "code": "ts_decay_linear(ts_mean(winsorize(actual_eps_value_quarterly), 25), 15)",
+    "sharpe": 1.01,
+    "fitness": 1.41,
+    "margin": 0.041583,
+    "turnover": 0.0117
+  },
+  {
+    "alpha_id": "npOrXjO3",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 20)",
+    "sharpe": 1.01,
+    "fitness": 1.41,
+    "margin": 0.038983,
+    "turnover": 0.0124
+  },
+  {
+    "alpha_id": "9qAk2alr",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 15)",
+    "sharpe": 1.01,
+    "fitness": 1.4,
+    "margin": 0.037611,
+    "turnover": 0.0128
+  },
+  {
+    "alpha_id": "rKrV2R53",
+    "code": "ts_backfill(ts_mean(winsorize(actual_eps_value_quarterly), 25), 60)",
+    "sharpe": 1.01,
+    "fitness": 1.4,
+    "margin": 0.041148,
+    "turnover": 0.0117
+  },
+  {
+    "alpha_id": "N15zOAzo",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "sharpe": 1.01,
+    "fitness": 1.42,
+    "margin": 0.038983,
+    "turnover": 0.0127
+  },
+  {
+    "alpha_id": "LLlzAG16",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "sharpe": 1.01,
+    "fitness": 1.41,
+    "margin": 0.041019,
+    "turnover": 0.0118
+  },
+  {
+    "alpha_id": "XgYzrYkb",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "sharpe": 1.01,
+    "fitness": 1.4,
+    "margin": 0.040756,
+    "turnover": 0.0119
+  },
+  {
+    "alpha_id": "1Yn2qRVK",
+    "code": "ts_mean(winsorize(anl4_af_eps_value), 25)",
+    "sharpe": 0.98,
+    "fitness": 1.38,
+    "margin": 0.098956,
+    "turnover": 0.005
+  },
+  {
+    "alpha_id": "QP5zZleX",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25)",
+    "sharpe": 0.89,
+    "fitness": 1.25,
+    "margin": 0.052882,
+    "turnover": 0.0093
+  },
+  {
+    "alpha_id": "YPWzEe6l",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly + actual_dividend_value_quarterly), 25)",
+    "sharpe": 0.83,
+    "fitness": 1.15,
+    "margin": 0.04864,
+    "turnover": 0.0098
+  },
+  {
+    "alpha_id": "rKrVvEpE",
+    "code": "ts_mean(winsorize(actual_cashflow_per_share_value_quarterly), 25)",
+    "sharpe": 0.74,
+    "fitness": 1.07,
+    "margin": 0.033385,
+    "turnover": 0.0156
+  },
+  {
+    "alpha_id": "88KY5xAa",
+    "code": "ts_mean(winsorize(actual_sales_value_annual), 25)",
+    "sharpe": 0.74,
+    "fitness": 1.05,
+    "margin": 0.175247,
+    "turnover": 0.0029
+  },
+  {
+    "alpha_id": "E5rLjrvm",
+    "code": "rank(ts_mean(winsorize(actual_eps_value_quarterly), 25))",
+    "sharpe": 0.71,
+    "fitness": 1.02,
+    "margin": 0.090554,
+    "turnover": 0.0057
+  },
+  {
+    "alpha_id": "zqJexlKG",
+    "code": "ts_mean(winsorize(pv87_2_affops_af_matrix_p1_chngratio_number), 25)",
+    "sharpe": 0.64,
+    "fitness": 0.92,
+    "margin": 0.123165,
+    "turnover": 0.0042
+  },
+  {
+    "alpha_id": "9qAknObr",
+    "code": "ts_mean(winsorize(anl4_adjusted_netincome_ft), 25)",
+    "sharpe": 0.59,
+    "fitness": 0.81,
+    "margin": 0.096841,
+    "turnover": 0.0049
+  },
+  {
+    "alpha_id": "blWnvkwl",
+    "code": "ts_arg_min(ts_mean(winsorize(actual_eps_value_quarterly), 25), 20)",
+    "sharpe": 0.59,
+    "fitness": 0.8,
+    "margin": 0.013784,
+    "turnover": 0.0336
+  },
+  {
+    "alpha_id": "88KJJXqV",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly * actual_dividend_value_quarterly), 25)",
+    "sharpe": 0.54,
+    "fitness": 0.78,
+    "margin": 0.029716,
+    "turnover": 0.0177
+  },
+  {
+    "alpha_id": "kqL9x3Yk",
+    "code": "ts_zscore(ts_mean(winsorize(actual_eps_value_quarterly), 25), 20)",
+    "sharpe": 0.53,
+    "fitness": 0.3,
+    "margin": 0.000635,
+    "turnover": 0.1542
+  },
+  {
+    "alpha_id": "A1Om7Vdl",
+    "code": "ts_zscore(ts_mean(winsorize(actual_eps_value_quarterly), 25), 20)",
+    "sharpe": 0.53,
+    "fitness": 0.3,
+    "margin": 0.000635,
+    "turnover": 0.1542
+  },
+  {
+    "alpha_id": "LLlrnvOM",
+    "code": "ts_arg_max(ts_mean(winsorize(actual_eps_value_quarterly), 25), 20)",
+    "sharpe": 0.52,
+    "fitness": 0.69,
+    "margin": 0.008919,
+    "turnover": 0.0488
+  },
+  {
+    "alpha_id": "78KmlxgL",
+    "code": "group_zscore(ts_mean(winsorize(actual_eps_value_quarterly), 25), country)",
+    "sharpe": 0.39,
+    "fitness": 0.3,
+    "margin": 0.009792,
+    "turnover": 0.0152
+  },
+  {
+    "alpha_id": "gJoG565v",
+    "code": "group_zscore(ts_mean(winsorize(actual_eps_value_quarterly), 25), subindustry)",
+    "sharpe": 0.32,
+    "fitness": 0.15,
+    "margin": 0.003023,
+    "turnover": 0.0173
+  },
+  {
+    "alpha_id": "88KYgbdv",
+    "code": "ts_mean(winsorize(pv87_2_bps_af_matrix_all_high), 25)",
+    "sharpe": 0.14,
+    "fitness": 0.11,
+    "margin": 0.008617,
+    "turnover": 0.0195
+  },
+  {
+    "alpha_id": "MP5NYnVL",
+    "code": "ts_mean(winsorize(actual_eps_value_quarterly), 25) - ts_mean(winsorize(actual_eps_value_quarterly), 5)",
+    "sharpe": 0.1,
+    "fitness": 0.04,
+    "margin": 0.000312,
+    "turnover": 0.168
+  },
+  {
+    "alpha_id": "WjWJZQPP",
+    "code": "ts_mean(winsorize(pv87_2_bps_af_matrix_all_chngratio_mean), 25)",
+    "sharpe": -0.4,
+    "fitness": -0.36,
+    "margin": -0.008406,
+    "turnover": 0.0235
+  }
+]

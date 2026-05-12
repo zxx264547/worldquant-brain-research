@@ -201,10 +201,32 @@ class RetryableBrainClient:
 
         raise AuthenticationError(f"Authentication failed: {result}")
 
+    async def _check_auth_valid(self) -> bool:
+        """检查当前认证是否有效 (轻量级验证)"""
+        try:
+            resp = self.client.session.get(
+                f"{self.client.base_url}/users/self", timeout=10)
+            return resp.status_code == 200
+        except Exception:
+            return False
+
     async def ensure_authenticated(self):
-        """确保已认证"""
+        """确保已认证, 401时自动恢复"""
         if not self._authenticated:
             await self.authenticate_with_retry()
+            return
+
+        # 定期检查认证有效性 (~每15分钟)
+        now = time.time()
+        if not hasattr(self, '_last_auth_check'):
+            self._last_auth_check = 0
+        if now - self._last_auth_check > 900:  # 15分钟
+            self._last_auth_check = now
+            if not await self._check_auth_valid():
+                logger.info("Auth expired, re-authenticating...")
+                self._authenticated = False
+                await self.authenticate_with_retry()
+                logger.info("Auth recovered")
 
     @async_retry(max_attempts=3, delay=3, backoff=3.0)
     async def create_simulation_with_retry(
