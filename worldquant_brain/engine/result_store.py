@@ -28,11 +28,11 @@ class ResultStore:
     def save(self, alpha: dict) -> bool:
         return save_alpha(alpha)
 
-    def exists(self, expression: str) -> bool:
-        return find_by_expression(expression) is not None
+    def exists(self, expression: str, settings: dict = None) -> bool:
+        return find_by_expression(expression, settings) is not None
 
-    def find(self, expression: str) -> Optional[dict]:
-        return find_by_expression(expression)
+    def find(self, expression: str, settings: dict = None) -> Optional[dict]:
+        return find_by_expression(expression, settings)
 
     def best(self, limit: int = 20) -> list[dict]:
         return get_best_alphas(limit)

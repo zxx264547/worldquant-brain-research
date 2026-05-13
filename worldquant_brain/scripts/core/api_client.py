@@ -532,7 +532,7 @@ class RetryableBrainClient:
         parts = [expression, dataset]
         if settings:
             # 按固定顺序添加关键参数
-            for k in sorted(['region', 'universe', 'delay', 'decay', 'truncation']):
+            for k in sorted(['region', 'universe', 'delay', 'decay', 'truncation', 'neutralization']):
                 if k in settings:
                     parts.append(f"{k}={settings[k]}")
         return "|".join(parts)

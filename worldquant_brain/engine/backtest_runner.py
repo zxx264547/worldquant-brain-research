@@ -45,9 +45,9 @@ class BacktestRunner:
         except Exception:
             pass  # 修复失败则用原文
 
-        # 1. SQLite去重
-        expr_hash = hashlib.sha256(expression.encode()).hexdigest()[:16]
-        if cached := store.find(expression):
+        # 1. SQLite去重（含settings，不同neutralization/decay不误判）
+        expr_hash = hashlib.sha256(f"{expression}|{merged}".encode()).hexdigest()[:16]
+        if cached := store.find(expression, merged):
             return cached
 
         # 2. 回测

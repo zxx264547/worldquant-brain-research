@@ -44,11 +44,32 @@ def hash_expression(expression: str) -> str:
     return hashlib.sha256(expression.encode()).hexdigest()[:16]
 
 
+def hash_alpha(expression: str, settings: dict = None) -> str:
+    """表达式+关键设置联合哈希，避免不同neutralization/decay等被误判为重复"""
+    parts = [expression]
+    if settings:
+        for k in sorted(['neutralization', 'decay', 'truncation', 'region', 'universe', 'delay']):
+            v = settings.get(k)
+            if v is not None:
+                parts.append(f"{k}={v}")
+    return hashlib.sha256("|".join(parts).encode()).hexdigest()[:16]
+
+
 # ─── Alpha CRUD ───
 
 def save_alpha(alpha: dict) -> bool:
-    """保存alpha结果 (自动去重)"""
-    expr_hash = hash_expression(alpha['expression'])
+    """保存alpha结果 (自动去重，含settings)"""
+    settings = alpha.get('settings_json')
+    if isinstance(settings, str):
+        try:
+            settings = json.loads(settings)
+        except Exception:
+            settings = alpha.get('settings', {})
+    elif isinstance(settings, dict):
+        pass
+    else:
+        settings = alpha.get('settings', {})
+    expr_hash = hash_alpha(alpha['expression'], settings)
     with get_conn() as conn:
         try:
             conn.execute("""INSERT INTO alphas (id, expression, expression_hash,
@@ -86,8 +107,8 @@ def find_by_hash(expr_hash: str) -> Optional[dict]:
         return dict(row) if row else None
 
 
-def find_by_expression(expression: str) -> Optional[dict]:
-    h = hash_expression(expression)
+def find_by_expression(expression: str, settings: dict = None) -> Optional[dict]:
+    h = hash_alpha(expression, settings)
     return find_by_hash(h)
 
 
