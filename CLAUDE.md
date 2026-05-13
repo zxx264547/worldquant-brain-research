@@ -146,6 +146,19 @@ Fundamental/Volume数据必须rank()包裹
 ### 5. 15分钟熔断
 in_progress>15分钟 → 重新认证 → 重启
 
+### 6. VECTOR数据 + vec_min/vec_max同向极值匹配
+VECTOR类型字段必须使用vec_min/vec_max（非vec_avg/vec_sum），遵循同向原则：
+- 外层ts_min/ts_arg_min/group_min → 内层vec_min
+- 外层ts_max/ts_arg_max/group_max → 内层vec_max
+- 外层zscore(…)包装可成倍提升Sharpe
+- 优先测试SECTOR中性化（非INDUSTRY）
+- **已验证**：`zscore(-ts_max(vec_max(rsk60_offer), 22))` → Sharpe 2.02, 已提交
+
+### 7. 网络/代理
+- API调用**不要**走http://127.0.0.1:7897代理（会断开SSL）
+- 直连api.worldquantbrain.com
+- 限流后Retry-After可能长达30分钟+
+
 ---
 
 ## 故障排查表

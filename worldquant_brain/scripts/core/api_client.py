@@ -31,6 +31,17 @@ SESSION_DIR.mkdir(exist_ok=True)
 class RetryableBrainClient:
     """带重试逻辑的API客户端"""
 
+    # 预定义颜色
+    COLORS = {
+        'submittable': '#34D399',   # 绿色 — Sharpe >= 1.58
+        'promising': '#FBBF24',     # 黄色 — Sharpe 1.0-1.58
+        'testing': '#60A5FA',       # 蓝色 — 测试中
+        'failed': '#F87171',        # 红色 — 无信号/负
+        'archived': '#9CA3AF',      # 灰色 — 已存档
+        'breakthrough': '#A78BFA',  # 紫色 — 新方向发现
+        'composite': '#F472B6',     # 粉色 — 组合信号
+    }
+
     def __init__(
         self,
         credentials: Dict[str, str] = None,
@@ -38,6 +49,9 @@ class RetryableBrainClient:
         poll_timeout: int = 600,
         poll_interval: int = 5
     ):
+        # 清除代理设置（避免SSL冲突）
+        for key in ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy']:
+            os.environ.pop(key, None)
         # 自动从配置文件加载凭据
         if credentials is None:
             credentials = self._load_credentials()
@@ -55,8 +69,14 @@ class RetryableBrainClient:
         # 已测试组合记录（去重用）
         self._tested_combinations: set = set()
 
+        # Alpha序号与批次管理
+        self._alpha_counter: int = 0
+        self._batch_prefix: str = 'A'
+
         # 尝试恢复Session
         self._load_session()
+        # 恢复计数器状态
+        self._load_counter_state()
 
     def _load_credentials(self) -> Optional[Dict[str, str]]:
         """从配置文件加载凭据"""
@@ -106,6 +126,106 @@ class RetryableBrainClient:
         except Exception as e:
             logger.warning(f"Failed to load session: {e}")
         return False
+
+    def set_batch_prefix(self, prefix: str):
+        """设置批次前缀，重置计数器。例如: 'B01-anl10-vmax' """
+        self._batch_prefix = prefix
+        self._alpha_counter = 0
+        self._save_counter_state()
+        logger.info(f"Batch prefix set: {prefix}")
+
+    def _load_counter_state(self):
+        """加载上次计数器状态"""
+        try:
+            counter_file = SESSION_DIR / "counter_state.json"
+            if counter_file.exists():
+                with open(counter_file, 'r') as f:
+                    state = json.load(f)
+                self._alpha_counter = state.get('counter', 0)
+                self._batch_prefix = state.get('prefix', 'A')
+        except Exception:
+            pass
+
+    def _save_counter_state(self):
+        """保存计数器状态"""
+        try:
+            counter_file = SESSION_DIR / "counter_state.json"
+            with open(counter_file, 'w') as f:
+                json.dump({'prefix': self._batch_prefix, 'counter': self._alpha_counter}, f)
+        except Exception:
+            pass
+
+    def _next_name(self, dataset: str = '') -> str:
+        """生成下一个Alpha名称: 前缀-序号"""
+        self._alpha_counter += 1
+        self._save_counter_state()
+        return f"{self._batch_prefix}-{self._alpha_counter:04d}"
+
+    @staticmethod
+    def _auto_tags(expression: str, dataset: str, result: dict) -> list:
+        """根据表达式和结果自动生成标签"""
+        tags = [f"ds:{dataset}"]
+        # 算子标签
+        for op in ['ts_sum', 'ts_mean', 'ts_max', 'ts_min', 'ts_rank',
+                    'ts_delta', 'ts_decay', 'vec_max', 'vec_min', 'vec_avg',
+                    'rank', 'zscore', 'signed_power', 'group_rank', 'ts_corr',
+                    'ts_backfill', 'jump_decay']:
+            if op in expression:
+                tags.append(f"op:{op}")
+        # 窗口标签
+        import re
+        windows = re.findall(r'(?:ts_\w+|vec_\w+)\([^,]+,\s*(\d+)\s*\)', expression)
+        if windows:
+            tags.append(f"w:{windows[0]}")
+        # Sharpe等级
+        sharpe = result.get('sharpe', 0)
+        if sharpe >= 1.58:
+            tags.append('grade:A')
+        elif sharpe >= 1.0:
+            tags.append('grade:B')
+        elif sharpe >= 0.5:
+            tags.append('grade:C')
+        else:
+            tags.append('grade:D')
+        if 'INDUSTRY' in expression:
+            tags.append('neut:INDUSTRY')
+        return tags
+
+    @staticmethod
+    def _auto_color(result: dict) -> str:
+        """根据结果自动选色"""
+        sharpe = result.get('sharpe', 0)
+        fitness = result.get('fitness', 0)
+        if sharpe >= 1.58:
+            return RetryableBrainClient.COLORS['submittable']
+        elif sharpe >= 1.0:
+            return RetryableBrainClient.COLORS['promising']
+        elif fitness > 0.5 and sharpe > 0:
+            return RetryableBrainClient.COLORS['testing']
+        elif sharpe <= 0:
+            return RetryableBrainClient.COLORS['failed']
+        return RetryableBrainClient.COLORS['testing']
+
+    async def _set_alpha_props(self, alpha_id: str, name: str,
+                                 tags: list = None, color: str = None):
+        """设置Alpha的name/tags/color属性（PATCH请求）"""
+        try:
+            data = {'name': name}
+            if tags:
+                data['tags'] = tags
+            if color:
+                data['color'] = color
+            resp = self.client.session.patch(
+                f'{self.client.base_url}/alphas/{alpha_id}',
+                json=data
+            )
+            if resp.status_code == 200:
+                logger.info(f"Alpha {alpha_id} props set: name={name}, "
+                           f"tags={tags}, color={color}")
+            else:
+                logger.warning(f"Failed to set alpha props: {resp.status_code}")
+        except Exception as e:
+            logger.warning(f"Failed to set alpha props for {alpha_id}: {e}")
 
     def _is_cache_valid(self, key: str) -> bool:
         """检查缓存是否有效"""
@@ -233,9 +353,20 @@ class RetryableBrainClient:
         self,
         expression: str,
         settings: Dict[str, Any],
-        timeout: int = None
+        timeout: int = None,
+        alpha_name: str = None,
+        alpha_tags: List[str] = None,
+        alpha_color: str = None,
     ) -> Dict[str, Any]:
-        """创建模拟带重试
+        """创建模拟带重试。
+
+        Args:
+            expression: Alpha表达式
+            settings: 模拟设置
+            timeout: 轮询超时
+            alpha_name: Alpha名称（None=自动生成 前缀-序号）
+            alpha_tags: 标签列表（None=自动生成 ds/op/w/grade标签）
+            alpha_color: 颜色（None=根据Sharpe自动选色）
 
         Returns:
             dict: 包含 alpha_id, sharpe, fitness, turnover, ppc, margin 等
@@ -314,6 +445,17 @@ class RetryableBrainClient:
 
         # 记录已测试
         self.record_tested(expression, dataset, settings, result)
+
+        # 设置Alpha属性（name/tags/color），方便网页搜索和归类
+        alpha_id = result.get('alpha_id')
+        if alpha_id:
+            name = alpha_name or self._next_name(dataset)
+            tags = alpha_tags or self._auto_tags(expression, dataset, result)
+            color = alpha_color or self._auto_color(result)
+            await self._set_alpha_props(alpha_id, name, tags, color)
+            result['display_name'] = name
+            result['tags'] = tags
+            result['color'] = color
 
         return result
 

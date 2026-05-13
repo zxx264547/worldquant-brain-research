@@ -1,0 +1,17 @@
+[
+  {
+    "expression": "zscore(vec_max(anl14_estvalue_fp1))",
+    "complexity": "0-op_vec",
+    "field": "anl14_estvalue_fp1",
+    "dataset": "analyst14",
+    "sharpe": -0.65,
+    "fitness": -0.67,
+    "turnover": 0.1146,
+    "margin": -0.0023,
+    "ppc": 0.0175,
+    "status": "needs_review",
+    "alpha_id": "",
+    "error": "",
+    "timestamp": "2026-05-13T20:47:32.503844"
+  }
+]
