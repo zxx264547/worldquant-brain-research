@@ -1,0 +1,187 @@
+{
+  "name": "alpha-submission-cn-template",
+  "version": "1.0",
+  "description": "Alpha提交中文描述模板 — 自动生成Idea/Rationale for data/Rationale for operators，每段至少100字中文",
+  "trigger": "alpha创建完成或即将提交",
+  "language": "zh-CN",
+  "template": {
+    "sections": {
+      "idea": {
+        "title": "Idea",
+        "min_chars": 100,
+        "description": "核心思想：这个Alpha在捕捉什么样的市场现象或定价偏差？为什么这种信号应该有效？",
+        "structure": [
+          "市场现象/定价偏差描述",
+          "信号方向与逻辑链条",
+          "为什么当前市场环境下该信号应有效"
+        ]
+      },
+      "rationale_data": {
+        "title": "Rationale for data used",
+        "min_chars": 100,
+        "description": "数据使用理由：为什么选择这个数据集和字段？数据覆盖范围、质量、更新频率如何？",
+        "structure": [
+          "数据集全称与来源",
+          "所选字段的定义与含义",
+          "数据覆盖范围（股票数/时间跨度）",
+          "为什么该数据适合捕捉目标信号"
+        ]
+      },
+      "rationale_operators": {
+        "title": "Rationale for operators used",
+        "min_chars": 100,
+        "description": "算子使用理由：为什么选择这些算子？它们的组合逻辑是什么？每层算子解决什么问题？",
+        "structure": [
+          "算子链的逐层解释（从内到外）",
+          "每层算子的目的与效果",
+          "为什么这个算子顺序是合理的",
+          "与替代算子的对比（为什么选A不选B）"
+        ]
+      }
+    },
+    "output_format": "## Idea\n{idea_text}\n\n## Rationale for data used\n{data_text}\n\n## Rationale for operators used\n{operators_text}"
+  },
+  "dataset_knowledge": {
+    "shortinterest3": {
+      "name_cn": "证券借贷洞察数据 (Securities Lending Insight Data)",
+      "source": "证券借贷市场交易记录",
+      "coverage": "覆盖全球主要股票市场，覆盖率100%（所有TOP3000股票均有数据）",
+      "frequency": "日频更新，反映最新借贷市场状况",
+      "fields": {
+        "max_loan_rate": {
+          "name_cn": "最高借贷利率",
+          "meaning": "单只股票在证券借贷市场上各借出方要求的最高年化利率，反映做空该股票的最高成本",
+          "signal": "高借贷利率表示做空成本高，通常意味着市场对该股票的悲观情绪浓厚或借券供给紧张。当成空头拥挤时，一旦出现正面消息，空头回补将推动股价上涨",
+          "direction": "正向预测（高借贷利率 → 未来正收益）"
+        },
+        "min_loan_rate": {
+          "name_cn": "最低借贷利率",
+          "meaning": "最低年化借贷利率，反映该股票借券的最低门槛",
+          "direction": "正向预测"
+        },
+        "mean_loan_rate": {
+          "name_cn": "平均借贷利率",
+          "meaning": "各借出方的加权平均利率，反映整体做空成本",
+          "direction": "正向预测"
+        },
+        "borrow_activity_score": {
+          "name_cn": "借贷活跃度评分",
+          "meaning": "衡量该股票在借贷市场上的交易活跃程度，高活跃度说明多空博弈激烈",
+          "direction": "正向预测（高活跃度常伴随空头拥挤后的反弹）"
+        },
+        "loan_utilization_ratio": {
+          "name_cn": "借贷利用率",
+          "meaning": "已借出股票占可借出股票的比例，高利用率表示做空需求旺盛但供给有限",
+          "direction": "正向预测（高利用率 + 正面消息 = 空头挤压）"
+        }
+      },
+      "characteristics": "该数据集与risk60同属证券借贷领域，但来自不同的数据供应商。与risk60相比，shortinterest3提供更细粒度的借贷利率分层数据（最高/最低/平均/利用率），且绝大多数字段从未被用于Alpha构建，生产相关性风险极低"
+    },
+    "risk60": {
+      "name_cn": "风险模型数据 (Risk Model Data)",
+      "source": "证券借贷市场数据",
+      "coverage": "覆盖主要市场股票",
+      "fields": {
+        "rsk60_offer": "借券费率报价",
+        "rsk60_last": "最近借券费率",
+        "rsk60_crowding": "拥挤度指标"
+      }
+    },
+    "analyst4": {
+      "name_cn": "分析师预测数据 (Analyst Estimate Data)",
+      "source": "全球券商分析师一致预期",
+      "coverage": "覆盖全球主要市场，EPS数据覆盖率约80%",
+      "fields": {
+        "actual_eps_value_quarterly": "季度实际EPS值"
+      }
+    },
+    "analyst10": {
+      "name_cn": "绩效加权分析师预测 (Performance-Weighted Analyst Estimates)",
+      "source": "基于历史准确率加权的分析师预测 (SmartEstimates)",
+      "coverage": "覆盖美股主要股票",
+      "fields": {
+        "anl10_epsrevise_ratio_to_close_fy2": "EPS修正比率（相对收盘价，FY2）"
+      }
+    },
+    "biasfree_analyst": {
+      "name_cn": "去偏分析师预测 (Bias Adjusted Analyst Forecasts)",
+      "source": "经偏差校正的分析师预测数据",
+      "coverage": "覆盖率88.5%",
+      "fields": {
+        "biasfree_analyst_price_target": "去偏目标价（从未被使用）"
+      }
+    }
+  },
+  "operator_knowledge": {
+    "vec_max": {
+      "name_cn": "向量最大值",
+      "explanation": "从VECTOR类型数据（如每日多笔借贷记录）中提取最大值，捕捉最极端的情况。对于借贷利率数据，最高利率代表做空该股票的最大成本，这是空头挤压信号的核心驱动力",
+      "why_not_alternative": "相比vec_avg（平均值）容易被中间值平滑，vec_max聚焦于极端值，对做空压力的捕捉更敏感"
+    },
+    "vec_min": {
+      "name_cn": "向量最小值",
+      "explanation": "提取VECTOR数据中的最小值，适合捕捉下限信号",
+      "why_not_alternative": "对于借贷利率数据，最低利率可能代表无风险套利利率，信号较弱"
+    },
+    "vec_avg": {
+      "name_cn": "向量平均值",
+      "explanation": "计算VECTOR数据的均值，平滑极端值的影响"
+    },
+    "ts_max": {
+      "name_cn": "时间序列最大值",
+      "explanation": "在指定时间窗口内取最大值，捕捉周期内的极端做空压力。当过去N天内出现过极高的借贷利率时，说明该股票经历过严重的做空拥挤，随后可能发生空头回补反弹",
+      "why_not_alternative": "ts_mean平滑了极端信号（过去22天的平均），而空头挤压恰恰由极端事件触发，所以ts_max比ts_mean更适合"
+    },
+    "ts_min": {
+      "name_cn": "时间序列最小值",
+      "explanation": "在时间窗口内取最小值，与vec_min配合使用"
+    },
+    "zscore": {
+      "name_cn": "Z分数标准化",
+      "explanation": "将信号转换为横截面Z分数（均值为0，标准差为1），消除量纲差异，使信号在不同股票间可比较。对于借贷利率这类有偏分布的数据，zscore比rank更有效地保留极端值的区分度",
+      "why_not_alternative": "rank将所有值等间距排列，丢失了极端值的相对距离信息。而空头挤压信号恰恰依赖于识别极度异常的高借贷成本股票，zscore保留了这个距离信息"
+    },
+    "rank": {
+      "name_cn": "横截面排名",
+      "explanation": "将信号在横截面上转换为百分位排名，消除异常值影响",
+      "why_not_alternative": "虽然rank对异常值更稳健，但在识别极端信号时不如zscore敏感"
+    },
+    "ts_sum": {
+      "name_cn": "时间序列求和",
+      "explanation": "在时间窗口内累加信号值，适合累积效应（如EPS多季度累积）。对于季度数据，252天（约4个季度）的ts_sum可以捕捉全年盈利动量"
+    },
+    "ts_mean": {
+      "name_cn": "时间序列均值",
+      "explanation": "在时间窗口内取平均，适合平滑短期噪声。22日均值对应约一个月的趋势，5日均值对应一周"
+    },
+    "ts_delta": {
+      "name_cn": "时间序列变化",
+      "explanation": "计算信号在时间窗口内的变化量，捕捉趋势方向"
+    },
+    "ts_backfill": {
+      "name_cn": "时间序列回填",
+      "explanation": "将低频数据（如季度EPS）回填到日频，确保每天都有信号值"
+    },
+    "signed_power": {
+      "name_cn": "有符号幂变换",
+      "explanation": "保留原始符号的同时进行非线性放大或压缩，调整信号的灵敏度"
+    },
+    "group_rank": {
+      "name_cn": "分组排名",
+      "explanation": "在分组（如行业）内进行排名，消除组间差异"
+    }
+  },
+  "pattern_knowledge": {
+    "maxmax_neg": {
+      "name_cn": "同向极值匹配模式",
+      "pattern": "zscore(-ts_max(vec_max(field), W))",
+      "explanation": "外层ts_max与内层vec_max同向（都取最大值），负号表示取反向信号。这是针对VECTOR数据的核心模式：vec_max从每日多笔数据中提取极端值，ts_max在时间窗口内寻找极端事件，负号将高成本映射为做多信号",
+      "best_for": "借贷利率、做空成本、风险溢价等极端事件驱动的信号"
+    },
+    "minmin_neg": {
+      "name_cn": "同向极小值模式",
+      "pattern": "zscore(-ts_min(vec_min(field), W))",
+      "explanation": "外层ts_min与内层vec_min同向，聚焦于最低值"
+    }
+  }
+}

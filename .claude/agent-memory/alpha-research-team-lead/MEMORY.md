@@ -4,30 +4,32 @@
 - [user_role.md](user_role.md) - User role and goals for alpha research
 - [alpha_research_status_20260501.md](alpha_research_status_20260501.md) - Previous ceiling analysis (2026-05-01)
 - [alpha_research_status_20260512.md](alpha_research_status_20260512.md) - Updated status after 2026-05-13 testing -- ALL directions exhausted
+- [dataset_discovery_20260513.md](dataset_discovery_20260513.md) - Full dataset discovery via API (343 unique datasets found)
 
 ## Current Status (2026-05-13)
-- **Best Sharpe: 1.17** (STRUCTURAL CEILING - 240+ tests, ALL data sources confirmed max)
-- Best expression: `ts_backfill(ts_sum(actual_eps_value_quarterly, 252), 3)` (without signed_power)
+- **Best Sharpe: 1.17** (STRUCTURAL CEILING on analyst4 EPS - 208 tests)
+- **Active Direction: VECTOR pattern on shortinterest3** -- 29 unused VECTOR fields, cov=1.0
+- **Active Direction: VECTOR pattern on biasfree_analyst** -- VECTOR price target, cov=0.885, users=0
 - No submittable alphas (target 1.58)
-- confirmed: delay=0/1 same, signed_power adds nothing, INDUSTRY neut destroys price
 
-## Full Exhausted List (2026-05-13 Final)
-1. EPS analyst4: 1.17 ceiling across all windows/settings/operators
-2. Price signals: 0.85 ceiling (close ts_sum), neut INDUSTRY kills to 0.23-0.27
-3. INDUSTRY neutralization: destroys ALL price signals (corr goes -1.03)
-4. delay=0: same as delay=1 for EPS (1.17)
-5. News12: dividend_yield 0.77, eod_close 0.68, atr14 0.55 -- no breakthrough
-6. analyst4 non-EPS: dividend_252 0.84, sales 0.69, cashflow 0.52
-7. fundamental6: 0.67-0.71 (limited by 0.5 coverage)
-8. pv87 BPS: 0.67-0.70
+## Key Recent Discoveries
+1. shortinterest3 has 31 VECTOR fields (29 with alphaCount=0). Same securities lending domain as risk60 but completely unused.
+2. biasfree_analyst_price_target (VECTOR, cov=0.885, 0 users) - bias-adjusted target price estimates
+3. analyst44 has anl44_2_eps_value etc. (VECTOR, cov 0.6-0.96, low users)
+4. analyst45 has 50 VECTOR fields for trade ideas (coverage 0.2-0.66)
+
+## Full Tested Data Source Ceilings
+1. risk60: 2.37 (all ProdCorr rejected)
+2. analyst4 EPS: 1.17
+3. Price signals: 0.85
+4. analyst10: 0.74
+5. analyst14 VECTOR: 0.68
+6. PV87 BPS: 0.70
+7. news12: 0.77
+8. fundamental6: 0.67-0.71
 9. sentiment21: 0.56
-10. ts_rank/group_rank: 0.65-0.68
-11. ts_delta momentum: 0.52-0.66
-12. Composite signals: 0.62-0.69
-13. Return momentum (66d): -0.60 (mean reversion)
-14. Low volatility: 0.73 (decent but not breakthrough)
+10. analyst27 VECTOR: -0.1 (no signal)
 
-## Untested Promising Avenues
-1. analyst10 dataset (weighted analyst estimates - might outperform analyst4)
-2. Multi-region (EUR/ASI with analyst4 data)
-3. Need to discover new data sources
+## Active Testing
+- shortinterest3 VECTOR batch (8 sims) - max_loan_rate, mean_loan_rate, etc.
+- biasfree_analyst VECTOR batch (8 sims) - price_target, fundamental_estimate

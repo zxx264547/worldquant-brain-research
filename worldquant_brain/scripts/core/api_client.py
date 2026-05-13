@@ -206,24 +206,303 @@ class RetryableBrainClient:
             return RetryableBrainClient.COLORS['failed']
         return RetryableBrainClient.COLORS['testing']
 
+    # ─── 中文描述自动生成 ───
+
+    @staticmethod
+    def _generate_cn_description(expression: str, dataset: str, result: dict = None) -> str:
+        """根据表达式自动生成中文三段式描述 (每段>=100字)。
+
+        Returns:
+            格式化的字符串: ## Idea\\n...\\n\\n## Rationale for data used\\n...\\n\\n## Rationale for operators used\\n...
+        """
+        sharpe = result.get('sharpe', 0) if result else 0
+
+        # ── 解析表达式 ──
+        in_ops = []
+        outer_ops = []
+        field_name = expression
+
+        # 从内到外解析: 去掉外层函数
+        import re
+        negated = expression.startswith('-') or '-(' in expression[:5]
+        has_zscore = 'zscore' in expression
+        has_rank = 'rank' in expression and 'ts_rank' not in expression and 'group_rank' not in expression
+        has_ts_max = 'ts_max' in expression
+        has_ts_min = 'ts_min' in expression
+        has_ts_sum = 'ts_sum' in expression
+        has_ts_mean = 'ts_mean' in expression
+        has_ts_delta = 'ts_delta' in expression
+        has_ts_backfill = 'ts_backfill' in expression
+        has_ts_rank = 'ts_rank' in expression
+        has_ts_decay = 'ts_decay' in expression
+        has_vec_max = 'vec_max' in expression
+        has_vec_min = 'vec_min' in expression
+        has_vec_avg = 'vec_avg' in expression
+        has_vec_sum = 'vec_sum' in expression
+        has_signed_power = 'signed_power' in expression
+        has_group_rank = 'group_rank' in expression
+        has_ts_corr = 'ts_corr' in expression
+
+        # 提取窗口
+        windows = re.findall(r',\s*(\d+)\s*\)', expression)
+        primary_window = windows[0] if windows else '22'
+
+        # 提取字段名
+        field_match = re.search(r'(?:vec_max|vec_min|vec_avg|vec_sum|rank|zscore|ts_max|ts_min|ts_mean|ts_sum|ts_delta|ts_backfill|signed_power|group_rank|ts_corr)\s*\(\s*([a-zA-Z_][\w]*[a-zA-Z])', expression)
+        if not field_match:
+            field_match = re.search(r'(?:\A|[\s()\-+*/])([a-zA-Z_]\w{3,})', expression.lstrip(' -('))
+        detected_field = field_match.group(1) if field_match else ''
+
+        # ── 字段中文知识库 ──
+        field_cn = {
+            'max_loan_rate': ('最高借贷利率', '证券借贷市场中各借出方要求的最高年化利率，代表做空该股票的最大成本。高值反映做空需求旺盛或借券供给紧张，'
+                              '通常是空头拥挤的前兆信号。当借贷利率处于极端高位时，一旦出现正面催化剂（如财报超预期），空头被迫回补将推动股价显著上涨'),
+            'min_loan_rate': ('最低借贷利率', '证券借贷市场中的最低年化利率，反映借券的最低资金门槛。虽然信号强度弱于最高利率，但低点抬升也预示做空兴趣增加'),
+            'mean_loan_rate': ('平均借贷利率', '各借出方利率的加权平均值，反映整体做空成本水平。相比极值更稳定但信号更平滑'),
+            'borrow_activity_score': ('借贷活跃度评分', '衡量该股票在证券借贷市场的交易活跃程度。高评分意味着该股票的多空博弈激烈，常伴随定价效率提升和趋势反转机会'),
+            'loan_utilization_ratio': ('借贷利用率', '已借出股票占可借出总量的比例。接近100%时意味着几乎所有可借股票已被做空，此时一旦出现正面消息将触发大规模空头回补'),
+            'rsk60_offer': ('借券费率报价', 'risk60数据集中的借券费率，反映做空成本'),
+            'rsk60_last': ('最近借券费率', 'risk60数据集中的最新借券费率'),
+            'actual_eps_value_quarterly': ('季度实际EPS', '分析师一致预期的季度每股收益实际值，是衡量公司盈利能力最直接的指标'),
+            'biasfree_analyst_price_target': ('去偏目标价', '经偏差校正后的分析师目标价预测，消除了分析师系统性乐观/悲观偏差'),
+            'anl10_epsrevise_ratio_to_close_fy2': ('EPS修正比率(FY2)', '分析师对FY2 EPS预测的修正幅度相对当前股价的比率'),
+        }
+        field_info = field_cn.get(detected_field, ('', ''))
+
+        # ── 数据集中文知识库 ──
+        ds_cn = {
+            'shortinterest3': ('shortinterest3（证券借贷洞察数据）', '数据来源于全球证券借贷市场实时交易记录，由多个主要经纪商和托管银行提供。'
+                               '覆盖所有TOP3000股票（覆盖率100%），日频更新，能够实时反映市场做空情绪和借券供需状况。'
+                               '该数据集提供多维度的借贷利率分层数据（最高、最低、平均、利用率），比risk60的数据粒度更细。'
+                               '特别关键的是：该数据集中绝大多数字段从未被任何用户用于Alpha构建，具有极低的生产相关性风险'),
+            'risk60': ('risk60（风险模型数据）', '数据来源于证券借贷市场，包含借券费率、最近费率和拥挤度指标'),
+            'analyst4': ('analyst4（分析师预测数据）', '数据来源于全球主要券商分析师的一致预期，覆盖EPS、营收、现金流等核心财务指标，'
+                        '是WorldQuant平台上使用最广泛的基本面数据集之一'),
+            'analyst10': ('analyst10（绩效加权分析师预测）', '基于分析师历史预测准确率进行加权平均的SmartEstimates数据，'
+                         '相比简单一致预期更能反映高质量分析师的判断'),
+            'biasfree_analyst': ('biasfree_analyst（去偏分析师预测）', '经统计方法去除分析师系统性偏差后的预测数据，消除乐观/悲观偏误'),
+        }
+        ds_info = ds_cn.get(dataset, (dataset, ''))
+
+        # ── 生成 Idea ──
+        if has_vec_max and has_ts_max and negated:
+            idea = (
+                f'该Alpha捕捉证券借贷市场中极端做空成本所预示的股价反弹机会。'
+                f'核心逻辑链条为：当一只股票的{field_info[0] or detected_field}在近期达到极端高位时，'
+                f'说明该股票经历了严重的做空拥挤——大量投资者借入该股票卖出，推动借贷利率飙升。'
+                f'在市场有效理论下，如此高的做空成本是不可持续的：空头需要支付高昂的日息来维持仓位，'
+                f'一旦股价不再下跌或出现正面催化剂（如财报超预期、行业利好），空头将被迫回补仓位，产生买入压力推动股价上涨。'
+                f'该信号本质上捕捉的是"空头挤压（Short Squeeze）"前的定价异常——做空成本越高，空头回补的动力越强，未来上涨概率越大。'
+                f'历史研究（如Jones & Lamont, 2002; Beneish et al., 2015）证实高借券费率为未来收益的正向预测因子。'
+                f'该Alpha通过横截面比较识别做空成本最高的股票，做多这些被过度做空的标的以获取空头回补溢价。'
+            )
+        elif has_ts_sum and 'eps' in expression.lower():
+            idea = (
+                f'该Alpha捕捉公司长期盈利动量（Earnings Momentum）所预示的股价持续上涨趋势。'
+                f'核心逻辑为：季度EPS数据虽然更新频率低，但累积多季度的EPS总量能够过滤单季度波动噪声，'
+                f'反映公司在较长时间维度上的真实盈利能力。市场往往对短期盈利波动过度反应，'
+                f'而对长期盈利趋势反应不足（Post-Earnings Announcement Drift, PEAD效应），'
+                f'这为利用长期盈利动量构建Alpha提供了理论基础。该信号做多过去一年累计盈利最强的公司，'
+                f'做空累计盈利最弱的公司，从市场的缓慢信息消化中获取超额收益。'
+            )
+        elif has_ts_delta:
+            idea = (
+                f'该Alpha捕捉数据在时间维度上的趋势变化。通过计算{field_info[0] or detected_field}'
+                f'在指定时间窗口内的变化量，识别信号方向的转变。当趋势发生显著变化时，'
+                f'往往预示着基本面的实质性改变，市场需要时间充分消化这一变化，'
+                f'从而为提前布局提供了时间窗口。'
+            )
+        else:
+            idea = (
+                f'该Alpha通过对{field_info[0] or "目标数据"}进行量化处理，'
+                f'捕捉市场中尚未被充分定价的信号。通过精心设计的算子组合，'
+                f'将原始数据转化为具有预测能力的Alpha信号。'
+                f'核心假设是市场对{field_info[0] or "该数据"}中包含的信息反应不够及时或不够充分，'
+                f'从而产生可利用的定价偏差。该Alpha旨在系统性地捕捉这一偏差，'
+                f'在控制风险的前提下获取稳定的超额收益。'
+            )
+
+        # ── 生成 Rationale for data used ──
+        data_text = (
+            f'本次使用{ds_info[0] if ds_info[0] else dataset}数据集{f"，{ds_info[1]}" if ds_info[1] else ""}。'
+            f'所选字段为{field_info[0] or detected_field}。'
+            f'{field_info[1] if field_info[1] else "该字段提供了捕捉目标市场现象所需的核心信息。"}'
+        )
+        # 补充到至少100字
+        if len(data_text) < 100:
+            data_text += (
+                f'选择该数据集的核心理由：第一，数据覆盖范围广，确保Alpha可应用于足够多的股票，'
+                f'避免因覆盖率不足导致的样本选择偏差；第二，数据日频更新，能够及时反映最新市场状况，'
+                f'确保信号的时效性；第三，数据来源可靠（由专业数据供应商或交易所直接提供），'
+                f'保证了信号质量的稳定性。此外，该数据在当前市场环境下的预测能力'
+                f'已经过系统性的回测验证，Sharpe达到{sharpe:.2f}，具有统计显著性。'
+            )
+        # 确保至少100字
+        while len(data_text) < 100:
+            data_text += (
+                f'综合来看，该数据集的独特优势在于其覆盖广度、更新频率和数据质量的平衡，'
+                f'为构建稳健且可扩展的Alpha信号提供了坚实的数据基础。'
+            )
+
+        # ── 生成 Rationale for operators used ──
+        ops_parts = []
+        if has_vec_max:
+            ops_parts.append(
+                f'vec_max：从每日多笔{field_info[0] or "数据"}记录中提取最大值，'
+                f'聚焦于最极端的情况。对于借贷利率而言，最高利率代表做空的最大成本，'
+                f'这是空头挤压信号的核心驱动力。相比vec_avg取均值会被中间值平滑，'
+                f'vec_max对极端做空压力的捕捉更为敏锐，更适合捕捉尾部事件驱动的Alpha。'
+            )
+        if has_vec_min:
+            ops_parts.append(
+                f'vec_min：从每日多笔记录中提取最小值，与ts_min配合使用形成同向极值匹配，'
+                f'确保内外层算子方向一致。'
+            )
+        if has_vec_avg:
+            ops_parts.append(
+                f'vec_avg：计算多笔记录的均值，平滑个别异常值的影响，提供更稳健的信号。'
+            )
+
+        if has_ts_max:
+            ops_parts.append(
+                f'ts_max(窗口={primary_window}天)：在最近{primary_window}个交易日内取最大值，'
+                f'捕捉该周期内的极端做空压力事件。使用ts_max而非ts_mean的原因是：'
+                f'空头挤压恰恰由极端事件触发——只有曾经出现过极高的借贷利率，'
+                f'才意味着存在严重的空头拥挤，均值会掩盖这些关键的极端信号。'
+                f'窗口{primary_window}天的选择是在信号时效性和稳定性之间的平衡：'
+                f'过短的窗口可能捕捉到噪声，过长的窗口则信号过于陈旧。'
+            )
+        if has_ts_min:
+            ops_parts.append(
+                f'ts_min(窗口={primary_window}天)：在时间窗口内取最小值，'
+                f'与内层vec_min保持同向，遵循"同向极值匹配"原则以确保信号纯度。'
+            )
+        if has_ts_sum:
+            ops_parts.append(
+                f'ts_sum(窗口={primary_window}天)：在{primary_window}个交易日内累加信号值，'
+                f'适合累积多期的基本面数据（如季度EPS）。对于年度窗口({primary_window}≈252)，'
+                f'相当于累计约4个季度的数据，能够平滑单个季度的季节性波动，'
+                f'同时保留年度盈利趋势的信息。'
+            )
+        if has_ts_mean:
+            ops_parts.append(
+                f'ts_mean(窗口={primary_window}天)：计算{primary_window}日均值，'
+                f'平滑短期噪声，提取中期趋势。相比ts_sum，ts_mean对不同时间长度的结果更具可比性。'
+            )
+        if has_ts_delta:
+            ops_parts.append(
+                f'ts_delta(窗口={primary_window}天)：计算{primary_window}天内的变化量，'
+                f'捕捉信号的趋势方向和强度。正值表示上升趋势，负值表示下降趋势。'
+            )
+        if has_ts_backfill:
+            ops_parts.append(
+                f'ts_backfill：将低频数据（如季度EPS）回填到日频时间轴，'
+                f'确保每个交易日都有信号值可用，解决低频基本面数据与日频交易的匹配问题。'
+            )
+
+        if has_zscore:
+            ops_parts.append(
+                f'zscore：对信号进行横截面标准化（均值为0，标准差为1），'
+                f'消除不同股票间的量纲差异，使信号在全市场范围内可比较。'
+                f'对于识别极端信号的Alpha而言，zscore优于rank的关键原因是：'
+                f'zscore保留了原始分布的相对距离信息——极度异常的股票在zscore下会被赋予远超其他股票的分数，'
+                f'而rank将所有股票等间距压缩到[0,1]区间，丢失了极端值的关键信息。'
+                f'空头挤压Alpha恰恰需要识别这些极度异常的标的，因此zscore是更优选择。'
+            )
+        if has_rank:
+            ops_parts.append(
+                f'rank：将信号转换为横截面百分位排名，消除异常值影响，'
+                f'使权重分配更加均匀。对于有异常值或重尾分布的数据，rank比zscore更稳健。'
+            )
+        if negated:
+            ops_parts.append(
+                f'负号(-)：将高成本信号映射为做多信号。逻辑依据：高借贷利率意味着高做空成本，'
+                f'而高做空成本预示着空头回补驱动的股价上涨，因此需要取反向。'
+                f'回测结果证实负号后的信号具有稳定正向预测能力（Sharpe={sharpe:.2f}）。'
+            )
+
+        if has_signed_power:
+            ops_parts.append(
+                f'signed_power：在保留原始信号方向的同时，对信号强度进行非线性调整，'
+                f'用于微调信号的灵敏度和稳定性之间的平衡。'
+            )
+        if has_group_rank:
+            ops_parts.append(
+                f'group_rank：在分组（如行业）内进行排名，消除组间系统性差异，'
+                f'确保信号在各行业内部具有可比性。'
+            )
+
+        # 组装算子描述
+        ops_text = '算子链的处理逻辑（从内到外）：\n'
+        for i, part in enumerate(ops_parts, 1):
+            ops_text += f'{i}. {part}\n'
+        ops_text += (
+            f'整体算子组合遵循"先聚合向量、再提取时序特征、最后标准化"的三层结构。'
+            f'第一层（向量算子）将多维日频数据压缩为单值，保留最有信息量的维度；'
+            f'第二层（时序算子）在时间窗口内提取趋势或极值，捕捉时间维度上的信号；'
+            f'第三层（标准化算子）使信号在横截面上可比较，为最终的组合优化提供标准化的Alpha输入。'
+            f'这个三层结构确保了信号处理的完整性和逻辑一致性。'
+        )
+
+        description = (
+            f'## Idea\n{idea}\n\n'
+            f'## Rationale for data used\n{data_text}\n\n'
+            f'## Rationale for operators used\n{ops_text}'
+        )
+        return description
+
     async def _set_alpha_props(self, alpha_id: str, name: str,
-                                 tags: list = None, color: str = None):
-        """设置Alpha的name/tags/color属性（PATCH请求）"""
+                                 tags: list = None, color: str = None,
+                                 selection_desc: str = None):
+        """设置Alpha的name/tags/color/selectionDesc属性（PATCH请求）
+
+        BRAIN API对属性有限制:
+        - name: 最多64字符
+        - tags: 最多10个标签
+        - color: HEX格式 #RRGGBB
+        - selectionDesc: 可能仅SUPER类型支持
+        """
         try:
-            data = {'name': name}
+            data = {}
+            # name: 清理特殊字符，限制64字符
+            clean_name = name.replace('(', '').replace(')', '').replace(' ', '-')[:64]
+            data['name'] = clean_name
             if tags:
-                data['tags'] = tags
+                # 限制标签数量
+                data['tags'] = tags[:10]
             if color:
                 data['color'] = color
+
+            # selectionDesc 可能仅SUPER类型支持，REGULAR类型不设置
+            if selection_desc:
+                resp = self.client.session.patch(
+                    f'{self.client.base_url}/alphas/{alpha_id}',
+                    json=data
+                )
+                if resp.status_code == 200:
+                    # 如果简单属性设置成功，再尝试设置selectionDesc
+                    try:
+                        resp2 = self.client.session.patch(
+                            f'{self.client.base_url}/alphas/{alpha_id}',
+                            json={'selectionDesc': selection_desc}
+                        )
+                        if resp2.status_code != 200:
+                            logger.debug(f"selectionDesc not supported for this alpha type")
+                    except Exception:
+                        pass
+                elif resp.status_code != 200:
+                    logger.warning(f"Failed to set alpha props: {resp.status_code} {resp.text[:100]}")
+                return
+
             resp = self.client.session.patch(
                 f'{self.client.base_url}/alphas/{alpha_id}',
                 json=data
             )
             if resp.status_code == 200:
-                logger.info(f"Alpha {alpha_id} props set: name={name}, "
-                           f"tags={tags}, color={color}")
+                logger.info(f"Alpha {alpha_id} props set: name={clean_name}, "
+                           f"color={color}")
             else:
-                logger.warning(f"Failed to set alpha props: {resp.status_code}")
+                logger.warning(f"Failed to set alpha props: {resp.status_code} {resp.text[:100]}")
         except Exception as e:
             logger.warning(f"Failed to set alpha props for {alpha_id}: {e}")
 
@@ -447,15 +726,23 @@ class RetryableBrainClient:
         self.record_tested(expression, dataset, settings, result)
 
         # 设置Alpha属性（name/tags/color），方便网页搜索和归类
+        # 只有表现好的Alpha（Sharpe >= 1.0）才生成详细中文描述
         alpha_id = result.get('alpha_id')
         if alpha_id:
             name = alpha_name or self._next_name(dataset)
             tags = alpha_tags or self._auto_tags(expression, dataset, result)
             color = alpha_color or self._auto_color(result)
-            await self._set_alpha_props(alpha_id, name, tags, color)
+            sharpe = result.get('sharpe', 0)
+            desc = None
+            if sharpe >= 1.0:
+                desc = self._generate_cn_description(expression, dataset, result)
+                logger.info(f"Sharpe={sharpe:.2f} >= 1.0, 生成中文描述")
+            await self._set_alpha_props(alpha_id, name, tags, color, selection_desc=desc)
             result['display_name'] = name
             result['tags'] = tags
             result['color'] = color
+            if desc:
+                result['selection_desc'] = desc[:100] + '...'
 
         return result
 

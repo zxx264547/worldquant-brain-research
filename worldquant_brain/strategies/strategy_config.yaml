@@ -1,6 +1,41 @@
 strategies:
-- name: analyst4_eps
+- name: shortinterest3_vecmax
   priority: 1
+  effectiveness: 0.9
+  datasets:
+  - shortinterest3
+  templates:
+  - zscore(-ts_max(vec_max({data}), 22))
+  - zscore(-ts_max(vec_max({data}), 5))
+  - zscore(-ts_max(vec_max({data}), 66))
+  - zscore(-ts_min(vec_min({data}), 22))
+  - rank(-ts_max(vec_max({data}), 22))
+  last_tested: null
+  notes: "29个VECTOR字段alphaCount=0, coverage=1.0, 关键字段: max_loan_rate, mean_loan_rate, min_loan_rate, borrow_activity_score, loan_utilization_ratio"
+- name: biasfree_analyst_vecmax
+  priority: 2
+  effectiveness: 0.7
+  datasets:
+  - biasfree_analyst
+  templates:
+  - zscore(-ts_max(vec_max({data}), 22))
+  - zscore(-ts_min(vec_min({data}), 22))
+  - rank(-ts_max(vec_max({data}), 22))
+  last_tested: null
+  notes: "偏差调整目标价VECTOR: biasfree_analyst_price_target (cov=0.885, users=0)"
+- name: analyst44_vecmax
+  priority: 3
+  effectiveness: 0.6
+  datasets:
+  - analyst44
+  templates:
+  - zscore(-ts_max(vec_max({data}), 22))
+  - zscore(-ts_min(vec_min({data}), 22))
+  - rank(-ts_max(vec_max({data}), 22))
+  last_tested: null
+  notes: "整合经纪人估计VECTOR: anl44_2_eps_value, anl44_2_ebit_value (cov=0.94+, low users)"
+- name: analyst4_eps
+  priority: 4
   effectiveness: 0.6
   datasets:
   - analyst4
@@ -8,26 +43,6 @@ strategies:
   - rank(ts_mean({data}, 22))
   - rank(ts_delta({data}, 22))
   - zscore(ts_mean({data}, 66))
-  last_tested: '2026-05-12'
-- name: fundamental_value
-  priority: 2
-  effectiveness: 0.5
-  datasets:
-  - fundamental6
-  templates:
-  - rank({data})
-  - rank(ts_mean({data}, 66))
-  - zscore(ts_mean({data}, 252))
-  last_tested: null
-- name: pv87_momentum
-  priority: 3
-  effectiveness: 0.45
-  datasets:
-  - pv87
-  templates:
-  - rank(ts_mean({data}, 5))
-  - rank(ts_delta({data}, 22))
-  - rank(ts_std_dev({data}, 22))
   last_tested: '2026-05-12'
 thresholds:
   sharpe_min: 1.58
