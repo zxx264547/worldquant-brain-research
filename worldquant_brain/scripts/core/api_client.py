@@ -181,6 +181,7 @@ class RetryableBrainClient:
         sharpe = result.get('sharpe', 0)
         if sharpe >= 1.58:
             tags.append('grade:A')
+            tags.append('submittable')
         elif sharpe >= 1.0:
             tags.append('grade:B')
         elif sharpe >= 0.5:
@@ -759,7 +760,24 @@ class RetryableBrainClient:
             'actual_net_income': 'analyst4',
             'actual_revenue': 'analyst4',
             'analyst4': 'analyst4',
-            'mdl136': 'mdl136',
+            'max_loan_rate': 'shortinterest3',
+            'min_loan_rate': 'shortinterest3',
+            'mean_loan_rate': 'shortinterest3',
+            'borrow_activity_score': 'shortinterest3',
+            'loan_utilization_ratio': 'shortinterest3',
+            'loan_rate_volatility': 'shortinterest3',
+            'available_market_value': 'shortinterest3',
+            'available_share_count': 'shortinterest3',
+            'rsk60_offer': 'risk60',
+            'rsk60_last': 'risk60',
+            'rsk60_crowding': 'risk60',
+            'biasfree_analyst': 'biasfree_analyst',
+            'anl10_epsrevise': 'analyst10',
+            'anl10_epsnormal': 'analyst10',
+            'anl10_epsinnovation': 'analyst10',
+            'anl14_estvalue': 'analyst14',
+            'anl14_recvalue': 'analyst14',
+            'mdl136': 'model136',
             'close': 'price',
             'open': 'price',
             'high': 'price',

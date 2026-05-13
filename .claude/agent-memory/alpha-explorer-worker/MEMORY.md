@@ -7,3 +7,4 @@
 - [vector_fields_exploration](vector_fields_exploration.md) - Multi-dataset VECTOR field exploration - analyst14/27/10/fnd6 with vec_min/vec_max patterns
 - [risk60_comprehensive_results](risk60_comprehensive_results.md) - COMPREHENSIVE: 10+ submittable alphas from risk60 dataset - rsk60_offer & rsk60_last
 - [rsk60_prod_correlation_20260513](rsk60_prod_correlation_20260513.md) - All rsk60 VECTOR alphas fail prod corr check (>0.9) even if structurally different
+- [rsk60_cross_dataset_20260513](rsk60_cross_dataset_20260513.md) - Cross-dataset rsk60 combinations: ADDITION preserves Sharpe (~2.0), MULTIPLICATION fails, prod corr still >0.7
