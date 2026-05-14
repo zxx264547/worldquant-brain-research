@@ -4,106 +4,74 @@
 
 ## 研究进度
 
-- 当前阶段：深度优化Alpha阶段（目标Sharpe>=1.58）
-- 最佳成绩：Sharpe 1.17 (analyst4 + eps + signed_power + ts_backfill)
-- 已测试：1475个Alpha，其中924个成功，203个Sharpe>=1.0
-- 差距：当前1.17 vs 目标1.58，需要约35%提升
-- API状态：严重限流(429)，每次调用需等待
+- 当前阶段：shortinterest3 (s3) 深度优化阶段
+- 最佳成绩：**Sharpe 2.45** (`min_loan_rate w22 + truncation=0.05`)
+- 数据集：shortinterest3 (VECTOR, 31字段, 29个alphaCount=0)
+- 核心模式：`zscore(-ts_max(vec_max(field), window))` + 调参
 
-## API状态 (2026-05-01)
+## 最佳Alpha (按类别)
 
-- TOP3000 Universe正常工作
-- TOP1500/UVIX等Universe不可用
-- 大量调用会触发429 Rate Limit
-- 模拟创建成功但轮询超时严重(需300-600s)
-- analyst4的actual_eps_value_quarterly字段表现最佳
-- signed_power表达式有效果但超时严重
+### 纯s3 (s3_sector_decay — 16条)
+| Alpha ID | 表达式 | Sharpe | 配置 |
+|----------|--------|--------|------|
+| N1nk8wLe | min_loan_rate w22 | **2.45** | truncation=0.05 |
+| N1nkL69E | min_loan_rate w22 | 2.23 | SECTOR中性化 |
+| akNXwAW9 | min_loan_rate w22 | 2.18 | decay=2 |
+| A1nqeQWW | mean_loan_rate w22 | 2.07 | SECTOR中性化 |
+| N1nW00Pe | max_loan_rate w5 | 1.98 | decay=8 |
 
-## 最佳Alpha表达式
+### 跨数据集 (s3x — 9条)
+| Alpha ID | 表达式 | Sharpe |
+|----------|--------|--------|
+| MPb9zdMo | min22 + close22 | 2.26 |
+| 78xg2pa2 | mean22 + close22 | 2.11 |
+| 0mAn6v7r | min22 + vol22 | 1.99 |
+| XgkXMXp0 | max5 + close22 | 1.89 |
 
-```
-ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)
-Sharpe=1.17, Fitness=2.06, Margin=0.126, Turnover=0.006
-```
+### 产品相关性测试 (spc — 多条)
+| Alpha ID | 表达式 | Sharpe | 备注 |
+|----------|--------|--------|------|
+| e7neMpoN | signed_power(zscore(min22), 10) | 1.61 | fitness=6.89, ppc=0.016, turnover=0.125, **Concentrated Weight待修复** |
+| P0njKg2J | min22 + CROWDING | 2.19 | |
+| 1YoVY9WW | min22 + vec_avg(min) | 1.91 | turnover 0.23过高 |
 
-## 新发现
+## 提交检查状态
 
-### 短窗口signed_power测试失败
-- 22窗口: 超时
-- 11窗口: 429限流
-- 5窗口: 429限流
+5条候选在 s3_submission_checks.json 中，**self_corr/prod_corr 全部 PENDING**：
+- S3-0002 (max22, Sharpe 1.76): LOW_SUB_UNIVERSE_SHARPE FAIL (0.69/0.76)
+- S3-0003 (max66, Sharpe 1.61): LOW_SUB_UNIVERSE_SHARPE FAIL (0.64/0.70)
 
-### 简单表达式测试失败
-- sign/abs/if_else全部超时或429
+## 已确认的结论
 
-### analyst14/analyst27字段不可用
-- analyst27只有VECTOR类型字段4个
-- 字段名称与描述不匹配，无法直接使用
+### 有效策略
+- **truncation=0.05** → 比SECTOR中性化更有效提升Sharpe
+- **close/volume 加法组合** → 保留信号 (EPS/lowvol无效)
+- **CROWDING中性化** → 可行，min_loan_rate达2.19
+- **decay=2~8** → 小幅提升，最佳值因字段而异
 
-## 核心问题
+### 无效策略
+- `rank()`包裹 → Sharpe暴跌 (2.18→0.65)
+- `ts_rank()` → Sharpe 0.58 (全灭)
+- `signed_power×0.3` → 破坏信号 (2.18→0.89)
+- `ts_min+vec_min` → 方向反了 (Sharpe负)
+- EPS作为附加信号 → 始终<1.0
+- 外层zscore → 零增益
 
-单一字段/数据集已触及瓶颈（Sharpe 1.17），需要：
-1. **vec_min/vec_max模式** - API需要修复
-2. **group_rank/group_op** - 印度区经验称可优化Robust Sharpe
-3. **多字段rank组合** - rank(A) + rank(B)模式
+## 下一步任务
 
-## API问题总结
+1. **修复 e7neMpoN 的 Concentrated Weight** — signed_power(zscore(min22), 10) 权重过度集中
+2. **继续 signed_power 降 PPC 方向** — sp10 的 PPC 极低 (0.016)，需降低 turnover
+3. **跑 sector_decay 最佳候选的提交检查** — min22+truncation=0.05 等未验证 sub_universe
 
-### vec_min/ts_min 失败原因
-- API返回 "must be an vector data"
-- ts_mean/rank/ts_sum 不支持 event inputs (VECTOR字段)
-- 原因：BRAIN API对VECTOR类型字段的处理有严格限制
-- 论坛帖子声称1.81 Sharpe可能是过时的或针对不同数据版本
+## API状态
 
-### API限流问题
-- 429错误在4-6次调用后触发
-- 模拟创建成功但轮询超时(需300-600s)
-- TOP3000可用，TOP1500/UVIX不可用
+- TOP3000 Universe正常
+- VECTOR字段需 vec_min/vec_max 包裹
+- 429限流存在，模拟轮询需要轮询等待
 
-### 字段类型说明
-- MATRIX类型: 支持ts_mean/rank等算子 ✓
-- VECTOR类型: 不支持ts_mean/rank等算子 ✗
-- analyst4的actual_eps_value_quarterly是MATRIX类型，所以可以工作
+## 关键文件
 
-## 新测试结果 (2026-05-04)
-
-### model136 数据集测试
-- `ts_mean(mdl136_qes_etf_us_flow_gross_pctvol, 22)`: Sharpe=0.65, Fitness=0.92
-- ETF流量数据单独使用效果一般，不如EPS
-
-### API状态
-- 429限流严重
-- 模拟创建后轮询超时严重(>180s)
-- 建议降低测试频率
-
-## 重要发现
-
-### VECTOR vs MATRIX 字段类型
-- **MATRIX类型**: 支持ts_mean/rank等算子 ✓ (代表字段: actual_eps_value_quarterly)
-- **VECTOR类型**: 不支持ts_mean/rank等算子 ✗ (会报错"Operator does not support event inputs")
-
-### vec_min/ts_min 失败原因
-- vec_min/ts_min 需要 VECTOR 类型字段
-- 但VECTOR类型不支持ts_mean包裹，导致无法构建复杂表达式
-- 论坛帖子声称的1.81 Sharpe可能是针对旧版API或不同数据
-
-### 纯MATRIX数据集 (可正常使用)
-- model136: ETF流量因子 (50 MATRIX)
-- fundamental6: 公司基本面 (48 MATRIX)
-- analyst4: EPS预测 (26 MATRIX)
-- pv87, news12 等
-
-## 当前最佳Alpha
-
-```
-Alpha ID: A1g1Z1Vw
-Expression: ts_backfill(signed_power(ts_sum(actual_eps_value_quarterly, 252), 1.05), 3)
-Sharpe: 1.17, Fitness: 2.06, Margin: 0.126, Turnover: 0.006
-```
-
-## 待测试方向
-
-1. **model136 + analyst4 组合** - 等待API恢复
-2. **fundamental13/fundamental17** - 综合基本面数据
-3. **pv87** - 价格/价值数据
-4. **sentiment21/22/23** - 情感数据 (纯MATRIX)
+- /tmp/multi_agent/spc_results.json — 最全的产品相关性测试结果
+- /tmp/multi_agent/s3x_results.json — 跨数据集组合结果
+- /tmp/multi_agent/s3_sector_decay_results.json — sector/decay/truncation调参
+- /tmp/multi_agent/s3_submission_checks.json — 提交检查 (pending)

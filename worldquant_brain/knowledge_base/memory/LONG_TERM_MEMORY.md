@@ -2,6 +2,43 @@
 
 > 重要发现、经验总结、套路积累
 
+## shortinterest3 探索经验 (2026-05-14)
+
+### VECTOR数据集最佳模式
+```
+zscore(-ts_max(vec_max(field), window))  # 核心公式
+```
+- **vec_max + ts_max 同向匹配**：外层ts_max/ts_min须与内层vec_max/vec_min同向
+- **zscore是关键**：rank只给0.65-0.68，zscore给1.76-2.45
+- **负号必须**：高借贷利率=负预测信号，必须取反
+
+### 字段排名
+- `min_loan_rate` > `mean_loan_rate` > `max_loan_rate` > `borrow_activity_score`
+- 252长窗口可用但Sharpe较低 (1.59-1.72)
+
+### 有效调参
+- **truncation=0.05** → 最大提升 (+0.27, 2.18→2.45)
+- **SECTOR中性化** → 小幅影响 (2.18→2.23)
+- **CROWDING中性化** → 可行 (2.19)
+- **decay=2~8** → 微调级别提升
+
+### 跨数据集加法
+- `s3_min22 + close22` → 2.26 (最高)
+- `s3_min22 + vol22` → 1.99
+- 加法保留信号，乘法/eps/lowvol无效
+
+### 无效路线
+- `signed_power(zscore, 0.3)` → 破坏信号 (2.18→0.89)
+- `signed_power(zscore, 10)` → 1.61但turnover高 (0.125)，权重集中
+- `ts_rank(vec_max)` → Sharpe 0.58
+- `ts_min+vec_min` → 方向反转 (Sharpe -2.06)
+
+### ProdCorr 教训 (risk60经验)
+- 同一数据集即使结构不同，prod_corr仍 > 0.9
+- 需跨数据集加法或找alphaCount=0的字段来规避
+
+---
+
 ## 重要发现
 
 ### Alpha筛选标准 (PPA)
