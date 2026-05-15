@@ -29,6 +29,54 @@ PERCEIVE → PLAN → DISPATCH → REFLECT → REMEMBER → EVOLVE
 | `python worldquant_brain/cli.py remember "..." -c 0.8` | 沉淀知识 |
 | `python worldquant_brain/cli.py evolve` | 提议规则进化 |
 
+### brain-data-scope 离线分析（感知阶段必用）
+
+在 PERCEIVE 阶段，启动后优先查询本地数据库，避免盲目回测：
+
+| 命令 | 作用 |
+|------|------|
+| `python worldquant_brain/scripts/brain_data_scope.py star <dataset>` | 数据集评级（★~★★★） |
+| `python worldquant_brain/scripts/brain_data_scope.py badge <dataset>` | OS/IS Sharpe 比率 + 颜色徽章 |
+| `python worldquant_brain/scripts/brain_data_scope.py neut <field> [dataset]` | 中性化效果分布 |
+| `python worldquant_brain/scripts/brain_data_scope.py report <field> [dataset]` | 字段综合报告 |
+| `python worldquant_brain/scripts/brain_data_scope.py ingest <results.json>` | 导入回测结果 |
+| `python worldquant_brain/scripts/brain_data_scope.py ingest-all` | 批量导入 /tmp/multi_agent/ 所有结果 |
+
+数据库位置：`worldquant_brain/data/field_analysis.db`
+每次 batch 完成后自动执行 `ingest-all` 积累数据。
+
+### 信号灯系统（决策阶段必用）
+
+每批回测完成后，用信号灯判断方向：继续深挖 vs 止损换方向。
+
+| 命令 | 作用 |
+|------|------|
+| `python worldquant_brain/scripts/direction_radar.py <results.json>` | 分析批次方向 |
+| `python worldquant_brain/scripts/direction_radar.py <results.json> --verbose` | 详细诊断 |
+
+四盏灯 + 行动：
+- 🟢 GREEN → 加大回测预算
+- 🟡 YELLOW → 谨慎继续 1-2 轮
+- 🔴 RED → 结构性改动再评估
+- ⚫ DEAD → 记录 anti_pattern，换方向
+
+核心指标：算子多样性分数（6 大族的覆盖度）用于区分"池塘没鱼"和"鱼饵不对"。只用了 1-2 个族结果还差 → 拓宽算子再试。用了 4+ 个族还差 → 数据真没信号，果断放弃。
+
+详见帖子 #2009 (JR57542)。
+
+### seed_alpha_generator（论文驱动 Alpha 生成）
+
+在探索新数据集前，先让 AI 读论文再写表达式，而不是凭空想象。
+
+| 命令 | 作用 |
+|------|------|
+| 修改 `seed_alpha_generator.py` 顶部配置区 | 填入数据集ID、AI API Key |
+| `python worldquant_brain/scripts/seed_alpha_generator.py` | 运行全链路生成 |
+
+全链路：数据集发现 → arXiv + Semantic Scholar 论文检索 → LLM 生成 idea → 模板展开 → 批量表达式。
+
+详见帖子 #39870945020183（XC83126）。
+
 ---
 
 ## 自进化机制
