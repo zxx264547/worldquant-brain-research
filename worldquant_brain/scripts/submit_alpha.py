@@ -1,250 +1,153 @@
 #!/usr/bin/env python3
-"""Alpha submission script - uses existing session cookie directly."""
+"""
+Alpha 提交工具 — 使用 curl -L 正确提交 Alpha 到 BRAIN 平台
 
-import asyncio
-import json
-import os
-import sys
-import time
-import logging
-from pathlib import Path
+用法:
+  python submit_alpha.py <alpha_id> [<name>]
+  python submit_alpha.py --batch <alpha_id1> <alpha_id2> ...
 
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-FORUM_PATH = "/home/zxx/wq_env/lib/python3.12/site-packages/cnhkmcp/untracked"
-sys.path.insert(0, FORUM_PATH)
+原因:
+  Python requests 的 POST 不会跟踪 303 重定向，导致提交返回 201 但未生效。
+  curl -L 会跟踪重定向链，正确完成提交。
+"""
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%H:%M:%S"
-)
-logger = logging.getLogger(__name__)
+import asyncio, sys, os, json, subprocess, time
 
-import requests
-import urllib3
-urllib3.disable_warnings()
+def get_jwt():
+    """从已保存的session获取JWT token"""
+    sys.path.insert(0, "/home/zxx/worldQuant")
+    from worldquant_brain.scripts.core.api_client import RetryableBrainClient
 
-ALPHA_ID = "vR50553z"
-BASE_URL = "https://api.worldquantbrain.com"
-
-# Session cookie from saved session
-JWT_COOKIE = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJTQVdYZWM3cFFiZnRhNE9ZM2ZReHZWcmNQa1A2SnR1TyIsImV4cCI6MTc3ODY2MjU1NH0.zJo-OdSLDV0znlIpErImUyAcgXHdwu8h3BjauucM3pM"
-
-MAX_RETRIES = 5
-RETRY_DELAY = 30  # seconds
-
-
-def make_session():
-    """Create a requests session with the saved JWT cookie."""
-    s = requests.Session()
-    s.cookies.set("t", JWT_COOKIE)
-    # No proxy - direct connection works
-    for k in ['http_proxy', 'https_proxy', 'HTTP_PROXY', 'HTTPS_PROXY']:
-        os.environ.pop(k, None)
-    return s
-
-
-async def api_get(session, path, retries=MAX_RETRIES):
-    """GET request with retry logic for 429s."""
-    url = f"{BASE_URL}{path}"
-    for attempt in range(retries):
-        try:
-            r = session.get(url, timeout=30)
-            if r.status_code == 200:
-                return r.json()
-            elif r.status_code == 429:
-                retry_after = int(r.headers.get("Retry-After", RETRY_DELAY))
-                wait = min(retry_after, 120)
-                logger.warning(f"  429 rate limited. Waiting {wait}s (attempt {attempt+1}/{retries})...")
-                await asyncio.sleep(wait)
-                continue
-            elif r.status_code == 401:
-                logger.error("  401 Unauthorized - session expired")
-                return None
-            else:
-                logger.warning(f"  HTTP {r.status_code}: {r.text[:200]}")
-                if attempt < retries - 1:
-                    await asyncio.sleep(RETRY_DELAY)
-                    continue
-                return None
-        except Exception as e:
-            logger.error(f"  Request failed: {e}")
-            if attempt < retries - 1:
-                await asyncio.sleep(RETRY_DELAY)
-                continue
-            return None
-    return None
-
-
-async def api_post(session, path, retries=MAX_RETRIES):
-    """POST request with retry logic for 429s."""
-    url = f"{BASE_URL}{path}"
-    for attempt in range(retries):
-        try:
-            r = session.post(url, timeout=60)
-            if r.status_code in (200, 201):
-                return r.json() if r.text else {"status": "ok"}
-            elif r.status_code == 429:
-                retry_after = int(r.headers.get("Retry-After", RETRY_DELAY))
-                wait = min(retry_after, 120)
-                logger.warning(f"  429 rate limited. Waiting {wait}s (attempt {attempt+1}/{retries})...")
-                await asyncio.sleep(wait)
-                continue
-            elif r.status_code == 401:
-                logger.error("  401 Unauthorized - session expired")
-                return None
-            else:
-                logger.warning(f"  HTTP {r.status_code}: {r.text[:200]}")
-                if attempt < retries - 1:
-                    await asyncio.sleep(RETRY_DELAY)
-                    continue
-                return None
-        except Exception as e:
-            logger.error(f"  Request failed: {e}")
-            if attempt < retries - 1:
-                await asyncio.sleep(RETRY_DELAY)
-                continue
-            return None
-    return None
-
-
-async def step_get_details(session):
-    """Step 1: Get alpha details."""
-    logger.info("=" * 60)
-    logger.info("STEP 1: Getting Alpha Details")
-    logger.info("=" * 60)
-
-    data = await api_get(session, f"/alphas/{ALPHA_ID}")
-    if not data:
-        logger.error("  Failed to get alpha details!")
+    async def _get():
+        client = RetryableBrainClient()
+        await client.ensure_authenticated()
+        for c in client.client.session.cookies:
+            if c.name == 't':
+                return c.value
         return None
 
-    is_data = data.get("is", {})
-    expression = data.get("regular", {}).get("code", data.get("expression", "N/A"))
-    settings = data.get("settings", {})
-
-    logger.info(f"  Alpha ID: {ALPHA_ID}")
-    logger.info(f"  Expression: {expression}")
-    logger.info(f"  Author: {data.get('author', 'N/A')}")
-    logger.info(f"  Status: {data.get('stage', data.get('status', 'N/A'))}")
-    logger.info(f"  Date Created: {data.get('dateCreated', 'N/A')}")
-    logger.info(f"  Date Submitted: {data.get('dateSubmitted', 'Not submitted')}")
-
-    sharpe = is_data.get("sharpe", 0)
-    fitness = is_data.get("fitness", 0)
-    margin = is_data.get("margin", 0)
-    turnover = is_data.get("turnover", 0)
-    returns = is_data.get("returns", 0)
-    ppc = abs(margin / returns) if returns != 0 else 1
-
-    logger.info(f"  Sharpe: {sharpe:.4f}")
-    logger.info(f"  Fitness: {fitness:.4f}")
-    logger.info(f"  Margin: {margin:.6f}")
-    logger.info(f"  Turnover: {turnover:.6f}")
-    logger.info(f"  Returns: {returns:.6f}")
-    logger.info(f"  PPC: {ppc:.4f}")
-
-    logger.info("  --- PPA Criteria Check ---")
-    checks = {
-        "Sharpe >= 1.58": (sharpe >= 1.58, f"{sharpe:.4f}"),
-        "Fitness > 0.5": (fitness > 0.5, f"{fitness:.4f}"),
-        "PPC < 0.5": (ppc < 0.5, f"{ppc:.4f}"),
-        "Margin > Turnover": (margin > turnover, f"margin={margin:.6f} turnover={turnover:.6f}"),
-    }
-    all_pass = True
-    for check, (passed, val) in checks.items():
-        sym = "PASS" if passed else "FAIL"
-        logger.info(f"  [{sym}] {check}: {val}")
-        if not passed:
-            all_pass = False
-
-    if all_pass:
-        logger.info("  >>> ALL PPA CRITERIA PASSED!")
-    else:
-        logger.warning("  >>> Some PPA criteria FAILED (may still be submitable)")
-
-    return data
+    return asyncio.run(_get())
 
 
-async def step_get_self_correlation(session):
-    """Step 2: Get self-correlation."""
-    logger.info("=" * 60)
-    logger.info("STEP 2: Getting Self-Correlation")
-    logger.info("=" * 60)
+def submit_alpha(alpha_id: str, jwt: str = None) -> dict:
+    """提交单个 Alpha，返回结果"""
+    clean_env = {k: v for k, v in os.environ.items() if 'proxy' not in k.lower()}
 
-    data = await api_get(session, f"/alphas/{ALPHA_ID}/correlations/self")
-    if data:
-        logger.info(f"  Self-correlation: {json.dumps(data, indent=2)[:600]}")
-    else:
-        logger.warning("  Self-correlation: empty or unavailable")
-    return data
+    if not jwt:
+        jwt = get_jwt()
+    if not jwt:
+        return {"success": False, "reason": "无法获取JWT token"}
 
+    # Step 1: 提交
+    cmd = ['curl', '-s', '-L', '--max-time', '30', '-w', '\n%{http_code}',
+           '-X', 'POST', f'https://api.worldquantbrain.com/alphas/{alpha_id}/submit',
+           '-H', f'Cookie: t={jwt}', '-H', 'Accept: application/json',
+           '--noproxy', '*']
+    result = subprocess.run(cmd, capture_output=True, text=True, env=clean_env, timeout=35)
+    lines = result.stdout.strip().split('\n')
+    status_code = lines[-1] if lines else '?'
+    body = '\n'.join(lines[:-1]) if len(lines) > 1 else ''
 
-async def step_get_production_correlation(session):
-    """Step 3: Get production correlation."""
-    logger.info("=" * 60)
-    logger.info("STEP 3: Getting Production Correlation")
-    logger.info("=" * 60)
+    # Step 2: 分析结果
+    time.sleep(3)
 
-    data = await api_get(session, f"/alphas/{ALPHA_ID}/correlations/prod")
-    if data:
-        logger.info(f"  Production correlation: {json.dumps(data, indent=2)[:600]}")
-    else:
-        logger.warning("  Production correlation: empty or unavailable")
-    return data
+    if status_code == '200' or status_code == '201':
+        # 验证状态
+        cmd2 = ['curl', '-s', f'https://api.worldquantbrain.com/alphas/{alpha_id}',
+                '-H', f'Cookie: t={jwt}', '--noproxy', '*']
+        result2 = subprocess.run(cmd2, capture_output=True, text=True, env=clean_env, timeout=15)
+        if result2.stdout:
+            alpha = json.loads(result2.stdout)
+            submitted = alpha.get('dateSubmitted')
+            status = alpha.get('status')
+            is_s = alpha.get('is', {}).get('sharpe', 0)
 
+            if submitted and status == 'ACTIVE':
+                return {
+                    "success": True,
+                    "alpha_id": alpha_id,
+                    "status": status,
+                    "submitted": submitted,
+                    "sharpe": is_s,
+                    "link": f"https://platform.worldquantbrain.com/alphas/{alpha_id}"
+                }
+            else:
+                return {
+                    "success": False,
+                    "alpha_id": alpha_id,
+                    "reason": f"提交未生效 (status={status}, submitted={submitted})",
+                    "detail": body[:300]
+                }
 
-async def step_submit(session):
-    """Step 4: Submit the alpha."""
-    logger.info("=" * 60)
-    logger.info("STEP 4: SUBMITTING ALPHA")
-    logger.info("=" * 60)
+    # 403 — 检查失败
+    if status_code == '403':
+        try:
+            data = json.loads(body) if body else {}
+            checks = data.get('is', {}).get('checks', [])
+            fails = [f"{c['name']}" for c in checks if c.get('result') == 'FAIL']
+            return {
+                "success": False,
+                "alpha_id": alpha_id,
+                "reason": "检查未通过",
+                "failures": fails,
+                "detail": body[:300]
+            }
+        except:
+            return {"success": False, "alpha_id": alpha_id, "reason": f"403 Forbidden", "detail": body[:200]}
 
-    logger.info(f"  Submitting alpha {ALPHA_ID}...")
-    result = await api_post(session, f"/alphas/{ALPHA_ID}/submit")
-
-    if result:
-        logger.info("  >>> ALPHA SUBMITTED SUCCESSFULLY! <<<")
-        logger.info(f"  Response: {json.dumps(result, indent=2)[:500]}")
-    else:
-        logger.error("  Submission failed!")
-
-    return result
-
-
-async def main():
-    logger.info("Creating API session with saved JWT cookie...")
-    session = make_session()
-
-    # Step 1: Get alpha details
-    details = await step_get_details(session)
-    if not details:
-        logger.error("Cannot proceed: failed to get alpha details.")
-        return
-
-    # Check if already submitted
-    date_submitted = details.get("dateSubmitted")
-    if date_submitted:
-        logger.warning(f"  Alpha was already submitted on: {date_submitted}")
-        logger.info("  Skipping submission.")
-        return
-
-    stage = details.get("stage", "")
-    logger.info(f"  Alpha stage: {stage}")
-
-    # Step 2: Self-correlation
-    await step_get_self_correlation(session)
-
-    # Step 3: Production correlation
-    await step_get_production_correlation(session)
-
-    # Step 4: Submit
-    await step_submit(session)
-
-    logger.info("=" * 60)
-    logger.info("Submission process complete.")
-    logger.info("=" * 60)
+    return {"success": False, "alpha_id": alpha_id, "reason": f"HTTP {status_code}", "detail": body[:200]}
 
 
+def name_alpha(alpha_id: str, name: str, jwt: str = None):
+    """给 Alpha 命名并加星标"""
+    clean_env = {k: v for k, v in os.environ.items() if 'proxy' not in k.lower()}
+    if not jwt:
+        jwt = get_jwt()
+
+    cmd = ['curl', '-s', '-X', 'PATCH',
+           f'https://api.worldquantbrain.com/alphas/{alpha_id}',
+           '-H', f'Cookie: t={jwt}',
+           '-H', 'Content-Type: application/json',
+           '-H', 'Accept: application/json',
+           '-d', json.dumps({"name": name, "favorite": True}),
+           '--noproxy', '*']
+    result = subprocess.run(cmd, capture_output=True, text=True, env=clean_env, timeout=15)
+    return result.status_code == 200
+
+
+# ===== CLI =====
 if __name__ == "__main__":
-    asyncio.run(main())
+    if len(sys.argv) < 2:
+        print(__doc__)
+        sys.exit(0)
+
+    if sys.argv[1] == "--batch":
+        ids = sys.argv[2:]
+    else:
+        ids = [sys.argv[1]]
+
+    jwt = get_jwt()
+    if not jwt:
+        print("无法认证，请检查配置文件")
+        sys.exit(1)
+
+    results = []
+    for aid in ids:
+        print(f"\n提交 {aid}...")
+        result = submit_alpha(aid, jwt)
+        results.append(result)
+
+        if result["success"]:
+            print(f"  ✅ 提交成功!")
+            print(f"  Status: {result.get('status')}")
+            print(f"  Submitted: {result.get('submitted')}")
+            print(f"  Link: {result.get('link')}")
+        else:
+            print(f"  ❌ {result['reason']}")
+            if 'failures' in result:
+                for f in result['failures']:
+                    print(f"    - {f}")
+
+    success = sum(1 for r in results if r["success"])
+    print(f"\n{'='*40}")
+    print(f"Total: {success}/{len(results)} submitted successfully")

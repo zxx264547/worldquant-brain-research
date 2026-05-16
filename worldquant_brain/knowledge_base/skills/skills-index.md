@@ -27,13 +27,15 @@
 | `alpha-submission-cn-template` | 中文提交模板 | Alpha提交时自动生成三段式描述 |
 | `handle-fitness-low` | 修复低Fitness | Fitness < 1.0 时自动调整 |
 | `handle-turnover-high` | 修复高Turnover | Turnover > 70% 时自动调整 |
+| `alpha-submit` | Alpha提交（curl -L） | 正确提交Alpha，避免303重定向导致提交失败 |
 
 ## 自定义Skills路径
 
 - `multi_agent/skills/alpha_submission_cn_template.json` — Alpha提交中文描述模板
 - `multi_agent/skills/handle_fitness_low.json` — Fitness修复
 - `multi_agent/skills/handle_turnover_high.json` — Turnover修复
+- `knowledge_base/skills/alpha-submit.md` — Alpha提交流程（curl -L方法）
 
 ---
 
-*更新时间：2026年4月*
+*更新时间：2026-05-16*
