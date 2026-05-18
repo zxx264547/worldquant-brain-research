@@ -15,6 +15,7 @@ from .exceptions import (
 
 from .api_client import RetryableBrainClient
 from .retry import async_retry, sync_retry
+from .logging_config import setup_logging
 
 __all__ = [
     'BrainAPIError',
@@ -27,4 +28,5 @@ __all__ = [
     'RetryableBrainClient',
     'async_retry',
     'sync_retry',
+    'setup_logging',
 ]

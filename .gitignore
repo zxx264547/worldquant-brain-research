@@ -11,6 +11,13 @@ env/
 *.parquet
 *.db
 worldquant_brain/data/reports/
+data/outputs/
+
+# Temp
+/tmp/
+
+# Credentials (never commit)
+worldquant_brain/config/user_config.json
 
 # Environment
 .env
