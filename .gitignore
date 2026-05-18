@@ -11,6 +11,7 @@ env/
 *.parquet
 *.db
 worldquant_brain/data/reports/
+worldquant_brain/data/raw/*.json
 data/outputs/
 
 # Temp
