@@ -34,8 +34,8 @@ import requests
 # 运行配置区（在此修改所有参数，无需命令行传参）
 # =============================================================================
 # ---- BRAIN 平台账号 ----
-BRAIN_EMAIL = "your_email@example.com"       # 替换为你的 BRAIN 注册邮箱
-BRAIN_PASSWORD = "your_password"              # 替换为你的 BRAIN 密码
+BRAIN_EMAIL = "2645471525@qq.com"
+BRAIN_PASSWORD = "20001025ZHANG"
 BRAIN_API_URL = "https://api.worldquantbrain.com"
 # ---- 回测设置 ----
 INSTRUMENT_TYPE = "EQUITY"
@@ -43,12 +43,12 @@ REGION = "USA"                                # USA / GLB / EUR / ASI / CHN / JP
 DELAY = 1                                     # 0 或 1
 UNIVERSE = "TOP3000"                          # TOP3000 / TOP1000 / TOP500 ...
 DATA_TYPE = "MATRIX"                          # MATRIX 或 VECTOR
-DATASET_ID = "analyst10"                      # 目标数据集 ID
+DATASET_ID = "analyst47"                      # 目标数据集 ID (复合Alpha指标)
 DATA_CATEGORY = ""                            # 留空则按 DATASET_ID 前缀自动推断
-# ---- AI 模型接入 ----
-AI_BASE_URL = "https://api.moonshot.cn/v1"    # 例：https://api.moonshot.cn/v1 或 https://api.anthropic.com
-AI_API_KEY = "sk-xxxxxxxxxxxxxxxxxx"          # 你的 API 令牌
-AI_MODEL = "kimi-k2-0711-preview"             # 模型名（兼容 OpenAI/Anthropic 协议即可）
+# ---- AI 模型接入 (DeepSeek via Anthropic) ----
+AI_BASE_URL = "https://api.deepseek.com/anthropic"
+AI_API_KEY = "sk-a1fc85c5a72a40c4b99aab96add4fa48"
+AI_MODEL = "deepseek-v4-pro[1m]"
 AI_TIMEOUT_SECONDS = 300
 # ---- 论文搜索设置 ----
 PAPER_MAX_QUERIES = 6

@@ -14,19 +14,13 @@ Alpha 提交工具 — 使用 curl -L 正确提交 Alpha 到 BRAIN 平台
 import asyncio, sys, os, json, subprocess, time
 
 def get_jwt():
-    """从已保存的session获取JWT token"""
-    sys.path.insert(0, "/home/zxx/worldQuant")
-    from worldquant_brain.scripts.core.api_client import RetryableBrainClient
-
-    async def _get():
-        client = RetryableBrainClient()
-        await client.ensure_authenticated()
-        for c in client.client.session.cookies:
-            if c.name == 't':
-                return c.value
-        return None
-
-    return asyncio.run(_get())
+    """从session文件直接读取JWT token"""
+    session_file = os.path.expanduser("~/.worldquant_brain/session.json")
+    if os.path.exists(session_file):
+        with open(session_file) as f:
+            session = json.load(f)
+        return session.get("cookies", {}).get("t")
+    return None
 
 
 def submit_alpha(alpha_id: str, jwt: str = None) -> dict:
