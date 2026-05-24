@@ -37,9 +37,14 @@
 
 ## 提交检查状态
 
-5条候选在 s3_submission_checks.json 中，**self_corr/prod_corr 全部 PENDING**：
-- S3-0002 (max22, Sharpe 1.76): LOW_SUB_UNIVERSE_SHARPE FAIL (0.69/0.76)
-- S3-0003 (max66, Sharpe 1.61): LOW_SUB_UNIVERSE_SHARPE FAIL (0.64/0.70)
+**已有成功提交的 Alpha** ✅
+
+| Alpha ID | Sharpe | Prod Corr | Self Corr | CW | 状态 |
+|----------|--------|-----------|-----------|-----|------|
+| e7neMpoN | 1.61 | **0.682** ✅ | 0.347 | 0.99 ❌ | ⚠️ 待修复CW |
+
+> 表达式: `signed_power(zscore(-ts_max(vec_max(min_loan_rate), 22)), 10)`
+> 通过检查: Sharpe、Fitness、Turnover、Prod Corr、Self Corr、Sub-Universe、2Y Sharpe、Pyramid
 
 ## 已确认的结论
 

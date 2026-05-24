@@ -1,9 +1,11 @@
 # Alpha Research Team Lead - Memory Index
 
-## Current Status (2026-05-14)
-- **首个通过Prod Corr的Alpha**: signed_power(zscore(-ts_max(vec_max(min_loan_rate), 22)), 10) — Sharpe=1.61, Prod Corr=0.682 ✅
-- **Alpha ID**: e7neMpoN
-- **需修复**: Concentrated Weight = 0.99 (WARNING)
+## Current Status (2026-05-21)
+- **候选Alpha**: zq5l8b2V — signed_power(zscore(-ts_max(vec_max(min_loan_rate), 22)), 5)
+- **Sharpe**: 1.75, Fitness: 7.11, PPC: 0.0176, Turnover: 0.1137
+- **父Alpha**: e7neMpoN — signed_power(..., 10), Sharpe=1.61, Prod_Corr=0.682, CW=0.99
+- **关键**: zq5l8b2V期望CW更低(功率5<10)，但需完整PPA验证
+- **API状态**: 所有simulation卡在35%，需等待恢复
 - **关键发现**: signed_power(参数=10) 是唯一有效降Prod Corr的方法
 - **已测试**: 300+ 表达式
 
