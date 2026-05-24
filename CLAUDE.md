@@ -1,3 +1,6 @@
+> **[MANDATORY]** 开始量化研究工作前，必须先完整阅读 `PLAYBOOK.md`。
+> 该文件包含操作流程、决策树和交接协议。跳过阅读将导致操作错误。
+
 # WorldQuant BRAIN 量化研究项目
 
 ## 项目概述
@@ -252,19 +255,25 @@ python3 worldquant_brain/multi_agent/init_system.py
 
 ---
 
-## 共享存储
+## 状态存储
+
+研究状态持久化在 `worldquant_brain/state/` 目录（git 跟踪，支持跨用户继承）：
 
 ```
-/tmp/multi_agent/
-├── ideas.json       # Idea队列
-├── results.json      # 结果队列
-├── memory.json      # 探索记忆
-├── configs/         # 运行时配置
-├── skills/          # 运行时技能
-├── prompts/         # 运行时提示词
-└── logs/            # 日志
+worldquant_brain/state/
+├── alphas.json          # Alpha结果（git tracked）
+├── experiments.json     # 实验历史（git tracked）
+├── knowledge_events.json # 知识事件（git tracked）
+├── rule_changes.json    # 规则变更（git tracked）
+├── research_ledger.json # 研究总账（git tracked）
+├── failure_log.json     # 失败记录（git tracked）
+├── datasets.json        # 数据集元数据（git tracked）
+├── valid_fields.json    # 有效字段（git tracked）
+└── _runtime/            # 运行时临时（NOT tracked）
+    ├── tasks.json       # 任务队列
+    └── workers.json     # Worker状态
 ```
 
 ---
 
-*最后更新：2026年4月*
+*最后更新：2026年5月*

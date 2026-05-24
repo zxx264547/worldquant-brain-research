@@ -203,18 +203,12 @@ def cmd_evolve(args):
 
 
 def cmd_clean(args):
-    """清理数据库 (保留Top N)"""
+    """清理状态文件 (保留Top N)"""
     keep = args.keep or 200
-    import sqlite3
-    from worldquant_brain.db.repository import get_db_path, count_alphas
+    from worldquant_brain.db.repository import count_alphas, clean_alphas
 
     before = count_alphas()
-    conn = sqlite3.connect(get_db_path())
-    conn.execute("""DELETE FROM alphas WHERE id NOT IN
-        (SELECT id FROM alphas ORDER BY sharpe DESC LIMIT ?)""", (keep,))
-    conn.commit()
-    conn.execute("VACUUM")
-    conn.close()
+    removed = clean_alphas(keep)
     after = count_alphas()
     print(f"清理: {before} → {after} (保留Top {keep})")
 

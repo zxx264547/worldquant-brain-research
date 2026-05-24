@@ -1,78 +1,59 @@
 #!/usr/bin/env python3
-"""Agent适配层 — 多智能体直接读写SQLite
+"""Agent适配层 — 多智能体通过repository读写状态
 
 Agent通过CLI调用: python worldquant_brain/cli.py <command>
-CLI调用本模块函数, 全部直接读写SQLite brain.db
+CLI调用本模块函数, 全部通过repository层操作JSON状态文件
 """
 
 import json
-import sqlite3
 import asyncio
 from pathlib import Path
 from datetime import datetime
 
-DB_PATH = Path(__file__).parent.parent / "data" / "brain.db"
+from worldquant_brain.db.repository import (
+    get_queued_tasks, push_task, get_best_alphas, save_alpha, get_workers,
+)
 
 
 # ═══ Ideas ═══
 
 def load_ideas(limit: int = 8) -> list[dict]:
-    """从SQLite tasks表加载待处理idea"""
-    conn = sqlite3.connect(str(DB_PATH))
-    conn.row_factory = sqlite3.Row
-    rows = conn.execute(
-        "SELECT * FROM tasks WHERE status='queued' ORDER BY priority DESC, id ASC LIMIT ?",
-        (limit,)).fetchall()
-    conn.close()
+    """从tasks加载待处理idea"""
+    tasks = get_queued_tasks(limit)
     return [{
-        "idea_id": f"task_{r['id']}",
-        "expression": r['expression'],
-        "strategy": r['strategy'],
-        "settings": json.loads(r.get('settings_json', '{}') or '{}'),
-    } for r in rows]
+        "idea_id": f"task_{t['id']}",
+        "expression": t['expression'],
+        "strategy": t['strategy'],
+        "settings": json.loads(t.get('settings_json', '{}') or '{}'),
+    } for t in tasks]
 
 
 def save_ideas(ideas: list[dict]):
-    """保存ideas到SQLite tasks表"""
-    conn = sqlite3.connect(str(DB_PATH))
+    """保存ideas到tasks"""
     for idea in ideas:
-        conn.execute("""
-            INSERT OR IGNORE INTO tasks (expression, strategy, settings_json, status, priority)
-            VALUES (?, ?, ?, 'queued', 0)
-        """, (
-            idea.get('expression', ''),
-            idea.get('strategy', 'manual'),
-            json.dumps(idea.get('settings', {}) or {}),
-        ))
-    conn.commit()
-    conn.close()
+        push_task(
+            strategy=idea.get('strategy', 'manual'),
+            expression=idea.get('expression', ''),
+            settings=idea.get('settings', {}),
+            priority=0,
+        )
 
 
 # ═══ Results ═══
 
 def load_results(recent: int = 50) -> list[dict]:
-    conn = sqlite3.connect(str(DB_PATH))
-    conn.row_factory = sqlite3.Row
-    rows = conn.execute(
-        "SELECT * FROM alphas WHERE status='done' ORDER BY created_at DESC LIMIT ?",
-        (recent,)).fetchall()
-    conn.close()
-    return [dict(r) for r in rows]
+    return get_best_alphas(recent)
 
 
 def save_result(result: dict):
     result['timestamp'] = datetime.now().isoformat()
-    from worldquant_brain.db.repository import save_alpha
     save_alpha(result)
 
 
 # ═══ State ═══
 
 def load_state() -> dict:
-    conn = sqlite3.connect(str(DB_PATH))
-    conn.row_factory = sqlite3.Row
-    workers = [dict(r) for r in conn.execute("SELECT * FROM workers").fetchall()]
-    conn.close()
+    workers = get_workers()
     return {"workers": workers, "timestamp": datetime.now().isoformat()}
 
 

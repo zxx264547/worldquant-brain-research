@@ -3,22 +3,20 @@
 提供数据集探索、字段分析、模式发现等能力，
 分析结果通过 ReportGenerator 自动沉淀为知识。
 """
-import json
-import sqlite3
+import re
 from pathlib import Path
 from datetime import datetime
 from typing import Optional
 from collections import Counter
+
+from worldquant_brain.db.json_store import alphas_store, experiments_store
 
 
 class DataExplorer:
     """通用数据分析工具（基于本地历史数据）"""
 
     def __init__(self, project_root: str | Path = None):
-        if project_root is None:
-            project_root = Path(__file__).parent.parent.parent
-        self.root = Path(project_root)
-        self.brain_db = self.root / "worldquant_brain" / "data" / "brain.db"
+        pass
 
     def analyze_experiment_trends(self, last_n: int = 50) -> dict:
         """分析最近N次实验的趋势
@@ -26,40 +24,27 @@ class DataExplorer:
         Returns:
             策略表现趋势、Sharpe分布、成功率变化
         """
-        if not self.brain_db.exists():
-            return {"status": "no_data"}
+        exp_data = experiments_store.load()
+        experiments = [e for e in exp_data["items"] if e.get("status") == "done"]
+        experiments.sort(key=lambda x: x.get("started_at", ""), reverse=True)
+        experiments = experiments[:last_n]
 
-        conn = sqlite3.connect(str(self.brain_db))
-        conn.row_factory = sqlite3.Row
-
-        # 实验趋势
-        experiments = conn.execute("""
-            SELECT strategy, best_sharpe, started_at, total_tasks, completed_tasks
-            FROM experiments WHERE status='done'
-            ORDER BY started_at DESC LIMIT ?
-        """, (last_n,)).fetchall()
-
-        # Alpha 分布
-        alphas = conn.execute("""
-            SELECT sharpe, fitness, ppc, margin, turnover, combo_type, created_at
-            FROM alphas WHERE status='done'
-            ORDER BY created_at DESC LIMIT ?
-        """, (last_n * 8,)).fetchall()
-
-        conn.close()
+        alpha_data = alphas_store.load()
+        alphas = [e for e in alpha_data["entries"].values() if e.get("status") == "done"]
+        alphas.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+        alphas = alphas[:last_n * 8]
 
         if not experiments:
             return {"status": "no_experiments"}
 
-        # 策略表现统计
         strategy_stats = {}
         for exp in experiments:
-            s = exp['strategy']
+            s = exp.get('strategy', 'unknown')
             if s not in strategy_stats:
                 strategy_stats[s] = {"runs": 0, "sharpes": [], "total_tasks": 0}
             strategy_stats[s]["runs"] += 1
-            strategy_stats[s]["sharpes"].append(exp['best_sharpe'] or 0)
-            strategy_stats[s]["total_tasks"] += exp['total_tasks'] or 0
+            strategy_stats[s]["sharpes"].append(exp.get('best_sharpe', 0) or 0)
+            strategy_stats[s]["total_tasks"] += exp.get('total_tasks', 0) or 0
 
         for s, stats in strategy_stats.items():
             sharpes = stats["sharpes"]
@@ -68,16 +53,14 @@ class DataExplorer:
             stats["trend"] = self._compute_trend(sharpes)
             del stats["sharpes"]
 
-        # Sharpe 分布
-        all_sharpes = [a['sharpe'] for a in alphas if a['sharpe'] is not None]
+        all_sharpes = [a.get('sharpe', 0) for a in alphas if a.get('sharpe') is not None]
         sharpe_dist = self._distribution_stats(all_sharpes)
 
-        # PPA 通过率
         ppa_pass = sum(1 for a in alphas
-                       if (a['sharpe'] or 0) >= 1.58 and
-                       (a['fitness'] or 0) > 0.5 and
-                       (a['ppc'] or 1) < 0.5 and
-                       (a['margin'] or 0) > (a['turnover'] or 1))
+                       if (a.get('sharpe', 0) or 0) >= 1.58 and
+                       (a.get('fitness', 0) or 0) > 0.5 and
+                       (a.get('ppc', 1) or 1) < 0.5 and
+                       (a.get('margin', 0) or 0) > (a.get('turnover', 1) or 1))
 
         return {
             "status": "ok",
@@ -90,52 +73,38 @@ class DataExplorer:
         }
 
     def find_promising_patterns(self) -> list[dict]:
-        """基于历史结果发现高潜力的模式
+        """基于历史结果发现高潜力的模式"""
+        alpha_data = alphas_store.load()
+        all_alphas = [e for e in alpha_data["entries"].values() if e.get("status") == "done"]
 
-        分析维度：
-        - 哪些 combo_type 表现最好
-        - 高Sharpe Alpha 的共同特征
-        """
-        if not self.brain_db.exists():
-            return []
+        combos = {}
+        for a in all_alphas:
+            ct = a.get('combo_type', '')
+            if ct:
+                if ct not in combos:
+                    combos[ct] = {"sharpes": []}
+                combos[ct]["sharpes"].append(a.get('sharpe', 0))
 
-        conn = sqlite3.connect(str(self.brain_db))
-        conn.row_factory = sqlite3.Row
-
-        # 按 combo_type 统计
-        combos = conn.execute("""
-            SELECT combo_type, COUNT(*) as cnt, AVG(sharpe) as avg_sharpe,
-                   MAX(sharpe) as max_sharpe
-            FROM alphas WHERE status='done' AND combo_type != ''
-            GROUP BY combo_type HAVING cnt >= 3
-            ORDER BY avg_sharpe DESC
-        """).fetchall()
-
-        # 高Sharpe表达式的算子分析
-        top_alphas = conn.execute("""
-            SELECT expression, sharpe FROM alphas
-            WHERE status='done' AND sharpe >= 0.8
-            ORDER BY sharpe DESC LIMIT 50
-        """).fetchall()
-
-        conn.close()
+        top_alphas = [a for a in all_alphas if (a.get('sharpe', 0) or 0) >= 0.8]
+        top_alphas.sort(key=lambda x: x.get('sharpe', 0), reverse=True)
+        top_alphas = top_alphas[:50]
 
         patterns = []
 
-        # 模式1: 最佳组合类型
-        for c in combos:
-            patterns.append({
-                "type": "combo_type",
-                "pattern": c['combo_type'],
-                "avg_sharpe": round(c['avg_sharpe'], 3),
-                "max_sharpe": round(c['max_sharpe'], 3),
-                "sample_size": c['cnt']
-            })
+        for ct, stats in combos.items():
+            if len(stats["sharpes"]) >= 3:
+                sharpes = stats["sharpes"]
+                patterns.append({
+                    "type": "combo_type",
+                    "pattern": ct,
+                    "avg_sharpe": round(sum(sharpes) / len(sharpes), 3),
+                    "max_sharpe": round(max(sharpes), 3),
+                    "sample_size": len(sharpes),
+                })
 
-        # 模式2: 算子频率分析
         operator_counter = Counter()
         for alpha in top_alphas:
-            expr = alpha['expression'] or ""
+            expr = alpha.get('expression', '') or ""
             for op in ['ts_mean', 'ts_delta', 'ts_std_dev', 'ts_decay_linear',
                        'ts_sum', 'ts_corr', 'rank', 'zscore', 'winsorize',
                        'signed_power', 'ts_arg_max']:
@@ -155,31 +124,21 @@ class DataExplorer:
 
     def analyze_field_performance(self, dataset: str = None) -> list[dict]:
         """分析哪些字段在历史回测中表现最好"""
-        if not self.brain_db.exists():
-            return []
+        alpha_data = alphas_store.load()
+        all_alphas = [e for e in alpha_data["entries"].values()
+                      if e.get("status") == "done" and (e.get("sharpe", 0) or 0) > 0]
+        all_alphas.sort(key=lambda x: x.get("sharpe", 0), reverse=True)
+        all_alphas = all_alphas[:200]
 
-        conn = sqlite3.connect(str(self.brain_db))
-        conn.row_factory = sqlite3.Row
-
-        alphas = conn.execute("""
-            SELECT expression, sharpe FROM alphas
-            WHERE status='done' AND sharpe > 0
-            ORDER BY sharpe DESC LIMIT 200
-        """).fetchall()
-        conn.close()
-
-        # 提取字段名模式
-        import re
         field_sharpes = {}
-        for a in alphas:
-            expr = a['expression'] or ""
-            # 匹配可能的字段名（通常在函数调用的第一个参数位置）
+        for a in all_alphas:
+            expr = a.get('expression', '') or ""
             fields = re.findall(r'\b([a-z][a-z_]+(?:_[a-z]+)+)\b', expr)
             for f in fields:
                 if f not in ['ts_mean', 'ts_delta', 'ts_std_dev', 'ts_sum',
                              'ts_decay_linear', 'ts_corr', 'ts_arg_max',
                              'ts_backfill', 'ts_delay']:
-                    field_sharpes.setdefault(f, []).append(a['sharpe'])
+                    field_sharpes.setdefault(f, []).append(a.get('sharpe', 0))
 
         results = []
         for field, sharpes in field_sharpes.items():
@@ -196,7 +155,6 @@ class DataExplorer:
 
     @staticmethod
     def _compute_trend(values: list[float]) -> str:
-        """计算简单趋势"""
         if len(values) < 3:
             return "insufficient_data"
         recent = sum(values[:len(values)//2]) / max(len(values)//2, 1)

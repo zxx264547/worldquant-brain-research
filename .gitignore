@@ -17,6 +17,9 @@ data/outputs/
 # Temp
 /tmp/
 
+# Runtime state (ephemeral, not tracked)
+worldquant_brain/state/_runtime/
+
 # Credentials (never commit)
 worldquant_brain/config/user_config.json
 

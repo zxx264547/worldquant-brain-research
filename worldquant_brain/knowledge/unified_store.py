@@ -1,60 +1,31 @@
 """统一知识存储 — 包装所有知识后端，提供单一读写接口"""
 import json
 import sqlite3
-import hashlib
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Optional
 from contextlib import contextmanager
 
+from worldquant_brain.db.json_store import (
+    alphas_store, experiments_store, knowledge_events_store,
+    rule_changes_store, ensure_state_dir,
+)
+
 
 class UnifiedKnowledgeStore:
     """AI认知循环的统一知识访问层
 
-    包装现有存储后端（brain.db, forum.sqlite3, markdown files），
-    不迁移底层数据，只提供统一的读写接口。
+    使用 JSON 文件作为主存储后端，forum.sqlite3 仅用于论坛搜索。
     """
 
     def __init__(self, project_root: str | Path = None):
         if project_root is None:
             project_root = Path(__file__).parent.parent.parent
         self.root = Path(project_root)
-        self.brain_db_path = self.root / "worldquant_brain" / "data" / "brain.db"
         self.forum_db_path = self.root / "worldquant_brain" / "data" / "forum.sqlite3"
         self.memory_dir = self.root / "worldquant_brain" / "knowledge_base" / "memory"
         self.agent_memory_dir = self.root / ".claude" / "agent-memory"
-        self._ensure_schema()
-
-    @contextmanager
-    def _brain_conn(self):
-        self.brain_db_path.parent.mkdir(parents=True, exist_ok=True)
-        conn = sqlite3.connect(str(self.brain_db_path))
-        conn.row_factory = sqlite3.Row
-        conn.execute("PRAGMA journal_mode=WAL")
-        conn.execute("PRAGMA busy_timeout=5000")
-        try:
-            yield conn
-            conn.commit()
-        except Exception:
-            conn.rollback()
-            raise
-        finally:
-            conn.close()
-
-    def _ensure_schema(self):
-        """确保所有表和列存在（幂等）"""
-        # 先确保基础 schema 存在
-        base_schema = self.root / "worldquant_brain" / "db" / "schema.sql"
-        with self._brain_conn() as conn:
-            if base_schema.exists():
-                conn.executescript(base_schema.read_text())
-            conn.executescript(SCHEMA_EXTENSIONS)
-            # alphas 表列扩展（忽略已存在的错误）
-            for sql in ALPHAS_COLUMN_MIGRATIONS:
-                try:
-                    conn.execute(sql)
-                except sqlite3.OperationalError:
-                    pass  # 列已存在，跳过
+        ensure_state_dir()
 
     # ═══════════════════════════════════════════
     #  PERCEIVE — 感知当前全局状态
@@ -76,85 +47,70 @@ class UnifiedKnowledgeStore:
         return state
 
     def _get_research_progress(self) -> dict:
-        with self._brain_conn() as conn:
-            row = conn.execute("""
-                SELECT COUNT(*) as total,
-                       MAX(sharpe) as best_sharpe,
-                       AVG(sharpe) as avg_sharpe,
-                       SUM(CASE WHEN is_submittable=1 THEN 1 ELSE 0 END) as submittable
-                FROM alphas WHERE status='done'
-            """).fetchone()
-            if row and row['total'] > 0:
-                return {
-                    "total_tested": row['total'],
-                    "best_sharpe": round(row['best_sharpe'] or 0, 3),
-                    "avg_sharpe": round(row['avg_sharpe'] or 0, 3),
-                    "submittable_count": row['submittable'] or 0,
-                    "target_sharpe": 1.58,
-                }
-            return {"total_tested": 0, "best_sharpe": 0, "avg_sharpe": 0,
-                    "submittable_count": 0, "target_sharpe": 1.58}
+        data = alphas_store.load()
+        entries = [e for e in data["entries"].values() if e.get("status") == "done"]
+        if entries:
+            sharpes = [e.get("sharpe", 0) for e in entries]
+            submittable = sum(1 for e in entries if e.get("is_submittable") == 1)
+            return {
+                "total_tested": len(entries),
+                "best_sharpe": round(max(sharpes), 3),
+                "avg_sharpe": round(sum(sharpes) / len(sharpes), 3),
+                "submittable_count": submittable,
+                "target_sharpe": 1.58,
+            }
+        return {"total_tested": 0, "best_sharpe": 0, "avg_sharpe": 0,
+                "submittable_count": 0, "target_sharpe": 1.58}
 
     def _get_recent_insights(self, limit: int = 10) -> list[dict]:
-        with self._brain_conn() as conn:
-            rows = conn.execute("""
-                SELECT * FROM knowledge_events
-                WHERE event_type = 'insight'
-                ORDER BY created_at DESC LIMIT ?
-            """, (limit,)).fetchall()
-            return [{"source": r['source'], "content": json.loads(r['content_json']),
-                     "confidence": r['confidence'], "created_at": r['created_at']}
-                    for r in rows]
+        data = knowledge_events_store.load()
+        insights = [e for e in data["items"] if e.get("event_type") == "insight"]
+        insights.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+        return [{"source": e.get("source", ""), "content": e.get("content", {}),
+                 "confidence": e.get("confidence", 0), "created_at": e.get("created_at", "")}
+                for e in insights[:limit]]
 
     def _get_strategy_effectiveness(self) -> dict:
-        with self._brain_conn() as conn:
-            rows = conn.execute("""
-                SELECT strategy, COUNT(*) as runs,
-                       AVG(best_sharpe) as avg_best,
-                       MAX(best_sharpe) as max_best
-                FROM experiments WHERE status='done'
-                GROUP BY strategy ORDER BY avg_best DESC
-            """).fetchall()
-            return {r['strategy']: {"runs": r['runs'], "avg_best": round(r['avg_best'] or 0, 3),
-                                     "max_best": round(r['max_best'] or 0, 3)}
-                    for r in rows}
+        data = experiments_store.load()
+        done = [e for e in data["items"] if e.get("status") == "done"]
+        by_strategy = {}
+        for exp in done:
+            s = exp.get("strategy", "unknown")
+            if s not in by_strategy:
+                by_strategy[s] = {"runs": 0, "sharpes": []}
+            by_strategy[s]["runs"] += 1
+            by_strategy[s]["sharpes"].append(exp.get("best_sharpe", 0))
+        return {s: {"runs": v["runs"],
+                    "avg_best": round(sum(v["sharpes"]) / len(v["sharpes"]), 3) if v["sharpes"] else 0,
+                    "max_best": round(max(v["sharpes"]), 3) if v["sharpes"] else 0}
+                for s, v in by_strategy.items()}
 
     def _count_anti_patterns(self) -> int:
-        with self._brain_conn() as conn:
-            row = conn.execute("""
-                SELECT COUNT(*) FROM knowledge_events
-                WHERE event_type = 'anti_pattern'
-            """).fetchone()
-            return row[0] if row else 0
+        data = knowledge_events_store.load()
+        return sum(1 for e in data["items"] if e.get("event_type") == "anti_pattern")
 
     def _get_submit_summary(self) -> dict:
-        with self._brain_conn() as conn:
-            rows = conn.execute("""
-                SELECT submit_status, COUNT(*) as cnt
-                FROM alphas WHERE submit_status IS NOT NULL
-                GROUP BY submit_status
-            """).fetchall()
-            summary = {"submitted": 0, "accepted": 0, "rejected": 0}
-            for r in rows:
-                if r['submit_status'] in summary:
-                    summary[r['submit_status']] = r['cnt']
-            return summary
+        data = alphas_store.load()
+        summary = {"submitted": 0, "accepted": 0, "rejected": 0}
+        for e in data["entries"].values():
+            status = e.get("submit_status")
+            if status and status in summary:
+                summary[status] += 1
+        return summary
 
     def _get_pending_rules(self) -> list[dict]:
-        with self._brain_conn() as conn:
-            rows = conn.execute("""
-                SELECT * FROM rule_changes WHERE status = 'proposed'
-                ORDER BY created_at DESC LIMIT 5
-            """).fetchall()
-            return [dict(r) for r in rows]
+        data = rule_changes_store.load()
+        pending = [r for r in data["items"] if r.get("status") == "proposed"]
+        pending.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+        return pending[:5]
 
     def _get_last_event_time(self, event_type: str) -> Optional[str]:
-        with self._brain_conn() as conn:
-            row = conn.execute("""
-                SELECT created_at FROM knowledge_events
-                WHERE event_type = ? ORDER BY created_at DESC LIMIT 1
-            """, (event_type,)).fetchone()
-            return row['created_at'] if row else None
+        data = knowledge_events_store.load()
+        events = [e for e in data["items"] if e.get("event_type") == event_type]
+        if events:
+            events.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+            return events[0].get("created_at")
+        return None
 
     # ═══════════════════════════════════════════
     #  SEARCH — 跨源搜索
@@ -169,16 +125,21 @@ class UnifiedKnowledgeStore:
         return results[:limit]
 
     def _search_knowledge_events(self, query: str, limit: int) -> list[dict]:
-        with self._brain_conn() as conn:
-            rows = conn.execute("""
-                SELECT * FROM knowledge_events
-                WHERE content_json LIKE ?
-                ORDER BY confidence DESC, created_at DESC LIMIT ?
-            """, (f"%{query}%", limit)).fetchall()
-            return [{"source": "knowledge_events", "type": r['event_type'],
-                     "content": json.loads(r['content_json']),
-                     "confidence": r['confidence'], "relevance": r['confidence']}
-                    for r in rows]
+        data = knowledge_events_store.load()
+        query_lower = query.lower()
+        matched = []
+        for e in data["items"]:
+            content_str = json.dumps(e.get("content", {}), ensure_ascii=False).lower()
+            if query_lower in content_str:
+                matched.append({
+                    "source": "knowledge_events",
+                    "type": e.get("event_type", ""),
+                    "content": e.get("content", {}),
+                    "confidence": e.get("confidence", 0),
+                    "relevance": e.get("confidence", 0),
+                })
+        matched.sort(key=lambda x: x["confidence"], reverse=True)
+        return matched[:limit]
 
     def _search_forum(self, query: str, limit: int) -> list[dict]:
         """搜索论坛知识（如果forum.sqlite3存在）"""
@@ -222,11 +183,16 @@ class UnifiedKnowledgeStore:
     def record_submit_result(self, alpha_id: str, expression: str,
                              result: str, reason: str = None) -> int:
         """记录提交结果（accept/reject），驱动反馈回路"""
-        with self._brain_conn() as conn:
-            conn.execute("""
-                UPDATE alphas SET submit_status=?, submit_date=datetime('now'),
-                reject_reason=? WHERE id=?
-            """, (result, reason, alpha_id))
+        from worldquant_brain.db.repository import update_alpha, find_by_hash, hash_alpha
+        # 更新 alpha 记录
+        data = alphas_store.load()
+        for h, entry in data["entries"].items():
+            if entry.get("id") == alpha_id:
+                entry["submit_status"] = result
+                entry["submit_date"] = datetime.now().isoformat()
+                entry["reject_reason"] = reason
+                alphas_store.save()
+                break
 
         content = {"alpha_id": alpha_id, "expression": expression,
                    "result": result, "reason": reason}
@@ -250,36 +216,55 @@ class UnifiedKnowledgeStore:
                             new_value: str, reason: str,
                             evidence_ids: list[int] = None) -> int:
         """提议规则修改（L2级别，需人工审批）"""
-        with self._brain_conn() as conn:
-            cur = conn.execute("""
-                INSERT INTO rule_changes (rule_type, old_value, new_value, reason, evidence_ids)
-                VALUES (?, ?, ?, ?, ?)
-            """, (rule_type, old_value, new_value, reason,
-                  json.dumps(evidence_ids or [])))
-            return cur.lastrowid
+        data = rule_changes_store.load()
+        rid = data["_meta"]["next_id"]
+        data["items"].append({
+            "id": rid,
+            "rule_type": rule_type,
+            "old_value": old_value,
+            "new_value": new_value,
+            "reason": reason,
+            "evidence_ids": evidence_ids or [],
+            "status": "proposed",
+            "created_at": datetime.now().isoformat(),
+        })
+        data["_meta"]["next_id"] = rid + 1
+        rule_changes_store.save()
+        return rid
 
     def approve_rule_change(self, rule_id: int):
         """批准规则修改"""
-        with self._brain_conn() as conn:
-            conn.execute("""
-                UPDATE rule_changes SET status='approved' WHERE id=?
-            """, (rule_id,))
+        data = rule_changes_store.load()
+        for r in data["items"]:
+            if r["id"] == rule_id:
+                r["status"] = "approved"
+                break
+        rule_changes_store.save()
 
     def apply_rule_change(self, rule_id: int):
         """标记规则已应用"""
-        with self._brain_conn() as conn:
-            conn.execute("""
-                UPDATE rule_changes SET status='applied' WHERE id=?
-            """, (rule_id,))
+        data = rule_changes_store.load()
+        for r in data["items"]:
+            if r["id"] == rule_id:
+                r["status"] = "applied"
+                break
+        rule_changes_store.save()
 
     def _record_event(self, event_type: str, source: str,
                       content: dict, confidence: float) -> int:
-        with self._brain_conn() as conn:
-            cur = conn.execute("""
-                INSERT INTO knowledge_events (event_type, source, content_json, confidence)
-                VALUES (?, ?, ?, ?)
-            """, (event_type, source, json.dumps(content, ensure_ascii=False), confidence))
-            return cur.lastrowid
+        data = knowledge_events_store.load()
+        eid = data["_meta"]["next_id"]
+        data["items"].append({
+            "id": eid,
+            "event_type": event_type,
+            "source": source,
+            "content": content,
+            "confidence": confidence,
+            "created_at": datetime.now().isoformat(),
+        })
+        data["_meta"]["next_id"] = eid + 1
+        knowledge_events_store.save()
+        return eid
 
     # ═══════════════════════════════════════════
     #  QUERY — 特定查询
@@ -287,63 +272,52 @@ class UnifiedKnowledgeStore:
 
     def get_anti_patterns(self, min_confidence: float = 0.6) -> list[dict]:
         """获取所有反模式"""
-        with self._brain_conn() as conn:
-            rows = conn.execute("""
-                SELECT content_json, confidence, created_at FROM knowledge_events
-                WHERE event_type = 'anti_pattern' AND confidence >= ?
-                ORDER BY confidence DESC
-            """, (min_confidence,)).fetchall()
-            return [{"content": json.loads(r['content_json']),
-                     "confidence": r['confidence'], "created_at": r['created_at']}
-                    for r in rows]
+        data = knowledge_events_store.load()
+        patterns = [e for e in data["items"]
+                    if e.get("event_type") == "anti_pattern" and e.get("confidence", 0) >= min_confidence]
+        patterns.sort(key=lambda x: x.get("confidence", 0), reverse=True)
+        return [{"content": e.get("content", {}),
+                 "confidence": e.get("confidence", 0),
+                 "created_at": e.get("created_at", "")}
+                for e in patterns]
 
     def get_submit_patterns(self, min_count: int = 3) -> dict:
         """分析提交结果的模式（用于驱动规则进化）"""
-        with self._brain_conn() as conn:
-            rows = conn.execute("""
-                SELECT submit_status, sharpe, fitness, ppc, margin, turnover, reject_reason
-                FROM alphas WHERE submit_status IS NOT NULL
-            """).fetchall()
-            if not rows:
-                return {"total": 0, "patterns": []}
+        data = alphas_store.load()
+        submitted = [e for e in data["entries"].values() if e.get("submit_status")]
+        if not submitted:
+            return {"total": 0, "patterns": []}
 
-            accepted = [dict(r) for r in rows if r['submit_status'] == 'accepted']
-            rejected = [dict(r) for r in rows if r['submit_status'] == 'rejected']
+        accepted = [e for e in submitted if e.get("submit_status") == "accepted"]
+        rejected = [e for e in submitted if e.get("submit_status") == "rejected"]
 
-            patterns = {
-                "total": len(rows),
-                "accepted_count": len(accepted),
-                "rejected_count": len(rejected),
-                "accepted_sharpe_range": self._range_stats(accepted, 'sharpe'),
-                "rejected_sharpe_range": self._range_stats(rejected, 'sharpe'),
-                "rejection_reasons": self._count_reasons(rejected),
-            }
-            return patterns
+        return {
+            "total": len(submitted),
+            "accepted_count": len(accepted),
+            "rejected_count": len(rejected),
+            "accepted_sharpe_range": self._range_stats(accepted, 'sharpe'),
+            "rejected_sharpe_range": self._range_stats(rejected, 'sharpe'),
+            "rejection_reasons": self._count_reasons(rejected),
+        }
 
     def get_knowledge_events_since(self, since: str, event_type: str = None) -> list[dict]:
         """获取某时间后的所有知识事件"""
-        with self._brain_conn() as conn:
-            if event_type:
-                rows = conn.execute("""
-                    SELECT * FROM knowledge_events
-                    WHERE created_at > ? AND event_type = ?
-                    ORDER BY created_at DESC
-                """, (since, event_type)).fetchall()
-            else:
-                rows = conn.execute("""
-                    SELECT * FROM knowledge_events WHERE created_at > ?
-                    ORDER BY created_at DESC
-                """, (since,)).fetchall()
-            return [{"id": r['id'], "type": r['event_type'], "source": r['source'],
-                     "content": json.loads(r['content_json']),
-                     "confidence": r['confidence'], "created_at": r['created_at']}
-                    for r in rows]
+        data = knowledge_events_store.load()
+        events = data["items"]
+        if event_type:
+            events = [e for e in events if e.get("event_type") == event_type]
+        events = [e for e in events if e.get("created_at", "") > since]
+        events.sort(key=lambda x: x.get("created_at", ""), reverse=True)
+        return [{"id": e.get("id"), "type": e.get("event_type"), "source": e.get("source"),
+                 "content": e.get("content", {}),
+                 "confidence": e.get("confidence", 0), "created_at": e.get("created_at", "")}
+                for e in events]
 
     @staticmethod
     def _range_stats(items: list[dict], field: str) -> dict:
         if not items:
             return {"min": 0, "max": 0, "avg": 0}
-        values = [i[field] for i in items if i.get(field) is not None]
+        values = [i.get(field, 0) for i in items if i.get(field) is not None]
         if not values:
             return {"min": 0, "max": 0, "avg": 0}
         return {"min": round(min(values), 3), "max": round(max(values), 3),
@@ -356,46 +330,3 @@ class UnifiedKnowledgeStore:
             reason = r.get('reject_reason', 'unknown') or 'unknown'
             reasons[reason] = reasons.get(reason, 0) + 1
         return reasons
-
-
-# ─── Schema 扩展 SQL（幂等）───
-
-SCHEMA_EXTENSIONS = """
--- 提交结果追踪（给 alphas 表加列，忽略已存在的错误）
-CREATE TABLE IF NOT EXISTS _migration_check (id INTEGER PRIMARY KEY);
-
--- 知识事件日志
-CREATE TABLE IF NOT EXISTS knowledge_events (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    event_type TEXT NOT NULL,
-    source TEXT NOT NULL,
-    content_json TEXT NOT NULL,
-    confidence REAL DEFAULT 0.5,
-    created_at TEXT DEFAULT (datetime('now'))
-);
-
-CREATE INDEX IF NOT EXISTS idx_ke_type ON knowledge_events(event_type);
-CREATE INDEX IF NOT EXISTS idx_ke_created ON knowledge_events(created_at);
-CREATE INDEX IF NOT EXISTS idx_ke_confidence ON knowledge_events(confidence);
-
--- 规则变更历史
-CREATE TABLE IF NOT EXISTS rule_changes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    rule_type TEXT NOT NULL,
-    old_value TEXT,
-    new_value TEXT,
-    reason TEXT,
-    evidence_ids TEXT DEFAULT '[]',
-    status TEXT DEFAULT 'proposed',
-    created_at TEXT DEFAULT (datetime('now'))
-);
-
-CREATE INDEX IF NOT EXISTS idx_rc_status ON rule_changes(status);
-"""
-
-# alphas 表的列扩展需要单独处理（SQLite 不支持 IF NOT EXISTS 对列）
-ALPHAS_COLUMN_MIGRATIONS = [
-    "ALTER TABLE alphas ADD COLUMN submit_status TEXT",
-    "ALTER TABLE alphas ADD COLUMN submit_date TEXT",
-    "ALTER TABLE alphas ADD COLUMN reject_reason TEXT",
-]

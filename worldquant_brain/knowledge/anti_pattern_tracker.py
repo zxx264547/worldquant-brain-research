@@ -1,10 +1,10 @@
 """反模式追踪器 — 记录失败模式，防止重复尝试已知死胡同"""
 import re
 import json
-import sqlite3
 from pathlib import Path
 from typing import Optional
-from contextlib import contextmanager
+
+from worldquant_brain.db.json_store import knowledge_events_store
 
 
 class AntiPatternTracker:
@@ -17,43 +17,32 @@ class AntiPatternTracker:
     """
 
     def __init__(self, project_root: str | Path = None):
-        if project_root is None:
-            project_root = Path(__file__).parent.parent.parent
-        self.root = Path(project_root)
-        self.db_path = self.root / "worldquant_brain" / "data" / "brain.db"
-
-    @contextmanager
-    def _conn(self):
-        conn = sqlite3.connect(str(self.db_path))
-        conn.row_factory = sqlite3.Row
-        conn.execute("PRAGMA journal_mode=WAL")
-        conn.execute("PRAGMA busy_timeout=5000")
-        try:
-            yield conn
-            conn.commit()
-        except Exception:
-            conn.rollback()
-            raise
-        finally:
-            conn.close()
+        pass
 
     def record_failure(self, expression: str, dataset: str,
                        sharpe: float, failure_type: str,
                        context: dict = None):
         """记录一次失败（自动检测是否形成反模式）"""
         pattern = self._extract_pattern(expression, dataset)
-        with self._conn() as conn:
-            conn.execute("""
-                INSERT INTO knowledge_events (event_type, source, content_json, confidence)
-                VALUES ('failure', 'anti_pattern_tracker', ?, 0.3)
-            """, (json.dumps({
+        data = knowledge_events_store.load()
+        eid = data["_meta"]["next_id"]
+        data["items"].append({
+            "id": eid,
+            "event_type": "failure",
+            "source": "anti_pattern_tracker",
+            "content": {
                 "expression": expression,
                 "dataset": dataset,
                 "sharpe": sharpe,
                 "failure_type": failure_type,
                 "pattern": pattern,
-                **(context or {})
-            }, ensure_ascii=False),))
+                **(context or {}),
+            },
+            "confidence": 0.3,
+            "created_at": __import__("datetime").datetime.now().isoformat(),
+        })
+        data["_meta"]["next_id"] = eid + 1
+        knowledge_events_store.save()
 
         self._check_pattern_threshold(pattern)
 
@@ -88,42 +77,42 @@ class AntiPatternTracker:
     def add_manual_pattern(self, pattern: str, reason: str,
                            confidence: float = 0.9):
         """AI手动添加反模式（如已知的API限制、无效字段等）"""
-        with self._conn() as conn:
-            conn.execute("""
-                INSERT INTO knowledge_events (event_type, source, content_json, confidence)
-                VALUES ('anti_pattern', 'manual', ?, ?)
-            """, (json.dumps({
+        data = knowledge_events_store.load()
+        eid = data["_meta"]["next_id"]
+        data["items"].append({
+            "id": eid,
+            "event_type": "anti_pattern",
+            "source": "manual",
+            "content": {
                 "pattern": pattern,
                 "reason": reason,
                 "evidence": ["manual_observation"],
-                "evidence_count": 1
-            }, ensure_ascii=False), confidence))
+                "evidence_count": 1,
+            },
+            "confidence": confidence,
+            "created_at": __import__("datetime").datetime.now().isoformat(),
+        })
+        data["_meta"]["next_id"] = eid + 1
+        knowledge_events_store.save()
 
     def _get_active_patterns(self) -> list[dict]:
         """获取所有置信度>=0.6的反模式"""
-        with self._conn() as conn:
-            rows = conn.execute("""
-                SELECT content_json, confidence, created_at FROM knowledge_events
-                WHERE event_type = 'anti_pattern' AND confidence >= 0.6
-                ORDER BY confidence DESC
-            """).fetchall()
-            return [{"content": json.loads(r['content_json']),
-                     "confidence": r['confidence']}
-                    for r in rows]
+        data = knowledge_events_store.load()
+        patterns = [e for e in data["items"]
+                    if e.get("event_type") == "anti_pattern" and e.get("confidence", 0) >= 0.6]
+        return [{"content": e.get("content", {}), "confidence": e.get("confidence", 0)}
+                for e in patterns]
 
     def _check_pattern_threshold(self, pattern: str):
         """检查某模式的失败次数是否达到阈值（5次），如果是则升级为反模式"""
-        with self._conn() as conn:
-            rows = conn.execute("""
-                SELECT content_json FROM knowledge_events
-                WHERE event_type = 'failure'
-                ORDER BY created_at DESC LIMIT 200
-            """).fetchall()
+        data = knowledge_events_store.load()
+        failures = [e for e in data["items"] if e.get("event_type") == "failure"]
+        failures = failures[-200:]
 
         pattern_count = 0
         evidence = []
-        for r in rows:
-            content = json.loads(r['content_json'])
+        for f in failures:
+            content = f.get("content", {})
             if content.get("pattern") == pattern:
                 pattern_count += 1
                 evidence.append(content.get("expression", "")[:60])
@@ -135,33 +124,29 @@ class AntiPatternTracker:
                     return
 
             confidence = min(0.6 + (pattern_count - 5) * 0.05, 0.95)
-            with self._conn() as conn:
-                conn.execute("""
-                    INSERT INTO knowledge_events (event_type, source, content_json, confidence)
-                    VALUES ('anti_pattern', 'auto_detection', ?, ?)
-                """, (json.dumps({
+            eid = data["_meta"]["next_id"]
+            data["items"].append({
+                "id": eid,
+                "event_type": "anti_pattern",
+                "source": "auto_detection",
+                "content": {
                     "pattern": pattern,
                     "evidence": evidence[:10],
                     "evidence_count": pattern_count,
-                    "reason": f"连续{pattern_count}次失败"
-                }, ensure_ascii=False), confidence))
+                    "reason": f"连续{pattern_count}次失败",
+                },
+                "confidence": confidence,
+                "created_at": __import__("datetime").datetime.now().isoformat(),
+            })
+            data["_meta"]["next_id"] = eid + 1
+            knowledge_events_store.save()
 
     def _extract_pattern(self, expression: str, dataset: str = None) -> str:
-        """从表达式中提取结构性模式签名
-
-        提取逻辑：
-        - 保留算子名和嵌套结构
-        - 将具体字段名替换为 {field}
-        - 将具体窗口数值替换为窗口范围（short/medium/long）
-        - 加入数据集标识
-        """
+        """从表达式中提取结构性模式签名"""
         sig = expression
-
-        # 将字段名替换为占位符
         sig = re.sub(r'\b[a-z][a-z_]*[0-9]*(?:_[a-z]+)*\b(?=\s*[,)])',
                      '{field}', sig)
 
-        # 将数字窗口归类
         def classify_window(m):
             val = int(m.group(1))
             if val <= 10:
@@ -185,7 +170,6 @@ class AntiPatternTracker:
         """检查候选签名是否匹配反模式"""
         if not anti_pattern:
             return False
-        # 精确匹配或前缀匹配（数据集级别的反模式）
         if candidate_sig == anti_pattern:
             return True
         if "::" in anti_pattern:
