@@ -2,7 +2,7 @@
   "_meta": {
     "version": 1,
     "description": "Alpha\u56de\u6d4b\u7ed3\u679c\uff0ckey\u4e3aexpression_hash",
-    "updated_at": "2026-05-29T04:15:34.074498"
+    "updated_at": "2026-05-29T04:34:34.687736"
   },
   "entries": {
     "d56fbae4edc2fd50": {
@@ -1372,6 +1372,30 @@
       "reject_reason": null,
       "created_at": "2026-05-29T04:15:34.074460",
       "updated_at": "2026-05-29T04:15:34.074464"
+    },
+    "35926319a24c258c": {
+      "id": "xAeGmO8m",
+      "expression": "zscore(-ts_max(vec_max(min_loan_rate), 66))",
+      "expression_hash": "35926319a24c258c",
+      "sharpe": 2.48,
+      "fitness": 5.15,
+      "ppc": 0.07772811572700296,
+      "margin": 0.041911,
+      "turnover": 0.0257,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.08, \"neutralization\": \"NONE\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"min_loan_66\"}",
+      "name": "min_loan_66",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 1,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-05-29T04:45:00",
+      "reject_reason": null,
+      "created_at": "2026-05-29T04:34:34.687652",
+      "updated_at": "2026-05-29T04:34:34.687661"
     }
   }
 }
