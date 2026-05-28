@@ -2,7 +2,7 @@
   "_meta": {
     "version": 1,
     "description": "Alpha\u56de\u6d4b\u7ed3\u679c\uff0ckey\u4e3aexpression_hash",
-    "updated_at": "2026-05-29T04:59:19.336317"
+    "updated_at": "2026-05-29T05:49:28.984313"
   },
   "entries": {
     "d56fbae4edc2fd50": {
@@ -1420,6 +1420,30 @@
       "reject_reason": null,
       "created_at": "2026-05-29T04:59:19.336310",
       "updated_at": "2026-05-29T04:59:19.336312"
+    },
+    "8fba64b7f0754d76": {
+      "id": "O0oJvZn1",
+      "expression": "zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(min_loan_rate), 66))",
+      "expression_hash": "8fba64b7f0754d76",
+      "sharpe": 2.5,
+      "fitness": 5.37,
+      "ppc": 0.06136945983379501,
+      "margin": 0.035447,
+      "turnover": 0.0326,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.08, \"neutralization\": \"NONE\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"min_22_66\"}",
+      "name": "min_22_66",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 1,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-05-29T05:50:00",
+      "reject_reason": null,
+      "created_at": "2026-05-29T05:49:28.984298",
+      "updated_at": "2026-05-29T05:49:28.984301"
     }
   }
 }
