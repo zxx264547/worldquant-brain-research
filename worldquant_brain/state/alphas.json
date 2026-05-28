@@ -2,7 +2,7 @@
   "_meta": {
     "version": 1,
     "description": "Alpha\u56de\u6d4b\u7ed3\u679c\uff0ckey\u4e3aexpression_hash",
-    "updated_at": "2026-05-29T05:49:28.984313"
+    "updated_at": "2026-05-29T06:18:07.723627"
   },
   "entries": {
     "d56fbae4edc2fd50": {
@@ -1444,6 +1444,54 @@
       "reject_reason": null,
       "created_at": "2026-05-29T05:49:28.984298",
       "updated_at": "2026-05-29T05:49:28.984301"
+    },
+    "fd46e770e3f1dc03": {
+      "id": "qMgEkAbj",
+      "expression": "zscore(-ts_max(vec_max(min_loan_rate), 5)) + zscore(-ts_max(vec_max(min_loan_rate), 66))",
+      "expression_hash": "fd46e770e3f1dc03",
+      "sharpe": 2.53,
+      "fitness": 5.51,
+      "ppc": 0.03859939250759365,
+      "margin": 0.022874,
+      "turnover": 0.0518,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.08, \"neutralization\": \"NONE\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"min_5_66\"}",
+      "name": "min_5_66",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 1,
+      "submit_status": null,
+      "submit_date": null,
+      "reject_reason": null,
+      "created_at": "2026-05-29T06:14:46.437631",
+      "updated_at": "2026-05-29T06:14:46.437634"
+    },
+    "afc9d938e3fc0848": {
+      "id": "MPk0mNM8",
+      "expression": "zscore(-ts_max(vec_max(min_loan_rate), 120))",
+      "expression_hash": "afc9d938e3fc0848",
+      "sharpe": 2.18,
+      "fitness": 4.11,
+      "ppc": 0.10107287449392713,
+      "margin": 0.044937,
+      "turnover": 0.0198,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.08, \"neutralization\": \"NONE\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"min_120\"}",
+      "name": "min_120",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 1,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-05-29T06:10:00",
+      "reject_reason": null,
+      "created_at": "2026-05-29T06:18:07.723616",
+      "updated_at": "2026-05-29T06:18:07.723620"
     }
   }
 }
