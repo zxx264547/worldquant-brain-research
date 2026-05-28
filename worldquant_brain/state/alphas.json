@@ -1,8 +1,8 @@
 {
   "_meta": {
     "version": 1,
-    "description": "Alpha\u56de\u6d4b\u7ed3\u679c\uff0ckey\u4e3aexpression_hash",
-    "updated_at": "2026-05-29T06:18:07.723627"
+    "description": "Alpha回测结果，key为expression_hash",
+    "updated_at": "2026-05-29T07:18:43.307248"
   },
   "entries": {
     "d56fbae4edc2fd50": {
@@ -1492,6 +1492,54 @@
       "reject_reason": null,
       "created_at": "2026-05-29T06:18:07.723616",
       "updated_at": "2026-05-29T06:18:07.723620"
+    },
+    "1a0461ee2612c53e": {
+      "id": "N1Aeja6q",
+      "expression": "zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(mean_loan_rate), 22)) + zscore(-ts_max(vec_max(max_loan_rate), 22))",
+      "expression_hash": "1a0461ee2612c53e",
+      "sharpe": 2.29,
+      "fitness": 4.53,
+      "ppc": 0.04352244897959184,
+      "margin": 0.021326,
+      "turnover": 0.046,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.08, \"neutralization\": \"NONE\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"min_mean_max\"}",
+      "name": "min_mean_max",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 1,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-05-29T06:30:00",
+      "reject_reason": null,
+      "created_at": "2026-05-29T06:44:21.342779",
+      "updated_at": "2026-05-29T06:44:21.342782"
+    },
+    "e0d9d4288ad082f0": {
+      "id": "VkOdOMLb",
+      "expression": "zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(min_loan_rate), 5))",
+      "expression_hash": "e0d9d4288ad082f0",
+      "sharpe": 2.49,
+      "fitness": 5.58,
+      "ppc": 0.03335191970686634,
+      "margin": 0.020935,
+      "turnover": 0.06,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.08, \"neutralization\": \"NONE\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"min_22_5\"}",
+      "name": "min_22_5",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 1,
+      "submit_status": null,
+      "submit_date": null,
+      "reject_reason": null,
+      "created_at": "2026-05-29T07:18:43.307241",
+      "updated_at": "2026-05-29T07:18:43.307243"
     }
   }
 }
