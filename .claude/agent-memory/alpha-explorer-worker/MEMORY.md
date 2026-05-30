@@ -14,3 +14,4 @@
 - [session_20260520_eur_exploration](session_20260520_eur_exploration.md) - 2026-05-20 EUR exploration - only 1 PPA-compliant alpha (eur_rsk60_offer), all others fail margin check
 - [eur_cross_combo_20260520](eur_cross_combo_20260520.md) - EUR cross-dataset combo tests blocked - API stuck at 0% progress
 - [api_stuck_35_percent](api_stuck_35_percent.md) - API simulations stuck at 35%, get_events returns empty, correct API usage documented
+- [session_20260525_analyst_exploration](session_20260525_analyst_exploration.md) - 2026-05-25 analyst VECTOR field exploration - all fail, NONE neutralization baseline Sharpe 0.67

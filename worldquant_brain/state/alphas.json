@@ -935,8 +935,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 0,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-05-30",
       "reject_reason": null,
       "created_at": "2026-05-27T20:57:10.231857",
       "updated_at": "2026-05-27T20:57:10.231859"
