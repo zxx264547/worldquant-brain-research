@@ -1,8 +1,8 @@
 {
   "_meta": {
     "version": 1,
-    "description": "Alpha回测结果，key为expression_hash",
-    "updated_at": "2026-05-29T07:18:43.307248"
+    "description": "Alpha\u56de\u6d4b\u7ed3\u679c\uff0ckey\u4e3aexpression_hash",
+    "updated_at": "2026-05-30T11:29:51"
   },
   "entries": {
     "d56fbae4edc2fd50": {
@@ -791,8 +791,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T01:00:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-27T09:03:45.139270",
       "updated_at": "2026-05-27T09:03:45.139272"
@@ -839,8 +839,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T00:06:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-27T12:15:05.416141",
       "updated_at": "2026-05-27T12:15:05.416143"
@@ -911,8 +911,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T00:06:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-27T20:47:38.900702",
       "updated_at": "2026-05-27T20:47:38.900706"
@@ -983,8 +983,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T01:15:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-28T09:48:24.232709",
       "updated_at": "2026-05-28T09:48:24.232711"
@@ -1031,8 +1031,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T00:06:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-28T22:47:04.531838",
       "updated_at": "2026-05-28T22:47:04.531848"
@@ -1127,8 +1127,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T01:36:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T01:35:46.513481",
       "updated_at": "2026-05-29T01:35:46.513484"
@@ -1223,8 +1223,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T02:45:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T02:47:12.772339",
       "updated_at": "2026-05-29T02:47:12.772342"
@@ -1295,8 +1295,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T03:15:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T03:17:52.663098",
       "updated_at": "2026-05-29T03:17:52.663100"
@@ -1343,8 +1343,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T04:05:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T03:56:23.397799",
       "updated_at": "2026-05-29T03:56:23.397802"
@@ -1367,8 +1367,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T04:25:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T04:15:34.074460",
       "updated_at": "2026-05-29T04:15:34.074464"
@@ -1391,8 +1391,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T04:45:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T04:34:34.687652",
       "updated_at": "2026-05-29T04:34:34.687661"
@@ -1415,8 +1415,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T05:10:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T04:59:19.336310",
       "updated_at": "2026-05-29T04:59:19.336312"
@@ -1440,7 +1440,7 @@
       "error_message": null,
       "is_submittable": 1,
       "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T05:50:00",
+      "submit_date": "2026-05-30",
       "reject_reason": null,
       "created_at": "2026-05-29T05:49:28.984298",
       "updated_at": "2026-05-29T05:49:28.984301"
@@ -1487,8 +1487,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T06:10:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T06:18:07.723616",
       "updated_at": "2026-05-29T06:18:07.723620"
@@ -1511,8 +1511,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-29T06:30:00",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T06:44:21.342779",
       "updated_at": "2026-05-29T06:44:21.342782"
