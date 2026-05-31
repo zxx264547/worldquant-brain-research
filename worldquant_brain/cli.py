@@ -58,35 +58,51 @@ def cmd_test(args):
 
 
 def cmd_check(args):
-    """检查Alpha是否可提交"""
+    """检查Alpha是否可提交（使用完整提交检查API）"""
     alpha_id = args.alpha_id
 
     async def _run():
         from worldquant_brain.scripts.core import RetryableBrainClient
         client = RetryableBrainClient()
-        await client.authenticate_with_retry()
-        alpha = await client.get_alpha_with_retry(alpha_id)
 
+        # 先获取基本信息
+        alpha = await client.get_alpha_with_retry(alpha_id)
         sharpe = alpha.get('sharpe', 0)
         fitness = alpha.get('fitness', 0)
         ppc = alpha.get('ppc', 0)
         margin = alpha.get('margin', 0)
         turnover = alpha.get('turnover', 0)
 
-        checks = {
+        print(f"=== Alpha {alpha_id} PPA检查 ===")
+        basic_checks = {
             'Sharpe >= 1.58': sharpe >= 1.58,
             'Fitness > 0.5': fitness > 0.5,
             'PPC < 0.5': ppc < 0.5,
             'Margin > Turnover': margin > turnover,
         }
 
-        for check, passed in checks.items():
+        for check, passed in basic_checks.items():
             print(f"  {'✓' if passed else '✗'} {check}")
 
-        if all(checks.values()):
-            print("\n*** Alpha满足提交条件! ***")
+        # 调用完整提交检查
+        print(f"\n=== 完整提交检查 ===")
+        result = await client.submit_alpha(alpha_id)
+
+        if result['success']:
+            print("\n*** ✅ 提交成功! ***")
         else:
-            print("\nAlpha不满足提交条件")
+            print(f"\n*** ❌ {result['message']} ***")
+
+        if result['checks']:
+            print("\n详细检查结果:")
+            for check in result['checks']:
+                status = '✅' if check['result'] == 'PASS' else '❌'
+                value_str = f"{check['value']:.4f}" if isinstance(check['value'], (int, float)) and check['value'] != 'N/A' else str(check['value'])
+                limit_str = f"{check['limit']:.4f}" if isinstance(check['limit'], (int, float)) and check['limit'] != 'N/A' else str(check['limit'])
+                print(f"  {status} {check['name']}: {check['result']} (value={value_str}, limit={limit_str})")
+
+            if result['failed_checks']:
+                print(f"\n失败项: {result['failed_checks']}")
 
     asyncio.run(_run())
 
