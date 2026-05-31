@@ -50,7 +50,7 @@ class RetryableBrainClient:
         poll_interval: int = 5
     ):
         # 清除代理设置（避免SSL冲突）
-        for key in ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy']:
+        for key in ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy', 'ALL_PROXY', 'all_proxy']:
             os.environ.pop(key, None)
         # 自动从配置文件加载凭据
         if credentials is None:
@@ -60,6 +60,8 @@ class RetryableBrainClient:
         self.poll_timeout = poll_timeout
         self.poll_interval = poll_interval
         self.client = BrainApiClient()
+        # 确保session不走代理
+        self.client.session.trust_env = False
         self._authenticated = False
 
         # 数据集字段缓存
@@ -839,14 +841,19 @@ class RetryableBrainClient:
             if progress:
                 logger.info(f"Simulation progress: {progress:.0%}")
 
-            # Check Retry-After header - when it's 0, simulation is likely complete
-            # (but alpha might be in next request or same response)
+            # Check Retry-After header - when it's 0, simulation is complete
             retry_after = r.headers.get('Retry-After')
             if retry_after:
                 retry_val = float(retry_after)
                 if retry_val == 0:
-                    # Simulation might be complete, try getting alpha_id
-                    logger.info("Retry-After=0, simulation may be complete")
+                    # API完成，alpha_id在响应或后续请求中
+                    alpha_id = data.get('alpha')
+                    if alpha_id:
+                        logger.info(f"Simulation completed (Retry-After=0), fetching alpha: {alpha_id}")
+                        alpha_data = await self.get_alpha_with_retry(alpha_id)
+                        return {'status': 'COMPLETE', 'alpha_id': alpha_id, **alpha_data}
+                    # alpha_id不在此响应，继续轮询（但用较短间隔）
+                    intervals = 2
                 else:
                     intervals = min(retry_val, 10)
 
@@ -949,3 +956,131 @@ class RetryableBrainClient:
         except Exception as e:
             logger.warning(f"Could not fetch PnL for {alpha_id}: {e}")
             return []
+
+    async def submit_alpha(self, alpha_id: str) -> dict:
+        """提交Alpha进行生产
+
+        绕过代理，使用正确的session发送请求
+
+        Returns:
+            dict: {
+                'success': bool,
+                'message': str,
+                'checks': list of check results,
+                'failed_checks': list of failed check names
+            }
+        """
+        await self.ensure_authenticated()
+
+        import requests
+
+        # 清除代理设置（避免SSL冲突）
+        env_backup = {}
+        for key in ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy']:
+            if key in os.environ:
+                env_backup[key] = os.environ.pop(key)
+
+        try:
+            # 使用session发送请求（session不走代理）
+            url = f'{self.client.base_url}/alphas/{alpha_id}/submit'
+            resp = self.client.session.post(url, timeout=30, allow_redirects=False)
+
+            # 处理303重定向问题 - 使用curl绕过重定向问题
+            if resp.status_code == 303:
+                location = resp.headers.get('location', '')
+                if location:
+                    # 去掉端口号
+                    if ':443' in location:
+                        location = location.replace(':443', '')
+
+                    # 使用subprocess调用curl处理重定向
+                    import subprocess
+                    clean_env = {k: v for k, v in os.environ.items() if 'proxy' not in k.lower()}
+                    cookie = self.client.session.cookies.get('t', '')
+
+                    cmd = ['curl', '-s', '-L', '--max-time', '30', '-w', '\n%{http_code}',
+                           '-X', 'POST', location,
+                           '-H', f'Cookie: t={cookie}',
+                           '-H', 'Accept: application/json',
+                           '--noproxy', '*']
+                    result = subprocess.run(cmd, capture_output=True, text=True, env=clean_env, timeout=35)
+                    lines = result.stdout.strip().split('\n')
+                    status_code = lines[-1] if lines else '0'
+                    body = '\n'.join(lines[:-1]) if len(lines) > 1 else ''
+
+                    # 解析curl返回的HTTP状态码
+                    if status_code == '201':
+                        return {
+                            'success': True,
+                            'message': "提交成功",
+                            'checks': [],
+                            'failed_checks': []
+                        }
+                    elif status_code == '403':
+                        try:
+                            data = json.loads(body) if body else {}
+                            checks = data.get('is', {}).get('checks', [])
+                            failed = [c.get('name') for c in checks if c.get('result') == 'FAIL']
+                            return {
+                                'success': False,
+                                'message': f"检查失败: {', '.join(failed)}" if failed else "HTTP 403",
+                                'checks': checks,
+                                'failed_checks': failed
+                            }
+                        except:
+                            return {'success': False, 'message': 'HTTP 403', 'checks': [], 'failed_checks': []}
+                    else:
+                        return {'success': False, 'message': f'HTTP {status_code}', 'checks': [], 'failed_checks': []}
+                else:
+                    return {'success': False, 'message': '无重定向location', 'checks': [], 'failed_checks': []}
+
+            if resp.status_code == 403:
+                data = resp.json()
+                checks = data.get('is', {}).get('checks', [])
+
+                # 解析检查结果
+                check_results = []
+                failed_checks = []
+                for check in checks:
+                    name = check.get('name', '?')
+                    result = check.get('result', '?')
+                    value = check.get('value', 'N/A')
+                    limit = check.get('limit', 'N/A')
+
+                    check_info = {
+                        'name': name,
+                        'result': result,
+                        'value': value,
+                        'limit': limit
+                    }
+                    check_results.append(check_info)
+
+                    if result == 'FAIL':
+                        failed_checks.append(name)
+
+                # 即使failed_checks为空，403状态仍代表提交被拒绝
+                return {
+                    'success': False,
+                    'message': f"检查失败: {', '.join(failed_checks)}" if failed_checks else "HTTP 403 错误",
+                    'checks': check_results,
+                    'failed_checks': failed_checks
+                }
+            elif resp.status_code == 201:
+                return {
+                    'success': True,
+                    'message': "提交成功",
+                    'checks': [],
+                    'failed_checks': []
+                }
+            else:
+                return {
+                    'success': False,
+                    'message': f"提交失败: HTTP {resp.status_code}",
+                    'checks': [],
+                    'failed_checks': []
+                }
+
+        finally:
+            # 恢复代理设置
+            for key, value in env_backup.items():
+                os.environ[key] = value
