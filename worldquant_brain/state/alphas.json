@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": 1,
-    "description": "Alpha回测结果，key为expression_hash",
+    "description": "Alpha\u56de\u6d4b\u7ed3\u679c\uff0ckey\u4e3aexpression_hash",
     "updated_at": "2026-05-31T13:21:01.807163"
   },
   "entries": {
@@ -1127,8 +1127,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-05-31",
       "reject_reason": null,
       "created_at": "2026-05-29T01:35:46.513481",
       "updated_at": "2026-05-29T01:35:46.513484"
@@ -1367,8 +1367,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-05-31",
       "reject_reason": null,
       "created_at": "2026-05-29T04:15:34.074460",
       "updated_at": "2026-05-29T04:15:34.074464"
@@ -1511,8 +1511,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-05-31",
       "reject_reason": null,
       "created_at": "2026-05-29T06:44:21.342779",
       "updated_at": "2026-05-29T06:44:21.342782"
