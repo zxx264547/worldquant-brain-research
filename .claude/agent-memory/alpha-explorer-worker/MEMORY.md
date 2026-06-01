@@ -15,3 +15,4 @@
 - [eur_cross_combo_20260520](eur_cross_combo_20260520.md) - EUR cross-dataset combo tests blocked - API stuck at 0% progress
 - [api_stuck_35_percent](api_stuck_35_percent.md) - API simulations stuck at 35%, get_events returns empty, correct API usage documented
 - [session_20260525_analyst_exploration](session_20260525_analyst_exploration.md) - 2026-05-25 analyst VECTOR field exploration - all fail, NONE neutralization baseline Sharpe 0.67
+- [session_20260601_shrt3_breakthrough](session_20260601_shrt3_breakthrough.md) - 2026-06-01 shrt3_bar breakthrough Sharpe 1.72 but ALL fail PROD_CORRELATION (correlated with analyst4_usa_1step/fundamental6_usa_2step)

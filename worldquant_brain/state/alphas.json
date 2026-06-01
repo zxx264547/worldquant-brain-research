@@ -1,8 +1,8 @@
 {
   "_meta": {
     "version": 1,
-    "description": "Alpha\u56de\u6d4b\u7ed3\u679c\uff0ckey\u4e3aexpression_hash",
-    "updated_at": "2026-05-31T13:21:01.807163"
+    "description": "Alpha回测结果，key为expression_hash",
+    "updated_at": "2026-06-01T20:16:49.340388"
   },
   "entries": {
     "d56fbae4edc2fd50": {
@@ -911,8 +911,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-31",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-27T20:47:38.900702",
       "updated_at": "2026-05-27T20:47:38.900706"
@@ -1295,8 +1295,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-31",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T03:17:52.663098",
       "updated_at": "2026-05-29T03:17:52.663100"
@@ -1343,8 +1343,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-31",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T03:56:23.397799",
       "updated_at": "2026-05-29T03:56:23.397802"
@@ -1391,8 +1391,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": "SUBMITTED",
-      "submit_date": "2026-05-31",
+      "submit_status": null,
+      "submit_date": null,
       "reject_reason": null,
       "created_at": "2026-05-29T04:34:34.687652",
       "updated_at": "2026-05-29T04:34:34.687661"
@@ -1566,15 +1566,48 @@
       "updated_at": "2026-05-31T13:21:01.807156"
     },
     "77fcd564a69ca302": {
-      "id": "E5kxLMJ9",
       "expression": "zscore(-ts_mean(actual_eps_value_quarterly, 22))",
       "expression_hash": "77fcd564a69ca302",
-      "sharpe": 0.37,
-      "fitness": 0.34,
-      "ppc": 0.16717050691244242,
+      "sharpe": -0.21,
+      "fitness": -0.1,
+      "ppc": 0.1253409090909091,
       "name": "analyst4_eps_22",
       "status": "ok",
       "is_submittable": 0
+    },
+    "157a31626acba503": {
+      "expression": "zscore(-ts_max(actual_eps_value_quarterly, 22))",
+      "expression_hash": "157a31626acba503",
+      "sharpe": -0.27,
+      "fitness": -0.14,
+      "ppc": 0.09403030303030302,
+      "name": "analyst4_eps_max22",
+      "status": "ok",
+      "is_submittable": 0
+    },
+    "30678ce1dcbe357e": {
+      "id": "gJxlJjaQ",
+      "expression": "zscore(ts_min(vec_min(anl44_2_eps_value), 22))",
+      "expression_hash": "30678ce1dcbe357e",
+      "sharpe": 0.5,
+      "fitness": 0.4,
+      "ppc": 0.03143401015228427,
+      "margin": 0.002477,
+      "turnover": 0.0636,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.01, \"neutralization\": \"INDUSTRY\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"vec_min_anl44_eps\"}",
+      "name": "vec_min_anl44_eps",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 0,
+      "submit_status": null,
+      "submit_date": null,
+      "reject_reason": null,
+      "created_at": "2026-06-01T20:16:49.340368",
+      "updated_at": "2026-06-01T20:16:49.340372"
     }
   }
 }
