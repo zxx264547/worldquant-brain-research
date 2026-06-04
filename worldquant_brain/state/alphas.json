@@ -1612,6 +1612,96 @@
       "reject_reason": null,
       "created_at": "2026-06-01T20:16:49.340368",
       "updated_at": "2026-06-01T20:16:49.340372"
+    },
+    "RRrQxZWo_test": {
+      "id": "RRrQxZWo",
+      "expression": "zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(mean_loan_rate), 22))",
+      "sharpe": 2.28,
+      "fitness": 4.21,
+      "name": "min_mean_test",
+      "status": "ok",
+      "is_submittable": 1
+    },
+    "pw7Ao3Rb": {
+      "id": "pw7Ao3Rb",
+      "expression": "zscore(-ts_max(vec_max(ern27_positive), 22))",
+      "expression_hash": "pw7Ao3Rb",
+      "sharpe": -0.3,
+      "name": "ern27_pos_22",
+      "status": "ok",
+      "is_submittable": 0
+    },
+    "gJ3E7j0l": {
+      "id": "gJ3E7j0l",
+      "expression": "zscore(-ts_max(vec_max(actual_bvps_value_annual12), 22))",
+      "expression_hash": "gJ3E7j0l",
+      "sharpe": -0.01,
+      "name": "bvps_22",
+      "status": "ok",
+      "is_submittable": 0
+    },
+    "O0o3ln1v": {
+      "id": "O0o3ln1v",
+      "expression": "signed_power(zscore(-ts_min(vec_min(shrt3_bar), 22)), 3)",
+      "expression_hash": "O0o3ln1v",
+      "sharpe": 1.8,
+      "name": "sign_bar_22",
+      "status": "ok",
+      "is_submittable": 1
+    },
+    "Grk2o7wP": {
+      "id": "Grk2o7wP",
+      "expression": "zscore(-ts_max(vec_max(min_loan_rate), 66)) + zscore(-ts_max(vec_max(min_loan_rate), 5))",
+      "expression_hash": "Grk2o7wP",
+      "sharpe": 2.34,
+      "name": "min66_min5",
+      "status": "ok",
+      "is_submittable": 1
+    },
+    "9qJebbwo": {
+      "id": "9qJebbwo",
+      "expression": "signed_power(zscore(-ts_min(vec_min(shrt3_bar), 66)), 2.5)",
+      "expression_hash": "9qJebbwo",
+      "sharpe": 1.67,
+      "name": "sign_bar_66",
+      "status": "ok",
+      "is_submittable": 1
+    },
+    "JjbAXmRn": {
+      "id": "JjbAXmRn",
+      "expression": "signed_power(-ts_decay_linear(vec_min(shrt3_bar), 22), 1.5)",
+      "expression_hash": "JjbAXmRn",
+      "sharpe": 1.22,
+      "name": "sign_decay_22",
+      "status": "ok",
+      "is_submittable": 0
+    },
+    "d5dM7X7Y": {
+      "id": "d5dM7X7Y",
+      "expression": "signed_power(ts_rank(vec_min(shrt3_bar), 66), 1.5)",
+      "expression_hash": "d5dM7X7Y",
+      "sharpe": 0.95,
+      "name": "sign_rank_66",
+      "status": "ok",
+      "is_submittable": 0
+    },
+    "78dWLxe8": {
+      "id": "78dWLxe8",
+      "expression": "zscore(-ts_max(vec_max(loan_rate_volatility), 120))",
+      "expression_hash": "78dWLxe8",
+      "sharpe": 1.84,
+      "name": "vol_120",
+      "status": "ok",
+      "is_submittable": 1
+    },
+    "rKWYd0m8": {
+      "id": "rKWYd0m8",
+      "expression": "ts_mean(zscore(-ts_max(vec_max(loan_rate_volatility), 22)), 5)",
+      "expression_hash": "rKWYd0m8",
+      "sharpe": 2.01,
+      "name": "vol_22_tm5",
+      "status": "ok",
+      "is_submittable": 1
     }
   }
 }
