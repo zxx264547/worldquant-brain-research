@@ -12,5 +12,8 @@
     ]
   },
   "prefersReducedMotion": false,
-  "dangerously-skip-permissions": true
+  "dangerously-skip-permissions": true,
+  "cli": {
+    "effort": "max"
+  }
 }

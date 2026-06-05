@@ -210,6 +210,33 @@ VECTOR类型字段必须使用vec_min/vec_max（非vec_avg/vec_sum），遵循�
 - 直连api.worldquantbrain.com
 - 限流后Retry-After可能长达30分钟+
 
+### 8. 获取数据集字段的正确方法
+**端点**：`/data-fields`（有连字符）
+
+**参数**：`dataset.id`（注意是点号，不是dataSet或dataset）
+
+**示例**：
+```python
+resp = session.get(f'{base_url}/data-fields', params={
+    'dataset.id': 'sentiment23',
+    'instrumentType': 'EQUITY',
+    'region': 'USA',
+    'delay': 1,
+    'universe': 'TOP3000',
+    'limit': 50
+})
+```
+
+**字段命名规律**：
+- sentiment23 → `snt23_` 开头（如 `snt23_neg_mean`）
+- pv48 → `pv48_` 开头（如 `pv48_constituent_cap`）
+- shortinterest3 → 直接用字段名（如 `mean_loan_rate`）
+
+**错误示例**（会返回 "Invalid query"）：
+- `dataSet` → ❌
+- `dataset` → ❌
+- `/datafields` → ❌
+
 ---
 
 ## 故障排查表
@@ -231,6 +258,39 @@ VECTOR类型字段必须使用vec_min/vec_max（非vec_avg/vec_sum），遵循�
 | Sharpe | >= 1.58 (目标) |
 | Fitness | > 0.5 |
 | Margin | > Turnover |
+
+---
+
+## Alpha 提交规则
+
+### 提交成功的判断
+**返回 HTTP 201 = 真正提交成功，其他都是失败**
+
+| HTTP Status | 含义 |
+|-------------|------|
+| 201 | 提交成功，触发 OS 回测 |
+| 403 + checks | 提交检查失败（被拒绝） |
+| 429 | 限流（需等待后重试） |
+| 400 | 参数错误或认证失败 |
+
+### 验证真正提交成功
+```python
+resp = session.post(f'{base_url}/alphas/{alpha_id}/submit')
+
+if resp.status_code == 201:
+    # 真正提交成功
+    pass
+elif resp.status_code == 403:
+    # 检查失败
+    checks = resp.json().get('is', {}).get('checks', [])
+```
+
+### 检查已提交Alpha状态
+```python
+# dateSubmitted 有值 = 已提交
+# status = 'SUBMITTED' = 已提交
+# stage = 'OS' = 已触发 OS 回测
+```
 
 ---
 

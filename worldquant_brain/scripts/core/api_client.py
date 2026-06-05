@@ -985,40 +985,51 @@ class RetryableBrainClient:
             url = f'{self.client.base_url}/alphas/{alpha_id}/submit'
             resp = self.client.session.post(url, timeout=30, allow_redirects=False)
 
-            # 处理303重定向问题 - 使用curl绕过重定向问题
+            # 处理303重定向问题 - 303要求客户端改用GET跟随
             if resp.status_code == 303:
                 location = resp.headers.get('location', '')
                 if location:
-                    # 去掉端口号
+                    # 修正URL：去掉端口号和强制https
                     if ':443' in location:
                         location = location.replace(':443', '')
+                    if location.startswith('http://'):
+                        location = location.replace('http://', 'https://')
 
-                    # 使用subprocess调用curl处理重定向
-                    import subprocess
-                    clean_env = {k: v for k, v in os.environ.items() if 'proxy' not in k.lower()}
-                    cookie = self.client.session.cookies.get('t', '')
+                    # 303+Location要求客户端用GET方法获取最终结果
+                    # 让session自动follow all redirects
+                    try:
+                        resp = self.client.session.post(location, timeout=30, allow_redirects=True)
+                    except Exception as e:
+                        return {'success': False, 'message': f'redirect failed: {e}', 'checks': [], 'failed_checks': []}
 
-                    cmd = ['curl', '-s', '-L', '--max-time', '30', '-w', '\n%{http_code}',
-                           '-X', 'POST', location,
-                           '-H', f'Cookie: t={cookie}',
-                           '-H', 'Accept: application/json',
-                           '--noproxy', '*']
-                    result = subprocess.run(cmd, capture_output=True, text=True, env=clean_env, timeout=35)
-                    lines = result.stdout.strip().split('\n')
-                    status_code = lines[-1] if lines else '0'
-                    body = '\n'.join(lines[:-1]) if len(lines) > 1 else ''
-
-                    # 解析curl返回的HTTP状态码
-                    if status_code == '201':
-                        return {
-                            'success': True,
-                            'message': "提交成功",
-                            'checks': [],
-                            'failed_checks': []
-                        }
-                    elif status_code == '403':
+                    if resp.status_code == 201:
+                        # 验证提交是否真正生效（平台需要更长时间处理）
+                        import time as _time
+                        _time.sleep(30)
+                        verify_url = f'{self.client.base_url}/alphas/{alpha_id}'
+                        verify_resp = self.client.session.get(verify_url, timeout=30)
+                        if verify_resp.status_code == 200:
+                            verify_data = verify_resp.json()
+                            date_submitted = verify_data.get('dateSubmitted')
+                            alpha_status = verify_data.get('status')
+                            if date_submitted and alpha_status == 'ACTIVE':
+                                return {
+                                    'success': True,
+                                    'message': "提交成功",
+                                    'checks': [],
+                                    'failed_checks': []
+                                }
+                            else:
+                                return {
+                                    'success': False,
+                                    'message': f"提交未生效 (status={alpha_status}, dateSubmitted={date_submitted})",
+                                    'checks': [],
+                                    'failed_checks': []
+                                }
+                        return {'success': False, 'message': '验证提交状态失败', 'checks': [], 'failed_checks': []}
+                    elif resp.status_code == 403:
                         try:
-                            data = json.loads(body) if body else {}
+                            data = resp.json()
                             checks = data.get('is', {}).get('checks', [])
                             failed = [c.get('name') for c in checks if c.get('result') == 'FAIL']
                             return {
@@ -1030,7 +1041,7 @@ class RetryableBrainClient:
                         except:
                             return {'success': False, 'message': 'HTTP 403', 'checks': [], 'failed_checks': []}
                     else:
-                        return {'success': False, 'message': f'HTTP {status_code}', 'checks': [], 'failed_checks': []}
+                        return {'success': False, 'message': f'HTTP {resp.status_code}', 'checks': [], 'failed_checks': []}
                 else:
                     return {'success': False, 'message': '无重定向location', 'checks': [], 'failed_checks': []}
 

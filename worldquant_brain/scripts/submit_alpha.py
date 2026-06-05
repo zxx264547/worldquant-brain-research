@@ -33,14 +33,38 @@ def submit_alpha(alpha_id: str, jwt: str = None) -> dict:
         return {"success": False, "reason": "无法获取JWT token"}
 
     # Step 1: 提交
-    cmd = ['curl', '-s', '-L', '--max-time', '30', '-w', '\n%{http_code}',
-           '-X', 'POST', f'https://api.worldquantbrain.com/alphas/{alpha_id}/submit',
-           '-H', f'Cookie: t={jwt}', '-H', 'Accept: application/json',
-           '--noproxy', '*']
-    result = subprocess.run(cmd, capture_output=True, text=True, env=clean_env, timeout=35)
-    lines = result.stdout.strip().split('\n')
-    status_code = lines[-1] if lines else '?'
-    body = '\n'.join(lines[:-1]) if len(lines) > 1 else ''
+    # 使用requests库，正确处理303后改为GET的标准流程
+    import requests as _requests
+    _session = _requests.Session()
+    _session.trust_env = False
+    _session.cookies.set('t', jwt)
+    _session.headers.update({'Accept': 'application/json'})
+
+    # 第一次POST
+    _url = f'https://api.worldquantbrain.com/alphas/{alpha_id}/submit'
+    _resp = _session.post(_url, timeout=30, allow_redirects=False)
+    status_code = str(_resp.status_code)
+    body = _resp.text
+
+    # 按HTTP 303标准：GET跟随重定向，直到200/201/403/400
+    redirect_count = 0
+    while _resp.status_code == 303 and redirect_count < 10:
+        _loc = _resp.headers.get('location', '').replace(':443', '').replace('http://', 'https://')
+        if not _loc:
+            break
+        # 303+Location要求客户端GET
+        _resp = _session.get(_loc, timeout=30, allow_redirects=False)
+        status_code = str(_resp.status_code)
+        body = _resp.text
+        redirect_count += 1
+        # 跟随Retry-After
+        if _resp.status_code == 303:
+            _retry_after = _resp.headers.get('Retry-After')
+            if _retry_after:
+                try:
+                    time.sleep(float(_retry_after))
+                except:
+                    pass
 
     # Step 2: 分析结果
     time.sleep(3)

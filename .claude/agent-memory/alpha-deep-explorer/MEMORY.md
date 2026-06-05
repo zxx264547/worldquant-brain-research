@@ -1,2 +1,3 @@
 - [startup.md](startup.md) — Alpha deep-explorer initialization
 - [learning.md](learning.md) — Key learning from cache results (updated 2026-05-01)
+- [session-2026-05-31.md](session-2026-05-31.md) — API issue, PROD_CORRELATION blocking, new field exploration
