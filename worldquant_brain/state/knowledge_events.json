@@ -1,19 +1,41 @@
 {
   "_meta": {
     "version": 1,
-    "description": "\u77e5\u8bc6\u4e8b\u4ef6\u65e5\u5fd7\uff08insight/anti_pattern/experiment/submit/failure/forum_sync\uff09",
-    "next_id": 1,
-    "updated_at": "2026-05-24T00:00:00"
+    "description": "知识事件日志（insight/anti_pattern/experiment/submit/failure/forum_sync）",
+    "next_id": 3,
+    "updated_at": "2026-06-13T13:37:58.111451"
   },
   "items": [
     {
       "event_type": "anti_pattern",
       "dataset": "shortinterest3",
-      "reason": "\u81ea\u76f8\u5173\u6027\u592a\u9ad8(Self Corr)",
+      "reason": "自相关性太高(Self Corr)",
       "affected_alphas": 26,
       "best_sharpe": 2.53,
-      "decision": "\u4e0d\u63d0\u4ea4shortinterest3\u884d\u751fAlpha\uff0c\u6362\u65b9\u5411\u63a2\u7d22\u65b0\u6570\u636e\u96c6",
+      "decision": "不提交shortinterest3衍生Alpha，换方向探索新数据集",
       "date": "2026-06-06"
+    },
+    {
+      "id": 1,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "rsk60_offer字段是发现的新优质Alpha源，Sharpe 1.91-1.98，margin>turnover，VECTOR类型用vec_max模式",
+        "category": "general"
+      },
+      "confidence": 0.9,
+      "created_at": "2026-06-13T13:37:55.015012"
+    },
+    {
+      "id": 2,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "API服务端模拟引擎卡35%无法完成，所有新simulations失败",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-13T13:37:58.111435"
     }
   ]
 }
