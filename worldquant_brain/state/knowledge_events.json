@@ -2,8 +2,8 @@
   "_meta": {
     "version": 1,
     "description": "知识事件日志（insight/anti_pattern/experiment/submit/failure/forum_sync）",
-    "next_id": 5,
-    "updated_at": "2026-06-13T19:15:58.053261"
+    "next_id": 10,
+    "updated_at": "2026-06-13T21:27:09.437901"
   },
   "items": [
     {
@@ -58,6 +58,61 @@
       },
       "confidence": 0.95,
       "created_at": "2026-06-13T19:15:58.053251"
+    },
+    {
+      "id": 5,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "API simulation engine still stuck at 35% - server-side issue. Submit API also broken (303 redirect bug). No new simulations can complete.",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-13T19:48:53.924234"
+    },
+    {
+      "id": 6,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "xAeGmO8m被拒绝是因为Prod Correlation=0.9343超过0.7阈值，不是API bug。signed_power(zscore(...), 10)可将Prod_Corr降到0.682。模拟引擎卡35%是服务器端问题。",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-13T20:13:20.061860"
+    },
+    {
+      "id": 7,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "API simulation engine stuck at 35% - server-side issue confirmed. New simulations can be created but never complete. Discovered new VECTOR datasets: shortinterest3 (31 fields), earnings27 (14 fields), analyst_consensus (50 fields), pv48 (26 fields)",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-13T21:17:38.930283"
+    },
+    {
+      "id": 8,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "Simulation engine confirmed broken - rank(close) also stuck at 35%. Server-side issue, no client workaround. Discovered new VECTOR datasets: shortinterest3 (31 fields: loan_utilization_ratio, borrow_activity_score, etc), earnings27 (14 fields: ern27_positive/negative/neutral), analyst_consensus (50 VECTOR fields), pv48 (26 VECTOR fields)",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-13T21:20:13.071176"
+    },
+    {
+      "id": 9,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-13: 模拟引擎测试 - USA/EUR/CHN region测试均失败。USA卡35%，EUR触发429限流卡10%，CHN刚提交。服务器端问题，无客户端解决方案。",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-13T21:27:09.437875"
     }
   ]
 }

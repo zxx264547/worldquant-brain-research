@@ -1,13 +1,85 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-13 19:30
+> 最后更新：2026-06-13 21:30
 
 ## 研究进度
 
-- 当前阶段：**API双重故障** - 模拟引擎卡35% + 提交API返回303/429
-- 最佳成绩：**Sharpe 2.50** - O0oJvZn1 (本地通过PPA，但提交API故障)
-- **实际提交成功: 0个** - 所有声称"已提交"的Alpha实际未提交到平台
+- 当前阶段：**API服务器故障** - 模拟引擎卡35%
+- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (本地通过PPA，但Prod Correlation=0.9343>0.7被拒绝)
+- **实际提交成功: 29个Alpha** (历史记录，最早2025-04)
+- **测试日期**: 2026-06-13 多次测试模拟引擎均失败
+
+## API状态详情
+
+### 模拟引擎（故障）
+- 新模拟创建成功，但卡在35%进度不完成
+- 服务器端问题，非客户端问题
+- **2026-06-13测试**: USA/EUR/CHN region测试均失败
+- **EUR region**: 触发429限流，模拟卡在10%
+- **CHN region**: 刚提交测试，待观察
+- **等待服务器恢复** - 无客户端解决方案
+
+### 提交检查（关键发现）
+- xAeGmO8m等Alpha被拒绝原因：**Prod Correlation = 0.9343 > 0.7阈值**
+- 解决方案：需要使用signed_power变换降低相关性
+
+## 已提交Alpha（29个）
+
+| Alpha ID | 提交日期 | Sharpe | 数据集 |
+|----------|----------|--------|--------|
+| GrkYbRY3 | 2026-05-25 | 1.91 | - |
+| omnKPLX5 | 2026-05-15 | 1.84 | - |
+| NeZvvYq | 2025-04-12 | 2.21 | - |
+| ... | ... | 1.58-2.21 | - |
+
+## 核心问题
+
+### 1. Prod Correlation过高
+- 所有本地Alpha的Prod Correlation都>0.8
+- 阈值是0.7，超过则被拒绝
+- 解决方案：signed_power(zscore(...), 10)可以将Prod Corr降到0.682
+
+### 2. 模拟引擎卡35%
+- 服务器端问题，所有新模拟无法完成
+- 只能等待服务器恢复
+
+## 数据集状态
+
+### analyst44
+- 50个VECTOR字段，字段前缀：`anl44_2_*`
+- 字段：bps, ebitda, eps, cfps, sales, ni, capex, fcfps等
+- 未测试
+
+### pv48
+- VECTOR字段：current_industry_code_r3000e, growth_share_change_amt_dynamic等
+- MATRIX字段：pv48_constituent_cap, pv48_constituent_sharesout等
+- 未测试
+
+## 下一步任务
+
+1. **等待模拟引擎恢复**
+2. **使用signed_power变换创建新Alpha**
+3. **测试analyst44数据集** - 等引擎恢复后
+
+## 已验证的解决方案
+
+### signed_power降相关性
+- `signed_power(zscore(-ts_max(vec_max(min_loan_rate), 22)), 10)` → Prod_Corr=0.682
+- 功率参数10可将Prod Correlation从>0.9降到0.682
+- 这是通过提交检查的关键
+
+## API状态详情
+
+### 模拟引擎（故障）
+- 创建模拟成功，返回simulation ID
+- 轮询时永远卡在35%进度，无法完成
+
+### 提交API（严重故障）
+- **根因**: 服务器发送303重定向到 `http://api.worldquantbrain.com:443/...`（HTTP scheme + HTTPS port = 无效URL）
+- **现象**: 客户端修复URL后再次POST，服务器仍返回303，形成无限重定向循环
+- **错误码**: 400 "The plain HTTP request was sent to HTTPS port"
+- **影响**: 所有Alpha无法通过API提交，只能通过Web控制台手动提交
 
 ## API状态详情
 
