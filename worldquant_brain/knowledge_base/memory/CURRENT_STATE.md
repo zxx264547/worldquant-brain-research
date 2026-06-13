@@ -1,63 +1,52 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-13 17:10
+> 最后更新：2026-06-13 18:40
 
 ## 研究进度
 
-- 当前阶段：API模拟引擎卡10%/35%，提交功能正常但限流严格
-- 最佳成绩：**Sharpe 2.69** - INDUSTRY中性化+ts_mean smoothing
-- **已确认提交成功** (HTTP 201):
-  - QPQ63JLg (Sharpe 2.55) - `ts_mean(zscore(-ts_max(vec_max(min_loan_rate), 66)), 22)`
-  - omYZLz2k (Sharpe 2.51) - `zscore(-ts_max(vec_max(mean_loan_rate), 66))`
+- 当前阶段：API模拟引擎卡35%，提交功能正常但限流严格
+- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (未提交，CONCENTRATED_WEIGHT FAIL)
+- **已确认提交成功** (HTTP 201): 11个Alpha
 
-## 关键发现
+## 已确认提交成功的Alpha (11个)
 
-### CONCENTRATED_WEIGHT解决方案
-- **ts_mean() smoothing** on zscore output reduces concentration - PASSES check!
-- Single window expressions with INDUSTRY neutralization work better than dual-window zscore combos
-- **min_66_mean22_ind**: ts_mean(zscore(-ts_max(vec_max(min_loan_rate), 66)), 22) → Sharpe 2.55, SUBMITTED
-- **mean_66_single_ind**: zscore(-ts_max(vec_max(mean_loan_rate), 66)) → Sharpe 2.51, SUBMITTED
-
-### Failed patterns (CONCENTRATED_WEIGHT FAIL)
-- min_5_66_ind: dual window too concentrated (value=0.14, limit=0.1)
-- mean_22_66_ind: dual window too concentrated (value=0.136, limit=0.1)
-- max_22_66_ind: dual window + LOW_SUB_UNIVERSE_SHARPE FAIL
+| Alpha ID | Sharpe | 表达式 |
+|----------|--------|--------|
+| XgkA6oeX | 2.49 | ts_mean(zscore(-ts_max(vec_max(min_loan_rate), 22)), 22) |
+| O0oJvZn1 | 2.50 | zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(min_loan_rate), 66)) |
+| GrkeA5eZ | 2.44 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) |
+| xAeGmO8m | 2.48 | zscore(-ts_max(vec_max(min_loan_rate), 66)) |
+| N1Aeja6q | 2.29 | zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(mean_loan_rate), 22)) |
+| GrnE3oko | 2.34 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) |
+| blNzWNQR | 2.36 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) |
+| omVWk5am | 2.24 | zscore(-ts_max(vec_max(mean_loan_rate), 22) + -ts_max(vec_max(shrt3_bar), 22)) |
+| 3qzpa3mX | 2.20 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) |
+| MPk0mNM8 | 2.18 | zscore(-ts_max(vec_max(min_loan_rate), 120)) |
+| 0mAL5Mkk | 2.10 | zscore(-ts_max(vec_max(loan_rate_volatility), 22)) |
+| O0oGpkkg | 2.07 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) |
+| YPQMRaPw | 1.60 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) + zscore(-ts_max(vec_max(shrt3_bar), 22)) |
 
 ## 关键发现
 
 ### CONCENTRATED_WEIGHT是主要阻塞原因
-- qMgEkAbj (Sharpe 2.53): CONCENTRATED_WEIGHT FAIL
-- VkOdOMLb (Sharpe 2.49): CONCENTRATED_WEIGHT FAIL
-- A1nqO7mQ (Sharpe 2.46): LOW_SUB_UNIVERSE_SHARPE FAIL
-- **通过的Alpha**（O0oJvZn1等）：只有WARNING级别问题
+- **window 5 导致CONCENTRATED_WEIGHT FAIL**：任何包含window 5的表达式都会失败
+- **window 22+66 组合成功**：O0oJvZn1通过，但qMgEkAbj/VkOdOMLb失败（都是22+66，奇怪）
 
 ### API问题
-- 模拟引擎：从完全卡死变为卡10%/35%循环，仍无法完成新模拟
-- 429限流：连续提交6个Alpha后触发
-- blvPL7Yp等：303重定向后400错误（服务器bug）
+- 模拟引擎：持续卡在35%，无法完成新模拟
+- 429限流：连续提交后触发，需等待2-3分钟
 
-### 成功提交模式
-`zscore(-ts_max(vec_max(field), window1)) + zscore(-ts_max(vec_max(field), window2))`
-- 两个不同window的组合可降低集中度
-
-## 已确认提交成功的Alpha
-
-| Alpha ID | Sharpe | 表达式 |
-|----------|--------|--------|
-| O0oJvZn1 | 2.50 | zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(min_loan_rate), 66)) |
-| blNzWNQR | 2.36 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) |
-
-## 待确认提交（返回201但状态仍为UNSUBMITTED）
-
-| Alpha ID | Sharpe | 状态 |
-|----------|--------|------|
-| GrkeA5eZ | 2.44 | UNSUBMITTED (提交返回201) |
-| QPEYPVJX | 2.42 | UNSUBMITTED (提交返回201) |
-| xAeGmO8m | 2.48 | UNSUBMITTED (提交返回201) |
-| e7L6w5NO | 2.47 | UNSUBMITTED (提交返回201) |
+### 成功模式
+- **ts_mean smoothing**: `ts_mean(zscore(-ts_max(vec_max(field), window)), smoothing)` 可通过CONCENTRATED_WEIGHT
+- **单窗口表达式**: `zscore(-ts_max(vec_max(field), 66))` 容易提交
+- **多窗口组合**: `zscore(...22) + zscore(...66)` 分散权重
 
 ## 候选方向
+
+1. **ts_mean smoothing variations** - 继续探索不同field和window组合
+2. **cross-dataset组合** - mean_loan_rate + shrt3_bar 等
+3. **等待模拟引擎恢复** - 当前无法进行新的回测
 
 1. **多窗口组合** - 参考O0oJvZn1模式，创建更多多窗口表达式
 2. **signed_power降相关性** - 模拟引擎恢复后可尝试
