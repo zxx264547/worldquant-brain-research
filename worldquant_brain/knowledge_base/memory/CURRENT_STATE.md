@@ -1,31 +1,32 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-13 18:40
+> 最后更新：2026-06-13 19:15
 
 ## 研究进度
 
-- 当前阶段：API模拟引擎卡35%，提交功能正常但限流严格
-- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (未提交，CONCENTRATED_WEIGHT FAIL)
-- **已确认提交成功** (HTTP 201): 11个Alpha
+- 当前阶段：API模拟引擎卡35%，**提交API有严重问题**
+- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (未提交)
+- **实际提交成功: 0个** - 所有声称"已提交"的Alpha实际未提交到平台
 
-## 已确认提交成功的Alpha (11个)
+## 关键发现
 
+### API问题 (严重)
+1. **模拟引擎卡35%**: 所有模拟在35%进度时卡住，无法完成
+2. **提交API返回400错误**: POST请求被拒绝，原因是服务器redirect到http://api.worldquantbrain.com:443/... (HTTP URL带HTTPS端口)，这是服务器配置问题
+3. **WSL2网络问题**: POST请求被拦截并被当作HTTP请求处理
+
+### CONCENTRATED_WEIGHT是主要阻塞原因
+- **window 5 导致CONCENTRATED_WEIGHT FAIL**：任何包含window 5的表达式都会失败
+- **单窗口66最安全**: `zscore(-ts_max(vec_max(field), 66))`
+
+### 验证有效的Alpha (本地测试)
 | Alpha ID | Sharpe | 表达式 |
 |----------|--------|--------|
-| XgkA6oeX | 2.49 | ts_mean(zscore(-ts_max(vec_max(min_loan_rate), 22)), 22) |
-| O0oJvZn1 | 2.50 | zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(min_loan_rate), 66)) |
-| GrkeA5eZ | 2.44 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) |
+| qMgEkAbj | 2.53 | zscore(-ts_max(vec_max(min_loan_rate), 5)) + zscore(-ts_max(vec_max(min_loan_rate), 66)) |
 | xAeGmO8m | 2.48 | zscore(-ts_max(vec_max(min_loan_rate), 66)) |
-| N1Aeja6q | 2.29 | zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(-ts_max(vec_max(mean_loan_rate), 22)) |
-| GrnE3oko | 2.34 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) |
-| blNzWNQR | 2.36 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) |
-| omVWk5am | 2.24 | zscore(-ts_max(vec_max(mean_loan_rate), 22) + -ts_max(vec_max(shrt3_bar), 22)) |
-| 3qzpa3mX | 2.20 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) |
-| MPk0mNM8 | 2.18 | zscore(-ts_max(vec_max(min_loan_rate), 120)) |
-| 0mAL5Mkk | 2.10 | zscore(-ts_max(vec_max(loan_rate_volatility), 22)) |
-| O0oGpkkg | 2.07 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) |
-| YPQMRaPw | 1.60 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) + zscore(-ts_max(vec_max(shrt3_bar), 22)) |
+| A1nqO7mQ | 2.46 | zscore(-ts_max(vec_max(min_loan_rate), 22)) |
+| QPEYPVJX | 2.42 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) + zscore(-ts_max(vec_max(min_loan_rate), 22)) |
 
 ## 关键发现
 
