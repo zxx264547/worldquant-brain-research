@@ -1,13 +1,42 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-13 19:15
+> 最后更新：2026-06-13 19:30
 
 ## 研究进度
 
-- 当前阶段：API模拟引擎卡35%，**提交API有严重问题**
-- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (未提交)
+- 当前阶段：**API双重故障** - 模拟引擎卡35% + 提交API返回303/429
+- 最佳成绩：**Sharpe 2.50** - O0oJvZn1 (本地通过PPA，但提交API故障)
 - **实际提交成功: 0个** - 所有声称"已提交"的Alpha实际未提交到平台
+
+## API状态详情
+
+### 模拟引擎（故障）
+- 创建模拟成功，返回simulation ID
+- 轮询时永远卡住不返回alpha_id
+- 尝试等待15分钟仍无结果
+
+### 提交API（故障）
+- **O0oJvZn1**: POST返回303 → Location: `http://api.worldquantbrain.com:443/...` (http scheme + HTTPS port 443 = 格式错误)
+- **blvPL7Yp**: POST返回429 THROTTLED
+- **xAeGmO8m**: 首次POST返回201，后续重试返回429
+- 根因：服务器配置问题，WSL2下无客户端解决方案
+
+## 通过PPA的Alpha（9个）
+
+| Alpha ID | Sharpe | Margin | Turnover | 数据集 |
+|----------|--------|--------|----------|--------|
+| O0oJvZn1 | 2.50 | 0.0354 | 0.0326 | shortinterest3 |
+| XgkA6oeX | 2.49 | 0.0403 | 0.0305 | shortinterest3 |
+| xAeGmO8m | 2.48 | 0.0419 | 0.0257 | shortinterest3 |
+| blNzWNQR | 2.36 | 0.0363 | 0.0246 | shortinterest3 |
+| MPk0mNM8 | 2.18 | 0.0449 | 0.0198 | shortinterest3 |
+| blvPL7Yp | 1.98 | 0.0285 | 0.0228 | risk60 |
+| kqQmORNd | 1.97 | 0.0280 | 0.0230 | risk60 |
+| 9qJ6d5Yr | 1.94 | 0.0280 | 0.0230 | risk60 |
+| omVzkzAE | 1.91 | 0.0280 | 0.0230 | risk60 |
+
+**注意**: shortinterest3系列有自相关性anti-pattern，risk60系列无此问题
 
 ## 关键发现
 
