@@ -801,7 +801,7 @@ class RetryableBrainClient:
         return 'unknown'
 
     async def _poll_for_completion(self, location: str, timeout: int) -> Dict[str, Any]:
-        """轮询等待模拟完成"""
+        """轮询等待模拟完成 -修复版"""
         elapsed = 0
         intervals = self.poll_interval
 
@@ -815,8 +815,8 @@ class RetryableBrainClient:
 
             data = r.json()
 
-            # Check for completion - API returns 'alpha' field when done
-            alpha_id = data.get('alpha')
+            # Check for completion - API may return 'alpha' or 'alpha_id'
+            alpha_id = data.get('alpha') or data.get('alpha_id')
             if alpha_id:
                 logger.info(f"Simulation completed, fetching alpha: {alpha_id}")
                 alpha_data = await self.get_alpha_with_retry(alpha_id)
@@ -846,8 +846,8 @@ class RetryableBrainClient:
             if retry_after:
                 retry_val = float(retry_after)
                 if retry_val == 0:
-                    # API完成，alpha_id在响应或后续请求中
-                    alpha_id = data.get('alpha')
+                    # API完成，alpha_id可能在响应中或需要再次请求
+                    alpha_id = data.get('alpha') or data.get('alpha_id')
                     if alpha_id:
                         logger.info(f"Simulation completed (Retry-After=0), fetching alpha: {alpha_id}")
                         alpha_data = await self.get_alpha_with_retry(alpha_id)
@@ -856,6 +856,21 @@ class RetryableBrainClient:
                     intervals = 2
                 else:
                     intervals = min(retry_val, 10)
+
+            #强制检查：当progress >= 90%时，说明快完成了，缩短间隔
+            if progress and progress >= 0.90:
+                intervals = 2
+
+        # 超时前最后强制检查一次
+        logger.warning(f"Polling timeout, making final check: {location}")
+        r = self.client.session.get(location)
+        if r.status_code == 200:
+            data = r.json()
+            alpha_id = data.get('alpha') or data.get('alpha_id')
+            if alpha_id:
+                logger.info(f"Final check found alpha: {alpha_id}")
+                alpha_data = await self.get_alpha_with_retry(alpha_id)
+                return {'status': 'COMPLETE', 'alpha_id': alpha_id, **alpha_data}
 
         raise SimulationTimeoutError(f"Simulation polling timed out after {timeout}s")
 

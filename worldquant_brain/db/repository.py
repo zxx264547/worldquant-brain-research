@@ -218,8 +218,9 @@ def complete_task(task_id: int, alpha_id: str, sharpe: float, success: bool = Tr
 
 
 def get_pending_count() -> int:
+    """获取待处理任务数（包含queued和running，避免WorkerPool提前退出）"""
     data = tasks_store.load()
-    return sum(1 for t in data["items"] if t["status"] == "queued")
+    return sum(1 for t in data["items"] if t["status"] in ("queued", "running"))
 
 
 def get_queued_tasks(limit: int = 8) -> list[dict]:

@@ -1,9 +1,19 @@
 {
   "_meta": {
     "version": 1,
-    "description": "知识事件日志（insight/anti_pattern/experiment/submit/failure/forum_sync）",
+    "description": "\u77e5\u8bc6\u4e8b\u4ef6\u65e5\u5fd7\uff08insight/anti_pattern/experiment/submit/failure/forum_sync\uff09",
     "next_id": 1,
     "updated_at": "2026-05-24T00:00:00"
   },
-  "items": []
+  "items": [
+    {
+      "event_type": "anti_pattern",
+      "dataset": "shortinterest3",
+      "reason": "\u81ea\u76f8\u5173\u6027\u592a\u9ad8(Self Corr)",
+      "affected_alphas": 26,
+      "best_sharpe": 2.53,
+      "decision": "\u4e0d\u63d0\u4ea4shortinterest3\u884d\u751fAlpha\uff0c\u6362\u65b9\u5411\u63a2\u7d22\u65b0\u6570\u636e\u96c6",
+      "date": "2026-06-06"
+    }
+  ]
 }

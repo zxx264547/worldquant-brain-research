@@ -62,21 +62,33 @@
 - EPS作为附加信号 → 始终<1.0
 - 外层zscore → 零增益
 
+## 数据集状态
+
+### shortinterest3 — ⚠️ 不提交（自相关性太高）
+- 26个Alpha Sharpe≥1.58，但**自相关性(Self Corr)过高**
+- 决定：不提交shortinterest3衍生Alpha，换方向探索新数据集
+
+### 数据集探索结果
+| 数据集 | 测试数 | 最佳Sharpe | 状态 |
+|--------|--------|------------|------|
+| **shortinterest3** | 26个可提交 | **2.53** | ⚠️ 不提交（自相关性高） |
+| **earnings27** | 2个 | 0.24 | ❌ DEAD |
+| **ai_equity_alpha** | 8个 | 运行中 | ⏳ |
+
+## 最佳Alpha Top 5
+1. **qMgEkAbj** — Sharpe 2.53 (shortinterest3) — 不提交
+2. **O0oJvZn1** — Sharpe 2.50 (shortinterest3) — 不提交
+3. **VkOdOMLb** — Sharpe 2.49 (shortinterest3) — 不提交
+4. **xAeGmO8m** — Sharpe 2.48 (shortinterest3) — 不提交
+5. **e7L6w5NO** — Sharpe 2.47 (shortinterest3) — 不提交
+
 ## 下一步任务
 
-1. **修复 e7neMpoN 的 Concentrated Weight** — signed_power(zscore(min22), 10) 权重过度集中
-2. **继续 signed_power 降 PPC 方向** — sp10 的 PPC 极低 (0.016)，需降低 turnover
-3. **跑 sector_decay 最佳候选的提交检查** — min22+truncation=0.05 等未验证 sub_universe
+1. **等待 ai_equity_alpha 结果** — 探索新的VECTOR数据集
+2. **探索其他数据集** — analyst4/10/14, mdl136, pv48 等
 
 ## API状态
 
 - TOP3000 Universe正常
 - VECTOR字段需 vec_min/vec_max 包裹
 - 429限流存在，模拟轮询需要轮询等待
-
-## 关键文件
-
-- /tmp/multi_agent/spc_results.json — 最全的产品相关性测试结果
-- /tmp/multi_agent/s3x_results.json — 跨数据集组合结果
-- /tmp/multi_agent/s3_sector_decay_results.json — sector/decay/truncation调参
-- /tmp/multi_agent/s3_submission_checks.json — 提交检查 (pending)
