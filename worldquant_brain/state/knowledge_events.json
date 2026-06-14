@@ -2,8 +2,8 @@
   "_meta": {
     "version": 1,
     "description": "知识事件日志（insight/anti_pattern/experiment/submit/failure/forum_sync）",
-    "next_id": 10,
-    "updated_at": "2026-06-13T21:27:09.437901"
+    "next_id": 11,
+    "updated_at": "2026-06-14T12:41:16.507220"
   },
   "items": [
     {
@@ -113,6 +113,17 @@
       },
       "confidence": 0.95,
       "created_at": "2026-06-13T21:27:09.437875"
+    },
+    {
+      "id": 10,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-13: Simulation engine stuck at 35% - server-side issue, no client workaround. API authentication works, simulation creation works, but completion never progresses. shortinterest3 has green badge with mean_loan_rate at Sharpe 1.75. earnings27/pv48 have no data.",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-14T12:41:16.507208"
     }
   ]
 }
