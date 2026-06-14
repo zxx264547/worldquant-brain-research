@@ -1,14 +1,88 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-14 23:45
+> 最后更新：2026-06-15 03:18
 
 ## 研究进度
 
-- 当前阶段：**API间歇性恢复** - Submit API工作，模拟引擎仍卡35%
-- 账户状态：**113 alphas**, **3新提交** (xAeGmO8m 2.48, e7L6w5NO 2.47, QPEYPVJX 2.42)
-- 模拟引擎：**卡35%** - 新模拟无法完成
-- **测试日期**: 2026-06-14 23:45
+- 当前阶段：**模拟引擎故障，提交API恢复** - 无法创建新模拟
+- 账户状态：**125 alphas**, **1新提交(e7neMpoN)**
+- 模拟引擎：**故障** - 所有新模拟卡在10%进度，无法完成
+- 提交API：**恢复** - e7neMpoN提交成功
+- **测试日期**: 2026-06-15 03:18
+
+## API状态确认 (2026-06-15 03:18)
+
+### 模拟引擎 (故障)
+- 所有模拟卡在 **10%** 进度（包括rank(close)和signed_power表达式）
+- 服务器端问题，无客户端解决方案
+- 无法创建新Alpha
+
+### 提交API (恢复)
+- e7neMpoN (signed_power, Sharpe 1.61) **提交成功**
+- xAeGmO8m 失败 PROD_CORRELATION (0.9343 > 0.7)
+- 主要问题：**PROD_CORRELATION** - 需要signed_power降相关
+
+### 解决方案
+- signed_power(zscore(...), 10) 可将 Prod_Corr 从 >0.9 降到 0.682
+- 示例: `signed_power(zscore(-ts_max(vec_max(min_loan_rate), 22)), 10)`
+
+## 新数据集验证 (2026-06-15 02:30)
+
+### 所有新数据集均无数据
+| 数据集 | Badge | 状态 |
+|--------|-------|------|
+| analyst44 | ⚫ 无数据 | 无数据 |
+| earnings27 | ⚫ 无数据 | 无数据 |
+| pv48 | ⚫ 无数据 | 无数据 |
+| analyst_consensus | ⚫ 无数据 | 无数据 |
+| news18 | ⚫ 无数据 | 无数据 |
+
+### 现有alphas确认
+- pv48: 18个alphas, 最高Sharpe=0.71 (ts_mean模式，非vec_max)
+- ern27: 9个alphas, 最高Sharpe=0.24 (使用vec_max但信号弱)
+- analyst44: 1个alpha, Sharpe=0.50 (ts_min方向错误)
+
+### 结论
+新数据集均无有效信号，无法替代shortinterest3/risk60的地位。
+
+## shortinterest3字段分析 (2026-06-15)
+
+### 31个VECTOR字段
+| 字段 | alphaCount | 状态 |
+|------|------------|------|
+| mean_loan_rate | 31 | 已充分测试，Sharpe 2.53 |
+| min_loan_rate | 10 | 已充分测试，Sharpe 2.53 |
+| max_loan_rate | 12 | 已测试 |
+| shrt3_bar | 1863 | EVENT类型，已测试 |
+| loan_utilization_ratio | 17 | **未充分测试** |
+| borrow_activity_score | 9 | **未充分测试** |
+| loan_rate_volatility | 9 | 已测试 |
+| available_share_count | 19 | 未充分测试 |
+| loaned_share_count | 6 | 未充分测试 |
+
+### 新字段候选 (低alphaCount)
+- loan_utilization_ratio (17)
+- borrow_activity_score (9)  
+- loaned_share_count (6)
+- average_loan_duration_days (1)
+
+## 关键发现
+
+### 模拟引擎故障确认
+1. **rank(close) 也卡35%** - 证明是服务器问题，不是表达式问题
+2. **所有VECTOR字段都卡** - 无一例外
+3. **dispatch任务已下发但无法完成** - 8个任务pending
+
+### CW模式 (已验证)
+- **CW-PASS**: 单窗口22/66，mean_loan_rate
+- **CW-FAIL**: 双窗口含window 5，min_loan_rate单窗口22
+
+### SUS模式 (已验证)
+- **SUS-PASS**: mean_loan_rate单窗口，min_loan_rate单窗口66/120/5
+- **SUS-FAIL**: min_loan_rate单窗口22
+
+## 2026-06-14 23:45 状态 (历史)
 
 ## 真实Alpha状态
 

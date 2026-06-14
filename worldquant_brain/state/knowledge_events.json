@@ -1,18 +1,18 @@
 {
   "_meta": {
     "version": 1,
-    "description": "\u77e5\u8bc6\u4e8b\u4ef6\u65e5\u5fd7\uff08insight/anti_pattern/experiment/submit/failure/forum_sync\uff09",
-    "next_id": 20,
-    "updated_at": "2026-06-14T23:43:37.113818"
+    "description": "知识事件日志（insight/anti_pattern/experiment/submit/failure/forum_sync）",
+    "next_id": 22,
+    "updated_at": "2026-06-15T03:18:15.568608"
   },
   "items": [
     {
       "event_type": "anti_pattern",
       "dataset": "shortinterest3",
-      "reason": "\u81ea\u76f8\u5173\u6027\u592a\u9ad8(Self Corr)",
+      "reason": "自相关性太高(Self Corr)",
       "affected_alphas": 26,
       "best_sharpe": 2.53,
-      "decision": "\u4e0d\u63d0\u4ea4shortinterest3\u884d\u751fAlpha\uff0c\u6362\u65b9\u5411\u63a2\u7d22\u65b0\u6570\u636e\u96c6",
+      "decision": "不提交shortinterest3衍生Alpha，换方向探索新数据集",
       "date": "2026-06-06"
     },
     {
@@ -20,7 +20,7 @@
       "event_type": "insight",
       "source": "ai_decision",
       "content": {
-        "insight": "rsk60_offer\u5b57\u6bb5\u662f\u53d1\u73b0\u7684\u65b0\u4f18\u8d28Alpha\u6e90\uff0cSharpe 1.91-1.98\uff0cmargin>turnover\uff0cVECTOR\u7c7b\u578b\u7528vec_max\u6a21\u5f0f",
+        "insight": "rsk60_offer字段是发现的新优质Alpha源，Sharpe 1.91-1.98，margin>turnover，VECTOR类型用vec_max模式",
         "category": "general"
       },
       "confidence": 0.9,
@@ -31,7 +31,7 @@
       "event_type": "insight",
       "source": "ai_decision",
       "content": {
-        "insight": "API\u670d\u52a1\u7aef\u6a21\u62df\u5f15\u64ce\u536135%\u65e0\u6cd5\u5b8c\u6210\uff0c\u6240\u6709\u65b0simulations\u5931\u8d25",
+        "insight": "API服务端模拟引擎卡35%无法完成，所有新simulations失败",
         "category": "general"
       },
       "confidence": 0.95,
@@ -53,7 +53,7 @@
       "event_type": "insight",
       "source": "ai_decision",
       "content": {
-        "insight": "WSL2\u73af\u5883\u4e0bPOST\u8bf7\u6c42\u5230/api.worldquantbrain.com/alphas/{id}/submit\u4f1a\u88ab\u62e6\u622a\uff0c\u8fd4\u56de400\u9519\u8bef\u3002\u670d\u52a1\u5668\u8fd4\u56de303 redirect\u5230http://api.worldquantbrain.com:443/...\u8fd9\u662f\u670d\u52a1\u5668\u914d\u7f6e\u95ee\u9898\uff0c\u4e0d\u662f\u5ba2\u6237\u7aef\u95ee\u9898\u3002GET\u8bf7\u6c42\u6b63\u5e38\u5de5\u4f5c\u3002",
+        "insight": "WSL2环境下POST请求到/api.worldquantbrain.com/alphas/{id}/submit会被拦截，返回400错误。服务器返回303 redirect到http://api.worldquantbrain.com:443/...这是服务器配置问题，不是客户端问题。GET请求正常工作。",
         "category": "general"
       },
       "confidence": 0.95,
@@ -75,7 +75,7 @@
       "event_type": "insight",
       "source": "ai_decision",
       "content": {
-        "insight": "xAeGmO8m\u88ab\u62d2\u7edd\u662f\u56e0\u4e3aProd Correlation=0.9343\u8d85\u8fc70.7\u9608\u503c\uff0c\u4e0d\u662fAPI bug\u3002signed_power(zscore(...), 10)\u53ef\u5c06Prod_Corr\u964d\u52300.682\u3002\u6a21\u62df\u5f15\u64ce\u536135%\u662f\u670d\u52a1\u5668\u7aef\u95ee\u9898\u3002",
+        "insight": "xAeGmO8m被拒绝是因为Prod Correlation=0.9343超过0.7阈值，不是API bug。signed_power(zscore(...), 10)可将Prod_Corr降到0.682。模拟引擎卡35%是服务器端问题。",
         "category": "general"
       },
       "confidence": 0.95,
@@ -108,7 +108,7 @@
       "event_type": "insight",
       "source": "ai_decision",
       "content": {
-        "insight": "2026-06-13: \u6a21\u62df\u5f15\u64ce\u6d4b\u8bd5 - USA/EUR/CHN region\u6d4b\u8bd5\u5747\u5931\u8d25\u3002USA\u536135%\uff0cEUR\u89e6\u53d1429\u9650\u6d41\u536110%\uff0cCHN\u521a\u63d0\u4ea4\u3002\u670d\u52a1\u5668\u7aef\u95ee\u9898\uff0c\u65e0\u5ba2\u6237\u7aef\u89e3\u51b3\u65b9\u6848\u3002",
+        "insight": "2026-06-13: 模拟引擎测试 - USA/EUR/CHN region测试均失败。USA卡35%，EUR触发429限流卡10%，CHN刚提交。服务器端问题，无客户端解决方案。",
         "category": "general"
       },
       "confidence": 0.95,
@@ -196,7 +196,7 @@
       "event_type": "insight",
       "source": "ai_decision",
       "content": {
-        "insight": "2026-06-14\u5173\u952e\u53d1\u73b0\uff1awindow 5\u5355\u7a97\u53e3min_loan_rate\u53ef\u63d0\u4ea4(e7L6w5NO Sharpe 2.47)\uff0c\u4f46\u53cc\u7a97\u53e3\u7ec4\u5408(\u542bwindow 5)\u5168\u90e8CW FAIL\u3002\u4e09\u5408\u4e00(5+66\u621622+5)\u90fd\u5931\u8d25\u3002\u5355\u7a97\u53e366\u53ef\u4ee5\u4f4622\u5931\u8d25SUS\u3002ts_mean\u5e73\u6ed1\u6709\u52a9\u4e8e\u964d\u4f4eCW\u3002",
+        "insight": "2026-06-14关键发现：window 5单窗口min_loan_rate可提交(e7L6w5NO Sharpe 2.47)，但双窗口组合(含window 5)全部CW FAIL。三合一(5+66或22+5)都失败。单窗口66可以但22失败SUS。ts_mean平滑有助于降低CW。",
         "category": "general"
       },
       "confidence": 0.9,
@@ -205,10 +205,10 @@
     {
       "event_type": "anti_pattern",
       "dataset": "platform",
-      "reason": "\u6a21\u62df\u5f15\u64ce\u6545\u969c - \u6240\u6709\u65b0\u6a21\u62df\u536110%\u8fdb\u5ea6\u65e0\u6cd5\u5b8c\u6210",
+      "reason": "模拟引擎故障 - 所有新模拟卡10%进度无法完成",
       "affected_alphas": "all",
       "best_sharpe": null,
-      "decision": "\u7b49\u5f85\u670d\u52a1\u5668\u6062\u590d\uff0c\u65e0\u5ba2\u6237\u7aef\u89e3\u51b3\u65b9\u6848",
+      "decision": "等待服务器恢复，无客户端解决方案",
       "date": "2026-06-14"
     },
     {
@@ -216,11 +216,33 @@
       "event_type": "submit",
       "source": "ai_decision",
       "content": {
-        "insight": "2026-06-14 23:40: \u6210\u529f\u63d0\u4ea43\u4e2a\u65b0Alpha: xAeGmO8m(2.48), e7L6w5NO(2.47), QPEYPVJX(2.42)\u3002\u6a21\u62df\u5f15\u64ce\u4ecd\u536135%\uff0c\u4f46submit API\u95f4\u6b47\u6027\u6062\u590d\u3002rsk60\u548cshortinterest3\u6570\u636e\u96c6\u4ecd\u6709\u591a\u4e2asubmittable alpha\u5f85\u63d0\u4ea4\u3002",
+        "insight": "2026-06-14 23:40: 成功提交3个新Alpha: xAeGmO8m(2.48), e7L6w5NO(2.47), QPEYPVJX(2.42)。模拟引擎仍卡35%，但submit API间歇性恢复。rsk60和shortinterest3数据集仍有多个submittable alpha待提交。",
         "category": "general"
       },
       "confidence": 0.9,
       "created_at": "2026-06-14T23:43:37.113818"
+    },
+    {
+      "id": 20,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-15: 新数据集(analyst44/earnings27/pv48/analyst_consensus/news18)经brain_data_scope badge验证全部无数据。现有alphas显示pv48最高Sharpe仅0.71，ern27仅0.24。无法找到替代shortinterest3/risk60的新信号源。",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-15T02:30:06.785767"
+    },
+    {
+      "id": 21,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-15: Submit API is working. e7neMpoN (signed_power param 10, Sharpe 1.61) submitted successfully. Simulation engine still stuck at 10%.",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-15T03:18:15.568598"
     }
   ]
 }
