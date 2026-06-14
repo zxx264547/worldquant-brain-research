@@ -2,8 +2,8 @@
   "_meta": {
     "version": 1,
     "description": "\u77e5\u8bc6\u4e8b\u4ef6\u65e5\u5fd7\uff08insight/anti_pattern/experiment/submit/failure/forum_sync\uff09",
-    "next_id": 19,
-    "updated_at": "2026-06-14T20:50:43.990744"
+    "next_id": 20,
+    "updated_at": "2026-06-14T23:43:37.113818"
   },
   "items": [
     {
@@ -210,6 +210,17 @@
       "best_sharpe": null,
       "decision": "\u7b49\u5f85\u670d\u52a1\u5668\u6062\u590d\uff0c\u65e0\u5ba2\u6237\u7aef\u89e3\u51b3\u65b9\u6848",
       "date": "2026-06-14"
+    },
+    {
+      "id": 19,
+      "event_type": "submit",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-14 23:40: \u6210\u529f\u63d0\u4ea43\u4e2a\u65b0Alpha: xAeGmO8m(2.48), e7L6w5NO(2.47), QPEYPVJX(2.42)\u3002\u6a21\u62df\u5f15\u64ce\u4ecd\u536135%\uff0c\u4f46submit API\u95f4\u6b47\u6027\u6062\u590d\u3002rsk60\u548cshortinterest3\u6570\u636e\u96c6\u4ecd\u6709\u591a\u4e2asubmittable alpha\u5f85\u63d0\u4ea4\u3002",
+        "category": "general"
+      },
+      "confidence": 0.9,
+      "created_at": "2026-06-14T23:43:37.113818"
     }
   ]
 }
