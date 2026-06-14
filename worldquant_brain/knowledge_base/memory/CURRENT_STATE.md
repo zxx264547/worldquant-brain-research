@@ -1,14 +1,93 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-14 16:15
+> 最后更新：2026-06-14 18:50
 
 ## 研究进度
 
-- 当前阶段：**模拟引擎故障** - 无法完成新回测
-- 最佳成绩：**Sharpe 2.53** - qMgEkAbj
-- 9个Alpha本地标记SUBMITTED，但服务器显示UNSUBMITTED
+- 当前阶段：**模拟引擎故障持续** - 引擎卡10%/35%无法完成
+- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (shortinterest3)
+- 模拟引擎：服务器端问题，新模拟卡10-35%进度
 - **测试日期**: 2026-06-14
+
+## 2026-06-14 18:45 API测试结果
+
+### 模拟引擎状态（确认故障）
+- rank(close) 模拟卡在 **35%** → 超时
+- zscore(ts_max(anl44_2_eps_value, 22)) 卡在 **10%** → 超时
+- 服务器端问题，无客户端解决方案
+- 认证成功，session正常
+
+### analyst44 字段发现
+- **50个VECTOR字段**，10个基础指标
+- 基础指标: bps, capex, cfps, dps, ebit, ebitda, ebitdaps, eps, epsr, fcfps
+- 字段ID格式: `anl44_2_<metric>_<suffix>`
+- 示例: `anl44_2_eps_value`, `anl44_2_ebitda_value`
+- **重要**: analyst44是单值时间序列（非多entry），可能不需要vec_max
+
+### 准备测试的表达式（引擎恢复后）
+```
+# EPS盈利动量
+zscore(-ts_max(anl44_2_eps_value, 22))
+zscore(-ts_max(anl44_2_eps_value, 66))
+
+# EBITDA动量
+zscore(-ts_max(anl44_2_ebitda_value, 22))
+zscore(-ts_max(anl44_2_ebitda_value, 66))
+
+# 现金流动量
+zscore(-ts_max(anl44_2_cfps_value, 22))
+zscore(-ts_max(anl44_2_fcfps_value, 22))
+
+# Book Per Share
+zscore(-ts_max(anl44_2_bps_value, 22))
+zscore(-ts_max(anl44_2_bps_value, 66))
+```
+
+## API状态（严重故障）
+
+### 模拟引擎（故障持续）
+- 新模拟创建成功，返回simulation ID
+- 轮询时永远卡在10%-35%进度，无法完成
+- 服务器端问题，无法完成回测
+- **无客户端解决方案**
+
+### 提交API（故障）
+- POST返回201但alpha仍显示UNSUBMITTED
+- qMgEkAbj实际提交返回403（CONCENTRATED_WEIGHT FAIL）
+- 根因：服务器配置问题或延迟处理
+
+### SSL错误
+- 连续API调用后出现SSL EOF错误
+- 服务器可能在主动断开连接（限流）
+
+## 2026-06-14 下午测试结果
+
+### 模拟引擎状态
+- 模拟创建成功，卡在 **10%** 进度（之前是35%）
+- 服务器端问题，无法完成回测
+- **已尝试**: rank(close) 测试，同样卡10%
+
+### 提交API状态
+- HTTP 429 限流严重
+- qMgEkAbj (2.53): CONCENTRATED_WEIGHT FAIL
+- VkOdOMLb (2.49): CONCENTRATED_WEIGHT FAIL
+- A1nqO7mQ (2.46): LOW_SUB_UNIVERSE_SHARPE FAIL
+- O0oJvZn1 (2.50): HTTP 429 限流
+
+### 已有12个Alpha已提交（SUBMITTED状态）
+- xAeGmO8m (2.48) - 单窗口66 min_loan_rate
+- e7L6w5NO (2.47) - 单窗口5 min_loan_rate
+- QPEYPVJX (2.42) - 双窗口22+22 mean+min
+- XgkA6oeX (2.49) - ts_mean smoothing
+- blvPL7Yp (1.98) - rsk60_offer
+- omVzkzAE (1.91) - rsk60_offer 窗口66
+
+### 新表达式批次（待引擎恢复）
+- ts_mean(zscore(ts_max(mean_loan_rate, 22)), 22)
+- ts_mean(zscore(ts_max(rsk60_offer, 22)), 22)
+- zscore(ts_max(mean_loan_rate, 66))
+- 等8个表达式已dispatch，等待完成
 
 ## API状态（严重故障）
 
