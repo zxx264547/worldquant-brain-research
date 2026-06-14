@@ -1,13 +1,13 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-14 12:52
+> 最后更新：2026-06-14 13:20
 
 ## 研究进度
 
-- 当前阶段：**API提交检查进行中** - 模拟引擎仍卡35%，提交API部分恢复
+- 当前阶段：**大规模提交完成** - 14个新Alpha提交成功
 - 最佳成绩：**Sharpe 2.53** - qMgEkAbj (本地测试)
-- **待提交Alpha**: 19个本地已测Alpha，Sharpe 1.98-2.53
+- **新提交成功**: 14个Alpha (Sharpe 2.07-2.49)
 - **测试日期**: 2026-06-14
 
 ## API状态
@@ -16,36 +16,62 @@
 - 新模拟创建成功，但卡在35%进度不完成
 - 服务器端问题，无法完成回测
 
-### 提交API（部分恢复）
-- **submit_alpha API工作正常** - 返回完整检查结果
-- **HTTP 400** = Alpha不存在（未提交过）
-- **HTTP 429** = 速率限制（需等待）
-- **关键阻塞1**: CONCENTRATED_WEIGHT - 3个最佳Alpha失败（双窗口组合）
-- **关键阻塞2**: LOW_SUB_UNIVERSE_SHARPE - 单窗口Alpha失败
+### 提交API（正常）
+- **submit_alpha API工作正常**
+- 限流已清除，可连续提交
 
-## 提交检查结果（2026-06-14）
+## 2026-06-14 提交结果
 
-| Alpha ID | Sharpe | CW | SUS | Prod | 状态 |
-|----------|--------|-----|-----|------|------|
-| qMgEkAbj | 2.53 | FAIL | PASS | PENDING | CW失败 |
-| VkOdOMLb | 2.49 | FAIL | PASS | PENDING | CW失败 |
-| Grk2o7wP | 2.34 | FAIL | PASS | PENDING | CW失败 |
-| A1nqO7mQ | 2.46 | PASS | FAIL | PENDING | SUS失败 |
-| 1Yo6nJXz | 1.91 | PASS | FAIL | PENDING | SUS失败 |
-| 78dWLxe8 | 1.84 | PASS | FAIL | PENDING | SUS失败 |
-| rKWYd0m8 | 2.01 | PASS | FAIL | PENDING | SUS失败 |
+### 成功提交（14个）
 
-**模式发现**:
-- CW-FAIL = 双窗口组合 (`zscore(...5) + zscore(...66)`)
-- CW-PASS = 单窗口 (`zscore(-ts_max(vec_max(field), 22))`)
-- CW-PASS的Alpha全部倒在LOW_SUB_UNIVERSE_SHARPE
+| Alpha ID | Sharpe | 表达式 | 关键模式 |
+|----------|--------|--------|----------|
+| XgkA6oeX | 2.49 | ts_mean(zscore(ts_max(min,22)),22) | ts_mean+zscore |
+| QPEYPVJX | 2.42 | zscore(ts_max(mean,22)) + zscore(ts_max(min,22)) | 双窗口22+22 |
+| GrkeA5eZ | 2.44 | zscore(ts_max(mean,22)) | mean单窗口 |
+| GrnE3oko | 2.34 | zscore(ts_max(mean,22)) | mean单窗口 |
+| e7L6w5NO | 2.47 | zscore(ts_max(min,5)) | min单窗口5 |
+| xAeGmO8m | 2.48 | zscore(ts_max(min,66)) | min单窗口66 |
+| N1Aeja6q | 2.29 | 双窗口min+mean 22+22 | 双窗口22+22 |
+| RRrQxZWo | 2.28 | 双窗口min+mean22+vol22 | 跨数据集 |
+| omVWk5am | 2.24 | mean_loan_rate+shrt3_bar | 跨数据集 |
+| 3qzpa3mX | 2.20 | mean_loan_rate w66 | mean单窗口66 |
+| MPk0mNM8 | 2.18 | min_loan_rate w120 | min单窗口120 |
+| O0oGpkkg | 2.07 | mean_loan_rate w66 | mean单窗口66 |
+| 0mAL5Mkk | 2.10 | loan_rate_volatility w22 | volatility单窗口 |
+| blNzWNQR | 2.36 | mean_loan_rate w66 | mean单窗口66 |
+
+### 失败（3个）
+
+| Alpha ID | Sharpe | 原因 |
+|----------|--------|------|
+| qMgEkAbj | 2.53 | CW FAIL - 双窗口5+66 |
+| A1nqO7mQ | 2.46 | SUS FAIL - min_loan_rate单窗口22 |
+| Grk2o7wP | 2.34 | CW FAIL - 双窗口min 22+5 |
+
+## 关键发现
+
+### CW检查模式
+- **CW-FAIL** = 双窗口组合包含window 5 (如5+66, 22+5)
+- **CW-PASS** = 单窗口，或双窗口22+22
+
+### SUS检查模式
+- **SUS-FAIL** = min_loan_rate单窗口22（但66/120/5可以）
+- **SUS-PASS** = mean_loan_rate单窗口（任何窗口）
+
+### 字段差异
+- **mean_loan_rate** 单窗口全部通过SUS
+- **min_loan_rate** 单窗口22失败SUS（但66/120/5可以）
+
+### 最佳模式
+- `ts_mean(zscore(ts_max(min,22)),22)` → Sharpe 2.49
+- `zscore(ts_max(mean,22)) + zscore(ts_max(min,22))` → Sharpe 2.42
 
 ## 下一步任务
 
-1. **等待速率限制冷却** - 重试429限流的Alpha
-2. **寻找通过SUS的模式** - CW-PASS Alpha为何失败SUS？
-3. **尝试INDUSTRY/SECTOR中性化** - 可能修复SUS
-4. **等待模拟引擎恢复** - 才能测试新表达式
+1. **等待OS回测结果** - 验证新提交Alpha的OS表现
+2. **探索新数据集** - analyst44, pv48等
+3. **继续挖掘shortinterest3** - 发现更多有效模式
 
 ## 已提交Alpha（29个）
 
