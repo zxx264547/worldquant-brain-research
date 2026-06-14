@@ -15,34 +15,36 @@
 | 指标 | 值 |
 |------|-----|
 | 总Alpha数 | 113 |
-| 已提交(SUBMITTED) | 23 |
+| 已提交(SUBMITTED) | 3 |
 | 最佳Sharpe | 2.53 |
-| 已提交Alpha范围 | Sharpe 1.67-2.53 |
+| Submittable未提交 | 18 |
 
-### 已提交Alpha Top 5
-1. 8fba64b7f0: Sharpe=2.50 - zscore(-ts_max(vec_max(min_loan_rate), 22)) + zscore(...)
-2. 93ce23d16b: Sharpe=2.49 - ts_mean(zscore(-ts_max(vec_max(min_loan_rate), 22)), 22)
-3. 35926319a2: Sharpe=2.48 - zscore(-ts_max(vec_max(min_loan_rate), 66))
-4. d65c44f91c: Sharpe=2.47 - zscore(-ts_max(vec_max(min_loan_rate), 5))
-5. 32f3ebeede: Sharpe=2.44 - zscore(-ts_max(vec_max(mean_loan_rate), 22))
+### 新提交Alpha (2026-06-14 23:40)
+1. xAeGmO8m: Sharpe=2.48 - zscore(-ts_max(vec_max(min_loan_rate), 66))
+2. e7L6w5NO: Sharpe=2.47 - zscore(-ts_max(vec_max(min_loan_rate), 5))
+3. QPEYPVJX: Sharpe=2.42 - zscore(-ts_max(vec_max(mean_loan_rate), 22)) + zscore(...)
 
-## API状态确认
+### 待提交Alpha (18个)
+- risk60系列: zq5zRWWV(2.26), blvPL7Yp(1.98), kqQmORNd(1.97), 9qJ6d5Yr(1.94), omVzkzAE(1.91)
+- shortinterest3系列: RRrQxZWo(2.28), rKWYd0m8(2.01), 1Yo6nJXz(1.91), 78dWLxe8(1.84)
+- CW失败: qMgEkAbj(2.53), VkOdOMLb(2.49), Grk2o7wP(2.34)
 
-### 模拟引擎 (故障)
+## API状态 (2026-06-14 23:50)
+
+### 模拟引擎 (间歇性恢复)
 - `POST /simulations` 返回 201 (创建成功)
-- Simulation ID格式: `1c1vOC1Lb5a5cxF9At3DMox`
-- `GET /simulations/{id}` 返回 `{"progress": 0.35}` - 卡住不动
-- `Retry-After: 5.0` 但连接被服务器关闭
+- 模拟完成率：**间歇性** - 有时卡35%，有时正常完成
+- Rate limit：429频繁，需等待30-60秒间隔
 
-### 数据API (故障)
-- `GET /data-sets?instrumentType=EQUITY&...` 超时 (30s+)
-- `GET /data-fields?...` 返回 200 但 0 fields
-- `GET /authentication` 正常工作
+### 提交API (间歇性工作)
+- Submit成功: xAeGmO8m, e7L6w5NO, QPEYPVJX (201)
+- Rate limit频繁: 429 Too Many Requests
+- 403失败: A1nqO7mQ(SUS), RRNLNY6z(Prod Corr), qMgEkAbj(CW)
 
-### 账户状态
-- User ID: XZ37692
--alphas数量: **0**
-- 所有历史Alpha不可访问
+### 关键发现
+- **模拟引擎曾短暂恢复** - 创建了3个sim并完成
+- **rate limit是主要阻塞** - submit和simulation都受限
+- **等待是最好的策略** - 30-60秒间隔可部分缓解
 
 ## 2026-06-14 21:30 数据集扫描结果
 
