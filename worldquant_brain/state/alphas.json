@@ -2,7 +2,7 @@
   "_meta": {
     "version": 1,
     "description": "Alpha\u56de\u6d4b\u7ed3\u679c\uff0ckey\u4e3aexpression_hash",
-    "updated_at": "2026-06-10T12:25:27.986429"
+    "updated_at": "2026-06-14T14:04:37.038413"
   },
   "entries": {
     "d56fbae4edc2fd50": {
@@ -1367,8 +1367,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000",
       "reject_reason": null,
       "created_at": "2026-05-29T04:15:34.074460",
       "updated_at": "2026-05-29T04:15:34.074464"
@@ -1391,8 +1391,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000",
       "reject_reason": "HTTP 400",
       "created_at": "2026-05-29T04:34:34.687652",
       "updated_at": "2026-05-29T04:34:34.687661"
@@ -1415,8 +1415,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000",
       "reject_reason": null,
       "created_at": "2026-05-29T04:59:19.336310",
       "updated_at": "2026-05-29T04:59:19.336312"
@@ -1620,7 +1620,9 @@
       "fitness": 4.21,
       "name": "min_mean_test",
       "status": "ok",
-      "is_submittable": 1
+      "is_submittable": 1,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000"
     },
     "pw7Ao3Rb": {
       "id": "pw7Ao3Rb",
@@ -1985,8 +1987,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000",
       "reject_reason": null,
       "created_at": "2026-06-13T13:14:09.339101",
       "updated_at": "2026-06-13T13:14:09.339113"
@@ -2009,8 +2011,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000",
       "reject_reason": null,
       "created_at": "2026-06-13T13:16:21.973057",
       "updated_at": "2026-06-13T13:16:21.973070"
@@ -2033,8 +2035,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000",
       "reject_reason": null,
       "created_at": "2026-06-13T13:16:21.973081",
       "updated_at": "2026-06-13T13:16:21.973082"
@@ -2057,8 +2059,8 @@
       "status": "ok",
       "error_message": null,
       "is_submittable": 1,
-      "submit_status": null,
-      "submit_date": null,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000",
       "reject_reason": null,
       "created_at": "2026-06-13T13:16:21.973087",
       "updated_at": "2026-06-13T13:16:21.973088"
@@ -2086,6 +2088,30 @@
       "reject_reason": null,
       "created_at": "2026-06-13T18:12:00",
       "updated_at": "2026-06-13T18:24:00"
+    },
+    "210aedda075a0ad5": {
+      "id": "zq5zRWWV",
+      "expression": "zscore(-ts_max(vec_max(rsk60_offer), 66))",
+      "expression_hash": "210aedda075a0ad5",
+      "sharpe": 2.26,
+      "fitness": 4.74,
+      "ppc": 0.09658722939785339,
+      "margin": 0.053094,
+      "turnover": 0.0207,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.08, \"neutralization\": \"NONE\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"cognitive_loop\"}",
+      "name": "cognitive_loop",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 1,
+      "submit_status": "SUBMITTED",
+      "submit_date": "2026-06-14T15:00:00.000000",
+      "reject_reason": null,
+      "created_at": "2026-06-14T14:04:37.038399",
+      "updated_at": "2026-06-14T14:04:37.038401"
     }
   }
 }

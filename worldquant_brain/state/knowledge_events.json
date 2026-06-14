@@ -2,8 +2,8 @@
   "_meta": {
     "version": 1,
     "description": "知识事件日志（insight/anti_pattern/experiment/submit/failure/forum_sync）",
-    "next_id": 12,
-    "updated_at": "2026-06-14T12:50:32.068179"
+    "next_id": 16,
+    "updated_at": "2026-06-14T16:15:04.281532"
   },
   "items": [
     {
@@ -135,6 +135,50 @@
       },
       "confidence": 0.85,
       "created_at": "2026-06-14T12:50:32.068169"
+    },
+    {
+      "id": 12,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-14: Simulation engine stuck at 35% - server-side issue. All new simulations (including rank(close)) fail to progress beyond 35%. Rate limiting (HTTP 429) prevents submissions. Several alphas pass PPA checks but cannot be submitted: xAeGmO8m (Sharpe 2.48), 9qJ6d5Yr (Sharpe 1.94), kqQmORNd (Sharpe 1.97), omVzkzAE (Sharpe 1.91). Need to wait for rate limit to clear before retrying.",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-14T14:10:18.272331"
+    },
+    {
+      "id": 13,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-14 afternoon: Rate limit (HTTP 429 THROTTLED) extremely severe - 10+ minutes of continuous 429 errors. Successfully submitted before the limit kicked in: kqQmORNd (Sharpe 1.97), omVzkzAE (Sharpe 1.91), 9qJ6d5Yr (Sharpe 1.94), xAeGmO8m (Sharpe 2.48). Pending submission (pass PPA but rate limited): e7L6w5NO (2.47), QPEYPVJX (2.42), RRrQxZWo (2.28), zq5zRWWV (2.26), blvPL7Yp (1.98). Failed: qMgEkAbj/VkOdOMLb (CONCENTRATED_WEIGHT), A1nqO7mQ/rKWYd0m8 (LOW_SUB_UNIVERSE_SHARPE). Simulation engine still stuck at 35%.",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-14T15:30:41.912706"
+    },
+    {
+      "id": 14,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-14 mid-afternoon: Successfully submitted 9 alphas: QPEYPVJX(2.42), xAeGmO8m(2.48), e7L6w5NO(2.47), RRrQxZWo(2.28), blvPL7Yp(1.98), 9qJ6d5Yr(1.94), kqQmORNd(1.97), omVzkzAE(1.91), zq5zRWWV(2.26). All use shortinterest3/rsk60 VECTOR fields with ts_max(vec_max(...), window) pattern. Rate limit cleared after ~30 min wait. Dual-window zscore combos (qMgEkAbj, VkOdOMLb) fail CONCENTRATED_WEIGHT. Some single-window alphas (A1nqO7mQ, rKWYd0m8) fail LOW_SUB_UNIVERSE_SHARPE.",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-14T15:38:13.811510"
+    },
+    {
+      "id": 15,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "Simulation engine stuck at 35% - server-side issue, no client workaround. Submit API returns 201 but doesn't actually submit (alpha still shows UNSUBMITTED). qMgEkAbj (Sharpe 2.53) fails CONCENTRATED_WEIGHT. analyst44 has 797 VECTOR fields (ebitda, eps, capex, cfps, dps, bps, fcfps per share metrics) - rich fundamental dataset.",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-14T16:15:04.281521"
     }
   ]
 }

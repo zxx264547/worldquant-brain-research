@@ -1,24 +1,56 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-14 13:20
+> 最后更新：2026-06-14 16:15
 
 ## 研究进度
 
-- 当前阶段：**大规模提交完成** - 14个新Alpha提交成功
-- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (本地测试)
-- **新提交成功**: 14个Alpha (Sharpe 2.07-2.49)
+- 当前阶段：**模拟引擎故障** - 无法完成新回测
+- 最佳成绩：**Sharpe 2.53** - qMgEkAbj
+- 9个Alpha本地标记SUBMITTED，但服务器显示UNSUBMITTED
 - **测试日期**: 2026-06-14
 
-## API状态
+## API状态（严重故障）
 
 ### 模拟引擎（故障持续）
-- 新模拟创建成功，但卡在35%进度不完成
+- 新模拟创建成功，返回simulation ID
+- 轮询时永远卡在10%-35%进度，无法完成
 - 服务器端问题，无法完成回测
+- **无客户端解决方案**
 
-### 提交API（正常）
-- **submit_alpha API工作正常**
-- 限流已清除，可连续提交
+### 提交API（故障）
+- POST返回201但alpha仍显示UNSUBMITTED
+- qMgEkAbj实际提交返回403（CONCENTRATED_WEIGHT FAIL）
+- 根因：服务器配置问题或延迟处理
+
+### SSL错误
+- 连续API调用后出现SSL EOF错误
+- 服务器可能在主动断开连接（限流）
+
+## 数据集探索结果
+
+| 数据集 | 字段数 | 类型 | 状态 |
+|--------|--------|------|------|
+| analyst44 | 797 | VECTOR | 丰富-fundamental指标 |
+| pv48 | 26+ | VECTOR | 大部分是行业代码 |
+| mdl136 | 0 | - | ❌ 无字段 |
+| analyst47 | 6 | MATRIX | ❌ 不适合vec_max |
+
+## 候选Alpha
+
+| Alpha ID | Sharpe | Fitness | 问题 |
+|----------|--------|---------|------|
+| qMgEkAbj | 2.53 | 5.51 | CONCENTRATED_WEIGHT FAIL |
+| O0oJvZn1 | 2.50 | 5.37 | 未提交 |
+| VkOdOMLb | 2.49 | 5.58 | 未提交 |
+| XgkA6oeX | 2.49 | 5.52 | 未提交 |
+| xAeGmO8m | 2.48 | 5.15 | 未提交 |
+
+## 下一步任务
+
+1. **等待模拟引擎恢复** - 服务器端问题
+2. **测试analyst44数据集** - 797个VECTOR字段（ebitda/eps/capex等fundamental指标）
+3. **降CONCENTRATED_WEIGHT** - 单窗口66最安全，避免window 5
 
 ## 2026-06-14 提交结果
 
