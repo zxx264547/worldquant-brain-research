@@ -2,8 +2,8 @@
   "_meta": {
     "version": 1,
     "description": "知识事件日志（insight/anti_pattern/experiment/submit/failure/forum_sync）",
-    "next_id": 11,
-    "updated_at": "2026-06-14T12:41:16.507220"
+    "next_id": 12,
+    "updated_at": "2026-06-14T12:50:32.068179"
   },
   "items": [
     {
@@ -124,6 +124,17 @@
       },
       "confidence": 0.95,
       "created_at": "2026-06-14T12:41:16.507208"
+    },
+    {
+      "id": 11,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-14: API submit check working. Key findings: (1) CW-FAIL pattern = dual-window combinations (zscore(...5)+zscore(...66)), CW-PASS = single-window. (2) All CW-passing alphas fail LOW_SUB_UNIVERSE_SHARPE. (3) Simulation engine still stuck at 35% for new simulations. (4) Need to find expressions that pass BOTH CW and SUS - possibly with INDUSTRY neutralization.",
+        "category": "general"
+      },
+      "confidence": 0.85,
+      "created_at": "2026-06-14T12:50:32.068169"
     }
   ]
 }

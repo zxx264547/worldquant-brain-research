@@ -1,28 +1,51 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-13 21:30
+> 最后更新：2026-06-14 12:52
 
 ## 研究进度
 
-- 当前阶段：**API服务器故障** - 模拟引擎卡35%
-- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (本地通过PPA，但Prod Correlation=0.9343>0.7被拒绝)
-- **实际提交成功: 29个Alpha** (历史记录，最早2025-04)
-- **测试日期**: 2026-06-13 多次测试模拟引擎均失败
+- 当前阶段：**API提交检查进行中** - 模拟引擎仍卡35%，提交API部分恢复
+- 最佳成绩：**Sharpe 2.53** - qMgEkAbj (本地测试)
+- **待提交Alpha**: 19个本地已测Alpha，Sharpe 1.98-2.53
+- **测试日期**: 2026-06-14
 
-## API状态详情
+## API状态
 
-### 模拟引擎（故障）
+### 模拟引擎（故障持续）
 - 新模拟创建成功，但卡在35%进度不完成
-- 服务器端问题，非客户端问题
-- **2026-06-13测试**: USA/EUR/CHN region测试均失败
-- **EUR region**: 触发429限流，模拟卡在10%
-- **CHN region**: 刚提交测试，待观察
-- **等待服务器恢复** - 无客户端解决方案
+- 服务器端问题，无法完成回测
 
-### 提交检查（关键发现）
-- xAeGmO8m等Alpha被拒绝原因：**Prod Correlation = 0.9343 > 0.7阈值**
-- 解决方案：需要使用signed_power变换降低相关性
+### 提交API（部分恢复）
+- **submit_alpha API工作正常** - 返回完整检查结果
+- **HTTP 400** = Alpha不存在（未提交过）
+- **HTTP 429** = 速率限制（需等待）
+- **关键阻塞1**: CONCENTRATED_WEIGHT - 3个最佳Alpha失败（双窗口组合）
+- **关键阻塞2**: LOW_SUB_UNIVERSE_SHARPE - 单窗口Alpha失败
+
+## 提交检查结果（2026-06-14）
+
+| Alpha ID | Sharpe | CW | SUS | Prod | 状态 |
+|----------|--------|-----|-----|------|------|
+| qMgEkAbj | 2.53 | FAIL | PASS | PENDING | CW失败 |
+| VkOdOMLb | 2.49 | FAIL | PASS | PENDING | CW失败 |
+| Grk2o7wP | 2.34 | FAIL | PASS | PENDING | CW失败 |
+| A1nqO7mQ | 2.46 | PASS | FAIL | PENDING | SUS失败 |
+| 1Yo6nJXz | 1.91 | PASS | FAIL | PENDING | SUS失败 |
+| 78dWLxe8 | 1.84 | PASS | FAIL | PENDING | SUS失败 |
+| rKWYd0m8 | 2.01 | PASS | FAIL | PENDING | SUS失败 |
+
+**模式发现**:
+- CW-FAIL = 双窗口组合 (`zscore(...5) + zscore(...66)`)
+- CW-PASS = 单窗口 (`zscore(-ts_max(vec_max(field), 22))`)
+- CW-PASS的Alpha全部倒在LOW_SUB_UNIVERSE_SHARPE
+
+## 下一步任务
+
+1. **等待速率限制冷却** - 重试429限流的Alpha
+2. **寻找通过SUS的模式** - CW-PASS Alpha为何失败SUS？
+3. **尝试INDUSTRY/SECTOR中性化** - 可能修复SUS
+4. **等待模拟引擎恢复** - 才能测试新表达式
 
 ## 已提交Alpha（29个）
 
