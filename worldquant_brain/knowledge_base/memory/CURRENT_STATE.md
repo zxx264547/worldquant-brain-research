@@ -1,15 +1,54 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-15 03:18
+> 最后更新：2026-06-15 07:30
 
 ## 研究进度
 
-- 当前阶段：**模拟引擎故障，提交API恢复** - 无法创建新模拟
-- 账户状态：**125 alphas**, **1新提交(e7neMpoN)**
-- 模拟引擎：**故障** - 所有新模拟卡在10%进度，无法完成
-- 提交API：**恢复** - e7neMpoN提交成功
-- **测试日期**: 2026-06-15 03:18
+- 当前阶段：**模拟引擎恢复，提交API工作** - 成功提交多个Alpha
+- 账户状态：**127 alphas**, **4新提交**
+- 模拟引擎：**恢复** - rank(close)和其他表达式正常工作
+- 提交API：**工作** - 存在429限流，需要等待
+- **测试日期**: 2026-06-15 07:30
+
+## API状态确认 (2026-06-15 07:30)
+
+### 模拟引擎 (恢复)
+- rank(close) 正常完成，Sharpe=0.67
+- VECTOR表达式正常工作
+- mean_loan_rate w22 → Sharpe=2.34
+
+### 提交API (工作)
+- 成功提交: GrnE3Ez5(1.67), O0oGpkkg(2.07), 0mAL5Mkk(2.10), 3qzpa3mX(2.20), MPk0mNM8(2.18), GrnE3oko(2.34), omVWk5am(2.24)
+- 429限流: 需要等待30-90秒间隔
+
+## 新提交Alpha (2026-06-15)
+
+| Alpha ID | Sharpe | 表达式 | 状态 |
+|----------|--------|--------|------|
+| GrnE3oko | 2.34 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) | SUBMITTED |
+| omVWk5am | 2.24 | zscore(-ts_max(vec_max(mean_loan_rate), 22) + -ts_max(vec_max(shrt3_bar), 22)) | SUBMITTED |
+| 3qzpa3mX | 2.20 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) | SUBMITTED |
+| MPk0mNM8 | 2.18 | zscore(-ts_max(vec_max(min_loan_rate), 120)) | SUBMITTED |
+| O0oGpkkg | 2.07 | zscore(-ts_max(vec_max(mean_loan_rate), 66)) | SUBMITTED |
+| 0mAL5Mkk | 2.10 | zscore(-ts_max(vec_max(loan_rate_volatility), 22)) | SUBMITTED |
+| GrnE3Ez5 | 1.67 | zscore(-ts_max(vec_max(max_loan_rate), 66)) | SUBMITTED |
+
+## 新测试的字段 (2026-06-15)
+
+### shortinterest3新字段
+| 字段 | AlphaCount | Sharpe | 状态 |
+|------|------------|--------|------|
+| borrow_activity_score | 9 | 0.98 | 低于目标 |
+| loan_utilization_ratio | 17 | 0.85 | 低于目标 |
+| available_share_count | 19 | -0.27 | 无效 |
+| loaned_share_count | 6 | 测试中 | - |
+| average_loan_duration_days | 1 | 测试中 | - |
+
+### 结论
+- 新字段(borrow_activity_score, loan_utilization_ratio) Sharpe < 1.0，无替代价值
+- 现有最佳模式: mean_loan_rate单窗口22/66, min_loan_rate单窗口120
+- mean_loan_rate + shrt3_bar组合(omVWk5am)成功提交
 
 ## API状态确认 (2026-06-15 03:18)
 
