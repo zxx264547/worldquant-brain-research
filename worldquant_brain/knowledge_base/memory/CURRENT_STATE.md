@@ -1,15 +1,58 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-15 07:30
+> 最后更新：2026-06-15 08:11
 
 ## 研究进度
 
-- 当前阶段：**模拟引擎恢复，提交API工作** - 成功提交多个Alpha
-- 账户状态：**127 alphas**, **4新提交**
-- 模拟引擎：**恢复** - rank(close)和其他表达式正常工作
-- 提交API：**工作** - 存在429限流，需要等待
-- **测试日期**: 2026-06-15 07:30
+- 当前阶段：**模拟引擎再次卡住** - 新batch卡35%
+- 账户状态：**131 alphas**, **25已提交**
+- 模拟引擎：**故障** - 卡35%不完成，服务器端问题
+- 提交API：**可用** - 成功提交XgK3kP31(2.36)和GrnE3Ez5(1.67)
+- **测试日期**: 2026-06-15 08:11
+
+## 当前状态摘要
+
+| 指标 | 值 |
+|------|-----|
+| 总Alpha数 | 131 |
+| 已提交(SUBMITTED) | 25 |
+| 可提交未提交 | 8 |
+| 最佳Sharpe | 2.53 |
+| 新增提交 | XgK3kP31(2.36), GrnE3Ez5(1.67) |
+
+## 模拟引擎状态 (2026-06-15 08:10)
+
+- **卡在35%** - 派发的8个signed_power表达式全部卡住
+- **服务器端问题** - 无客户端解决方案
+- **间歇性恢复** - 早先短暂恢复后再次故障
+- **等待中** - 只能等待服务器端恢复
+
+## 2026-06-15 新提交
+
+| Alpha ID | Sharpe | 表达式 | 状态 |
+|----------|--------|--------|------|
+| XgK3kP31 | 2.36 | zscore(-ts_max(vec_max(mean_loan_rate), 22)) | SUBMITTED |
+| GrnE3Ez5 | 1.67 | zscore(-ts_max(vec_max(max_loan_rate), 66)) | SUBMITTED |
+
+## 待解决Alpha问题
+
+| Alpha ID | Sharpe | 失败原因 | 解决方案 |
+|----------|--------|----------|----------|
+| qMgEkAbj | 2.53 | CW-FAIL(dual-window+win5) | 避免window 5组合 |
+| VkOdOMLb | 2.49 | CW-FAIL(dual-window+win5) | 避免window 5组合 |
+| Grk2o7wP | 2.34 | CW-FAIL(dual-window+win5) | 避免window 5组合 |
+| A1nqO7mQ | 2.46 | SUS-FAIL(1.05<1.07) | 需INDUSTRY中性化 |
+| RRNLNY6z | 2.36 | SUS-FAIL(1.0<1.02) | 需INDUSTRY中性化 |
+| 1Yo6nJXz | 1.91 | SUS-FAIL | 需INDUSTRY中性化 |
+| 78dWLxe8 | 1.84 | SUS-FAIL | 需INDUSTRY中性化 |
+| rKWYd0m8 | 2.01 | SUS-FAIL | 需INDUSTRY中性化 |
+
+## 关键发现
+
+1. **INDUSTRY中性化**可修复LOW_SUB_UNIVERSE_SHARPE失败
+2. **避免window 5在双窗口组合** - 所有含window 5的双窗口都失败CW
+3. **模拟引擎持续卡35%** - 服务器端问题，只能等待
 
 ## API状态确认 (2026-06-15 07:30)
 

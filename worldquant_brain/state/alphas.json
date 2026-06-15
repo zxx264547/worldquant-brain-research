@@ -2,7 +2,7 @@
   "_meta": {
     "version": 1,
     "description": "Alpha回测结果，key为expression_hash",
-    "updated_at": "2026-06-15T06:59:25.895138"
+    "updated_at": "2026-06-15T07:52:40.182161"
   },
   "entries": {
     "d56fbae4edc2fd50": {
@@ -2932,6 +2932,30 @@
       "reject_reason": null,
       "created_at": "2026-06-15T06:59:25.895131",
       "updated_at": "2026-06-15T06:59:25.895133"
+    },
+    "a55e1736d23ffc88": {
+      "id": "XgK3kP31",
+      "expression": "zscore(-ts_max(vec_max(mean_loan_rate), 22))",
+      "expression_hash": "a55e1736d23ffc88",
+      "sharpe": 2.36,
+      "fitness": 4.72,
+      "ppc": 0.03407311226528166,
+      "margin": 0.017057,
+      "turnover": 0.0587,
+      "settings_json": "{\"instrumentType\": \"EQUITY\", \"region\": \"USA\", \"universe\": \"TOP3000\", \"delay\": 1, \"decay\": 0, \"truncation\": 0.05, \"neutralization\": \"SECTOR\", \"pasteurization\": \"ON\", \"unitHandling\": \"VERIFY\", \"nanHandling\": \"OFF\", \"language\": \"FASTEXPR\", \"visualization\": false, \"description\": \"test_0\"}",
+      "name": "test_0",
+      "combo_type": "",
+      "base_alpha": "",
+      "tech_signal": "",
+      "weight": null,
+      "status": "ok",
+      "error_message": null,
+      "is_submittable": 1,
+      "submit_status": null,
+      "submit_date": null,
+      "reject_reason": null,
+      "created_at": "2026-06-15T07:52:40.182155",
+      "updated_at": "2026-06-15T07:52:40.182156"
     }
   }
 }

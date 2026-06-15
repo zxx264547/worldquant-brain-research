@@ -2,8 +2,8 @@
   "_meta": {
     "version": 1,
     "description": "知识事件日志（insight/anti_pattern/experiment/submit/failure/forum_sync）",
-    "next_id": 22,
-    "updated_at": "2026-06-15T03:18:15.568608"
+    "next_id": 24,
+    "updated_at": "2026-06-15T08:11:12.876133"
   },
   "items": [
     {
@@ -243,6 +243,28 @@
       },
       "confidence": 0.95,
       "created_at": "2026-06-15T03:18:15.568598"
+    },
+    {
+      "id": 22,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-15: Simulation engine intermittent - recovered briefly around 07:30 but new batch stuck at 35% again. 23 alphas already submitted with Sharpe up to 2.50. Server-side issue, no client workaround available.",
+        "category": "general"
+      },
+      "confidence": 0.95,
+      "created_at": "2026-06-15T07:43:48.137259"
+    },
+    {
+      "id": 23,
+      "event_type": "insight",
+      "source": "ai_decision",
+      "content": {
+        "insight": "2026-06-15: Simulation engine stuck at 35% - server-side issue. Successfully submitted XgK3kP31(2.36) and GrnE3Ez5(1.67). Pending alphas: qMgEkAbj/VkOdOMLb/Grk2o7wP fail CW(dual-window+window5); A1nqO7mQ/RRNLNY6z/1Yo6nJXz/78dWLxe8/rKWYd0m8 fail SUS. Need INDUSTRY neutralization to fix SUS failures.",
+        "category": "general"
+      },
+      "confidence": 0.9,
+      "created_at": "2026-06-15T08:11:12.876123"
     }
   ]
 }
