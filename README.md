@@ -192,7 +192,9 @@ worldquant_brain/
   `eur_explore.py` / `eur_long_window_test.py`
 - `worldquant_brain/multi_agent/`（早期 Multi-Agent 实验，已被
   `.claude/agents/` Claude Code Agents 方案取代）
+- `.claude/`（Claude Code 配置归档，2026-08 已迁移到 DeepSeek Harness：
+  角色 → `.agents/skills/`，MCP → `~/.dsh/profiles/web/cordis.patch.yml`）
 
 ---
 
-*最后更新：2026-08-16（框架修复：感知链路/状态一致性/安全）*
+*最后更新：2026-08-16（框架迁移至 DeepSeek Harness + 框架修复）*
