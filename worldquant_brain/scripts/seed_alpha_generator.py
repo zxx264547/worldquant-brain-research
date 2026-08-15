@@ -34,8 +34,35 @@ import requests
 # 运行配置区（在此修改所有参数，无需命令行传参）
 # =============================================================================
 # ---- BRAIN 平台账号 ----
-BRAIN_EMAIL = "2645471525@qq.com"
-BRAIN_PASSWORD = "20001025ZHANG"
+# 凭据【禁止】硬编码在本文件：
+#   1. 环境变量: WQ_BRAIN_EMAIL / WQ_BRAIN_PASSWORD（最高优先）
+#   2. 本地配置: worldquant_brain/config/user_config.json（.gitignore 排除）
+#   3. 缺失则脚本报错退出
+def _load_brain_credentials() -> tuple[str, str]:
+    import os as _os
+    email = _os.environ.get("WQ_BRAIN_EMAIL", "")
+    password = _os.environ.get("WQ_BRAIN_PASSWORD", "")
+    if email and password:
+        return email, password
+    cfg = Path(__file__).resolve().parent.parent / "config" / "user_config.json"
+    if cfg.exists():
+        import json as _json
+        try:
+            creds = _json.loads(cfg.read_text()).get("credentials", {})
+            email = email or creds.get("email", "")
+            password = password or creds.get("password", "")
+        except Exception:
+            pass
+    if not email or not password:
+        raise SystemExit(
+            "[ERROR] 未找到 BRAIN 凭据。请设置环境变量 "
+            "WQ_BRAIN_EMAIL/WQ_BRAIN_PASSWORD，"
+            "或配置 worldquant_brain/config/user_config.json"
+        )
+    return email, password
+
+
+BRAIN_EMAIL, BRAIN_PASSWORD = _load_brain_credentials()
 BRAIN_API_URL = "https://api.worldquantbrain.com"
 # ---- 回测设置 ----
 INSTRUMENT_TYPE = "EQUITY"
@@ -46,8 +73,15 @@ DATA_TYPE = "MATRIX"                          # MATRIX 或 VECTOR
 DATASET_ID = "analyst47"                      # 目标数据集 ID (复合Alpha指标)
 DATA_CATEGORY = ""                            # 留空则按 DATASET_ID 前缀自动推断
 # ---- AI 模型接入 (DeepSeek via Anthropic) ----
+# API Key 从环境变量读取（WQ_AI_API_KEY 或 AI_API_KEY），禁止硬编码
 AI_BASE_URL = "https://api.deepseek.com/anthropic"
-AI_API_KEY = "sk-a1fc85c5a72a40c4b99aab96add4fa48"
+AI_API_KEY = __import__("os").environ.get(
+    "WQ_AI_API_KEY", __import__("os").environ.get("AI_API_KEY", "")
+)
+if not AI_API_KEY:
+    raise SystemExit(
+        "[ERROR] 未找到 AI API Key。请设置环境变量 WQ_AI_API_KEY"
+    )
 AI_MODEL = "deepseek-v4-pro[1m]"
 AI_TIMEOUT_SECONDS = 300
 # ---- 论文搜索设置 ----

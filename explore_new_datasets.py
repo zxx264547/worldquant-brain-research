@@ -15,7 +15,7 @@ from datetime import datetime
 sys.path.insert(0, '/home/zxx/wq_env/lib/python3.12/site-packages/cnhkmcp/untracked')
 from platform_functions import BrainApiClient, SimulationData, SimulationSettings
 
-RESULTS_FILE = Path('/tmp/multi_agent/new_dataset_explore.json')
+RESULTS_FILE = Path('/home/zxx/worldQuant/worldquant_brain/state/_runtime/new_dataset_explore.json')
 RESULTS_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 # 候选数据集和字段
@@ -66,8 +66,20 @@ class NewDatasetExplorer:
     async def authenticate(self):
         """认证"""
         self._clear_proxy()
+        # 凭据从本地配置加载（禁止硬编码；见 config/user_config.json）
+        import json as _json
+        cfg_path = Path('/home/zxx/worldQuant/worldquant_brain/config/user_config.json')
+        creds = {}
+        if cfg_path.exists():
+            creds = _json.loads(cfg_path.read_text()).get('credentials', {})
+        email = os.environ.get('WQ_BRAIN_EMAIL', creds.get('email', ''))
+        password = os.environ.get('WQ_BRAIN_PASSWORD', creds.get('password', ''))
+        if not email or not password:
+            print('[AUTH] 缺少凭据：请配置 config/user_config.json 或环境变量')
+            self._authenticated = False
+            return
         # Use the SAME client instance - authenticate on the client
-        result = await self.client.authenticate(email='2645471525@qq.com', password='20001025ZHANG')
+        result = await self.client.authenticate(email=email, password=password)
         print(f"[AUTH] {result.get('message', result)}")
         self._authenticated = True
 

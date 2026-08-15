@@ -77,7 +77,8 @@ from platform_functions import BrainApiClient, SimulationSettings, SimulationDat
 
 async def test():
     client = BrainApiClient()
-    await client.authenticate(email='2645471525@qq.com', password='20001025ZHANG')
+    # 凭据请从 config/user_config.json 或环境变量读取，勿硬编码
+    await client.authenticate(email='<your_email>', password='<your_password>')
     sim_settings = SimulationSettings(region='USA', universe='TOP3000', delay=1, testPeriod='P0Y3M')
     sim_data = SimulationData(settings=sim_settings, regular='rank(close)')
     result = await client.create_simulation(sim_data)

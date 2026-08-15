@@ -13,7 +13,7 @@ from pathlib import Path
 sys.path.insert(0, '/home/zxx/wq_env/lib/python3.12/site-packages/cnhkmcp/untracked')
 from platform_functions import BrainApiClient, SimulationData, SimulationSettings
 
-OUTPUT_FILE = Path('/tmp/multi_agent/earnings27_batch1.json')
+OUTPUT_FILE = Path('/home/zxx/worldQuant/worldquant_brain/state/_runtime/earnings27_batch1.json')
 OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
 
 # 候选表达式 - 使用earnings27字段
@@ -43,8 +43,17 @@ SETTINGS = SimulationSettings(
 async def main():
     print('🔐 Authenticating...')
     client = BrainApiClient()
-    await client.authenticate('2645471525@qq.com', '20001025ZHANG')
-    print('✅ Authenticated\\n')
+    # 凭据从本地配置加载（禁止硬编码；见 config/user_config.json）
+    import json as _json, os as _os
+    cfg_path = Path('/home/zxx/worldQuant/worldquant_brain/config/user_config.json')
+    creds = _json.loads(cfg_path.read_text()).get('credentials', {}) if cfg_path.exists() else {}
+    email = _os.environ.get('WQ_BRAIN_EMAIL', creds.get('email', ''))
+    password = _os.environ.get('WQ_BRAIN_PASSWORD', creds.get('password', ''))
+    if not email or not password:
+        print('❌ 缺少凭据：请配置 config/user_config.json 或环境变量')
+        return
+    await client.authenticate(email, password)
+    print('✅ Authenticated\n')
 
     results = []
 
