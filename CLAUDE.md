@@ -103,14 +103,14 @@ PERCEIVE → PLAN → DISPATCH → REFLECT → REMEMBER → EVOLVE
 ├── posts_categorized.json       # 论坛帖子(已分类)
 ├── posts_raw.json              # 论坛帖子(原始)
 │
-├── .claude/                    # Claude Code配置
-│   ├── agents/                # Claude Code Agents
-│   │   ├── alpha-idea-generator.md
-│   │   ├── alpha-deep-explorer.md
-│   │   ├── alpha-explorer-worker.md
-│   │   └── alpha-research-team-lead.md
-│   ├── plans/                 # 计划文件
+├── .claude/                    # [legacy] Claude Code配置（已迁移到 .agents/skills/，保留归档）
+│   ├── agents/                # 原 Claude Code Agents（已转为 DSH skills）
+│   ├── plans/                 # 计划文件（DSH 用内置 plan-mode）
 │   └── settings.local.json
+│
+├── .agents/skills/             # [DSH] DeepSeek Harness 技能（自动发现，无需配置）
+│   ├── alpha-*.md             # 角色技能（原 Claude Code Agents 转换）
+│   └── wq-*.md                # 项目工具技能（onboarding/alpha-submit/skills-index）
 │
 └── worldquant_brain/
     ├── config/                 # 配置文件
@@ -161,20 +161,38 @@ PERCEIVE → PLAN → DISPATCH → REFLECT → REMEMBER → EVOLVE
 2. `knowledge_base/memory/WORKSPACE_MAP.md` - 文件位置
 3. `knowledge_base/memory/LONG_TERM_MEMORY.md` - 经验总结
 4. `knowledge_base/memory/daily/YYYY-MM-DD.md` - 今日进展
-5. `knowledge_base/skills/skills-index.md` - 技能模块
+5. `.agents/skills/wq-skills-index.md` - 技能模块（DSH 技能目录，自动注册）
 
 **激活关键词**：进入量化、继续量化研究、量化模式、继续量化
 
 ---
 
-## Claude Code Agents
+## DeepSeek Harness Skills（2026-08 由 Claude Code Agents 迁移）
 
-| Agent | 用途 |
-|-------|------|
-| `alpha-research-team-lead` | 主协调器 - 协调整个研究流程 |
-| `alpha-idea-generator` | 产生Alpha ideas |
-| `alpha-explorer-worker` | 探索Alpha |
-| `alpha-deep-explorer` | 深度优化Alpha |
+> 框架已从 Claude Code 迁移到 DeepSeek Harness（DSH）。原 `.claude/agents/*.md`
+> 角色已转为 `.agents/skills/` 下的 DSH skills（frontmatter: name + description），
+> 由 DSH 自动发现注册，**无需任何配置**。主代理通过 skill 工具按需加载角色。
+
+| Skill | 原 Agent | 用途 |
+|-------|----------|------|
+| `alpha-research-team-lead` | team-lead | 主协调器 - 协调整个研究流程 |
+| `alpha-idea-generator` | idea-generator | 产生Alpha ideas |
+| `alpha-explorer-worker` | explorer-worker | 探索Alpha |
+| `alpha-deep-explorer` | deep-explorer | 深度优化Alpha |
+| `alpha-research-assistant` | research-assistant | 论坛/邮件调研 |
+| `wq-onboarding` | skills/onboarding | 项目启动配置 |
+| `wq-alpha-submit` | skills/alpha-submit | Alpha 提交 |
+| `wq-skills-index` | skills/skills-index | 技能索引 |
+
+> 多代理编排：DSH 提供内置 `subagent`/`subagent_fork`（单次委派）、`workflow`
+> （脚本化多代理）、`ralph`（fresh-agent 循环）、`goal`（长周期目标）工具，
+> 替代原 Claude Code 的 SendMessage 协作机制。
+>
+> MCP：`worldquant_brain/config/mcp_config.json`（Claude Code 格式）已迁移到
+> `~/.dsh/profiles/web/cordis.patch.yml`（DSH 的 dsh-mcp-client 插件配置），
+> 工具名保持 `mcp__<server>__<tool>` 形状。
+>
+> `.claude/` 目录整体保留为归档，DSH 不读取。
 
 ---
 
@@ -336,4 +354,4 @@ worldquant_brain/state/
 
 ---
 
-*最后更新：2026年5月*
+*最后更新：2026-08-16（框架迁移至 DeepSeek Harness：.claude/agents → .agents/skills、MCP → cordis.patch.yml）*
