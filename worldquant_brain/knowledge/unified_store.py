@@ -48,7 +48,9 @@ class UnifiedKnowledgeStore:
 
     def _get_research_progress(self) -> dict:
         data = alphas_store.load()
-        entries = [e for e in data["entries"].values() if e.get("status") == "done"]
+        # 兼容历史 status='ok'（2026-06 前 backtest_runner 的写法）
+        entries = [e for e in data["entries"].values()
+                   if e.get("status") in ("done", "ok")]
         if entries:
             sharpes = [e.get("sharpe", 0) for e in entries]
             submittable = sum(1 for e in entries if e.get("is_submittable") == 1)

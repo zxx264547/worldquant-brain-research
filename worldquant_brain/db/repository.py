@@ -14,6 +14,20 @@ from worldquant_brain.db.json_store import (
     ensure_state_dir, STATE_DIR, RUNTIME_DIR,
 )
 
+# ─── Alpha 持久化状态语义 ───
+# 历史遗留：部分旧数据写入 status='ok'（结果状态语义），
+# 持久化层统一用 'done' 表示"已完成回测并入库"。
+# 读取端必须兼容两种值，写入端统一归一化为 STATUS_DONE。
+STATUS_DONE = "done"
+STATUS_OK = "ok"
+DONE_STATUSES = (STATUS_DONE, STATUS_OK)
+
+# 任务状态
+TASK_QUEUED = "queued"
+TASK_RUNNING = "running"
+TASK_DONE = "done"
+TASK_FAILED = "failed"
+
 
 def get_db_path() -> str:
     """兼容旧接口 — 返回 state 目录路径"""
@@ -79,7 +93,9 @@ def save_alpha(alpha: dict) -> bool:
         "base_alpha": alpha.get('base_alpha', ''),
         "tech_signal": alpha.get('tech_signal', ''),
         "weight": alpha.get('weight'),
-        "status": alpha.get('status', 'done'),
+        # 持久化状态统一为 'done'（历史数据可能是 'ok'，读取端兼容）
+        "status": STATUS_DONE if alpha.get('status', STATUS_DONE) in DONE_STATUSES
+                  else alpha.get('status', STATUS_DONE),
         "error_message": alpha.get('error_message'),
         "is_submittable": 1 if alpha.get('sharpe', 0) >= 1.58 else 0,
         "submit_status": alpha.get('submit_status'),
@@ -105,7 +121,8 @@ def find_by_expression(expression: str, settings: dict = None) -> Optional[dict]
 
 def get_best_alphas(limit: int = 20) -> list[dict]:
     data = alphas_store.load()
-    done = [e for e in data["entries"].values() if e.get("status") == "done"]
+    done = [e for e in data["entries"].values()
+            if e.get("status") in DONE_STATUSES]
     done.sort(key=lambda x: x.get("sharpe", 0), reverse=True)
     return done[:limit]
 
@@ -338,16 +355,45 @@ def clean_alphas(keep_top: int = 500):
 
 # ─── Migration ───
 
-def migrate_json_results(json_dir: str = "/tmp/multi_agent"):
-    """迁移历史JSON结果到state"""
+def normalize_alpha_statuses() -> int:
+    """幂等数据修复：把历史遗留 status='ok' 的 alpha 条目归一化为 'done'
+
+    2026-06 之前 backtest_runner 以结果状态 'ok' 直接入库，
+    导致感知层（只认 'done'）统计为 0。本函数一次性修复存量数据，
+    新数据由 save_alpha 写入时自动归一化。
+
+    Returns:
+        修复的条目数
+    """
+    data = alphas_store.load()
+    fixed = 0
+    for entry in data["entries"].values():
+        if entry.get("status") == STATUS_OK:
+            entry["status"] = STATUS_DONE
+            entry["updated_at"] = datetime.now().isoformat()
+            fixed += 1
+    if fixed:
+        alphas_store.save()
+        print(f"[State] 数据修复完成: {fixed} 条 status 'ok' → 'done'")
+    return fixed
+
+
+def migrate_json_results(json_dir: str = None):
+    """迁移历史JSON结果到state
+
+    默认扫描项目内运行时目录（不再依赖 /tmp）：
+    <project>/worldquant_brain/state/_runtime/multi_agent_results/*_results.json
+    """
     import glob
+    if json_dir is None:
+        json_dir = str(RUNTIME_DIR / "multi_agent_results")
     count = 0
     for f in glob.glob(f"{json_dir}/*_results.json"):
         try:
             with open(f) as fp:
                 file_data = json.load(fp)
             for r in file_data.get('results', []):
-                if r.get('status') != 'ok':
+                if r.get('status') != STATUS_OK:
                     continue
                 alpha = {
                     'alpha_id': r.get('alpha_id', ''),
@@ -358,7 +404,7 @@ def migrate_json_results(json_dir: str = "/tmp/multi_agent"):
                     'margin': r.get('margin', 0),
                     'turnover': r.get('turnover', 0),
                     'name': r.get('name', ''),
-                    'status': 'done',
+                    'status': STATUS_DONE,
                 }
                 if save_alpha(alpha):
                     count += 1
@@ -372,6 +418,13 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == '--migrate':
         init_db()
         migrate_json_results()
+        print(f"[State] 总Alpha数: {count_alphas()}")
+        print("[State] Top 5:")
+        for a in get_best_alphas(5):
+            print(f"  {a['name']}: Sharpe={a['sharpe']:.3f} Fitness={a['fitness']:.3f}")
+    elif len(sys.argv) > 1 and sys.argv[1] == '--fix-status':
+        init_db()
+        normalize_alpha_statuses()
         print(f"[State] 总Alpha数: {count_alphas()}")
         print("[State] Top 5:")
         for a in get_best_alphas(5):

@@ -124,7 +124,7 @@ def cmd_submittable(args):
         print("没有可提交的Alpha")
         return
     for a in subs:
-        print(f"  {a['alpha_id']}: Sharpe={a['sharpe']:.3f} "
+        print(f"  {a.get('id', a.get('alpha_id', '?'))}: Sharpe={a['sharpe']:.3f} "
               f"Name={a['name'][:40]}")
 
 
