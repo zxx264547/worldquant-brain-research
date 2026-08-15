@@ -183,4 +183,16 @@ worldquant_brain/
 
 ---
 
-*最后更新：2026-05-16*
+## Legacy 脚本说明（手工探索工具，非框架组成部分）
+
+以下文件是早期手工探索脚本，功能已被 `worldquant_brain/scripts/` 与
+`cli.py` 取代，**保留仅供历史参考**，修改框架时无需同步它们：
+- 顶层 `cli/` 目录（alpha_get/alpha_screen/backtest 等 12 个旧版命令行脚本）
+- 顶层 `explore_new_datasets.py` / `earnings27_explore.py` /
+  `eur_explore.py` / `eur_long_window_test.py`
+- `worldquant_brain/multi_agent/`（早期 Multi-Agent 实验，已被
+  `.claude/agents/` Claude Code Agents 方案取代）
+
+---
+
+*最后更新：2026-08-16（框架修复：感知链路/状态一致性/安全）*

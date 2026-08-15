@@ -1,9 +1,31 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-15 09:20
+> 最后更新：2026-08-16（框架修复）
 
-## 研究进度
+## ⚙️ 框架状态（2026-08-16 修复后）
+
+> 框架层修复已完成，感知链路恢复真实数据。研究进度见下方历史记录。
+
+**感知输出验证**（`python worldquant_brain/cli.py perceive`）：
+- total_tested=**130**、best_sharpe=**2.53**、avg_sharpe=0.949、submittable=**22**
+
+**本次框架修复内容**（详见 git log: f186cf2 → bd51084）：
+1. **感知链路修复**：status 语义统一（'done'，兼容历史 'ok'）；result_store 统一走 JSON 后端（state/*.json），废弃 SQLite brain.db；130 条历史数据已修复
+2. **僵尸状态清理**：292 条遗留任务清理（99 running + 193 failed），保留 78 done；WorkerPool 启动自动崩溃恢复（running→queued）
+3. **运行时路径外置**：skill 技能目录、memory、migrate 结果目录均从 /tmp 迁入项目内
+4. **安全**：移除所有硬编码凭据（seed_alpha_generator / explore_new_datasets / earnings27_explore），统一从 config/user_config.json 或环境变量读取
+5. **测试**：新增 tests/test_state_consistency.py（6 项一致性测试），旧测试加隔离不再污染真实数据
+6. **git**：forum.sqlite3 移出 LFS 跟踪（数据文件可再生成），git status/commit 恢复正常
+
+**下一步建议**（研究层面，未执行）：
+- 验证平台状态（6 月模拟引擎/提交 API 故障为服务端问题，2 个月后可能已恢复）：`rank(close)` 冒烟测试
+- 4 个 SUS-FAIL Alpha（A1nqO7mQ 等）改 INDUSTRY 中性化重测
+- 数据集枯竭是根本瓶颈：重新扫描 /data-fields 找新 VECTOR 数据集
+
+---
+
+## 研究进度（2026-06-15 停摆时的状态）
 
 - 当前阶段：**平台严重故障** - 模拟引擎卡10-35%，提交API失效
 - 账户状态：**仅1个ACTIVE alpha** (GrnE3oko)
