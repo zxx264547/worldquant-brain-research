@@ -248,6 +248,57 @@ def get_queued_tasks(limit: int = 8) -> list[dict]:
     return queued[:limit]
 
 
+# ─── Task 恢复与清理 ───
+
+def recover_stale_tasks() -> int:
+    """崩溃恢复：把所有遗留 running 任务重置为 queued（幂等）
+
+    进程被杀后 tasks 会残留 running 状态，导致任务永远卡死。
+    WorkerPool 启动时必须调用本函数。
+    """
+    data = tasks_store.load()
+    recovered = 0
+    for task in data["items"]:
+        if task["status"] == TASK_RUNNING:
+            task["status"] = TASK_QUEUED
+            task["worker_id"] = None
+            task["updated_at"] = datetime.now().isoformat()
+            recovered += 1
+    if recovered:
+        tasks_store.save()
+        print(f"[State] 崩溃恢复: {recovered} 条 running 任务重置为 queued")
+
+    # 清理 worker 的占用状态
+    w_data = workers_store.load()
+    dirty = False
+    for wid, w in w_data["entries"].items():
+        if w.get("status") == "busy":
+            w["status"] = "idle"
+            w["current_task_id"] = None
+            w["last_heartbeat"] = datetime.now().isoformat()
+            dirty = True
+    if dirty:
+        workers_store.save()
+    return recovered
+
+
+def clean_tasks(statuses: tuple = (TASK_FAILED, TASK_RUNNING)) -> int:
+    """清理指定状态的任务记录（默认清理 failed + 僵尸 running）
+
+    Returns:
+        删除的任务数
+    """
+    data = tasks_store.load()
+    before = len(data["items"])
+    data["items"] = [t for t in data["items"] if t.get("status") not in statuses]
+    removed = before - len(data["items"])
+    if removed:
+        tasks_store.save()
+    print(f"[State] 任务清理: 删除 {removed} 条 ({','.join(statuses)})，"
+          f"剩余 {len(data['items'])} 条")
+    return removed
+
+
 # ─── Worker CRUD ───
 
 def register_worker(worker_id: str):

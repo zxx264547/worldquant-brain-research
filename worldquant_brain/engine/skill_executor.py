@@ -5,7 +5,8 @@ import json
 from pathlib import Path
 from typing import Optional
 
-SKILLS_DIR = Path("/tmp/multi_agent/skills")
+# 技能 JSON 定义目录 — 项目内（不再依赖 /tmp/multi_agent，重启不丢失）
+SKILLS_DIR = Path(__file__).parent.parent / "multi_agent" / "skills"
 
 # 内置Skill定义 (当JSON文件不存在时使用)
 BUILTIN_SKILLS = {

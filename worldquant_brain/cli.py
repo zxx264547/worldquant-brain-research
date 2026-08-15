@@ -177,7 +177,8 @@ def cmd_memory(args):
     """保存记忆 (Agent用)"""
     note = args.save
     ts = datetime.now().isoformat()
-    mem_file = Path("/tmp/multi_agent/memory.json")
+    # 项目内运行时目录（不再依赖 /tmp，重启不丢失）
+    mem_file = Path(__file__).parent / "state" / "_runtime" / "memory.json"
     entries = []
     if mem_file.exists():
         entries = json.loads(mem_file.read_text())
@@ -227,6 +228,18 @@ def cmd_clean(args):
     removed = clean_alphas(keep)
     after = count_alphas()
     print(f"清理: {before} → {after} (保留Top {keep})")
+
+
+def cmd_clean_tasks(args):
+    """清理任务队列 (默认: failed + 僵尸running)"""
+    from worldquant_brain.db.repository import clean_tasks, recover_stale_tasks
+
+    statuses = args.status or ("failed", "running")
+    if args.recover:
+        recovered = recover_stale_tasks()
+        print(f"恢复: {recovered} 条 running → queued")
+    removed = clean_tasks(tuple(statuses))
+    print(f"清理完成: 删除 {removed} 条任务")
 
 
 # ─── 主CLI ───
@@ -319,6 +332,15 @@ def create_parser():
     p.add_argument('--keep', '-k', type=int, default=200,
                    help='保留Top N条记录')
     p.set_defaults(func=cmd_clean)
+
+    # clean-tasks
+    p = sub.add_parser('clean-tasks', help='清理任务队列')
+    p.add_argument('--status', '-s', nargs='+',
+                   choices=['queued', 'running', 'done', 'failed'],
+                   help='要删除的任务状态 (默认: failed running)')
+    p.add_argument('--recover', '-r', action='store_true',
+                   help='先把遗留 running 任务重置为 queued')
+    p.set_defaults(func=cmd_clean_tasks)
 
     return parser
 

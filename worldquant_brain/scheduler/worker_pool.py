@@ -29,6 +29,10 @@ class WorkerPool:
         self._running = True
         await self.runner.init()
 
+        # 崩溃恢复：重置上次进程遗留的 running 任务
+        from worldquant_brain.db.repository import recover_stale_tasks
+        recover_stale_tasks()
+
         for i in range(self.size):
             worker_id = f"worker_{i+1}"
             self.queue.store.register_worker(worker_id)

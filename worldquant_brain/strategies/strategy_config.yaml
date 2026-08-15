@@ -1,3 +1,11 @@
+# ============================================================================
+# 角色说明（2026-08 框架修复时澄清）
+# 本文件是【L1 自进化配置】：由 knowledge/evolution_engine.py 读写，
+# 记录策略优先级、效果分数与模板建议，供 AI 决策参考。
+# 它【不】是执行配置：实际挖掘执行使用 strategies/__init__.py 中的
+# Python 策略类（ALL_STRATEGIES: single_field/combination/...）。
+# 修改执行策略请编辑 Python 类；修改优先级/效果分数请用 cli.py evolve。
+# ============================================================================
 strategies:
 - name: shortinterest3_vecmax
   priority: 1
