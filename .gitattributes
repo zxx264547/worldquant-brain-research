@@ -1,1 +1,2 @@
-worldquant_brain/data/forum.sqlite3 filter=lfs diff=lfs merge=lfs -text
+# forum.sqlite3 是运行时数据文件（54MB，可再生成），不再纳入 LFS/git 管理
+# 由 worldquant_brain/wq_forum_rag/convert_forum.py 等脚本重新生成

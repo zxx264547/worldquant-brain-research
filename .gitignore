@@ -10,6 +10,7 @@ env/
 *.csv
 *.parquet
 *.db
+*.sqlite3
 worldquant_brain/data/reports/
 worldquant_brain/data/raw/*.json
 data/outputs/
@@ -31,3 +32,4 @@ worldquant_brain/config/user_config.json
 
 # IDE
 .vscode/
+.claude/scheduled_tasks.lock

@@ -1,15 +1,90 @@
 # 当前研究状态
 
 > AI启动时首先读取此文件，了解当前研究进展
-> 最后更新：2026-06-15 08:11
+> 最后更新：2026-06-15 09:20
 
 ## 研究进度
 
-- 当前阶段：**模拟引擎再次卡住** - 新batch卡35%
-- 账户状态：**131 alphas**, **25已提交**
-- 模拟引擎：**故障** - 卡35%不完成，服务器端问题
-- 提交API：**可用** - 成功提交XgK3kP31(2.36)和GrnE3Ez5(1.67)
-- **测试日期**: 2026-06-15 08:11
+- 当前阶段：**平台严重故障** - 模拟引擎卡10-35%，提交API失效
+- 账户状态：**仅1个ACTIVE alpha** (GrnE3oko)
+- 模拟引擎：**严重故障** - 卡在10-35%需10+分钟，超时
+- 提交API：**失效** - 返回成功但alphas实际UNSUBMITTED
+- **测试日期**: 2026-06-15 09:20
+
+## 2026-06-15 09:20 平台状态确认
+
+### 平台Alpha状态（实际查询结果）
+| Alpha ID | Platform Status | 本地DB状态 | 说明 |
+|----------|----------------|-----------|------|
+| GrnE3oko | **ACTIVE** (OS) | SUBMITTED | 唯一真正提交的alpha |
+| O0oJvZn1 | UNSUBMITTED | SUBMITTED | 本地DB不一致 |
+| XgkA6oeX | UNSUBMITTED | SUBMITTED | 本地DB不一致 |
+| xAeGmO8m | UNSUBMITTED | SUBMITTED | 本地DB不一致 |
+| e7neMpoN | UNSUBMITTED | None | signed_power但未提交 |
+| zq5l8b2V | UNSUBMITTED | None | signed_power power=5失败 |
+
+### 提交API故障根因
+- POST /alphas/{id}/submit 返回303重定向到 `http://api.worldquantbrain.com:443/...`（HTTP scheme + HTTPS port）
+- RetryableBrainClient有303重定向修复逻辑，但不稳定
+- GrnE3oko曾在2026-06-14 19:30成功提交（早于303 bug出现）
+- 当前所有提交尝试返回HTTP 400或429（无稳定成功）
+
+### signed_power验证结果
+| Alpha | Power | Sharpe | Prod_Corr | CW | 状态 |
+|-------|-------|-------|-----------|-----|------|
+| e7neMpoN | 10 | 1.61 | 0.682 ✅ | 0.99 | 平台UNSUBMITTED (API 400) |
+| zq5l8b2V | 5 | 1.75 | 0.7829 ❌ | 0.738 | FAIL检查 (Prod_Corr + CW) |
+
+**结论**: power=10可通过Prod_Corr但Sharpe仅1.61；power=5 Sharpe更高但Prod_Corr仍超标
+
+### 模拟引擎故障确认
+- rank(close)测试：卡35%约9分钟后超时重试，第二次尝试4分钟后完成
+- 新dispatch的模拟：卡10-15%，预计需要10+分钟
+- 引擎间歇性恢复，但等待时间不可接受
+
+## 2026-06-15 08:45 最新发现
+
+### 模拟引擎状态 (确认恢复)
+- 模拟创建成功，需3-4分钟完成
+- progress: 10% → 15% → 35% → 80% → COMPLETE
+- 单次模拟约180-225秒
+
+### Alpha 6XEWwWWP 测试结果
+| 指标 | 值 | 状态 |
+|------|-----|------|
+| Sharpe | 2.23 | PASS |
+| Fitness | 3.63 | PASS |
+| PPC | 0.000 | N/A |
+| Prod Corr | 0.000 (检测中) | **FAIL实际0.9594** |
+| 中性化 | INDUSTRY | 有效 |
+
+### 提交失败原因
+- **PROD_CORRELATION: FAIL** - value=0.9594, limit=0.7
+- **POWER_POOL_CORRELATION: WARNING** - value=0.9205, limit=0.5
+- 表达式与现有production alphas相似度太高
+
+### 新数据集状态
+| 数据集 | Badge | 状态 |
+|--------|-------|------|
+| shortinterest3 | 🟢 | 已饱和，Prod Corr高 |
+| risk60 | 🟢 | 已饱和，Prod Corr高 |
+| analyst44 | ⚫ | 无数据 |
+| earnings27 | ⚫ | 无数据 |
+
+## 核心问题
+
+1. **Production Correlation是主要阻塞**
+   - 阈值: 0.7
+   - 现有alpha_prod_corr: 0.9594 (超标)
+   - 即使INDUSTRY中性化也无法降低
+   
+2. **数据集饱和**
+   - shortinterest3和risk60的VECTOR字段已被大量使用
+   - 新数据集无数据
+
+3. **解决方案探索中**
+   - signed_power降相关性（已验证e7neMpoN达0.682）
+   - 需找到全新表达式模式
 
 ## 当前状态摘要
 
